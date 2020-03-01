@@ -1,0 +1,52 @@
+<!--pages/secondhand/secondhand-fabu/secondhand-fabu.wxml-->
+<view class="cu-form-group ">
+  <textarea maxlength="-1" bindinput="textareaInput" placeholder="输入品牌型号，新旧程度，入手渠道，转手原因等" style="height:100%; min-height:300rpx;" placeholder-style="color:#999;"></textarea>
+</view>
+
+<view class="cu-form-group padding-lr padding-top">
+  <view class="grid col-3 grid-square flex-sub">
+    <view class="bg-img" wx:for="{{upload_pic}}" wx:key="index" bindtap="previewImg" data-url="{{upload_pic[index]}}">
+      <image src='{{upload_pic[index]}}' mode='aspectFill'></image>
+      <view class="cu-tag bg-red" catchtap="delTap" data-index="{{index}}">
+        <text class="cuIcon-close"></text>
+      </view>
+    </view>
+    <view class="solids bg-gray" bindtap="chooseImage" wx:if="{{upload_pic.length<upload_max && video==''}}">
+      <text class="cuIcon-cameraadd " style="font-size:36px;"></text>
+    </view>
+    <view class="solids bg-gray" bindtap="chooseVideo" wx:if="{{upload_pic.length<=0 && video==''}}">
+      <text class="cuIcon-video " style="font-size:36px;"></text>
+    </view>
+  </view>
+  <view wx:if="{{video!=''}}" class="flex justify-center" style="width:100%;">
+    <view class="pr" style="width:300px;">
+      <video src="{{video}}"></video>
+      <view class="cu-tag bg-black pa" style="right:0rpx;" catchtap="delTap" data-index="{{index}}">
+        <text class="cuIcon-close"></text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- <view class="padding  ">
+  <view class=" round padding-lr padding-tb-xs text-gray flex align-center" style="background:#F8F8F8; ">
+    <text class="cuIcon-location " style="font-size:40rpx; "></text>
+    <text class="padding-left-xs text-gray" style=" ">信息发布于：{{address}}</text>
+  </view>
+</view> -->
+
+
+<view class="cu-form-group paddint-top">
+  <view class="title">选择分类</view>
+  <picker bindchange="classifyChange" value="{{classifyId}}" range="{{list}}" range-key="{{'name'}}">
+    <view class="picker">
+      <text class="text-gray" wx:if="{{classifyId<0}}">请选择分类</text>
+      <text wx:else>{{list[classifyId].name}}</text>
+    </view>
+  </picker>
+</view>
+
+
+<view class="padding flex flex-direction">
+  <button class="cu-btn bg-green lg" bindtap="submit">发布</button>
+</view>

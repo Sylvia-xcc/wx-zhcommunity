@@ -1,0 +1,4 @@
+/* pages/secondhand/secondhand-list/secondhand-list.wxss */
+page{
+  background: #fff !important;
+}

@@ -1,0 +1,8 @@
+/* components/coupon/index.wxss */
+@import '../popup/popup.wxss';
+@import "../../colorui/main.wxss";
+
+.coupon{
+  width: 100%;
+  height:500rpx;
+}

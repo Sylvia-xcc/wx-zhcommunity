@@ -1,0 +1,4 @@
+/* pages/community/community-jifen-list/community-jifen-list.wxss */
+page{
+  background: #fff !important;
+}

@@ -1,0 +1,22 @@
+/* pages/matchmaker/matchmaker-edit/matchmaker-edit.wxss */
+.cu-form-group {
+  padding: 1rpx 1rpx;
+}
+
+.cu-form-group .title {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #000;
+}
+
+.cu-form-group input {
+  font-size: 24rpx;
+}
+
+.cu-form-group picker .picker{
+  font-size: 24rpx;
+}
+
+.cu-form-group textarea{
+  font-size: 24rpx;
+}

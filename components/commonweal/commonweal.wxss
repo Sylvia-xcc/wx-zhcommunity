@@ -1,0 +1,4 @@
+/* components/commonweal/commonweal.wxss */
+@import "/colorui/main.wxss";
+@import "/colorui/icon.wxss";
+@import "/app.wxss";

@@ -1,0 +1,16 @@
+/* pages/index/index.wxss */
+page{
+  background: #fff !important;
+}
+
+.gz-item {
+  width: 219rpx;
+  height: 200rpx;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 2rpx 3rpx 10rpx 0rpx rgba(153, 153, 153, 0.2);
+  border-radius: 10rpx;
+  display: inline-block;
+  margin-right: 20rpx;
+  text-align: center;
+  padding-top: 20rpx;
+}

@@ -1,0 +1,26 @@
+/* pages/user/user-fabu/index.wxss */
+page{
+  background: #F5F5F5 !important;
+}
+
+.item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 30%;
+  background: #fff;
+  height: 192rpx;
+  border-radius:10px;
+  margin-bottom: 30rpx;
+}
+
+.item image{
+  width:96rpx;
+  height: 95rpx;
+}
+.item text{
+  font-size: 26rpx;
+  color: #000;
+  padding-top:10rpx;
+}

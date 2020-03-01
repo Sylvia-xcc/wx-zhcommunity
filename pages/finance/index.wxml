@@ -1,0 +1,43 @@
+<!--pages/finance/index.wxml-->
+<view hidden="{{isLoading}}">
+  <scroll-view scroll-x class="bg-white nav">
+    <view class="flex padding-lr text-center">
+      <view class="cu-item flex-sub {{tabCur==index?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-index="{{index}}" data-id="{{item.id}}" wx:for="{{classify}}" wx:key="index">{{item.name}}</view>
+    </view>
+  </scroll-view>
+
+  <view class="cu-bar search bg-gray">
+    <view class="search-form round" style="background:#fff;">
+      <text class="cuIcon-search"></text>
+      <input type="text" placeholder="请输入关键词" confirm-type="search" bindtap="searchTap"></input>
+    </view>
+    <view class="action">
+      <button class="cu-btn bg-green shadow-blur round" bindtap="fabuTap">发布+</button>
+    </view>
+  </view>
+
+  <view class="padding bg-white cu-card dynamic" style="padding-top:0;" hidden="{{loading}}">
+    <view class="padding-bottom ssolid_bottom cu-item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailTap">
+      <view class="text-df c0 showtwo">{{item.content}}</view>
+      <view class="text-gray text-xs padding-top-xs">{{item.create_time}}</view>
+      <view class="grid flex-sub padding-top-sm {{item.img_list.length>1?'col-3 grid-square':'col-1'}}">
+        <view wx:for="{{item.img_list}}" wx:key="index" wx:for-item="iitem" wx:if="{{index<3}}" class="bg-img {{item.img_list.length>1?'':'only-img'}}" style="background-image:url({{iitem}});" data-id="{{index}}" data-dataimg="{{item.img_list}}" catchtap='previewImgTap'>
+        </view>
+      </view>
+
+      <view class="flex justify-between align-center padding-top-sm">
+        <view class="flex align-center padding-top-xs">
+          <image src="{{item.user_photo}}" class="cu-avatar sm round"></image>
+          <view class="text-xs c0 padding-left-xs">{{item.nickname}}</view>
+        </view>
+        <button class="cu-btn radius bg-green sm ">联系TA</button>
+      </view>
+    </view>
+  </view>
+
+  <navigator  url="/pages/finance/finance-user/finance-user" hover-class="none" class="bg-white"  style="position: fixed;right:30rpx; bottom:100rpx; z-index:99; ">
+    <image src="/images/head-icon.png" style="width:80rpx;height:80rpx;"></image>
+  </navigator>
+
+  <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+</view>

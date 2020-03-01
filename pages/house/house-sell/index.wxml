@@ -1,0 +1,213 @@
+<!--pages/house/house-sell/index.wxml-->
+<view hidden="{{isLoading}}">
+  <view catchtouchmove="true" class="{{displays=='block'?'swiper-pop':''}}">
+    <scroll-view scroll-x class="bg-white nav">
+      <view class="flex text-center">
+        <view class="cu-item flex-sub bg-gray text-black {{tabCur==0?'text-white cur bg-cgreen':''}}" bindtap="tabSelect" data-id="0">
+          买房
+        </view>
+        <view class="cu-item flex-sub bg-gray text-black {{tabCur==1?'text-white cur bg-cgreen':''}}" bindtap="tabSelect" data-id="1">
+          租房
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="cu-bar search bg-white">
+      <view class="search-form round" style="background:#fff; border:1rpx solid #999;">
+        <text class="cuIcon-search"></text>
+        <input type="text" placeholder="请输入职位关键词" confirm-type="search" bindtap="searchTap"></input>
+      </view>
+      <view class="action">
+        <button class="cu-btn bg-green shadow-blur round" bindtap="fabuTap">发布+</button>
+      </view>
+    </view>
+
+    <view id="swiper-tab">
+      <view class="swiper-tab">
+        <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}} {{tabCur==0?'width1':'width2'}}" data-current="0" bindtap="tabNav">
+          <text>{{areaIndex==0?'地区':areaArray[areaIndex].name}}</text>
+          <i></i>
+        </view>
+        <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}} {{tabCur==0?'width1':'width2'}}" data-current="1" bindtap="tabNav" wx:if="{{tabCur==0}}">
+          <text>{{houseSellPriceIndex==0?'售价':houseSellPriceArray[houseSellPriceIndex].name}}</text>
+          <i></i>
+        </view>
+        <view class="swiper-tab-list {{currentTab==4 ? 'on' : ''}} width2" data-current="4" bindtap="tabNav" wx:if="{{tabCur==1}}">
+          <text>{{rentingTypeIndex==0?'方式':rentingTypeArray[rentingTypeIndex].name}}</text>
+          <i></i>
+        </view>
+        <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}} width2" data-current="2" bindtap="tabNav" wx:if="{{tabCur==1}}">
+          <text>{{reprisesIndex==0?'租金':reprisesArray[reprisesIndex].name}}</text>
+          <i></i>
+        </view>
+        <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}} {{tabCur==0?'width1':'width2'}}" data-current="3" bindtap="tabNav">
+          <text>筛选</text>
+          <view class="cu-tag bg-red round pa" style="top:10rpx; left:60%; width:20rpx; height:30rpx;" wx:if="{{shaixuanNum>0}}">{{shaixuanNum}}</view>
+          <i></i>
+        </view>
+
+      </view>
+
+      <view catchtouchmove="true" style="display:{{displays}}; height:{{height}}px;">
+        <!-- 地区 -->
+        <view wx:if="{{currentTab==0}}" class="swiper-con">
+          <view wx:for="{{areaArray}}" wx:key="index" class="item flex" data-id="{{index}}" bindtap="areaTap">
+            <text class="basis-df">{{item.name}}</text>
+            <text class="cuIcon-check text-bold text-green" wx:if="{{index==areaIndex}}"></text>
+          </view>
+        </view>
+        <!-- 售价 -->
+        <view wx:elif="{{currentTab==1}}" class="swiper-con">
+          <view wx:for="{{houseSellPriceArray}}" wx:key="index" class="item flex" data-id="{{index}}" bindtap="houseSellPriceTap">
+            <text class="basis-df">{{item.name}}</text>
+            <text class="cuIcon-check text-bold text-green" wx:if="{{index==houseSellPriceIndex}}"></text>
+          </view>
+        </view>
+        <!-- 租金 -->
+        <view wx:elif="{{currentTab==2 && tabCur==1}}" class="swiper-con">
+          <view wx:for="{{reprisesArray}}" wx:key="index" class="item flex" data-id="{{item.id}}" bindtap="reprisesTap">
+            <text class="basis-df">{{item.name}}</text>
+            <text class="cuIcon-check text-bold text-green" wx:if="{{index==reprisesIndex}}"></text>
+          </view>
+        </view>
+        <!-- 筛选 -->
+        <view wx:elif="{{currentTab==3}}" class="swiper-con">
+          <view class="padding">
+            <view wx:if="{{tabCur==0}}">
+              <view class="text-bold text-sm">面积（㎡）（单选）</view>
+              <view class="flex  flex-wrap margin-tb">
+                <view wx:for="{{spaceArray}}" wx:key="index" class="item-shaixuan pr {{index==spaceIndex?'selected':''}}" data-id="{{index}}" bindtap="selectSpaceTap">
+                  {{item.value}}
+                  <image src="/images/gou.png" wx:if="{{index==spaceIndex}}" class="pa" style="width:43rpx;height:43rpx; right:0;bottom:0;"></image>
+                </view>
+              </view>
+            </view>
+
+            <view wx:if="{{tabCur==0}}">
+              <view class="text-bold text-sm">用途（单选）</view>
+              <view class="flex flex-wrap margin-tb">
+                <view wx:for="{{houseTypeArray}}" wx:key="index" class="item-shaixuan pr {{index==houseTypeIndex?'selected':''}}" data-id="{{index}}" bindtap="selectHouseTypeTap">
+                  {{item.value}}
+                  <image src="/images/gou.png" wx:if="{{index==houseTypeIndex}}" class="pa" style="width:43rpx;height:43rpx; right:0;bottom:0;"></image>
+                </view>
+              </view>
+            </view>
+
+            <view wx:if="{{tabCur==0}}">
+              <view class="text-bold text-sm">房源特色（多选）</view>
+              <view class="flex  flex-wrap margin-tb">
+                <view wx:for="{{houseSpeArray}}" wx:key="index" class="item-shaixuan pr {{item.selected?'selected':''}}" data-id="{{item.id}}" bindtap="selectHouseSpeTap">
+                  {{item.value}}
+                  <image src="/images/gou.png" wx:if="{{item.selected}}" class="pa" style="width:43rpx;height:43rpx; right:0;bottom:0;"></image>
+                </view>
+              </view>
+            </view>
+
+            <view wx:if="{{tabCur==0}}">
+              <view class="text-bold text-sm">楼龄（单选）</view>
+              <view class="flex flex-wrap margin-tb">
+                <view wx:for="{{houseYearArray}}" wx:key="index" class="item-shaixuan pr {{index==houseYearIndex?'selected':''}}" data-id="{{index}}" bindtap="selectHouseYearTap">
+                  {{item.value}}
+                  <image src="/images/gou.png" wx:if="{{index==houseYearIndex}}" class="pa" style="width:43rpx;height:43rpx; right:0;bottom:0;"></image>
+                </view>
+              </view>
+            </view>
+
+            <view>
+              <view class="text-bold text-sm">楼层（单选）</view>
+              <view class="flex flex-wrap margin-tb">
+                <view wx:for="{{houseStoreyArray}}" wx:key="index" class="item-shaixuan pr {{index==houseStoreyIndex?'selected':''}}" data-id="{{index}}" bindtap="selectHouseStoreyTap">
+                  {{item.value}}
+                  <image src="/images/gou.png" wx:if="{{index==houseStoreyIndex}}" class="pa" style="width:43rpx;height:43rpx; right:0;bottom:0;"></image>
+                </view>
+              </view>
+            </view>
+
+            <view>
+              <view class="text-bold text-sm">朝向（单选）</view>
+              <view class="flex flex-wrap margin-tb">
+                <view wx:for="{{orientationsArray}}" wx:key="index" class="item-shaixuan pr {{index==orientationsIndex?'selected':''}}" data-id="{{index}}" bindtap="selectOrientationsTap">
+                  {{item.name}}
+                  <image src="/images/gou.png" wx:if="{{index==orientationsIndex}}" class="pa" style="width:43rpx;height:43rpx; right:0;bottom:0;"></image>
+                </view>
+              </view>
+            </view>
+
+            <view wx:if="{{tabCur==1}}">
+              <view class="text-bold text-sm">租期（单选）</view>
+              <view class="flex flex-wrap margin-tb">
+                <view wx:for="{{zuqiArray}}" wx:key="index" class="item-shaixuan pr {{index==zuqiIndex?'selected':''}}" data-id="{{index}}" bindtap="selectZuQiTap">
+                  {{item.value}}
+                  <image src="/images/gou.png" wx:if="{{index==zuqiIndex}}" class="pa" style="width:43rpx;height:43rpx; right:0;bottom:0;"></image>
+                </view>
+              </view>
+            </view>
+
+            <view>
+              <view class="text-bold text-sm">装修情况（单选）</view>
+              <view class="flex flex-wrap margin-tb">
+                <view wx:for="{{renovationArray}}" wx:key="index" class="item-shaixuan pr {{index==renovationIndex?'selected':''}}" data-id="{{index}}" bindtap="selectRenovationTap">
+                  {{item.value}}
+                  <image src="/images/gou.png" wx:if="{{index==renovationIndex}}" class="pa" style="width:43rpx;height:43rpx; right:0;bottom:0;"></image>
+                </view>
+              </view>
+            </view>
+
+            <view>
+              <view class="text-bold text-sm">电梯（单选）</view>
+              <view class="flex flex-wrap margin-tb">
+                <view wx:for="{{liftArray}}" wx:key="index" class="item-shaixuan pr {{index==liftIndex?'selected':''}}" data-id="{{index}}" bindtap="selectLiftTap">
+                  {{item.value}}
+                  <image src="/images/gou.png" wx:if="{{index==liftIndex}}" class="pa" style="width:43rpx;height:43rpx; right:0;bottom:0;"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class=" flex flex-direction">
+            <button class="cu-btn bg-cgreen lg text-white" bindtap="shaixuanTap">确定</button>
+          </view>
+        </view>
+        <!-- 租房方式 -->
+        <view wx:elif="{{currentTab==4 && tabCur==1}}" class="swiper-con">
+          <view wx:for="{{rentingTypeArray}}" wx:key="index" class="item flex" data-id="{{item.id}}" bindtap="rentingTypeTap">
+            <text class="basis-df">{{item.name}}</text>
+            <text class="cuIcon-check text-bold text-green" wx:if="{{index==rentingTypeIndex}}"></text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view hidden="{{loading}}">
+    <view class="padding flex solid-bottom " wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="detailTap">
+      <view>
+        <image src="{{item.photo.img[0]}}" class="radius" style="width:224rpx;height:224rpx;" mode="aspectFill"></image>
+      </view>
+      <view class="padding-left-sm flex-sub">
+        <view class="text-df text-bold showtwo">{{item.title}}</view>
+        <view class="font_22 text-gray padding-tb-xs">{{item.layout1}}室{{item.layout2}}厅{{item.layout3}}卫/{{item.measure}}㎡/{{item.chaoxiang}}/{{item.name}}</view>
+        <view class="flex flex-wrap ">
+          <view class="padding-right-xs padding-bottom-xs" wx:for="{{item.tese}}" wx:key="index">
+            <view class="cu-tag line-gray radius font_22" style="height:38rpx;">{{item}}</view>
+          </view>
+        </view>
+        <view>
+          <text class="font_30 text-red text-bold">{{item.money}}{{tabCur==0?'万':'元/月'}}</text>
+          <text class="text-gray text-sm padding-left-sm" wx:if="{{tabCur==0}}">{{item.avg_pay}}元/㎡</text>
+          <text class="text-gray text-sm padding-left-sm" wx:else>{{item.pay}}</text>
+        </view>
+        <view class="padding-top-sm flex justify-between">
+          <view class="flex align-center">
+            <image src="{{item.avatar}}" class="round" style="width:40rpx;height:40rpx;"></image>
+            <text class="text-xs text-bold padding-left-xs">{{item.u_name}}</text>
+          </view>
+          <view class="padding-right-sm" style="width：140rpx;">
+            <button class="cu-btn radius sm bg-cgreen text-white">联系TA</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+</view>

@@ -1,0 +1,40 @@
+<!--components/addImage/addImage.wxml-->
+<view class="padding" wx:if="{{upload_pic.length>0 || video!=''}}" style="position: relative;">
+  <image src="{{upload_pic[0]}}" style="width:750rpx; height:468rpx;" mode='aspectFill' wx:if="{{video==''}}"></image>
+  <video src="{{video}}" object-fit="cover" style="width:690rpx;" wx:else></video>
+  <view class="cu-tag bg-black" style="position: absolute; top:30rpx;right:30rpx;" wx:if="{{video==''}}" catchtap="delTap" data-index="{{0}}">
+    <text class="cuIcon-close"></text>
+  </view>
+  <view class="cu-tag bg-black" style="position: absolute; top:30rpx;right:30rpx;" wx:else catchtap="delVideoTap">
+    <text class="cuIcon-close"></text>
+  </view>
+</view>
+
+<view class="cu-form-group padding-lr padding-top">
+  <view class="grid col-3 grid-square flex-sub">
+    <view wx:if="{{video!=''}}" class="flex justify-center">
+      <view class="pr">
+        <video src="{{video}}" object-fit="cover" style="height:{{height}}px;"></video>
+        <view class="cu-tag bg-black pa" style="right:0rpx;" catchtap="delVideoTap">
+          <text class="cuIcon-close"></text>
+        </view>
+      </view>
+    </view>
+    <view class="bg-img" wx:for="{{upload_pic}}" wx:key="index" bindtap="previewImg" data-url="{{upload_pic[index]}}">
+      <image src='{{upload_pic[index]}}' mode='aspectFill'></image>
+      <view class="cu-tag bg-red" catchtap="delTap" data-index="{{index}}">
+        <text class="cuIcon-close"></text>
+      </view>
+    </view>
+    <view class="solids bg-gray" bindtap="chooseImage" wx:if="{{upload_pic.length<upload_max }}">
+      <text class="cuIcon-cameraadd " style="font-size:36px;"></text>
+    </view>
+    <view class="solids bg-gray" bindtap="chooseVideo" wx:if="{{video==''}}">
+      <text class="cuIcon-video " style="font-size:36px;"></text>
+    </view>
+  </view>
+</view>
+
+<view class="padding flex flex-direction" style="padding-top:100rpx;">
+  <button class="cu-btn bg-cgreen lg radius text-white" bindtap="sumbitTap">完成</button>
+</view>

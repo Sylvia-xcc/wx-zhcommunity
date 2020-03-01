@@ -1,0 +1,4 @@
+/* pages/user/user-activity/user-activity-community/user-activity-community.wxss */
+page {
+  background: #fff !important;
+}

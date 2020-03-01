@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "v-banner": "/components/banner/banner"
+  },
+  "navigationBarTitleText": "个人主页"
+}

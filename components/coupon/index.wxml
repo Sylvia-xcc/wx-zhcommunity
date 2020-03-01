@@ -1,0 +1,23 @@
+<!--components/coupon/index.wxml-->
+<view bindtap='toggleModal' class="pop-mask {{showModal?'active':''}}">
+</view>
+<view class="pop-content {{showModal?'active':''}}">
+  <view class="padding text-center text-lg text-black">店铺优惠</view>
+  <scroll-view scroll-y class="bg-white coupon">
+    <radio-group class="block " bindchange="changeTap">
+      <block wx:for="{{coupons_list}}" wx:key>
+        <view class="flex align-center justify-between padding-lr padding-tb-xs">
+          <view class="flex flex-row align-end text-black">
+            <text class="title ">{{item.coupon_name}}</text>
+            <text class="text-price padding-left-sm" wx:if="{{item.coupon_amount}}">{{item.coupon_amount}}</text>
+          </view>
+          <radio  checked="{{item.coupon_id==couponId}}" value="{{item.coupon_id}}"></radio>
+        </view>
+      </block>
+    </radio-group>
+  </scroll-view>
+  <view class="padding-tb text-center">
+    <button class="bg-red round" style="width:90%;" bindtap="submitTap">完成</button>
+  </view>
+
+</view>

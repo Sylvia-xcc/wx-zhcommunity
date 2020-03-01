@@ -1,0 +1,4 @@
+/* pages/user/user-collect/user-collect-secondhand/user-collect-secondhand.wxss */
+page{
+  background: #fff !important;
+}

@@ -1,0 +1,15 @@
+<!--pages/user/user-activity/index.wxml-->
+<view class="margin flex flex-wrap justify-between">
+  <navigator url="/pages/user/user-activity/user-activity-community/user-activity-community" hover-class="none" class="item">
+    <image src="/images/a1.png" class="grid-img"></image>
+    <text>社区服务</text>
+  </navigator>
+  <navigator url="/pages/user/user-activity/user-activity-school/user-activity-school" hover-class="none" class="item">
+    <image src="/images/a7.png" class="grid-img"></image>
+    <text>小雅课堂</text>
+  </navigator>
+  <navigator url="/pages/user/user-activity/user-activity-commonweal/user-activity-commonweal" hover-class="none" class="item">
+    <image src="/images/a9.png" class="grid-img"></image>
+    <text>公益活动</text>
+  </navigator>
+</view>

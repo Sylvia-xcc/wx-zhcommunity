@@ -1,0 +1,99 @@
+<!--pages/index/index.wxml-->
+<loading id="loading" showLoading="{{showLoading}}"></loading>
+
+<swiper class="screen-swiper " indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+  <swiper-item wx:for="{{swiperList}}" wx:key="index">
+    <image src="{{item}}" mode="aspectFill"></image>
+  </swiper-item>
+</swiper>
+<view class="padding flex flex-wrap">
+  <navigator url="/pages/community/index" hover-class="none" class="flex align-center flex-direction basis-xs padding-bottom">
+    <image src="/images/a1.png" style="width:96rpx;height:95rpx;"></image>
+    <view class="font_26 c0">社区服务</view>
+  </navigator>
+  <navigator url="/pages/secondhand/index" hover-class="none" class="flex align-center flex-direction basis-xs padding-bottom">
+    <image src="/images/a2.png" style="width:96rpx;height:95rpx;"></image>
+    <view class="font_26 c0">二手物品</view>
+  </navigator>
+  <navigator url="/pages/matchmaker/index" hover-class="none" class="flex align-center flex-direction basis-xs padding-bottom">
+    <image src="/images/a3.png" style="width:96rpx;height:95rpx;"></image>
+    <view class="font_26 c0">红娘</view>
+  </navigator>
+  <navigator url="/pages/friendship/index" hover-class="none" class="flex align-center flex-direction basis-xs padding-bottom">
+    <image src="/images/a4.png" style="width:96rpx;height:95rpx;"></image>
+    <view class="font_26 c0">情义有价</view>
+  </navigator>
+  <navigator url="/pages/house/index" hover-class="none" class="flex align-center flex-direction basis-xs padding-bottom">
+    <image src="/images/a5.png" style="width:96rpx;height:95rpx;"></image>
+    <view class="font_26 c0">房管家</view>
+  </navigator>
+  <navigator url="/pages/job/index" hover-class="none" class="flex align-center flex-direction basis-xs padding-bottom">
+    <image src="/images/a6.png" style="width:96rpx;height:95rpx;"></image>
+    <view class="font_26 c0">附近工作</view>
+  </navigator>
+  <navigator url="/pages/school/school-course-list/school-course-list" hover-class="none" class="flex align-center flex-direction basis-xs padding-bottom">
+    <image src="/images/a7.png" style="width:96rpx;height:95rpx;"></image>
+    <view class="font_26 c0">小雅课堂</view>
+  </navigator>
+  <navigator url="/pages/finance/index" hover-class="none" class="flex align-center flex-direction basis-xs padding-bottom">
+    <image src="/images/a8.png" style="width:96rpx;height:95rpx;"></image>
+    <view class="font_26 c0">金融服务</view>
+  </navigator>
+  <navigator url="/pages/commonweal/index" hover-class="none" class="flex align-center flex-direction basis-xs padding-bottom">
+    <image src="/images/a9.png" style="width:96rpx;height:95rpx;"></image>
+    <view class="font_26 c0">公益活动</view>
+  </navigator>
+  <navigator url="/pages/shop/index" hover-class="none" class="flex align-center flex-direction basis-xs padding-bottom">
+    <image src="/images/a10.png" style="width:96rpx;height:95rpx;"></image>
+    <view class="font_26 c0">精选商城</view>
+  </navigator>
+</view>
+
+<view class="padding-tb padding-left" >
+  <view class="padding-bottom-sm">
+    <text class="cuIcon-titles text-green"></text>
+    <text class="c0 text-bold">品牌入口</text>
+  </view>
+  <view class="">
+    <scroll-view scroll-x style="white-space: nowrap;overflow:hidden;">
+      <block wx:for="{{6}}" wx:key="index">
+        <view class="gz-item" bindtap="toOtherTap">
+          <image src="/images/head.png" style="width:132rpx;height:112rpx;"></image>
+          <view class="text-gray font_26 padding-top-5">京东</view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</view>
+
+<navigator url="/pages/game/fish/index" hover-class="none" class="padding">
+  <view class="padding-bottom-sm">
+    <text class="cuIcon-titles text-green"></text>
+    <text class="c0 text-bold">休闲游戏</text>
+  </view>
+  <image src="http://image.fengzhankeji.com/static/game.png" style="width:690rpx; height:200rpx;"></image>
+</navigator>
+
+<!-- <navigator url="/pages/commonweal/index" hover-class="none" class="padding flex flex-direction">
+  <button class="cu-btn bg-grey lg">公益活动</button>
+</navigator> -->
+
+<!-- <navigator url="/pages/game/llk/llk" hover-class="none" class="padding flex flex-direction">
+  <button class="cu-btn bg-grey lg">连连看小游戏</button>
+</navigator> -->
+
+<!-- <navigator url="/pages/community/index" hover-class="none" class="padding flex flex-direction">
+  <button class="cu-btn bg-grey lg">社区服务</button>
+</navigator> -->
+
+<!-- <navigator url="/pages/matchmaker/index" hover-class="none" class="padding flex flex-direction">
+  <button class="cu-btn bg-grey lg">红娘</button>
+</navigator> -->
+
+<!-- <navigator url="/pages/friendship/index" hover-class="none" class="padding flex flex-direction">
+  <button class="cu-btn bg-grey lg">情义有价</button>
+</navigator> -->
+
+<!-- <navigator url="/pages/finance/index" hover-class="none" class="padding flex flex-direction">
+  <button class="cu-btn bg-grey lg">金融服务</button>
+</navigator> -->

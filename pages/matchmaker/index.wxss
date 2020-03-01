@@ -1,0 +1,38 @@
+/* pages/matchmaker/index.wxss */
+@import './matchmaker-personal/matchmaker-personal.wxss';
+
+.msg-item {
+  width: 330rpx;
+  height: 527rpx;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 7rpx 2rpx 0px rgba(198, 199, 198, 0.11);
+  border-radius: 6rpx;
+  margin-bottom: 30rpx;
+}
+
+.msg-item-img {
+  width: 330rpx;
+  height: 343rpx;
+  border-radius: 6rpx 6rpx 0rpx 0rpx;
+}
+
+.icon{
+  width:70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  border: 1rpx solid #68B581;
+  font-size: 20rpx;
+  text-align: center;
+  color: #68B581;
+  line-height: 70rpx;
+  vertical-align: middle;
+}
+
+.user-box {
+  width: 690rpx;
+  height: 422rpx;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10rpx;
+}
+

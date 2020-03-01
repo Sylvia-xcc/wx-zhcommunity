@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "v-bottomloading": "/components/bottomLoading/bottomloading",
+    "v-commonweal":"/components/commonweal/commonweal"
+  },
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "公益活动"
+}

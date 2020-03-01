@@ -1,0 +1,22 @@
+/* pages/job/job-detail/job-detail.wxss */
+
+/* page {
+  background: #fff !important;
+} */
+
+.fload {
+  line-height: 50rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+
+/* 展开收缩 */
+.hide{
+  -webkit-line-clamp:2; 
+}
+.show{
+  -webkit-line-clamp:0;  /*全部显示*/
+}

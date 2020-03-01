@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "my-textarea": "/components/textarea/index",
+    "v-bottomloading": "/components/bottomLoading/bottomloading"
+  },
+  "navigationBarTitleText": "聊天详情"
+}

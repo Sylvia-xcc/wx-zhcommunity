@@ -1,0 +1,91 @@
+<!--pages/friendship/friendship-fabu/friendship-fabu.wxml-->
+<view hidden="{{isLoading}}">
+  <view class="bg-white padding ssolid_bottom">
+    <view class="text-sm c9 padding-bottom-xs ">需求类型</view>
+    <picker bindchange="typeChange" value="{{index}}" range="{{list}}" range-key="{{'name'}}">
+      <view class="picker pr" style="text-align:left; color:#333 !important;">
+        <text class="" wx:if="{{type<0}}">请选择需求类型</text>
+        <text wx:else>{{list[type].name}}</text>
+        <view class="cuIcon-right text-grey pa" style="right:0;top:2rpx;"></view>
+      </view>
+    </picker>
+  </view>
+
+  <view class="bg-white padding ssolid_bottom">
+    <view class="text-sm c9 padding-bottom-xs">初步预算</view>
+    <input placeholder="请输入初步预算价格（元）" placeholder-class="c3 text-df" type="number" value="{{money}}" bindinput="moneyInput"></input>
+    <view class="flex align-center padding-top-xs" bindtap="checkTap">
+      <view class="cuIcon-round text-gray" wx:if="{{checked}}"></view>
+      <view class="cuIcon-roundcheckfill text-green" wx:else></view>
+      <text class="padding-left-xs font_22 c0">不接受议价</text>
+    </view>
+  </view>
+
+  <view class="bg-white padding ssolid_bottom">
+    <view class="text-sm c9 padding-bottom-xs">联系方式</view>
+    <input placeholder="请输入联系方式" placeholder-class="c3 text-df" type="number" value="{{mobile}}" bindinput="mobileInput"></input>
+  </view>
+
+  <view class="padding bg-white ssolid_bottom">
+    <view class="text-sm c9 ">上传附件</view>
+    <view class="padding-top-sm  ">
+      <view class="grid col-3 grid-square flex-sub">
+        <view class="bg-img" wx:for="{{upload_pic}}" wx:key="index" bindtap="previewImg" data-url="{{upload_pic[index]}}">
+          <image src='{{upload_pic[index]}}' mode='aspectFill'></image>
+          <view class="cu-tag bg-red" catchtap="delTap" data-index="{{index}}">
+            <text class="cuIcon-close"></text>
+          </view>
+        </view>
+        <view class="solids bg-gray" bindtap="chooseImage" wx:if="{{upload_pic.length<upload_max}}">
+          <text class="cuIcon-cameraadd " style="font-size:36px;"></text>
+        </view>
+        <!-- <view class="solids bg-gray" bindtap="chooseVideo" wx:if="{{upload_pic.length<=0 && video==''}}">
+        <text class="cuIcon-video " style="font-size:36px;"></text>
+      </view> -->
+      </view>
+      <!-- <view wx:if="{{video!=''}}" class="flex justify-center" style="width:100%;">
+      <view class="pr" style="width:300px;">
+        <video src="{{video}}"></video>
+        <view class="cu-tag bg-black pa" style="right:0rpx;" catchtap="delTap" data-index="{{index}}">
+          <text class="cuIcon-close"></text>
+        </view>
+      </view>
+    </view> -->
+    </view>
+  </view>
+
+  <view class="bg-white padding ssolid_bottom">
+    <view class="text-df text-black ">需求具体描述</view>
+    <view class="padding-top-sm ">
+      <textarea class="solids" maxlength="-1" value="{{desc}}" bindinput="descInput" placeholder="输入具体详情" style="height:100%; min-height:250rpx; width:690rpx; padding:20rpx !important;" placeholder-style="color:#999; padding:20rpx !important;"></textarea>
+    </view>
+  </view>
+
+
+  <view class="bg-white padding ">
+    <view class="text-sm c9 padding-bottom-xs">标签</view>
+    <view class="flex flex-wrap">
+      <view class="padding-xs" wx:for="{{tags}}" wx:key="index" data-index="{{index}}" catchtap="tagTap">
+        <view class="cu-tag {{item.checked?'bg-cgreen text-white':'bg-gray'}}  radius">{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bg-white padding ssolid_top" wx:if="{{id>0}}">
+    <view class="text-df text-black ">审核情况：{{status==0?'审核中':status==1?'审核通过':status==2?'审核驳回':status==3?'已发布':'已撤销'}}</view>
+    <view class="padding-top-sm ">
+      <view class="solids padding-sm" style="width:690rpx;">
+        审核人员给发布人的反馈，不可编辑
+      </view>
+    </view>
+  </view>
+
+  <view class="mask" wx:if="{{id>0 && (status==1 || status==3)}}"></view>
+
+  <view class="padding flex flex-direction">
+    <button class="cu-btn bg-green lg" bindtap="submitTap" data-type="submit" wx:if="{{id<=0}}">提交审核</button>
+    <button class="cu-btn bg-green lg" bindtap="submitTap" data-type="republish" wx:if="{{id>0 && (status==0||status==2||status==4)}}">重新提交</button>
+    <button class="cu-btn bg-green lg" bindtap="submitTap" data-type="publish" wx:if="{{id>0 && status==1}}">发布</button>
+    <button class="cu-btn bg-green lg" bindtap="submitTap" data-type="cancel" wx:if="{{id>0 && status==3}}">撤销</button>
+  </view>
+</view>

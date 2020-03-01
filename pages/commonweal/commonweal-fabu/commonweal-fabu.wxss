@@ -1,0 +1,4 @@
+/* pages/commonweal/commonweal-fabu/commonweal-fabu.wxss */
+page{
+  background: #fff !important;
+}

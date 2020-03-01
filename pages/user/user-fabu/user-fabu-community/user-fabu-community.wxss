@@ -1,0 +1,5 @@
+/* pages/user/user-fabu/user-fabu-community/user-fabu-community.wxss */
+
+page {
+  background: #fff !important;
+}

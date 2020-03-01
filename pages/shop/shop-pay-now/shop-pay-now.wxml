@@ -1,0 +1,82 @@
+<!--pages/shop/shop-pay-now/shop-pay-now.wxml-->
+<view hidden="{{!isLoading}}">
+  <view class="cu-list menu margin-top bg-white padding-tb">
+    <view class="cu-item arrow" wx:if="{{hasAddress}}" bindtap='addressTap'>
+      <view class="text-sl">
+        <text class="cuIcon-locationfill text-red "></text>
+      </view>
+      <view class="content padding-left-xs">
+        <view class="text-black text-bold">
+          <text>{{address.username}}</text>
+          <text class="padding-left">{{address.phone}}</text>
+        </view>
+        <view class="text-gray text-sm">
+          {{address.province}}{{address.city}}{{address.areas}}{{address.addr}}
+        </view>
+      </view>
+    </view>
+    <view class="cu-item" wx:else bindtap='addressTap'>
+      <view class="content text-gray  flex flex-row align-center justify-center">
+        <view class="text-sl padding-right-sm">
+          <text class="cuIcon-add "></text>
+        </view>
+        添加收货地址
+      </view>
+    </view>
+  </view>
+
+  <view class="cu-list menu margin-top bg-white sm-border padding-tb">
+    <block wx:for="{{productData}}" wx:key>
+      <view class="cu-item">
+        <image src="{{item.thumb}}" mode="aspectFill" class="margin-bottom" style="width:190rpx;height:190rpx;"></image>
+        <view class="content padding-left">
+          <view class="text-black text-lg text-bold">{{item.name}}</view>
+          <view class="padding-tb-sm">
+            <view class="cu-tag bg-gray" wx:for="{{item.gg_name}}" wx:key>{{item}}</view>
+          </view>
+          <view class="flex justify-between">
+            <view>
+              <text class="text-black text-bold">￥{{item.price}}</text>
+              <!-- <text class="padding-left-sm text-line-through text-xs text-gray">￥{{item.price}}</text> -->
+            </view>
+            <text class="text-gray">x {{buyNum}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class="cu-item ">
+      <view class="text-bold text-black">运费</view>
+      <view class="text-bold text-black text-price">{{fastPrice}}</view>
+    </view>
+    <view class="cu-item arrow" wx:if="{{coupon_list.length>0}}" bindtap="couponTap">
+      <view class="text-bold text-black">优惠劵</view>
+      <view class=" text-red">
+        <block wx:if="{{couponId<=0}}">不使用优惠劵</block>
+        <block wx:else>{{coupon.coupon_name}}</block>
+      </view>
+    </view>
+    <view class="cu-item ">
+      <view class="text-bold text-black">共{{totalNum}}件</view>
+      <view class="text-bold text-black text-price">{{totalPrice}}</view>
+    </view>
+    <view class="cu-item ">
+      <view class="text-bold text-black">可获得积分</view>
+      <view class="text-bold text-black">{{jifen}}</view>
+    </view>
+    <view class="cu-item ">
+      <view class="padding-top" style="width:100%;">
+        <text class="text-bold text-black ">买家留言:</text>
+        <view class="margin-top-sm solid padding-sm"  wx:if="{{!showModal}}">
+          <textarea maxlength="-1" style="width:100%;" placeholder-class='padding-sm' disabled="{{modalName!=null}}" bindinput="remarkInput" value="{{remark}}" placeholder="请用户填写备注留言"></textarea>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="padding text-center text-xl text-bold text-black">总计：¥{{price}}</view>
+  <view class="padding-bottom-xl text-center">
+    <button class="bg-green" style="width:90%;" bindtap='submitTap'>微信支付</button>
+  </view>
+</view>
+
+<my-coupon id='my-coupon' bind:onCouponChoiceTap='onCouponChoiceTap' bind:toggleModal='toggleModal' coupons_list="{{coupon_list}}" couponId="{{couponId}}"></my-coupon>

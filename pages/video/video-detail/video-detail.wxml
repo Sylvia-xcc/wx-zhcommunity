@@ -1,0 +1,86 @@
+<!--pages/video/video-detail/video-detail.wxml-->
+
+<video src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" style="width:750rpx;"></video>
+
+<view class="padding bg-white">标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</view>
+
+<view class="flex align-center padding-lr padding-tb-sm bg-white">
+  <image src="/images/head.png" class="cu-avatar round"></image>
+  <text class="padding-left text-sm c0">中环国际社区</text>
+  <text class="flex-sub text-right text-xs text-gray">1266次播放</text>
+</view>
+
+<view class="margin-top  bg-white">
+  <view class="flex ssolid_bottom padding" wx:for="{{4}}" wx:key="index" data-id="{{item.id}}" bindtap="detailTap">
+    <view>
+      <view class="font_26 c0 showtwo">香蕉皮的6大妙用，可惜很多人都把它扔了！</view>
+      <view class="font_22 text-gray padding-top-sm">
+        <text>第一财经 </text>
+        <text>677条评论</text>
+      </view>
+    </view>
+    <view class="padding-left-xl">
+      <image src="/images/ershou2.png" style="width:188rpx;height:113rpx;"></image>
+    </view>
+  </view>
+</view>
+
+<view class="padding bg-white margin-top" style="padding-bottom:150rpx;">
+  <view class="c0 font_26 text-bold">全部留言（{{total}}）</view>
+  <view>
+    <view class="cu-list menu-avatar comment">
+      <view class="cu-item solid-bottom" style="padding-left:90rpx !important;" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="messageTap">
+        <view class="cu-avatar round" style="left:0 !important; background-image:url({{item.user_photo}});"></view>
+        <view class="content">
+          <view class="text-black text-bold" style="font-size:24rpx;">{{item.user_name}}</view>
+          <view class="text-black text-content font_22 flex align-center">
+            <view class="flex-sub">{{item.content}}</view>
+            <view class="cuIcon-appreciate margin-left {{item.is_like>0?'text-cgreen':''}}" style="font-size:40rpx;" data-id="{{item.id}}" data-like="{{item.is_like}}" data-gid="{{item.id}}" catchtap="likeMessageTap"></view>
+          </view>
+          <view class="flex">
+            <view class="text-gray text-xs">{{item.create_time}}</view>
+            <view class="text-blue text-xs padding-left-sm">评论</view>
+          </view>
+
+          <view>
+            <view class="cu-list menu-avatar comment" wx:for="{{item.childNode}}" wx:key="index" wx:for-item="iitem" catchtap>
+              <view class="cu-item" style="padding-left:90rpx !important; padding-right:0 !important; padding-bottom:0 !important;">
+                <view class="cu-avatar round" style="left:0 !important; background-image:url({{item.user_photo}});"></view>
+                <view class="content">
+                  <view class="text-black text-bold" style="font-size:24rpx;">{{iitem.user_name}}</view>
+                  <view class="text-black text-content font_22 flex align-center">
+                    <view class="flex-sub">回复 {{item.user_name}}： {{iitem.content}}</view>
+                    <view class="cuIcon-appreciate margin-left {{iitem.is_like>0?'text-cgreen':''}}" style="font-size:40rpx;" data-id="{{iitem.id}}" data-like="{{iitem.is_like}}" data-gid="{{iitem.parent_id}}" catchtap="likeMessageTap"></view>
+                  </view>
+                  <view class="flex justify-between">
+                    <view class="text-gray text-xs">{{iitem.create_time}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+
+        </view>
+      </view>
+    </view>
+    <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+  </view>
+</view>
+<my-textarea id='my-textarea' bind:OnSubmit='OnSubmit'></my-textarea>
+
+
+<view class="cu-bar input position-bottom" style="box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);">
+  <view class="bg-gray margin-lr-sm margin-tb-xs padding-xs text-gray radius text-sm" style="width:440rpx;" bindtap="messageTap">快来说说你的想法</view>
+  <view class="action pr" style="margin-left:0 !important;" bindtap="messageTap">
+    <view class="cuIcon-message text-gray">
+      <view class="cu-tag badge">{{total}}</view>
+    </view>
+  </view>
+  <view class="action" style="margin-left:0 !important;" bindtap="collectTap">
+    <text class="cuIcon-favor {{detail.is_collect>0?'text-green':'text-gray'}}"></text>
+  </view>
+  <view class="action pr" style="width:48rpx; margin-right:0 !important; margin-left:0 !important;">
+    <button open-type="share" class="shareBtn"></button>
+    <view class=" cuIcon-post text-gray"></view>
+  </view>
+</view>

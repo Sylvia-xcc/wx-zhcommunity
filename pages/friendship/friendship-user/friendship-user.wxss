@@ -1,0 +1,8 @@
+/* pages/friendship/friendship-user/friendship-user.wxss */
+.nav .cu-item {
+  margin: 0px;
+}
+
+page{
+  background: #fff !important;
+}

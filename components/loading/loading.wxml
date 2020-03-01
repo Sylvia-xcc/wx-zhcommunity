@@ -1,0 +1,5 @@
+<!--components/loading/loading.wxml-->
+<view class="loading" wx:if="{{showLoading}}">
+  <image src="../../images/logining.gif" />
+  <text>{{message}}</text>
+</view>

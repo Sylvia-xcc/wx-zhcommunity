@@ -1,0 +1,6 @@
+<!--components/popup/popup.wxml-->
+<view bindtap='toggleModal' class="pop-mask {{showModal?'active':''}}"></view>
+<view class="pop-content {{showModal?'active':''}}">
+  <slot></slot>
+</view>
+

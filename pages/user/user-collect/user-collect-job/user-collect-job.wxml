@@ -1,0 +1,16 @@
+<!--pages/user/user-collect/user-collect-job/user-collect-job.wxml-->
+<view hidden="{{isLoading}}">
+
+  <view  class="padding padding-tb-lg solid-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.mid}}" bindtap="detailTap">
+    <view class="flex justify-between">
+      <text class="text-sm c0">{{item.job_type}}-{{item.favname}}</text>      
+    </view>
+    <view class="flex align-center justify-between padding-top">
+      <text class="text-red" wx:if="{{item.job_type=='全职'}}">{{item.money=='不限'?'面议':item.money}}</text>
+      <text class="text-red" wx:else>{{item.money}}元/{{item.money_type}}</text>
+      <text class="font_22 text-gray">{{item.create_time}}</text>
+    </view>
+  </view>
+
+  <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+</view>

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "v-bottomloading": "/components/bottomLoading/bottomloading"
+  },
+  "navigationBarTitleText": "社区服务"
+}

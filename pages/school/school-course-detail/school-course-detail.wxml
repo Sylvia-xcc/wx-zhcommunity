@@ -1,0 +1,64 @@
+<!--pages/school/school-course-detail/school-course-detail.wxml-->
+<view class="padding">
+  <v-banner banner="{{banner}}" videoUrl="{{videoUrl}}"></v-banner>
+</view>
+
+<view>
+  <view class="font_30 c0 text-bold padding-lr">老师介绍</view>
+  <view class="cu-list menu-avatar">
+    <view class="cu-item pr">
+      <view class="cu-avatar round lg" style="background-image:url({{detail.lecture_teacher.thumb}});"></view>
+      <view class="content flex-sub">
+        <view class="text-sm" style="font-size:24rpx;">{{detail.lecture_teacher.name}}</view>
+        <view class="text-gray text-xs flex justify-between">
+          辅导老师
+        </view>
+      </view>
+      <view class="padding-right-sm pa" style="bottom:40rpx; right:30rpx;" bindtap="guanzhuTap">
+        <button class="cu-btn radius sm bg-cgreen text-white" wx:if="{{detail.like==0}}" >+关注</button>
+        <button class="cu-btn radius sm bg-grey text-white" wx:else>已关注</button>
+      </view>
+    </view>
+    <view class="text-content padding-lr text-sm">
+      {{detail.lecture_teacher.intro}}
+    </view>
+  </view>
+</view>
+
+<view class="padding">
+  <view class="font_30 c0 text-bold ">课程大纲</view>
+  <view class="padding-top-sm">
+    <view class="flex padding-bottom" wx:for="{{detail.lecture_product_video}}" wx:key="index" data-index="{{index}}" data-id="{{item.pid}}" bindtap="detailTap">
+      <view class="basis-xs text-sm">{{detail.name}}</view>
+      <view class="flex-sub">
+        <view class="text-sm">{{item.title}}</view>
+        <view class="text-red text-xs padding-top-xs">{{item.create_time}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="padding" style="padding-bottom:150rpx;">
+  <view class="font_30 c0 text-bold ">课程详情</view>
+  <view class="padding-top-sm text-sm">
+    {{detail.intro}}
+  </view>
+</view>
+
+<view class="cu-bar bg-white tabbar border shop position-bottom">
+
+  <view class="action" style="width:96rpx;" bindtap="collectTap">
+    <view class=" cuIcon-favor {{detail.fav>0?'text-green':''}}"></view> 收藏
+  </view>
+  <view class="action pr" style="width:96rpx;">
+    <button open-type="share" class="shareBtn"></button>
+    <view class=" cuIcon-post"></view>
+    转发
+  </view>
+  <view class="action" style="width:96rpx;" bindtap="messageTap">
+    <view class=" cuIcon-pic"></view> 生产海报
+  </view>
+  <view class="btn-group" style="justify-content: flex-end !important; padding-right:30rpx !important;">
+    <button class="cu-btn bg-green round shadow-blur" bindtap="joinTap">{{detail.join==0?'立即报名':'前往课程'}}</button>
+  </view>
+</view>

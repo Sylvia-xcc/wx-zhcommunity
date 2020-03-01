@@ -1,0 +1,11 @@
+<!--components/poster/index.wxml-->
+<!--生成海报  -->
+<view class="imagePathBox" hidden="{{!maskHidden}}" bindtap="closeTap">
+  <block wx:if="{{showMask}}">
+    <button class='savealbum' catchtap='saveAlbum'>保存海报</button>
+    <!-- 显示图像 -->
+    <image src="{{imagePath}}" class='generate' style="width: {{canvasData.width}}rpx;height: {{canvasData.height}}rpx; top:{{canvasData.top}}rpx; left:{{canvasData.left}}rpx;" catchtap='tempTap'></image>
+  </block>
+  <!-- 画布 -->
+  <canvas style="width: {{canvasData.width}}px;height: {{canvasData.height}}px;position:fixed;top:999999rpx;left:0px;border:1px solid red;background: red;" canvas-id="xcanvas" />
+</view>

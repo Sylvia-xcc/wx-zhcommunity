@@ -1,0 +1,5 @@
+/* pages/community/community-jifen-shop-detail/community-jifen-shop-detail.wxss */
+
+page{
+  background: #fff !important;
+}

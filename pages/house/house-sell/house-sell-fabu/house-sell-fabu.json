@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "v-addImage": "/components/addImage/addImage"
+  },
+  "navigationBarTitleText": "发布售房信息"
+}

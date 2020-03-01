@@ -1,0 +1,8 @@
+<!--components/bottomLoading/bottomloading.wxml-->
+<view class=" padding-tb-sm">
+  <view class="flex align-center justify-center" wx:if="{{showBottomLoading}}">
+    <image src="/images/login.gif" style="width:40rpx;height:40rpx;"></image>
+    <text class="c3 font_22 margin-left-xs">加载中...</text>
+  </view>
+  <view class="text-center text-sm" wx:if="{{haveMore && !showBottomLoading}}">没有更多了~~~</view>
+</view>

@@ -1,0 +1,10 @@
+<!--components/textarea/index.wxml-->
+<view bindtap='toggleModal' class="pop-mask {{showModal?'active':''}}">
+</view>
+<view class="pop-content {{showModal?'active':''}}">
+  <view class="textarea-con">
+    <textarea class="textarea-li" placeholder="{{placeholder}}" fixed="{{true}}"  maxlength="9999999" value="{{comment}}" bindinput="bindinput">
+    </textarea>
+    <view class="textarea-btn" bindtap="submitTap">提交</view>
+  </view>
+</view>

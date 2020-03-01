@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "v-banner": "/components/banner/banner",
+    "my-commodity": "/components/commodity/index"
+  },
+  "navigationBarTitleText": "详情"
+}

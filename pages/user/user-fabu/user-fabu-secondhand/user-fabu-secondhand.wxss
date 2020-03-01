@@ -1,0 +1,4 @@
+/* pages/user/user-fabu/user-fabu-secondhand/user-fabu-secondhand.wxss */
+page{
+  background: #fff !important;
+}

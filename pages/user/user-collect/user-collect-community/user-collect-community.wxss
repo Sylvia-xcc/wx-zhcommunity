@@ -1,0 +1,4 @@
+/* pages/user/user-collect/user-collect-community/user-collect-community.wxss */
+page {
+  background: #fff !important;
+}

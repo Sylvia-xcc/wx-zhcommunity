@@ -1,0 +1,56 @@
+<!--components/commodity/index.wxml-->
+<view bindtap='toggleModal' class="pop-mask {{showModal?'active':''}}">
+</view>
+<view class="pop-content {{showModal?'active':''}}">
+  <view class="cart-popup-container">
+    <view class="cart-popup-con">
+      <view class='cart-popup-top'>
+        <image src='{{itemData.imgUrl}}' class="cart-popup-top-img" mode="aspectFill"></image>
+        <view class='cart-popup-top-right'>
+          <text class=" text-df text-bold" style="color:#000;">{{itemData.name}}</text>
+          <view class="flex justify-between padding-top align-center">
+            <view>
+              <text class='cart-popup-top-pricenew'>{{optype=='buyjifen'?'需要积分：':'￥'}}{{itemData.price}}</text>
+              <text class='cart-popup-top-priceold' wx:if="{{itemData.price_yj}}">￥{{itemData.price_yj}}</text>
+            </view>
+            <text class="stock">库存：{{itemData.stock}}</text>
+          </view>          
+          <view class="padding-top-xs" wx:if="{{show_attr_value}}">
+            <text class='cart-popup-top-choose fts24'>已选： </text>
+            <block wx:for="{{attrValueList}}" wx:for-item="item" wx:key="index">
+              <text class='cart-popup-top-choose fts24'>{{item.selectedValue==''?'':('"'+item.selectedValue+'"')}} </text>
+            </block>
+          </view>
+        </view>
+      </view>
+      <scroll-view class="attr-box" scroll-y style="max-height:500rpx;">
+        <block wx:for="{{attrValueList}}" wx:for-item="attrValueObj" wx:for-index="attrIndex" wx:key="index">
+          <view class='cart-popup-date ftb24'>
+            {{attrValueObj.attr_name}}
+            <view class='cart-popup-date-con'>
+              <block wx:for="{{attrValueObj.guige_list}}" wx:for-item="item" wx:key="{{item.id}}">
+                <view class="cart-popup-item {{item.name==attrValueObj.selectedValue?'cart-popup-item-active':''}}" data-id='{{item.id}}' bindtap='selectAttrValueTap' data-value="{{item.name}}" data-selectedValue="{{attrValueObj.selectedValue}}" data-idx='{{attrIndex}}'>
+                  {{item.name}}
+                </view>
+              </block>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+      <view class="shu">
+        <text class="cun">购买数量</text>
+        <view class="dian">
+          <view class="stepper">
+            <view class="{{buynum<=1?'disabled':''}}" data-type="0" bindtap="changeNum"><text>-</text></view>
+            <view class="nownum">{{buynum}}</view>
+            <view class="normal"  data-type="1" bindtap="changeNum"><text>+</text></view>
+          </view>
+        </view>
+      </view>
+      <view class='cart-popup-close text-gray text-xxl padding-right' bindtap='closeTap'>
+        <text class="cuIcon-close "></text>
+      </view>
+    </view>
+    <view class='cart-popup-btnsure' bindtap='sureCartTap'>确定</view>
+  </view>
+</view>

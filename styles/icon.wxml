@@ -1,0 +1,99 @@
+
+<view class="padding bg-white">
+  <view class="flex">
+    <view class="flex-sub bg-grey item margin-xs radius">1</view>
+    <view class="flex-sub bg-grey item margin-xs radius">1</view>
+  </view>
+  <view class="flex">
+    <view class="flex-sub bg-grey itemm margin-xs radius">1</view>
+    <view class="flex-sub bg-grey item margin-xs radius">1</view>
+  </view>
+</view>
+
+
+<view class="margin-top bg-white">
+  <view class="cu-bar ">
+    <view class="action">
+      <view class="bl-organe self-end"></view>
+      <text class="text-xl text-bold padding-left self-end c36">北欧大牌</text>
+      <text class="text-xl padding-lr-xs self-end">|</text>
+      <text class="text-df self-end">限量秒杀</text>
+    </view>
+    <view class="cuIcon-more padding-right"></view>
+  </view>
+  <view class="padding-lr padding-top flex flex-row flex-wrap justify-between">
+    <block wx:for="{{[1,2,3,4]}}" wx:key>
+      <view class="item-a">
+        <view class="top">
+          <image src="/images/t2.png" mode="aspectFit"></image>
+        </view>
+        <view class="flex flex-row justify-between align-end padding-top-sm padding-lr-sm">
+          <view class="cu-tag round sm basis-lg">品牌名称</view>
+          <text class="text-red font_16">到手价</text>
+        </view>
+        <view class="flex flex-row justify-between align-end padding-top-xs padding-lr-sm">
+          <text class="font_16 ff text-cut basis-lg">C003 Leisure chair</text>
+          <text class="text-red text-bold font_22">¥ 1200</text>
+        </view>
+        <view class="flex flex-row justify-between align-end padding-top-xs padding-lr-sm">
+          <text class="font_16 ff basis-df">Y010休闲椅</text>
+          <text class="font_16">原价 <text class="text-line-through">¥1600</text></text>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="padding-lr padding-bottom c4e flex align-center justify-center">
+    <view class="font_22 padding-right-xs">查看更多</view>
+    <view class="cuIcon-playfill" style="font-size:16rpx;"></view>
+  </view>
+</view>
+
+<view class="margin-top bg-white">
+  <view class="cu-bar ">
+    <view class="action ">
+      <view class="bl-organe self-end"></view>
+      <text class="text-xl text-bold padding-left self-end c36">热销品类</text>
+      <text class="text-xl padding-lr-xs self-end">|</text>
+      <text class="text-df self-end">年度低价</text>
+    </view>
+    <view class="cuIcon-more padding-right"></view>
+  </view>
+  <view class="padding-lr padding-bottom-lg flex flex-row flex-wrap justify-between">
+    <block wx:for="{{[1,2,3,4]}}" wx:key>
+      <view class="item-b c4e flex flex-direction align-center ">
+        <view class=" text-xxl padding-top-xs padding-right-xs text-right like" style="width:100%;">
+          <text class="cuIcon-likefill" style="color:#FC9360;"></text>
+        </view>
+        <view class="top">
+          <image src="/images/t2.png" mode="aspectFit"></image>
+        </view>
+        <view class="text-xs padding-top-lg">P009功能抽盒</view>
+        <view class="text-xs padding-top-xs">¥360.00</view>
+      </view>
+    </block>
+  </view>
+</view>
+
+<view class="margin-top bg-white">
+  <view class="cu-bar ">
+    <view class="action">
+      <view class="bl-organe self-end"></view>
+      <text class="text-xl text-bold padding-left self-end c36">精选品牌</text>
+      <text class="text-xl padding-lr-xs self-end">|</text>
+      <text class="text-df self-end">特价热卖</text>
+    </view>
+    <view class="cuIcon-more padding-right"></view>
+  </view>
+  <image src="/images/img1.png" class="item-action padding-top" mode="aspectFill"></image>
+  <view class="flex flex-row padding-bottom-lg padding-top " style="padding-left:30rpx;">
+    <block wx:for="{{[1,2,3,4]}}" wx:key="{{index}}">
+      <view class="item-c text-center" wx:if="{{index<=2}}">
+        <view class="top">
+          <image src="/images/t2.png" mode="aspectFit"></image>
+        </view>
+        <view class="c0 font_18 padding-top-sm">P007穿衣镜</view>
+        <view class="c0 font_18 padding-top-xs">¥260</view>
+      </view>
+    </block>
+  </view>
+</view>

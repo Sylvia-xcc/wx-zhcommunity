@@ -1,0 +1,5 @@
+/* pages/finance/finance-fabu/finance-fabu.wxss */
+page{
+  background: #fff !important;
+}
+

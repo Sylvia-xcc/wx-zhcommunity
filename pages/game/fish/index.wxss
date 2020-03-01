@@ -1,0 +1,60 @@
+/* pages/fish/index.wxss */
+
+.canvas-bg{
+  width: 100%;
+  height:100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.dian{
+  background: red;
+  position: fixed;
+  top: 0;
+  left: 180px;
+  width: 5rpx;
+  height: 5rpx;
+}
+
+.popView{
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background:rgb(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.popView .item{
+  width: 570rpx;
+  height: 844rpx;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.popView .item image{
+  width: 570rpx;
+  height: 844rpx;
+}
+.popView .item .closebtn{
+  width: 166rpx;
+  height: 166rpx;
+  line-height: 166rpx;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: -30rpx;
+}
+
+.popView .item .closebtn image{
+  width: 166rpx;
+  height: 166rpx;
+}

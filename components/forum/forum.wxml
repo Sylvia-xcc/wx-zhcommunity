@@ -1,0 +1,58 @@
+<!--components/forum/forum.wxml-->
+<view class="cu-card dynamic no-card margin-bottom-sm">
+  <view class="cu-item shadow">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url({{item.user.avatar}});" data-uid="{{item.user.id}}" data-anonymous='{{item.anonymous}}'  catchtap="personalTap"></view>
+        <view class="content flex-sub">
+          <view class="flex align-center" style="font-size:24rpx;">
+            <text class="padding-right-xs">{{item.anonymous>0?'匿名':item.user.nickname}}</text>
+            <image src="{{item.user.levelThumb}}" style="width:68rpx;height:30rpx;"></image>
+          </view>
+          <view class="text-gray text-xs flex justify-between">
+            {{item.datelineText}}
+          </view>
+        </view>
+        <view class="padding-right">
+          <image src="../../images/tag/tag-zhiding.png" class="margin-right-xs" style="width:85rpx;height:32rpx;" wx:if="{{item.highlight==1}}"></image>
+          <image src="../../images/tag/tag-jing.png" class="margin-right-xs" style="width:33rpx;height:33rpx;" wx:if="{{item.digest==1}}"></image>
+          <image src="../../images/tag/tag-zhuang.png" class="margin-right-xs" style="width:33rpx;height:33rpx;" wx:if="{{item.original==2}}"></image>
+          <image src="../../images/tag/tag-yuan.png" class="margin-right-xs" style="width:33rpx;height:33rpx;" wx:if="{{item.original==1}}"></image>
+          <image wx:for="{{item.tag}}" wx:key="index" src="{{item.icon}}" style="width:33rpx;height:33rpx;"></image>
+        </view>
+      </view>
+    </view>
+    <view class="text-content font_24 showone text-bold" style="margin-bottom:5rpx;" data-tid="{{item.tid}}" bindtap="forumTap">
+      {{item.subject}}
+    </view>
+    <view class="text-content font_22 showtwo text-gray" data-tid="{{item.tid}}" bindtap="forumTap">
+      <rich-text nodes="{{item.content}}"></rich-text>
+    </view>
+    <view class="grid flex-sub padding-lr {{item.pics.length>1?'col-3 grid-square':'col-1'}}" wx:if="{{item.pics.length>0}}">
+      <view class="bg-img {{item.pics.length>1?'':'only-img'}}" wx:for="{{item.pics}}" wx:key="index" wx:for-item="iitem" style="background-image:url('{{iitem.thumb}}');" data-id="{{index}}" data-dataimg="{{item.pics}}" catchtap='previewImgTap'></view>
+    </view>
+    <view class="text-gray text-sm padding flex justify-between align-center">
+      <view class="ibtn-section" data-fid="{{item.classes.typeid}}" bindtap="sectionTap">{{item.classes.name}}</view>
+      <view class="text-right flex">
+        <view class="{{item.isfav>0?'text-red':''}}" data-tid="{{item.tid}}" catchtap="collectTap">
+          <text class="cuIcon-like margin-lr-xs font_28 "></text>
+          <text class="font_22 padding-right-xs">{{item.favs>0?item.favs:'收藏'}}</text>
+        </view>
+
+        <view class="{{item.islike>0?'text-red':''}}" data-tid="{{item.tid}}" data-pid="{{item.pid}}" catchtap="likeTap">
+          <text class="cuIcon-appreciate margin-lr-xs font_28  "></text>
+          <text class="font_22 padding-right-xs">{{item.likes>0?item.likes:'赞'}}</text>
+        </view>
+        <view class="" data-tid="{{item.tid}}" catchtap="forumTap">
+          <text class="cuIcon-message margin-lr-xs font_28  "></text>
+          <text class="font_22 padding-right-xs">{{item.replies>0?item.replies:'评论'}}</text>
+        </view>
+        <view class="pr">
+          <button open-type="share" data-shareInfo="{{shareModel}}" class="shareBtn"></button>
+          <text class="cuIcon-forward margin-lr-xs font_28 "></text>
+        </view>
+
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "v-bottomloading": "/components/bottomLoading/bottomloading"
+  },
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "二手物品"
+}

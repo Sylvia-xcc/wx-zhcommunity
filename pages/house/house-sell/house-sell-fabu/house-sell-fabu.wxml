@@ -1,0 +1,189 @@
+<!--pages/house/house-sell/house-sell-fabu/house-sell-fabu.wxml-->
+<view style="display:{{displays}}">
+  <view>
+    <image src="/images/upload.png" style="width:750rpx;height:430rpx;" bindtap="addImageTap"></image>
+  </view>
+  <form>
+    <view class="cu-form-group">
+      <view class="title">标题</view>
+      <input placeholder="请输入发布标题" placeholder-class="text-gray text-df" bindinput="titleInput"></input>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">小区名称</view>
+      <input placeholder="请输入小区名称" placeholder-class="text-gray text-df" bindinput="nameInput"></input>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">户型</view>
+      <picker mode="multiSelector" bindchange="roomColumnChange" value="{{roomIndex}}" range="{{roomArr}}">
+        <view class="picker" style="text-align:left">
+          <text class="text-gray" wx:if="{{roomIndex.length<=0}}">请选择户型</text>
+          <text wx:else>{{roomArr[0][roomIndex[0]]}}{{roomArr[1][roomIndex[1]]}}{{roomArr[2][roomIndex[2]]}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="cu-form-group" wx:if="{{type==1}}">
+      <view class="title">租房类型</view>
+      <picker bindchange="rentingTypePickerChange" value="{{index}}" range="{{rentingTypeArray}}" range-key="{{'name'}}">
+        <view class="picker" style="text-align:left">
+          <text class="text-gray" wx:if="{{rentingTypeIndex<0}}">请选择租房类型</text>
+          <text wx:else>{{rentingTypeArray[rentingTypeIndex].name}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="cu-form-group">
+      <view class="title">面积</view>
+      <input placeholder="{{rentingTypeIndex==1?'请输入房间面积㎡':'请输入房屋面积㎡'}}" type="number" placeholder-class="text-gray text-df" bindinput="areaInput"></input>
+      <!-- <text class="padding-right-sm" style="width:260rpx">㎡</text> -->
+    </view>
+
+    <view class="cu-form-group" wx:if="{{type==1 && rentingTypeIndex==1}}">
+      <view class="title">卧室类型</view>
+      <picker bindchange="roomTypePickerChange" value="{{index}}" range="{{roomTypeArray}}" range-key="{{'value'}}">
+        <view class="picker" style="text-align:left">
+          <text class="text-gray" wx:if="{{roomTypeIndex<0}}">请选择卧室类型</text>
+          <text wx:else>{{roomTypeArray[roomTypeIndex].value}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="cu-form-group">
+      <view class="title">楼层</view>
+      <picker mode="multiSelector" bindchange="floorColumnChange" value="{{floorIndex}}" range="{{floorArr}}">
+        <view class="picker" style="text-align:left">
+          <text class="text-gray" wx:if="{{floorIndex.length<=0}}">请选择楼层</text>
+          <text wx:else>{{floorArr[0][floorIndex[0]]}} / {{floorArr[1][floorIndex[1]]}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="cu-form-group">
+      <view class="title">朝向</view>
+      <picker bindchange="orientationsPickerChange" value="{{index}}" range="{{orientationsArray}}" range-key="{{'name'}}">
+        <view class="picker" style="text-align:left">
+          <text class="text-gray" wx:if="{{orientationsIndex<0}}">请选择房屋朝向</text>
+          <text wx:else>{{orientationsArray[orientationsIndex].name}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="cu-form-group" wx:if="{{type==0}}">
+      <view class="title">类型</view>
+      <picker bindchange="houseTypePickerChange" value="{{index}}" range="{{houseTypeArray}}" range-key="{{'value'}}">
+        <view class="picker" style="text-align:left">
+          <text class="text-gray" wx:if="{{houseTypeIndex<0}}">请选择房屋类型</text>
+          <text wx:else>{{houseTypeArray[houseTypeIndex].value}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="cu-form-group" wx:if="{{type==0}}">
+      <view class="title">产权</view>
+      <input type="number" maxlength="4" placeholder="请输入房屋产权年限" placeholder-class="text-gray text-df" bindinput="chanquanInput"></input>
+    </view>
+
+    <view class="cu-form-group" wx:if="{{type==0}}">
+      <view class="title">房屋年龄</view>
+      <picker bindchange="houseYearPickerChange" value="{{index}}" range="{{houseYearArray}}" range-key="{{'value'}}">
+        <view class="picker" style="text-align:left">
+          <text class="text-gray" wx:if="{{houseYearIndex<0}}">请选择房屋年龄</text>
+          <text wx:else>{{houseYearArray[houseYearIndex].value}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="cu-form-group" wx:if="{{type==1}}">
+      <view class="title">入住情况</view>
+      <picker bindchange="ruzhuPickerChange" value="{{index}}" range="{{ruzhuArray}}" range-key="{{'name'}}">
+        <view class="picker" style="text-align:left">
+          <text class="text-gray" wx:if="{{ruzhuIndex<0}}">请选择入住情况</text>
+          <text wx:else>{{ruzhuArray[ruzhuIndex].name}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="cu-form-group">
+      <view class="title">装修情况</view>
+      <picker bindchange="renovationPickerChange" value="{{index}}" range="{{renovationArray}}" range-key="{{'value'}}">
+        <view class="picker" style="text-align:left">
+          <text class="text-gray" wx:if="{{renovationIndex<0}}">请选择装修情况</text>
+          <text wx:else>{{renovationArray[renovationIndex].value}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="cu-form-group">
+      <view class="title">电梯</view>
+      <picker bindchange="liftPickerChange" value="{{index}}" range="{{liftArray}}" range-key="{{'value'}}">
+        <view class="picker" style="text-align:left">
+          <text class="text-gray" wx:if="{{liftIndex<0}}">请选择是否有电梯</text>
+          <text wx:else>{{liftArray[liftIndex].value}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="cu-form-group" wx:if="{{type==0}}">
+      <view class="title">售价</view>
+      <input type="number" maxlength="11" placeholder="请输入出售价格(万)" placeholder-class="text-gray text-df" bindinput="sellpirceInput"></input>
+    </view>
+
+    <view class="cu-form-group" wx:if="{{type==1}}">
+      <view class="title">租金</view>
+      <input type="number" maxlength="11" placeholder="请输入出租价格(元/月)" placeholder-class="text-gray text-df" value="{{rentpirce}}" bindinput="rentpirceInput"></input>
+    </view>
+
+    <view class="cu-form-group" wx:if="{{type==1}}">
+      <view class="title">租期</view>
+      <picker bindchange="zuqiPickerChange" value="{{index}}" range="{{zuqiArray}}" range-key="{{'value'}}">
+        <view class="picker" style="text-align:left">
+          <text class="text-gray" wx:if="{{zuqiIndex<0}}">请选择租期</text>
+          <text wx:else>{{zuqiArray[zuqiIndex].value}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="cu-form-group" wx:if="{{type==1}}">
+      <view class="title">付款方式</view>
+      <picker bindchange="payTypePickerChange" value="{{index}}" range="{{payTypeArray}}" range-key="{{'name'}}">
+        <view class="picker" style="text-align:left">
+          <text class="text-gray" wx:if="{{payTypeIndex<0}}">请选择付款方式</text>
+          <text wx:else>{{payTypeArray[payTypeIndex].name}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="cu-form-group" bindtap="addressTap">
+      <view class="title">位置</view>
+      <input placeholder="请输入具体住宅地址" placeholder-class="text-gray text-df" value='{{address.address}}'></input>
+      <text class="cuIcon-locationfill text-orange"></text>
+    </view>
+
+    <view class="padding-lr padding-top  bg-white text-black " style="font-size:30rpx; border-top: 1rpx solid #eee;">{{type==0?'描述房屋核心卖点，优势':'房屋设施说明'}}</view>
+    <view class="cu-form-group align-start ">
+      <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="textareaInput" placeholder="{{type==0?'比如交通是否便利，生活是否方便，未来区域房价长势如何等等':'比如冰箱，洗衣机，空调，热水器，微波炉等家用电器情况'}}" placeholder-class="text-gray text-df"></textarea>
+    </view>
+
+
+    <view class="padding-sm flex flex-wrap" style="border-top: 1rpx solid #eee;">
+      <view class="padding-xs" wx:for="{{houseSpeArray}}" wx:key="index" data-id="{{item.id}}" bindtap="houseSpeTap">
+        <view class="cu-tag line-gray radius {{item.checked?'bg-cgreen text-white':''}}">{{item.value}}</view>
+      </view>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">联系人</view>
+      <input type="number" maxlength="11" placeholder="请输入联系人称呼" placeholder-class="text-gray text-df" bindinput="linkInput"></input>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">联系方式</view>
+      <input type="number" maxlength="11" placeholder="请输入手机号码" placeholder-class="text-gray text-df" bindinput="mobileInput"></input>
+    </view>
+
+    <view class="padding flex flex-direction" style="padding-top:100rpx;">
+      <button class="cu-btn bg-cgreen lg radius text-white" bindtap="sumbitTap">{{type==0?'发布售房信息':'发布租房信息'}}</button>
+    </view>
+  </form>
+</view>
+
+<!-- 上传图片 -->
+<v-addImage id="my-addImage" style="display:{{displays=='block'?'none':'block'}}" bind:OnSubmit='OnSubmit'></v-addImage>

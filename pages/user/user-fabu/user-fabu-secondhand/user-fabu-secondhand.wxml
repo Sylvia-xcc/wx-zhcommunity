@@ -1,0 +1,15 @@
+<!--pages/user/user-fabu/user-fabu-secondhand/user-fabu-secondhand.wxml-->
+<view hidden="{{isLoading}}">
+  <view class="flex padding solid-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailTap">
+    <image src="{{item.imgs}}" style="width:156rpx;height:156rpx;"></image>
+    <view class="flex-sub padding-left">
+      <view class="c0 showtwo">{{item.text}}</view>
+      <view class="flex justify-between text-gray font_22 padding-tb-sm ">
+        <text>评论 {{item.comments}}条</text>
+        <text>{{item.create_time}}</text>
+      </view>
+      <view class="text-sm text-gray text-right" data-id="{{item.id}}" catchtap="deleteTap">删除</view>
+    </view>
+  </view>
+  <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+</view>

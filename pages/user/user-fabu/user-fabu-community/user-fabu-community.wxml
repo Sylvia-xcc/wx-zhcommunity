@@ -1,0 +1,35 @@
+<!--pages/user/user-fabu/user-fabu-community/user-fabu-community.wxml-->
+<view hidden="{{isLoading}}">
+  <scroll-view scroll-x class="bg-white nav text-center">
+    <view class="cu-item flex-sub {{tabCur==0?'text-cgreen text-bold nav-cur':''}}" style="width:200rpx;" bindtap="tabSelect" data-id="{{0}}">聊会天</view>
+    <view class="cu-item flex-sub {{tabCur==1?'text-cgreen text-bold nav-cur':''}}" style="width:200rpx;" bindtap="tabSelect" data-id="{{1}}">约个会</view>
+  </scroll-view>
+
+  <view class="padding-tb" wx:if="{{tabCur==0}}">
+    <view hidden="{{loading}}" class="flex padding solid-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailChatTap">
+      <image src="{{item.photos[0]}}" class="radius" style="width:156rpx;height:156rpx;" wx:if="{{item.photos.length>0}}"></image>
+      <view class="flex-sub padding-left  flex flex-direction justify-between">
+        <view class="c0 showtwo">{{item.content}}</view>
+        <view class="flex justify-between text-gray font_22 padding-top ">
+          <text>{{item.create_time}}</text>
+          <view class="text-sm text-gray text-right" data-id="{{item.id}}" catchtap="deleteTap">删除</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{tabCur==1}}">
+    <view hidden="{{loading}}" class="flex padding solid-bottom" wx:for="{{list}}" wx:key="index">
+      <image src="{{item.img_list[0]}}" class="radius" style="width:156rpx;height:156rpx;" wx:if="{{item.img_list.length>0}}"></image>
+      <view class="flex-sub padding-left  flex flex-direction justify-between">
+        <view class="c0 showtwo">{{item.describe}}</view>
+        <view class="flex justify-between text-gray font_22 padding-top ">
+          <text>{{item.create_time}}</text>
+          <view class="text-sm text-gray text-right" data-id="{{item.id}}" catchtap="deleteTap">删除</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+</view>

@@ -1,0 +1,4 @@
+/* pages/friendship/friendship-detail/friendship-detail.wxss */
+page{
+  background: #fff !important;
+}

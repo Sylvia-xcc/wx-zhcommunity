@@ -1,0 +1,157 @@
+<!--pages/job/index.wxml-->
+<view hidden="{{isLoading}}">
+  <view catchtouchmove="true" class="{{displays=='block'?'swiper-pop':''}}">
+    <scroll-view scroll-x class="bg-white nav">
+      <view class="flex text-center">
+        <view class="cu-item flex-sub bg-gray text-black {{tabCur==0?'text-white cur bg-cgreen':''}}" bindtap="tabSelect" data-id="0">
+          全职
+        </view>
+        <view class="cu-item flex-sub bg-gray text-black {{tabCur==1?'text-white cur bg-cgreen':''}}" bindtap="tabSelect" data-id="1">
+          兼职
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="cu-bar search bg-white">
+      <view class="search-form round" style="background:#fff; border:1rpx solid #999;">
+        <text class="cuIcon-search"></text>
+        <input type="text" placeholder="请输入职位关键词" confirm-type="search" bindtap="searchTap"></input>
+      </view>
+      <view class="action">
+        <button class="cu-btn bg-green shadow-blur round" bindtap="fabuTap">发布+</button>
+      </view>
+    </view>
+
+    <view id="swiper-tab">
+      <view class="swiper-tab">
+        <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}} {{tabCur==0?'width1':'width2'}}" data-current="0" bindtap="tabNav">
+          <text>{{areaIndex==0?'地区':areaArr[areaIndex].name}}</text>
+          <i></i>
+        </view>
+        <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}} {{tabCur==0?'width1':'width2'}}" data-current="1" bindtap="tabNav">
+          <text>{{jobIndex==0?'类型':jobArr[jobIndex].name}}</text>
+          <i></i>
+        </view>
+        <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}} width2" data-current="2" bindtap="tabNav" wx:if="{{tabCur==1}}">
+          <text>{{jzmoneyIndex==0?'薪资':jzmoneyArr[jzmoneyIndex].name}}</text>
+          <i></i>
+        </view>
+        <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}} width1 pr" data-current="3" bindtap="tabNav" wx:if="{{tabCur==0}}">
+          <text>筛选</text>
+          <view class="cu-tag bg-red round pa" style="top:10rpx; left:60%; width:20rpx; height:30rpx;" wx:if="{{shaixuanNum>0}}">{{shaixuanNum}}</view>
+          <i></i>
+        </view>
+        <view class="swiper-tab-list {{currentTab==4 ? 'on' : ''}} width2" data-current="4" bindtap="tabNav" wx:if="{{tabCur==1}}">
+          <text>{{sortIndex==0?'排序':sortArr[sortIndex].name}}</text>
+          <i></i>
+        </view>
+      </view>
+
+      <view catchtouchmove="true" style="display:{{displays}}; height:{{height}}px;">
+        <!-- 地区 -->
+        <view wx:if="{{currentTab==0}}" class="swiper-con">
+          <view wx:for="{{areaArr}}" wx:key="index" class="item flex" data-id="{{index}}" bindtap="areaTap">
+            <text class="basis-df">{{item.name}}</text>
+            <text class="cuIcon-check text-bold text-green" wx:if="{{index==areaIndex}}"></text>
+          </view>
+        </view>
+        <!-- 类型 -->
+        <view wx:elif="{{currentTab==1}}" class="swiper-con">
+          <view wx:for="{{jobArr}}" wx:key="index" class="item flex" data-id="{{index}}" bindtap="jobTap">
+            <text class="basis-df">{{item.name}}</text>
+            <text class="cuIcon-check text-bold text-green" wx:if="{{index==jobIndex}}"></text>
+          </view>
+        </view>
+        <!-- 薪资 -->
+        <view wx:elif="{{currentTab==2 && tabCur==1}}" class="swiper-con">
+          <view wx:for="{{jzmoneyArr}}" wx:key="index" class="item flex" data-id="{{index}}" bindtap="moneyTap">
+            <text class="basis-df">{{item.name}}</text>
+            <text class="cuIcon-check text-bold text-green" wx:if="{{index==jzmoneyIndex}}"></text>
+          </view>
+        </view>
+        <!-- 筛选 -->
+        <view wx:elif="{{currentTab==3 && tabCur==0}}" class="swiper-con">
+          <view class="padding">
+            <view>
+              <view class="text-bold text-sm">期望月薪（单选）</view>
+              <view class="flex justify-between flex-wrap margin-tb">
+                <view wx:for="{{monthlypayArr}}" wx:key="index" class="item-shaixuan pr {{index==monthlypayIndex?'selected':''}}" data-id="{{item.id}}" bindtap="selectMoneyTap">
+                  {{item.name}}
+                  <image src="/images/gou.png" wx:if="{{index==monthlypayIndex}}" class="pa" style="width:43rpx;height:43rpx; right:0;bottom:0;"></image>
+                </view>
+              </view>
+            </view>
+
+            <view>
+              <view class="text-bold text-sm">福利待遇（多选）</view>
+              <view class="flex  flex-wrap margin-tb">
+                <view wx:for="{{treatmentArr}}" wx:key="index" class="item-shaixuan pr {{item.selected?'selected':''}}" data-id="{{item.id}}" bindtap="selectFuliTap">
+                  {{item.name}}
+                  <image src="/images/gou.png" wx:if="{{item.selected}}" class="pa" style="width:43rpx;height:43rpx; right:0;bottom:0;"></image>
+                </view>
+              </view>
+            </view>
+
+            <view>
+              <view class="text-bold text-sm">工作年限（单选）</view>
+              <view class="flex justify-between flex-wrap margin-tb">
+                <view wx:for="{{worktimeArr}}" wx:key="index" class="item-shaixuan pr {{index==worktimeIndex?'selected':''}}" data-id="{{item.id}}" bindtap="selectWorkTap">
+                  {{item.name}}
+                  <image src="/images/gou.png" wx:if="{{index==worktimeIndex}}" class="pa" style="width:43rpx;height:43rpx; right:0;bottom:0;"></image>
+                </view>
+              </view>
+            </view>
+
+            <view>
+              <view class="text-bold text-sm">学历要求（单选）</view>
+              <view class="flex justify-between flex-wrap margin-tb">
+                <view wx:for="{{educationArr}}" wx:key="index" class="item-shaixuan pr {{index==educationId?'selected':''}}" data-id="{{item.id}}" bindtap="selectEducationTap">
+                  {{item.name}}
+                  <image src="/images/gou.png" wx:if="{{index==educationId}}" class="pa" style="width:43rpx;height:43rpx; right:0;bottom:0;"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class=" flex flex-direction">
+            <button class="cu-btn bg-cgreen lg text-white" bindtap="shaixuanTap">确定</button>
+          </view>
+        </view>
+        <!-- 排序 -->
+        <view wx:elif="{{currentTab==4 && tabCur==1}}" class="swiper-con">
+          <view wx:for="{{sortArr}}" wx:key="index" class="item flex" data-id="{{item.id}}" bindtap="sortTap">
+            <text class="basis-df">{{item.name}}</text>
+            <text class="cuIcon-check text-bold text-green" wx:if="{{index==sortIndex}}"></text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view hidden="{{loading}}">
+    <view class="cu-card dynamic no-card solid-bottom padding-bottom-sm" wx:for="{{list}}" wx:key="index">
+      <view class="cu-item shadow pr" data-id="{{item.id}}" bindtap="detailTap">
+        <view class="cu-list menu-avatar">
+          <view class="cu-item">
+            <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
+            <view class="content flex-sub">
+              <view class="text-sm" style="font-size:24rpx;">{{item.nickname}}</view>
+              <view class="text-gray text-xs flex justify-between">
+                {{item.create_time}}
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="text-content">
+          <view class="text-sm">{{tabCur==1?'兼职':''}}{{item.job}}</view>
+          <view class="text-cred">{{tabCur==0?item.month_pay=='不限'?'面议':item.month_pay:item.month_pay+'元/'+item.money_type}} </view>
+        </view>
+        <view class="padding-right-sm pa" style="bottom:30rpx; right:30rpx;">
+          <button class="cu-btn radius sm bg-cgreen text-white">联系TA</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+</view>

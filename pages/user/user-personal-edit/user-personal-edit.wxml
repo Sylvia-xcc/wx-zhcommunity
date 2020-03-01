@@ -1,0 +1,51 @@
+<!--pages/user/user-personal-edit/user-personal-edit.wxml-->
+
+<view class="margin radius">
+  <view class="cu-form-group">
+    <view class="title">头像</view>
+    <view class="padding-tb flex align-center" bindtap="chooseImage">
+      <image src="{{upload_pic[0]}}" class="cu-avatar round lg"></image>
+      <view style="width:20rpx; height:2"></view>
+      <view class="cuIcon-right text-grey" style="font-size:34rpx;"></view>
+    </view>
+
+  </view>
+  <view class="cu-form-group">
+    <view class="title">昵称</view>
+    <input placeholder="请输入您的昵称" class="text-right text-sm " placeholder-class="text-right text-sm text-gray" value="{{nickname}}" bindinput="nameInput"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">性别</view>
+    <picker bindchange="sexChange" value="{{index}}" range="{{sex}}" range-key="{{'name'}}">
+      <view class="picker text-right">
+        <text wx:if="{{sexIndex<0}}" class="text-sm text-gray">请选择您的性别</text>
+        <text wx:else>{{sex[sexIndex].name}}</text>
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">生日</view>
+    <picker mode="date" value="{{birthday}}" start="1940-09-01" end="2060-09-01" bindchange="birthdayChange">
+      <view class="picker text-right ">
+        <text wx:if="{{birthday==''}}" class="text-sm text-gray">请选择您的生日</text>
+        <text wx:else>{{birthday}}</text>
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">常住</view>
+    <picker mode="region" bindchange="addressChange" value="{{address}}" custom-item="{{customItem}}">
+      <view class="picker text-right">
+        <text wx:if="{{address.length<=0}}" class="text-sm text-gray">请选择您的常住地址</text>
+        <text wx:else>{{address[0]}}，{{address[1]}}，{{address[2]}}</text>
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">行业</view>
+    <input placeholder="请输入你的行业名称" class="text-right text-sm " placeholder-class="text-right text-sm text-gray" value="{{job}}" bindinput="jobInput"></input>
+  </view>
+</view>
+<view class="padding flex flex-direction">
+  <button class="cu-btn bg-green lg" bindtap="submitTap">修改</button>
+</view>

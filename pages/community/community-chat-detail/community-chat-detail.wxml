@@ -1,0 +1,88 @@
+<!--pages/community/community-chat-detail/community-chat-detail.wxml-->
+<view hidden="{{isLoading}}">
+<view class="cu-card dynamic no-card bg-white padding-bottom">
+  <view class="cu-item shadow">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item pr">
+        <view class="cu-avatar round lg" style="background-image:url({{detail.avatar}});"></view>
+        <view class="content flex-sub">
+          <view>{{detail.nickname}}</view>
+          <view class="text-gray text-sm flex ">
+            {{detail.create_time}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="text-content font_24 c0">
+      {{detail.content}}
+    </view>
+    <view class="padding-lr">
+      <image src="{{item}}" class="margin-bottom-sm" style="width:750rpx;" mode="widthFix" wx:for="{{detail.photos}}" wx:key="index"></image>
+    </view>
+    <view class="text-black text-xs text-left padding-lr">
+      <text>评论({{total}})</text>
+      <!-- <text class="padding-left">{{detail.views}}次阅读</text> -->
+    </view>
+  </view>
+</view>
+
+<view class="padding bg-white margin-top" style="padding-bottom:150rpx;">
+  <!-- <view class="c0 font_26 text-bold">全部留言（{{total}}）</view> -->
+  <view>
+    <view class="cu-list menu-avatar comment">
+      <view class="cu-item solid-bottom" style="padding-left:90rpx !important;" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" >
+        <view class="cu-avatar round" style="left:0 !important; background-image:url({{item.avatar}});"></view>
+        <view class="content">
+          <view class="text-black text-bold" style="font-size:24rpx;">{{item.nickname}}</view>
+          <view class="text-black text-content font_22 flex align-center">
+            <view class="flex-sub">{{item.content}}</view>
+            <view class="cuIcon-appreciate margin-left {{item.like>0?'text-cgreen':''}}" style="font-size:40rpx;" data-id="{{item.id}}" data-like="{{item.like}}"  data-model="chat_comment" catchtap="likeMessageTap"></view>
+          </view>
+          <view class="flex">
+            <view class="text-gray text-xs">{{item.create_time}}</view>
+            <!-- <view class="text-blue text-xs padding-left-sm">评论</view> -->
+          </view>
+
+          <!-- <view>
+            <view class="cu-list menu-avatar comment" wx:for="{{item.childNode}}" wx:key="index" wx:for-item="iitem" catchtap>
+              <view class="cu-item" style="padding-left:90rpx !important; padding-right:0 !important; padding-bottom:0 !important;">
+                <view class="cu-avatar round" style="left:0 !important; background-image:url({{item.user_photo}});"></view>
+                <view class="content">
+                  <view class="text-black text-bold" style="font-size:24rpx;">{{iitem.user_name}}</view>
+                  <view class="text-black text-content font_22 flex align-center">
+                    <view class="flex-sub">回复 {{item.user_name}}： {{iitem.content}}</view>
+                    <view class="cuIcon-appreciate margin-left {{iitem.is_like>0?'text-cgreen':''}}" style="font-size:40rpx;" data-id="{{iitem.id}}" data-like="{{iitem.is_like}}" data-gid="{{iitem.parent_id}}" catchtap="likeMessageTap"></view>
+                  </view>
+                  <view class="flex justify-between">
+                    <view class="text-gray text-xs">{{iitem.create_time}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view> -->
+
+        </view>
+      </view>
+    </view>
+    <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+  </view>
+</view>
+<my-textarea id='my-textarea' bind:OnSubmit='OnSubmit'></my-textarea>
+
+
+<view class="cu-bar input position-bottom" style="box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);">
+  <view class="bg-gray margin-lr-sm margin-tb-xs padding-xs text-gray radius text-sm" style="width:440rpx;" bindtap="messageTap">快来说说你的想法</view>
+  <view class="action pr" style="margin-left:0 !important;" bindtap="messageTap">
+    <view class="cuIcon-message text-gray">
+      <view class="cu-tag badge">{{total}}</view>
+    </view>
+  </view>
+  <view class="action" style="margin-left:0 !important;" data-id="{{detail.id}}" data-like="{{detail.like}}"  data-model="chat_like" catchtap="likeMessageTap">
+    <text class="cuIcon-appreciate {{detail.like>0?'text-green':'text-gray'}}"></text>
+  </view>
+  <view class="action pr" style="width:48rpx; margin-right:0 !important; margin-left:0 !important;">
+    <button open-type="share" class="shareBtn"></button>
+    <view class=" cuIcon-post text-gray"></view>
+  </view>
+</view>
+</view>

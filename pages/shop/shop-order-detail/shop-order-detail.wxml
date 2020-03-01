@@ -1,0 +1,92 @@
+<!--pages/shop/shop-order-detail/shop-order-detail.wxml-->
+
+<view hidden='{{!isLoading}}'>
+  <view class="cu-list menu margin-top bg-white padding-tb">
+    <view class="cu-item ">
+      <view class="content padding-left-xs">
+        <view class="text-black text-bold">
+          <text>订单号：{{orderData.order_sn}}</text>
+          <text class="padding-left"></text>
+        </view>
+        <view class="text-gray text-sm ">
+          下单时间{{orderData.addtime}}
+        </view>
+      </view>
+      <text class="text-red">{{orderData.order_status}}</text>
+    </view>
+  </view>
+  <view class="padding-lr padding-tb-sm font_22 c6c">收货人</view>
+  <view class="cu-list menu  bg-white padding-tb ">
+    <view class="cu-item ">
+      <view class="text-sl">
+        <text class="cuIcon-locationfill text-red "></text>
+      </view>
+      <view class="content padding-left-xs">
+        <view class="text-black text-bold">
+          <text>{{orderData.receiver}}</text>
+          <text class="padding-left">{{orderData.tel}}</text>
+        </view>
+        <view class="text-gray text-sm">
+          {{orderData.address_xq}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="padding-lr padding-tb-sm font_22 c6c">商品清单</view>
+  <view class="cu-list menu  bg-white sm-border padding-tb">
+    <view class="cu-item">
+      <view class="content">
+        <block wx:for="{{productData}}" wx:key="index">
+          <view class="flex flex-row">
+            <image src="{{item.pro_thumb}}" mode="aspectFill" class="margin-bottom " style="width:190rpx;height:190rpx;"></image>
+            <view class="content flex-direction padding-left basis-lg justify-between">
+              <text class="text-black text-bold">{{item.pro_name}}</text>
+              <view class="padding-tb-xs text-sm" wx:if="{{item.pro_buff!=''}}">选择：{{item.pro_buff}}</view>
+              <view class="flex justify-between">
+                <text class="text-black text-bold">￥{{item.pro_price}}</text>
+                <text class="text-gray">x {{item.pro_num}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <view class="padding-lr padding-tb-sm font_22 c6c">买家留言</view>
+  <view class="cu-list menu bg-white padding-tb-sm ">
+    <view class="cu-item ">{{orderData.remark==""?"无":orderData.remark}}</view>
+  </view>
+
+  <view class="cu-list menu margin-top bg-white sm-border">
+    <view class="cu-item ">
+      <view class="text-bold text-black">运费</view>
+      <view class="text-bold text-black text-price">{{orderData.express_money}}</view>
+    </view>
+    <view class="cu-item " wx:if="{{youhui>0}}">
+      <view class="text-bold text-black">优惠</view>
+      <view class="text-bold text-black text-price">{{youhui}}</view>
+    </view>
+    <view class="cu-item ">
+      <view class="text-bold text-black">支付方式</view>
+      <view class="text-bold text-black">{{orderData.pay_type == '现金支付'?'余额支付':orderData.pay_type}}</view>
+    </view>
+
+    <view class="cu-item ">
+      <view class="text-bold text-black">商品总价</view>
+      <view class="text-bold text-black text-price">{{orderData.price}}</view>
+    </view>
+
+    <view class="cu-item " wx:if="{{orderData.kuaidi_name}}">
+      <view class="text-bold text-black">快递名字</view>
+      <view class="text-bold text-black">{{orderData.kuaidi_name}}</view>
+    </view>
+
+    <view class="cu-item " wx:if="{{orderData.kuaidi_number}}">
+      <view class="text-bold text-black">快递单号</view>
+      <view class="text-bold text-black">{{orderData.kuaidi_number}}</view>
+    </view>
+  </view>
+
+  <view class="padding text-center text-xl text-bold text-black">实付：¥{{orderData.amount}}</view>
+</view>

@@ -1,0 +1,144 @@
+<!--pages/job/job-qz-fabu/job-qz-fabu.wxml-->
+<form>
+  <view class="cu-form-group">
+    <view class="title">我要招聘</view>
+    <picker bindchange="jobPickerChange" value="{{index}}" range="{{jobArr}}" range-key="{{'name'}}">
+      <view class="picker" style="text-align:left">
+        <text class="text-gray" wx:if="{{jobIndex<0}}">选择提供的职位</text>
+        <text wx:else>{{jobArr[jobIndex].name}}</text>
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group" wx:if="{{type==0}}">
+    <view class="title">月薪</view>
+    <picker bindchange="moneyPickerChange" value="{{index}}" range="{{moneyArr}}" range-key="{{'name'}}">
+      <view class="picker" style="text-align:left">
+        <text class="text-gray" wx:if="{{moneyIndex<0}}">选择提供的月薪</text>
+        <text wx:else>{{moneyArr[moneyIndex].name}}</text>
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group" wx:else>
+    <view class="title">薪资</view>
+    <input placeholder="请输入合适的数字" type="number" placeholder-class="text-gray text-df" bindinput="moneyInput"></input>
+    <text class="padding-right-sm" style="width:60rpx">元</text>
+    <radio-group class="flex flex-row" bindchange="radioChange">
+      <view class="margin-right-sm">
+        <radio class=" margin-right-xs" checked="{{original==1}}" value='1'></radio>小时
+      </view>
+      <view class="margin-right-xs">
+        <radio class=" margin-right-xs" checked="{{original==2}}" value='2'></radio>天
+      </view>
+    </radio-group>
+  </view>
+
+  <view class="cu-form-group" wx:if="{{type==1}}">
+    <view class="title">结算方式</view>
+    <picker bindchange="jiesuanPickerChange" value="{{index}}" range="{{jiesuanArr}}">
+      <view class="picker" style="text-align:left">
+        <text class="text-gray" wx:if="{{jiesuanIndex<0}}">选择结算方式</text>
+        <text wx:else>{{jiesuanArr[jiesuanIndex]}}</text>
+      </view>
+    </picker>
+  </view>
+
+  <view class="cu-form-group" bindtap="showModal" data-target="WorkTimerModal" wx:if="{{type==1}}">
+    <view class="title">工作时间</view>
+    <view class="flex-sub">
+      <text class="text-gray text-left" wx:if="{{worktimers.length<=0}}">选择工作时间</text>
+      <text wx:else class="padding-tb">{{worktimers}}</text>
+    </view>
+    <view class="pr" style="width:60rpx;">
+      <text class="cuIcon-right text-grey pa" style="font-size:34rpx; right:-10rpx; top:-15rpx;"></text>
+    </view>
+  </view>
+
+  <view class="cu-form-group" bindtap="showModal" data-target="ChooseModal" wx:if="{{type==0}}">
+    <view class="title">福利待遇</view>
+    <view class="flex-sub">
+      <text class="text-gray text-left" wx:if="{{checkArr.length<=0}}">选择提供的福利，如包吃住</text>
+      <text wx:else class="padding-tb">{{checkArr}}</text>
+    </view>
+    <view class="pr" style="width:60rpx;">
+      <text class="cuIcon-right text-grey pa" style="font-size:34rpx; right:-10rpx; top:-15rpx;"></text>
+    </view>
+  </view>
+
+  <view class="cu-form-group" wx:if="{{type==0}}">
+    <view class="title">工作年限</view>
+    <picker bindchange="workPickerChange" value="{{index}}" range="{{workArray}}" range-key="{{'name'}}">
+      <view class="picker" style="text-align:left">
+        <text class="text-gray" wx:if="{{wordIndex<0}}">选择工作年限</text>
+        <text wx:else>{{workArray[wordIndex].name}}</text>
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group" wx:if="{{type==0}}">
+    <view class="title">学历要求</view>
+    <picker bindchange="educationalPickerChange" value="{{index}}" range="{{educationalArr}}" range-key="{{'name'}}">
+      <view class="picker" style="text-align:left">
+        <text class="text-gray" wx:if="{{educationalIndex<0}}">选择学历要求</text>
+        <text wx:else>{{educationalArr[educationalIndex].name}}</text>
+      </view>
+    </picker>
+  </view>
+
+  <view class="cu-form-group" bindtap="addressTap">
+    <view class="title">工作地点</view>
+    <input placeholder="输入具体工作地址" placeholder-class="text-gray text-df" value='{{address.address}}'></input>
+    <text class="cuIcon-locationfill text-orange"></text>
+  </view>
+
+  <view class="cu-form-group" wx:if="{{type==1}}">
+			<view class="title">有效期限</view>
+			<view>
+        长期有效
+				<switch class="green sm" checked="{{validityTime==1}}" bindchange="validityTimeChange"></switch>
+			</view>
+		</view>
+
+  <view class="cu-form-group">
+    <view class="title">联系电话</view>
+    <input type="number" maxlength="11" placeholder="输入手机号码" placeholder-class="text-gray text-df" bindinput="mobileInput"></input>
+  </view>
+
+  <view class="cu-form-group align-start">
+    <view class="title">职位描述</view>
+    <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="textareaInput" placeholder="请输入具体的职位描述" placeholder-class="text-gray text-df"></textarea>
+  </view>
+
+  <view class="padding flex flex-direction" style="padding-top:100rpx;">
+    <button class="cu-btn bg-cgreen lg radius text-white" bindtap="sumbitTap">发布</button>
+  </view>
+</form>
+
+<view class="cu-modal bottom-modal {{modalName=='ChooseModal'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog" catchtap>
+    <view class="cu-bar bg-white">
+      <view class="action text-gray" bindtap="hideModal">取消</view>
+      <view>福利待遇(多选)</view>
+      <view class="action text-green" data-type="ok" bindtap="hideModal">确定</view>
+    </view>
+    <view class="grid col-3 padding-sm">
+      <view wx:for="{{checkbox}}" wx:key="index" class="padding-xs">
+        <button class="cu-btn orange lg block {{item.checked?'bg-cgreen':'line-gray'}}" bindtap="ChooseCheckbox" data-value="{{item.name}}"> {{item.name}}
+        </button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="cu-modal bottom-modal {{modalName=='WorkTimerModal'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog" catchtap>
+    <view class="cu-bar bg-white">
+      <view class="action text-gray" bindtap="hideModal">取消</view>
+      <view class="action text-green" data-type="worktimerok" bindtap="hideModal">确定</view>
+    </view>
+    <view class="padding-sm">
+      <view wx:for="{{workTimercheckbox}}" wx:key="index" class="padding-sm flex justify-between" bindtap="ChooseWorkTimerCheckbox" data-value="{{item.value}}">
+        <text>{{item.name}}</text>
+        <text class="cuIcon-check text-bold" wx:if="{{item.checked}}"></text>
+      </view>
+    </view>
+  </view>
+</view>

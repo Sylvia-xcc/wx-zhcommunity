@@ -1,0 +1,28 @@
+/* pages/authorize/authorize.wxss */
+page
+{
+  background-color: rgb(230, 230, 230);
+}
+.head {
+  text-align: center;
+  padding-top: 150rpx;
+  min-height: 87.5vh;
+}
+
+.head_p {
+  width: 140rpx;
+}
+
+.haed_name {
+  font-size: 30rpx;
+  color: rgb(77, 77, 77);
+  margin-top: 50rpx;
+}
+
+.tops {
+  margin-top: 300rpx;
+  background-color: green;
+  color: white;
+  width: 60%;
+  margin-left: 20%;
+}

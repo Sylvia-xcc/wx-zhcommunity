@@ -1,0 +1,24 @@
+<!--pages/school/school-course-list/school-course-list.wxml-->
+
+<view class="padding" hidden="{{isLoading}}">
+  <view wx:for="{{list}}" wx:key="index" data-lid="{{item.id}}" bindtap="detailTap">
+    <view class="bg-img bg-mask padding-tb-xl radius" style="background-image: url('{{item.thumb}}');height: 414rpx;">
+      <view class="text-white flex flex-direction justify-between" style="height:100%;">
+        <view class="padding-sm text-xl text-right showtwo">
+          {{item.name}}
+        </view>
+        <view class="padding-sm text-right ">
+          <button class="cu-btn radius bg-cgreen text-white">参加课程</button>
+        </view>
+      </view>
+    </view>
+    <view class="padding-tb-sm flex justify-between align-center">
+      <view class="flex align-center">
+        <image src="{{item.avatar}}" class="round" style="width:40rpx;height:40rpx;"></image>
+        <text class="text-xs c0 padding-left-xs">{{item.username}}</text>
+      </view>
+      <view class="text-gray text-xs">2020-02-04 12:09发布</view>
+    </view>
+  </view>
+  <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+</view>

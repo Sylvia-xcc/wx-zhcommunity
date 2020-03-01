@@ -1,0 +1,8 @@
+/* pages/finance/finance-user/finance-user.wxss */
+.nav .cu-item {
+  margin: 0px;
+}
+
+page{
+  background: #fff !important;
+}

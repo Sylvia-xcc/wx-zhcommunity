@@ -1,0 +1,66 @@
+/* components/textarea/index.wxss */
+
+.pop-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 0;
+}
+
+.pop-mask.active {
+  display: block;
+}
+
+.pop-content {
+  position: fixed;
+  bottom: 0;
+  width: 750rpx;
+  background: #fff;
+  transform: translateY(150%);
+  transition: all 0.4s ease;
+  z-index: 9999;
+}
+
+.pop-content.active {
+  transform: translateY(0);
+}
+
+.textarea-con {
+  width: 750rpx;
+  background: #ececec;
+  border-top: 2rpx solid #d8d8d8;
+  padding-bottom: 10rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.textarea-li {
+  width: 580rpx;
+  max-height: 200rpx;
+  background: #fff;
+  padding: 15rpx;
+  margin: 15rpx;
+  min-height: 48rpx;
+}
+
+.textarea-btn {
+  width: 100rpx;
+  height: 60rpx;
+  background: #68B581;
+  color: #fff;
+  margin-bottom: 15rpx;
+  margin-right: 15rpx;
+  border-radius: 10rpx;
+  line-height: 60rpx;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.btn-hide {
+  background: orange;
+}

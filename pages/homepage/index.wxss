@@ -1,0 +1,9 @@
+/* pages/homepage/index.wxss */
+
+@import '/pages/user/user-fabu/index.wxss'
+.user-box {
+  width: 750rpx;
+  height: 422rpx;
+  position: relative;
+  overflow: hidden;
+}

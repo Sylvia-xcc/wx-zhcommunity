@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "v-banner": "/components/banner/banner"
+  },
+  "navigationBarTitleText": "课程详情"
+}

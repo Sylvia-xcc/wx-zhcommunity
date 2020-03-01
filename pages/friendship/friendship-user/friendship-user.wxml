@@ -1,0 +1,41 @@
+<!--pages/friendship/friendship-user/friendship-user.wxml-->
+<view hidden="{{isLoading}}">
+  <scroll-view scroll-x class="bg-white nav">
+    <view class="flex text-center">
+      <view class="cu-item flex-sub bg-gray text-black {{tabCur==0?'text-white cur bg-cgreen':''}}" bindtap="tabSelect" data-id="0">
+        我的收藏
+      </view>
+      <view class="cu-item flex-sub bg-gray text-black {{tabCur==1?'text-white cur bg-cgreen':''}}" bindtap="tabSelect" data-id="1">
+        我的发布
+      </view>
+    </view>
+  </scroll-view>
+
+
+  <view class="bg-white">
+    <view class="padding flex justify-center align-center" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailTap">
+      <view>
+        <image src="{{item.file_list[0]}}" class="ridius" style="width:224rpx;height:224rpx;"></image>
+      </view>
+      <view class="flex-sub padding-left-sm pr">
+        <view class="text-bold c0 text-df showtwo">{{item.intro}}</view>
+        <view class="padding-top-xs flex flex-wrap">
+          <view class="padding-right-xs padding-bottom-xs" wx:for="{{item.tag_list}}" wx:key="index" wx:if="{{index<3}}">
+            <view class="cu-tag line-gray radius" style="height:38rpx;">{{item.name}}</view>
+          </view>
+        </view>
+        <view class="text-red text-bold font_30">￥{{item.money}}元</view>
+        <view class="flex align-center justify-between">
+          <view class="flex align-center padding-top-xs">
+            <image src="{{item.user_photo}}" class="cu-avatar sm round"></image>
+            <view class="text-xs c0 padding-left-xs">{{item.nickname}}</view>
+          </view>
+          <button class="cu-btn radius bg-green sm pa" style="right:30rpx; bottom:10rpx;" wx:if="{{tabCur==0}}">联系TA</button>
+          <button class="cu-btn radius bg-green sm pa" style="right:30rpx; bottom:10rpx;" wx:else>{{item.status==0?'审核中':item.status==1?'审核通过':item.status==2?'审核驳回':item.status==3?'已发布':'已撤销'}}</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+</view>

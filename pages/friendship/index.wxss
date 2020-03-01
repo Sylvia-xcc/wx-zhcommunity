@@ -1,0 +1,7 @@
+/* pages/friendship/index.wxss */
+
+.screen-swiper {
+  min-height: 1334rpx !important;
+}
+
+

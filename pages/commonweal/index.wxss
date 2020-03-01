@@ -1,0 +1,7 @@
+/* pages/commonweal/index.wxss */
+page{
+  background: #fff !important;
+}
+.cu-form-group+.cu-form-group{
+  border-top: none;
+}

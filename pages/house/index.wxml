@@ -1,0 +1,6 @@
+<!--pages/house/index.wxml-->
+
+<view class="padding flex justify-between">
+  <view class="text-center basis-df" bindtap="buyTap">买/租赁</view>
+  <view class="text-center basis-df" bindtap="sellTap">卖/出租</view>
+</view>

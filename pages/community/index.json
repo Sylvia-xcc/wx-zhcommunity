@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "v-bottomloading": "/components/bottomLoading/bottomloading",
+    "v-meeting":"/components/meeting/meeting"
+  },
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "社区服务"
+}

@@ -1,0 +1,44 @@
+/* components/poster/index.wxss */
+
+.imagePathBox {
+  width: 750rpx;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999999;
+  /* border: 1px solid red; */
+}
+
+.isIPX {
+  padding-bottom: 145rpx !important;
+}
+
+.generate {
+  background: #fff;
+  position: fixed;
+  z-index: 3000;
+}
+
+.savealbum {
+  display: block;
+  width: 606rpx;
+  height: 100rpx;
+  padding: 0;
+  line-height: 100rpx;
+  text-align: center;
+  position: fixed;
+  bottom: 150rpx;
+  left: 72rpx;
+  color: white;
+  font-size: 36rpx;
+  z-index: 99999;
+  background: rgba(252, 92, 101, 1);
+  border-radius: 100rpx;
+}
+button:not([size='mini']){
+   width: 606rpx;
+}

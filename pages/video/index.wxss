@@ -1,0 +1,4 @@
+/* pages/video/index.wxss */
+page{
+  background: #fff !important;
+}

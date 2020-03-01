@@ -1,0 +1,16 @@
+<!--pages/community/community-jifen-shop/community-jifen-shop.wxml-->
+<view class="margin-lr margin-top-sm radius bg-white padding-tb padding-lr-sm text-bold">您的总积分：778</view>
+<view class="padding-tb-xl">
+  <view class="text-bold text-center font_30">每周限时兑换马克杯</view>
+  <view class="padding flex flex-wrap justify-between">
+    <view class="bg-white text-sm pr margin-bottom" style="width: 330rpx;height: 486rpx;" wx:for="{{13}}" wx:key="index" data-id="{{item.id}}" bindtap="detailTap">
+      <image src="/images/head.png" style="width: 330rpx;height: 365rpx;"></image>
+      <view class="padding-lr-xs showone">陶瓷杯子马克杯带把红色字母</view>
+      <view class="padding-lr-xs text-gray padding-top-xs text-line-through">300</view>
+      <view class="padding-lr-xs text-red text-df">2000积分</view>
+      <button class="cu-btn radius sm bg-red pa" style="right:10rpx; bottom:10rpx; height:34rpx;">立即兑换</button>
+      <image src="/images/xl.png" class="pa" style="width:54rpx;height:56rpx; top:-20rpx; left:-20rpx;"></image>
+    </view>
+  </view>
+  <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+</view>

@@ -1,0 +1,15 @@
+<!--components/banner/banner.wxml-->
+<!-- 视频，图片轮播组件 -->
+<swiper indicator-dots='true' circular easing-function="linear" autoplay="{{autoplay}}" interval="{{interval}}" bindchange="swiperChange" style='height:{{swiperH}}px; background:#fff;'>
+  <swiper-item wx:if="{{videoUrl!=''}}">
+    <video id="myvideo" src='{{videoUrl}}' style='width:100%;height:100%;' bindplay="play" bindpause="pause" bindended="pause" controls="{{false}}" show-center-play-btn="{{false}}"></video>
+  </swiper-item>
+  <block wx:for="{{banner}}" wx:key="this">
+    <swiper-item>
+      <image src="{{item}}" data-src='{{item}}'  bindtap='previewImgTap' bindload='setContainerHeight' mode='aspectFill'></image>
+    </swiper-item>
+  </block>
+  <view class="playBtn" wx:if="{{videoUrl!='' && current==0 }}" bindtap="playVideo" style="top:{{btnH}}px;">
+    <image src='{{isVideoPlay?"/images/pause_btn.png":"/images/play_btn.png"}}' class="play-img"></image>
+  </view>
+</swiper>

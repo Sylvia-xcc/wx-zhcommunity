@@ -1,0 +1,36 @@
+<!--pages/shop/shop-address/shop-address.wxml-->
+<view wx:if="{{address.length>0}}" style="padding-bottom:120rpx;">
+  <block wx:for="{{address}}" wx:key="index">
+    <view class="cu-list menu card-menu margin-top item-shadow" style="border-radius:8rpx;">
+      <view class="cu-item" data-id="{{item.id}}" data-obj="{{item}}" bindtap="selectTap">
+        <view class="text-sl">
+          <text class="cuIcon-locationfill text-red "></text>
+        </view>
+        <view class="content  padding-tb">
+          <view>
+            <text class="text-lg margin-left-xs">{{item.username}}</text>
+            <text class="text-gray text-sm padding-left">{{item.phone}}</text>
+          </view>
+          <view>
+            <view class="cu-tag  bg-cyan sm" wx:if="{{item.default==1}}">默认</view>
+            <text class="text-sm text-gray padding-left-xs">{{item.province}}{{item.city}}{{item.areas}}{{item.addr}}</text>
+          </view>
+        </view>
+        <view class="action text-gray padding-left" data-id="{{item.id}}" data-item="{{item}}" catchtap="editAddress">
+          编辑
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+<view wx:else class="flex flex-direction align-center justify-center" style="margin-top:400rpx">
+  <view class="text-xsl">
+    <text class="cuIcon-locationfill text-red "></text>
+  </view>
+  <view class='text-gray text-xl'>您还没有添加收货地址</view>
+</view>
+
+
+<navigator url="/pages/shop/shop-address-edit/shop-address-edit?len={{address.length}} " hover-class="none ">
+  <button class="bg-red position-bottom">新增地址</button>
+</navigator>

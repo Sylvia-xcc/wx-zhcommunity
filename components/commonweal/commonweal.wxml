@@ -1,0 +1,66 @@
+<!--components/commonweal/commonweal.wxml-->
+<view class="cu-card dynamic no-card solid-bottom">
+  <view class="cu-item shadow">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item pr">
+        <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
+        <view class="content flex-sub">
+          <view>{{item.nickname}}</view>
+          <view class="text-gray text-sm flex ">
+            {{item.create_time}}
+            <view class="text-red padding-left-sm">{{item.deadline}}截止</view>
+          </view>
+        </view>
+        <view class="padding-right-sm pa" style="bottom:30rpx; right:30rpx;" >
+          <button class="cu-btn radius sm  text-white bg-green" bindtap="showModal" data-target="bottomModal" wx:if="{{item.join==0}}">去报名</button>
+          <button class="cu-btn radius sm  text-white bg-grey" wx:if="{{item.join==1}}">已报名</button>
+          <button class="cu-btn radius sm  text-white bg-grey" wx:if="{{item.end==1}}">已结束</button>
+        </view>
+      </view>
+    </view>
+    <view class="text-content font_24">
+      <view>{{item.content}}</view>
+      <view class="padding-top-xs text-gray">活动人数：{{item.people_num}}</view>
+    </view>
+    <view class="grid flex-sub padding-lr padding-bottom-sm {{item.img_list.length>1?'col-3 grid-square':'col-1'}}">
+      <view wx:for="{{item.img_list}}" wx:key="index" wx:for-item="iitem" class="bg-img {{item.img_list.length>1?'':'only-img'}}" style="background-image:url({{iitem}});" data-id="{{index}}" data-dataimg="{{item.img_list}}" catchtap='previewImgTap'>
+      </view>
+    </view>
+    <view class="padding-lr flex align-center">
+      <view class="cuIcon-location text-cgreen" style="font-size:38rpx;"></view>
+      <view class="padding-left-xs text-gray text-sm">{{item.address}}</view>
+    </view>
+    <view class="padding flex align-center" bindtap="showModal" data-target="bottomModal">
+      <text class="font_22 padding-right-xs">已报名：</text>
+      <text class="font_22 text-gray" wx:if="{{item.users.length<=0}}">暂无报名，就等你啦</text>
+      <image src="{{item.photo}}" class="round margin-right-xs" style="width:56rpx;height:56rpx;" wx:for="{{item.users}}" wx:key="index"></image>
+      <view class="cuIcon-right text-grey padding-left-sm"></view>
+    </view>
+  </view>
+</view>
+
+
+<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog" catchtap>
+    <view class="cu-bar bg-white">
+      <view class="content">已报名</view>
+      <view class="action text-gray" bindtap="hideModal">取消</view>
+    </view>
+    <view class="padding-sm bg-white">
+      <scroll-view scroll-y style="height:400rpx;" wx:if="{{item.users.length>0}}">
+        <view class="flex flex-wrap">
+          <view class="basis-xs flex flex-direction align-center padding-bottom-sm" wx:for="{{item.users}}" wx:key="index">
+            <image src="{{item.photo}}" class="round" style="width:82rpx;height:82rpx;"></image>
+            <text class="text-sm c0 padding-top-xs">{{item.nickname}}</text>
+          </view>
+        </view>
+      </scroll-view>
+      <view wx:else class="text-gray">暂无报名，就等你啦</view>
+      <view class="padding-lr padding-tb-xl flex flex-direction">
+        <button class="cu-btn radius bg-cgreen margin-tb-sm lg text-white" bindtap="joinTap" wx:if="{{item.join==0}}">立即报名</button>
+        <button class="cu-btn radius bg-grey margin-tb-sm lg" wx:if="{{item.join==1}}">已报名</button>
+        <button class="cu-btn radius bg-grey lg">已结束</button>
+      </view>
+    </view>
+  </view>
+</view>

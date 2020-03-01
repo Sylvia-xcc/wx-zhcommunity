@@ -1,0 +1,249 @@
+<!--pages/matchmaker/index.wxml-->
+
+<view hidden="{{isLoading}}">
+  <view class="padding" style="padding-bottom:150rpx;" wx:if="{{tabCur==0}}">
+    <v-banner banner="{{detail.photo}}"></v-banner>
+    <view class="padding bg-white radius margin-top-sm item">
+      <view class=" flex justify-between">
+        <view class="font_30 c0 text-bold">{{detail.name}}
+          <view class="cu-tag bg-cgreen radius text-white margin-left-sm" style="height:40rpx;">身份证已认证</view>
+        </view>
+        <view class="flex align-center">
+          <text class="cuIcon-locationfill text-gray " style="font-size:34rpx;"></text>
+          <text class="text-gray padding-left-xs font_22">{{detail.province}} {{detail.city}}</text>
+        </view>
+      </view>
+      <view class=" flex flex-wrap justify-start padding-top">
+        <view class="cu-tag bg-gray radius c0 margin-bottom-sm">年龄：{{detail.age}}</view>
+        <view class="cu-tag bg-gray radius c0 margin-bottom-sm">身高：{{detail.height}}cm</view>
+        <view class="cu-tag bg-gray radius c0 margin-bottom-sm">毕业院校：{{detail.school}}</view>
+        <view class="cu-tag bg-gray radius c0 margin-bottom-sm">职业：{{detail.job}}</view>
+        <view class="cu-tag bg-gray radius c0 margin-bottom-sm">年薪：{{detail.income}}</view>
+      </view>
+    </view>
+
+    <view class="padding bg-white radius margin-top-sm item">
+      <view class="font_26 c0 text-bold">
+        <text class="cuIcon-titles text-green" style="font-size:30rpx;"></text>
+        <text> 自我介绍</text>
+      </view>
+      <view class="text-sm c0 padding-top-sm">
+        {{detail.intro}}
+      </view>
+    </view>
+
+    <view class="padding bg-white radius margin-top-sm item">
+      <view class="font_26 c0 text-bold">
+        <text class="cuIcon-titles text-green" style="font-size:30rpx;"></text>
+        <text> 兴趣爱好</text>
+      </view>
+      <view class="text-sm c0 padding-top-sm">
+        {{detail.hobby}}
+      </view>
+    </view>
+
+    <view class="padding bg-white radius margin-top-sm item">
+      <view class="font_26 c0 text-bold">
+        <text class="cuIcon-titles text-green" style="font-size:30rpx;"></text>
+        <text> 感情观</text>
+      </view>
+      <view class="text-sm c0 padding-top-sm">
+        {{detail.felling}}
+      </view>
+    </view>
+
+    <view class="padding bg-white radius margin-top-sm item">
+      <view class="font_26 c0 text-bold">
+        <text class="cuIcon-titles text-green" style="font-size:30rpx;"></text>
+        <text> 对另一半的要求</text>
+      </view>
+      <view class="text-sm c0 padding-top-sm">
+        {{detail.requirement}}
+      </view>
+    </view>
+
+    <view class="padding bg-white radius margin-top-sm item">
+      <view class="font_26 c0 text-bold">
+        <text class="cuIcon-titles text-green" style="font-size:30rpx;"></text>
+        <text> 微信号</text>
+      </view>
+      <view class="text-sm c0 padding-top-sm flex flex-direction align-center">
+        <view class="pr">{{detail.wx_account}}
+          <view class="text-blue pa" style="top:-4rpx; right:-80rpx;" data-text="weixinhao1273" bindtap="copyTap">复制</view>
+        </view>
+        <text class="padding-tb-xs text-red">or</text>
+        <text>只有对方关注您才可以查看微信号哦</text>
+      </view>
+    </view>
+
+    <view class="padding  radius margin-top-sm flex justify-around">
+      <view class="text-center" data-id="{{detail.id}}" bindtap="nolikeTap">
+        <image src="/images/h2.png" style="width:110rpx;height:110rpx;"></image>
+        <view class="font_26 text-bold c0">换一个</view>
+      </view>
+      <view class="text-center" data-id="{{detail.id}}" bindtap="likeTap">
+        <image src="/images/h1.png" style="width:110rpx;height:110rpx;"></image>
+        <view class="font_26 text-bold c0">打招呼</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{tabCur==1}}" style="padding-bottom:150rpx;">
+    <scroll-view scroll-x class=" nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+      <view class="flex padding-lr text-center">
+        <view class="cu-item flex-sub {{msgNum==0?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{0}}">消息</view>
+        <view class="cu-item flex-sub {{msgNum==1?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{1}}">互相喜欢</view>
+        <view class="cu-item flex-sub {{msgNum==2?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{2}}">我喜欢的</view>
+        <view class="cu-item flex-sub {{msgNum==3?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{3}}">我无感的</view>
+        <view class="cu-item flex-sub {{msgNum==4?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{4}}">喜欢我的</view>
+      </view>
+    </scroll-view>
+    <view wx:if="{{msgNum==0}}">
+      <view class="cu-list menu-avatar padding-top">
+        <view class="cu-item bg-gray" style="background-color:#f0f0f0 !important;" wx:for="{{10}}" wx:key="index">
+          <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Taric.png);">
+            <view class="cu-tag badge" style="margin-right:0rpx;">99+</view>
+          </view>
+          <view class="content">
+            <view class="text-black">
+              <text class="text-cut text-bold">瓦洛兰之盾-塔里克</text>
+              <view class="cu-tag round bg-orange sm">战士</view>
+            </view>
+            <view class="text-gray text-sm flex">
+              <text class="text-cut">塔里克是保护者星灵，用超乎寻常的力量守护着符文之地的生命、仁爱以及万物之美。塔里克由于渎职而被放逐，离开了祖国德玛西亚，前去攀登巨神峰寻找救赎，但他找到的却是来自星界的更高层的召唤。现在的塔里克与古代巨神族的神力相融合，以瓦洛兰之盾的身份，永不疲倦地警惕着阴险狡诈的虚空腐化之力。</text>
+            </view>
+          </view>
+          <view class="action">
+            <view class="text-grey text-xs">22:20</view>
+            <view class="cuIcon-notice_forbid_fill text-gray"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:else>
+      <view class="flex flex-wrap justify-between padding">
+        <view class="msg-item" wx:for="{{list}}" wx:key="index" data-id="{{item.cid}}" bindtap="detailTap">
+          <image src="{{item.photo[0]}}" class="msg-item-img"></image>
+          <view class="padding-lr-sm padding-top-xs pr">
+            <view>
+              <text class="c0 text-bold font_26">{{item.name}}</text>
+              <text class="font_22 c3 padding-left">{{item.age}}岁</text>
+            </view>
+            <view class="text-gray font_22 padding-top-xs">
+              {{item.height}}cm
+              <text class="padding-lr-sm">|</text>{{item.income}}
+            </view>
+            <view class="text-bold c0 font_22 padding-tb-xs">{{item.job}}</view>
+            <view class="text-bold c0 font_22">{{item.school}}</view>
+            <view class="icon pa" style="bottom:0rpx; right:20rpx;" data-id="{{item.id}}" catchtap="caozuoTap">
+              <text wx:if="{{msgNum==1}}">聊天</text>
+              <text wx:elif="{{msgNum==2}}">送爱心</text>
+              <text wx:elif="{{msgNum==3}}">挽回</text>
+              <text wx:elif="{{msgNum==4}}">心动</text>
+            </view>
+            <!-- <image src="/images/h3.png" class="pa" style="width:70rpx;height:70rpx; bottom:0rpx; right:20rpx;"></image> -->
+          </view>
+        </view>
+      </view>
+    </view>
+    <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+  </view>
+
+  <view wx:if="{{tabCur==2}}">
+    <view class="bg-white padding-tb">
+      <view class='user-box flex align-center justify-center margin-lr'>
+        <image class="blur" src="{{user!=null?user.photo[0]:'/images/head.png'}}" mode="aspectFill"></image>
+        <view class="padding-xl text-white pa flex flex-direction align-center ">
+          <image class="cu-avatar round xl" src="{{user.photo[0]}}" style="width:160rpx;height:160rpx; background-color:#fff;"></image>
+          <view class="padding text-lg  font_30 text-bold">{{user.name}}</view>
+          <view class="flex align-center text-white" bindtap="editTap">
+            <view class="padding-right-sm" style="padding-top:-6rpx;">编辑个人资料</view>
+            <view class="cuIcon-post"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <view class="cu-list menu margin-top">
+      <view class="cu-item {{menuArrow?'arrow':''}}" bindtap="showModal" data-target="bottomPHModal">
+        <view class="content flex align-center">
+          <image src="/images/c1.png" class="png" style="width:30rpx;height:27rpx;" mode="aspectFit"></image>
+          <text class="text-black text-sm text-bold padding-left-xs" style="padding-top:5rpx;">偏好设置</text>
+        </view>
+      </view>
+      <view class="cu-item {{menuArrow?'arrow':''}}">
+        <view class="content flex align-center">
+          <image src="/images/c2.png" class="png" style="width:30rpx;height:29rpx;" mode="aspectFit"></image>
+          <text class="text-black text-sm text-bold padding-left-xs" style="padding-top:5rpx;">状态设置</text>
+        </view>
+      </view>
+      <view class="cu-item {{menuArrow?'arrow':''}}">
+        <view class="content flex align-center">
+          <image src="/images/c3.png" class="png" style="width:27rpx;height:26rpx;" mode="aspectFit"></image>
+          <text class="text-black text-sm text-bold padding-left-xs" style="padding-top:5rpx;">推荐设置</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="cu-modal bottom-modal {{modalName=='bottomPHModal'?'show':''}}" bindtap="hideModal">
+      <view class="cu-dialog" catchtap>
+        <view class="cu-bar bg-white">
+          <view class="action text-gray" bindtap="hideModal">取消</view>
+          <view class="action text-green">确定</view>
+          <view class="content text-bold">偏好设置</view>
+        </view>
+        <view class="padding-xl">
+          <view class="flex align-center">
+            <view class="cuIcon-titles text-green"></view>
+            <view class="text-sm text-bold padding-left-xs">为我推荐</view>
+          </view>
+          <view class="cu-form-group">
+            <view class="title">推荐城市</view>
+            <picker mode="region" bindchange="RegionChange" value="{{region}}" custom-item="{{customItem}}">
+              <view class="picker">
+                <view wx:if="{{region.length<=0}}">请选择城市</view>
+                <view wx:else>{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
+              </view>
+            </picker>
+          </view>
+          <view class="cu-form-group">
+            <view class="title">自动扩大范围</view>
+            <switch></switch>
+          </view>
+          <view class="cu-form-group">
+            <view class="title">推荐学历</view>
+            <picker bindchange="PickerChange" value="{{index}}" range="{{xueliArray}}" range-key="{{'name'}}">
+              <view class="picker">
+                <view wx:if="{{xueliIndex<0}}">请选择学历氛围</view>
+                <view wx:else>{{xueliArray[xueliIndex].name}}</view>
+              </view>
+            </picker>
+          </view>
+          <view class="cu-form-group">
+            <view class="title">推荐年龄</view>
+            <picker bindchange="PickerChange" value="{{index}}" range="{{xueliArray}}" range-key="{{'name'}}">
+              <view class="picker">
+                <view wx:if="{{xueliIndex<0}}">请选择学历氛围</view>
+                <view wx:else>{{xueliArray[xueliIndex].name}}</view>
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="cu-bar tabbar bg-white position-bottom">
+    <view class="action {{tabCur==0?'text-cgreen':'text-gray'}}" data-id="0" bindtap="tabSelectTap">
+      <view class="cuIcon-search" style="font-size:42rpx;"></view> 寻觅
+    </view>
+    <view class="action {{tabCur==1?'text-cgreen':'text-gray'}}" data-id="1" bindtap="tabSelectTap">
+      <view class="cuIcon-message" style="font-size:46rpx;"></view> 消息
+    </view>
+    <view class="action {{tabCur==2?'text-cgreen':'text-gray'}}" data-id="2" bindtap="tabSelectTap">
+      <view class="cuIcon-my" style="font-size:52rpx;"></view>
+      我的资料
+    </view>
+  </view>
+</view>

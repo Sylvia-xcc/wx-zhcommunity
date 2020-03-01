@@ -1,0 +1,4 @@
+/* pages/user/user-collect/user-collect-friendship/user-collect-friendship.wxss */
+page{
+  background: #fff !important;
+}

@@ -1,0 +1,105 @@
+<!--pages/school/school-lesson-detail/school-lesson-detail.wxml-->
+<view hidden="{{isLoading}}">
+  <view class="padding-lr">
+    <video src="https://www.fengzhankeji.com/qizhuhome/data/upload/2019-11-27/5dde39f275eea.mp4" style="width:690rpx;"></video>
+  </view>
+
+  <scroll-view scroll-x class="bg-white nav">
+    <view class="flex text-center">
+      <view class="cu-item flex-sub {{tabCur==0?'text-cgreen cur text-bold':''}}" bindtap="tabSelect" data-id="{{0}}">聊天</view>
+      <view class="cu-item flex-sub {{tabCur==1?'text-cgreen cur':''}}" bindtap="tabSelect" data-id="{{1}}">课件</view>
+      <view class="cu-item flex-sub {{tabCur==2?'text-cgreen cur':''}}" bindtap="tabSelect" data-id="{{2}}">所有课时</view>
+      <view class="cu-item flex-sub {{tabCur==3?'text-cgreen cur':''}}" bindtap="tabSelect" data-id="{{3}}">详情</view>
+    </view>
+  </scroll-view>
+
+
+  <view class="padding" wx:if="{{tabCur==0}}">
+    <view class="cu-list menu-avatar comment">
+      <view class="cu-item solid-bottom" style="padding-left:90rpx !important;" wx:for="{{list}}" wx:key="index">
+        <view class="cu-avatar round" style="left:0 !important; background-image:url({{item.avatar}}"></view>
+        <view class="content">
+          <view class="text-black text-bold" style="font-size:24rpx;">{{item.nickname}}
+            <view class="text-gray text-xs padding-left">{{item.create_time}}</view>
+          </view>
+          <view class="text-black text-content font_22 flex align-center">
+            <view class="flex-sub">{{item.content}}</view>
+            <!-- <view class="cuIcon-appreciate margin-left {{item.like>0?'text-green':'text-gray'}}" style="font-size:40rpx;" data-id="{{item.id}}" data-like="{{item.like}}" catchtap="likeMessageTap"></view> -->
+          </view>
+        </view>
+      </view>
+    </view>
+    <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+    <view style="padding-bottom:100rpx;"></view>
+    <view class="cu-bar foot input position-bottom">
+      <input class="solid-bottom" focus="{{false}}" maxlength="300" cursor-spacing="10" bindinput="textInput"></input>
+      <button class="cu-btn bg-green shadow-blur" bindtap="messageTap">发送</button>
+    </view>
+  </view>
+
+  <view class="padding" wx:if="{{tabCur==1}}">
+    <view class="cu-list menu-avatar comment">
+      <view class="cu-item solid-bottom" wx:for="{{pptlist}}" wx:key="index"  data-url="{{item.filename}}" catchtap="downloadfileTap">
+        <view class="cu-avatar radius lg" style="left:0 !important; background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
+        <view class="content pr">
+          <view class="text-black text-bold" style="font-size:24rpx;">{{item.name}}</view>
+          <view class="text-gray text-xs">{{item.create_time}}</view>
+          <view class="cuIcon-down margin-left pa" style="font-size:40rpx; right:0rpx; top:20rpx;"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="padding" wx:if="{{tabCur==2}}">
+    <view class="cu-list menu-avatar comment">
+      <view class="cu-item solid-bottom" wx:for="{{detail.lecture_product_video}}" wx:key="index" data-index="{{index}}" data-id="{{item.pid}}" bindtap="detailTap">
+        <view class="cu-avatar radius lg" style="left:0 !important; background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
+        <view class="content pr">
+          <view class="text-black text-bold" style="font-size:30rpx;">{{detail.name}}
+            <view class="text-black text-sm padding-left">{{item.title}}</view>
+          </view>
+          <view class="text-black text-sm flex justify-between">主讲老师：{{detail.lecture_teacher.name}}
+            <view class="text-gray text-xs padding-left">{{item.create_time}}更新</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="padding " wx:if="{{tabCur==3}}">
+    <view class="solid-bottom padding-tb">
+      <view class="font_30 c0 text-bold ">{{detail.lecture_product_video[index].title}}</view>
+      <view class="flex justify-between padding-top-xs">
+        <text class="font_22">123人已学习</text>
+        <text class="text-sm text-gray">{{detail.lecture_product_video[index].create_time}}更新</text>
+      </view>
+    </view>
+    <view class="solid-bottom padding-tb">
+      <view class="font_30 c0 text-bold ">老师简介</view>
+      <view class="cu-list menu-avatar">
+        <view class="cu-item pr">
+          <view class="cu-avatar round lg" style="left:0 !important; background-image:url({{detail.lecture_teacher.thumb}});"></view>
+          <view class="content flex-sub" style="left:116rpx !important;">
+            <view class="text-sm" style="font-size:24rpx;">{{detail.lecture_teacher.name}}</view>
+            <view class="text-gray text-xs flex justify-between">
+              辅导老师
+            </view>
+          </view>
+          <view class="padding-right-sm pa" style="bottom:40rpx; right:30rpx;" bindtap="guanzhuTap">
+            <button class="cu-btn radius sm bg-cgreen text-white" wx:if="{{detail.like==0}}">+关注</button>
+            <button class="cu-btn radius sm bg-grey text-white" wx:else>已关注</button>
+          </view>
+        </view>
+        <view class="text-content text-sm">
+          {{detail.lecture_teacher.intro}}
+        </view>
+      </view>
+    </view>
+    <view class=" padding-tb">
+      <view class="font_30 c0 text-bold ">课程详情</view>
+      <view class="flex justify-between padding-top-xs">
+        {{detail.lecture_product_video[index].intro}}
+      </view>
+    </view>
+  </view>
+</view>

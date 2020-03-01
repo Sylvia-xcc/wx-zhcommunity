@@ -1,0 +1,31 @@
+<!--pages/user/user-collect/index.wxml-->
+<view class="margin flex flex-wrap justify-between">
+  <navigator url="/pages/user/user-collect/user-collect-secondhand/user-collect-secondhand" hover-class="none" class="item">
+    <image src="/images/a2.png" class="grid-img"></image>
+    <text>二手物品</text>
+  </navigator>
+  <navigator url="/pages/user/user-collect/user-collect-house/user-collect-house" hover-class="none" class="item">
+    <image src="/images/a5.png" class="grid-img"></image>
+    <text>房管家</text>
+  </navigator>
+  <navigator url="/pages/user/user-collect/user-collect-job/user-collect-job" hover-class="none" class="item">
+    <image src="/images/a6.png" class="grid-img"></image>
+    <text>附近工作</text>
+  </navigator>
+  <navigator url="/pages/user/user-collect/user-collect-community/user-collect-community" hover-class="none" class="item">
+    <image src="/images/a1.png" class="grid-img"></image>
+    <text>社区服务</text>
+  </navigator>
+  <navigator url="/pages/user/user-collect/user-collect-finance/user-collect-finance" hover-class="none" class="item">
+    <image src="/images/a8.png" class="grid-img"></image>
+    <text>金融服务</text>
+  </navigator>
+  <navigator url="/pages/user/user-collect/user-collect-friendship/user-collect-friendship" hover-class="none" class="item">
+    <image src="/images/a4.png" class="grid-img"></image>
+    <text>情义有价</text>
+  </navigator>
+  <navigator url="/pages/user/user-collect/user-collect-shop/user-collect-shop" hover-class="none" class="item">
+    <image src="/images/a10.png" class="grid-img"></image>
+    <text>精选商城</text>
+  </navigator>
+</view>

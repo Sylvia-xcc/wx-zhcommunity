@@ -1,0 +1,304 @@
+<!--pages/community/index.wxml-->
+<view hidden="{{isLoading}}">
+  <scroll-view scroll-x class="bg-white nav">
+    <view class="flex padding-lr text-center">
+      <view class="cu-item flex-sub {{tabCur==0?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{0}}">看新闻</view>
+      <view class="cu-item flex-sub {{tabCur==1?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{1}}">积分榜</view>
+      <view class="cu-item flex-sub {{tabCur==2?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{2}}">聊会天</view>
+      <view class="cu-item flex-sub {{tabCur==3?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{3}}">约个会</view>
+    </view>
+  </scroll-view>
+
+  <view class="padding" wx:if="{{tabCur==0}}">
+    <swiper indicator-dots='true' circular easing-function="linear" autoplay="{{false}}" interval="{{false}}" bindchange="swiperChange" class="padding-bottom" style='background:#fff; height:160rpx;'>
+      <block wx:for="{{banner}}" wx:key="this">
+        <swiper-item>
+          <image src="{{item}}" data-src='{{item}}' bindtap='previewImgTap' bindload='setContainerHeight' mode='aspectFill'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <view hidden="{{loading}}" class="cu-card dynamic no-card}}" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="detailNewsTap">
+      <view class="cu-item shadow">
+        <view class="showone text-sm text-bold padding-tb-sm">{{item.title}}</view>
+        <view class="grid flex-sub col-1">
+          <view class="bg-img only-img radius" style="background-image:url({{item.photo}});"></view>
+        </view>
+        <view class="text-gray text-sm text-left padding-tb">
+          <text>{{item.create_time}}</text>
+          <text class="padding-left-sm">评论({{item.comments_num}})</text>
+        </view>
+      </view>
+    </view>
+    <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+  </view>
+
+  <view class="padding-tb" wx:if="{{tabCur==1}}">
+    <view class="bg-gray flex flex-direction align-center padding-tb margin-lr">
+      <image src="/images/head.png" class="cu-avatar round lg"></image>
+      <text class="text-bold text-lg padding-tb-sm">圆圆</text>
+      <view class="flex">
+        <text class="text-cgreen">总积分：778</text>
+        <navigator url="/pages/community/community-jifen-list/community-jifen-list" hover-class="none">
+          <text class="text-grey padding-left">积分明细>></text>
+        </navigator>
+      </view>
+      <view class="flex padding-top" style="width:100%;">
+        <view class="flex flex-direction align-center line-right font_22" style="flex-basis: 25%;">
+          <view>
+            <text class="text-bold text-lg padding-right-xs">23</text>名</view>
+          <view>总榜排名</view>
+        </view>
+        <view class="flex flex-direction align-center line-right font_22" style="flex-basis: 25%;">
+          <view>
+            <text class="text-bold text-lg padding-right-xs">5</text>积分</view>
+          <view>今日奖励</view>
+        </view>
+        <view class="flex flex-direction align-center line-right font_22" style="flex-basis: 25%;">
+          <view>
+            <text class="text-bold text-lg padding-right-xs">3</text>天</view>
+          <view>连续签到</view>
+        </view>
+        <view class="flex flex-direction align-center font_22" style="flex-basis: 25%;">
+          <view>
+            <text class="text-bold text-lg padding-right-xs">23</text>次</view>
+          <view>累计签到</view>
+        </view>
+      </view>
+    </view>
+
+    <swiper indicator-dots='true' circular easing-function="linear" autoplay="{{false}}" interval="{{false}}" bindchange="swiperChange" class="padding" style='background:#fff; height:200rpx;'>
+      <block wx:for="{{banner}}" wx:key="this">
+        <swiper-item>
+          <image src="{{item}}" data-src='{{item}}' bindtap='previewImgTap' bindload='setContainerHeight' mode='aspectFill'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <scroll-view scroll-x class="bg-white nav">
+      <view class="flex padding-lr text-center">
+        <view class="cu-item flex-sub {{jifenCur==0?'text-cgreen text-bold ':''}}" bindtap="tabJFSelect" data-id="{{0}}">今日积分榜</view>
+        <view class="cu-item flex-sub {{jifenCur==1?'text-cgreen text-bold ':''}}" bindtap="tabJFSelect" data-id="{{1}}">积分天数榜</view>
+        <view class="cu-item flex-sub {{jifenCur==2?'text-cgreen text-bold ':''}}" bindtap="tabJFSelect" data-id="{{2}}">积分总榜</view>
+      </view>
+    </scroll-view>
+
+
+    <view wx:if="{{jifenCur==0}}">
+      <view class="bg-cgreen flex justify-between padding-tb-sm text-white">
+        <text class="basis-xs text-center">排名</text>
+        <text class="basis-xs text-center">昵称</text>
+        <text class="basis-xs text-center">奖励</text>
+        <text class="basis-sm text-center">签到时间</text>
+      </view>
+      <view class="flex justify-between align-center padding-tb-sm font-26 {{index%2==1?'bg-gray':''}}" wx:for="{{10}}" wx:key="index">
+        <text class="basis-xs text-center">{{index+1}}</text>
+        <text class="basis-xs text-center">张三</text>
+        <text class="basis-xs text-center">10积分</text>
+        <text class="basis-sm text-center">2019-01-30 14:02:28</text>
+      </view>
+    </view>
+
+    <view wx:if="{{jifenCur==1}}">
+      <view class="bg-cgreen flex justify-between padding-tb-sm text-white">
+        <text class="basis-xm text-center">排名</text>
+        <text class="basis-xm text-center">昵称</text>
+        <text class="basis-xm text-center">连续签到天数</text>
+      </view>
+      <view class="flex justify-between padding-tb-sm font-26 {{index%2==1?'bg-gray':''}}" wx:for="{{10}}" wx:key="index">
+        <text class="basis-xm text-center">{{index+1}}</text>
+        <text class="basis-xm text-center">张三</text>
+        <text class="basis-xm text-center">15天</text>
+      </view>
+    </view>
+
+    <view wx:if="{{jifenCur==2}}">
+      <view class="bg-cgreen flex justify-between padding-tb-sm text-white">
+        <text class="basis-xm text-center">排名</text>
+        <text class="basis-xm text-center">昵称</text>
+        <text class="basis-xm text-center">积分</text>
+      </view>
+      <view class="flex justify-between padding-tb-sm font-26 {{index%2==1?'bg-gray':''}}" wx:for="{{10}}" wx:key="index">
+        <text class="basis-xm text-center">{{index+1}}</text>
+        <text class="basis-xm text-center">张三</text>
+        <text class="basis-xm text-center">273646</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="padding-tb" wx:if="{{tabCur==2}}">
+    <view hidden="{{loading}}" class="cu-card dynamic no-card solid-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailChatTap">
+      <view class="cu-item shadow">
+        <view class="cu-list menu-avatar">
+          <view class="cu-item pr">
+            <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
+            <view class="content flex-sub">
+              <view>{{item.nickname}}</view>
+              <view class="text-gray text-sm flex ">
+                {{item.create_time}}
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="text-content font_24">
+          {{item.content}}
+        </view>
+        <view class="grid flex-sub padding-lr padding-bottom {{item.photos.length>1?'col-3 grid-square':'col-1'}}">
+          <view wx:for="{{item.photos}}" wx:key="index" wx:for-item="iitem" class="bg-img {{item.photos.length>1?'':'only-img'}}" style="background-image:url({{iitem}});" data-id="{{index}}" data-dataimg="{{item.photos}}" catchtap='previewImgTap'>
+          </view>
+        </view>
+      </view>
+    </view>
+    <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+    <view class="flex justify-center position-bottom" style="bottom:10rpx;">
+      <button class="cu-btn round bg-green" bindtap="showModal" data-target="chatModel">发布+</button>
+    </view>
+
+    <view class="cu-modal bottom-modal {{modalName=='chatModel'?'show':''}}" bindtap="hideModal">
+      <view class="cu-dialog" style="border-radius:20px 20px 0px 0px;" catchtap>
+        <view class="cu-bar bg-white">
+          <view class="content">发布</view>
+          <view class="action text-gray" bindtap="hideModal">取消</view>
+        </view>
+        <view class="padding-sm bg-white">
+          <view class="cu-form-group padding-lr padding-top">
+            <view class="grid col-3 grid-square flex-sub" wx:if="{{video==''}}">
+              <view class="bg-img pr" wx:for="{{upload_pic}}" wx:key="index" bindtap="previewImg" data-url="{{upload_pic[index]}}">
+                <image src='{{upload_pic[index]}}' mode='aspectFill' class="pa" style="left:0; top:0;"></image>
+                <view class="cu-tag bg-red" catchtap="delTap" data-index="{{index}}">
+                  <text class="cuIcon-close"></text>
+                </view>
+              </view>
+              <view class="solids bg-gray" bindtap="chooseImage" wx:if="{{upload_pic.length<upload_max }}">
+                <text class="cuIcon-cameraadd " style="font-size:36px;"></text>
+              </view>
+              <!-- <view class="solids bg-gray" bindtap="chooseVideo" wx:if="{{upload_pic.length<=0 && video==''}}">
+              <text class="cuIcon-video " style="font-size:36px;"></text>
+            </view> -->
+            </view>
+            <!-- <view wx:if="{{video!=''}}" class="flex justify-center" style="width:100%;">
+            <view class="pr" style="width:300px;">
+              <video src="{{video}}"></video>
+              <view class="cu-tag bg-black pa" style="right:0rpx;" catchtap="delTap" data-index="{{index}}">
+                <text class="cuIcon-close"></text>
+              </view>
+            </view>
+          </view> -->
+          </view>
+        </view>
+        <view class="cu-bar input" style="background:#68B581 !important;">
+          <input class="bg-white c0" placeholder="输入聊天内容" focus="{{false}}" maxlength="300" cursor-spacing="10" bindinput="chatInput"></input>
+          <button class="cu-btn bg-cgreen text-white" bindtap="chatTap">发送</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{tabCur==3}}">
+    <view hidden="{{loading}}" wx:for="{{list}}" wx:key="index">
+      <v-meeting item="{{item}}"></v-meeting>
+    </view>
+    <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+    <view class="flex justify-center position-bottom" style="bottom:10rpx;">
+      <button class="cu-btn round bg-green" bindtap="showModal" data-target="fabuModal">发布+</button>
+    </view>
+
+
+    <view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}" bindtap="hideModal">
+      <view class="cu-dialog" catchtap>
+        <view class="cu-bar bg-white">
+          <view class="content">已报名</view>
+          <view class="action text-gray" bindtap="hideModal">取消</view>
+        </view>
+        <view class="padding-sm bg-white">
+          <scroll-view scroll-y style="height:400rpx;">
+            <view class="flex flex-wrap">
+              <view class="basis-xs flex flex-direction align-center padding-bottom-sm" wx:for="{{meet.join_users}}" wx:key="index">
+                <image src="{{item.avatar}}" class="round" style="width:82rpx;height:82rpx;"></image>
+                <text class="text-sm c0 padding-top-xs">{{item.nickname}}</text>
+              </view>
+            </view>
+          </scroll-view>
+          <view class="padding-lr padding-tb-xl flex flex-direction">
+            <button class="cu-btn radius bg-cgreen margin-tb-sm lg text-white" bindtap="meetingAddTap" wx:if="{{meet.join==0}}">立即报名</button>
+            <button wx:else class="cu-btn radius bg-grey margin-tb-sm lg">已报名</button>
+            <button class="cu-btn radius bg-grey lg">已结束</button>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="cu-modal bottom-modal {{modalName=='fabuModal'?'show':''}}" bindtap="hideModal">
+      <view class="cu-dialog" style="border-radius:20px 20px 0px 0px;" catchtap>
+        <view class="cu-bar bg-white">
+          <view class="content">发布</view>
+          <view class="action text-gray" bindtap="hideModal">取消</view>
+        </view>
+        <view class="padding-sm bg-white">
+          <view class="cu-form-group">
+            <view class="title">开始时间</view>
+            <picker mode="multiSelector" value="{{startTime}}" bindchange="changeStartDateTime" bindcolumnchange="changeStartDateTimeColumn" range="{{dateStartTimeArray}}">
+              <view class="picker" style="text-align:left;">
+                <view class="text-gray" wx:if="{{!startBool}}">请选择开始时间</view>
+                <view wx:else>{{dateStartTimeArray[0][startTime[0]]}}-{{dateStartTimeArray[1][startTime[1]]}}-{{dateStartTimeArray[2][startTime[2]]}} {{dateStartTimeArray[3][startTime[3]]}}:{{dateStartTimeArray[4][startTime[4]]}}</view>
+              </view>
+            </picker>
+          </view>
+
+          <view class="cu-form-group">
+            <view class="title">结束时间</view>
+            <picker mode="multiSelector" value="{{endTime}}" bindchange="changeEndDateTime" bindcolumnchange="changeEndDateTimeColumn" range="{{dateEndTimeArray}}">
+              <view class="picker" style="text-align:left;">
+                <view class="text-gray" wx:if="{{!endBool}}">请选择结束时间</view>
+                <view wx:else>{{dateEndTimeArray[0][endTime[0]]}}-{{dateEndTimeArray[1][endTime[1]]}}-{{dateEndTimeArray[2][endTime[2]]}} {{dateEndTimeArray[3][endTime[3]]}}:{{dateEndTimeArray[4][endTime[4]]}}</view>
+              </view>
+            </picker>
+          </view>
+          <view class="cu-form-group" bindtap="addressTap">
+            <view class="title" style="width:150rpx;">地址</view>
+            <input placeholder="请输入具体约会地址" class="text-left" placeholder-class="text-gray text-df text-left" value='{{address.address}}'></input>
+            <text class="cuIcon-locationfill text-orange"></text>
+          </view>
+          <view class="cu-form-group paddint-top">
+            <view class="title" style="width:150rpx;">人数</view>
+            <picker bindchange="peopleChange" value="{{index}}" range="{{peoples}}">
+              <view class="picker" style="text-align:left;">
+                <text class="text-gray" wx:if="{{people<0}}">请选择约会人数</text>
+                <text wx:else>{{peoples[people]}}</text>
+              </view>
+            </picker>
+          </view>
+          <view class="cu-form-group padding-lr padding-top">
+            <view class="grid col-3 grid-square flex-sub" wx:if="{{video==''}}">
+              <view class="bg-img pr" wx:for="{{upload_pic}}" wx:key="index" bindtap="previewImg" data-url="{{upload_pic[index]}}">
+                <image src='{{upload_pic[index]}}' mode='aspectFill' class="pa" style="left:0; top:0;"></image>
+                <view class="cu-tag bg-red" catchtap="delTap" data-index="{{index}}">
+                  <text class="cuIcon-close"></text>
+                </view>
+              </view>
+              <view class="solids bg-gray" bindtap="chooseImage" wx:if="{{upload_pic.length<upload_max }}">
+                <text class="cuIcon-cameraadd " style="font-size:36px;"></text>
+              </view>
+              <!-- <view class="solids bg-gray" bindtap="chooseVideo" wx:if="{{upload_pic.length<=0 && video==''}}">
+              <text class="cuIcon-video " style="font-size:36px;"></text>
+            </view> -->
+            </view>
+            <!-- <view wx:if="{{video!=''}}" class="flex justify-center" style="width:100%;">
+            <view class="pr" style="width:300px;">
+              <video src="{{video}}"></video>
+              <view class="cu-tag bg-black pa" style="right:0rpx;" catchtap="delTap" data-index="{{index}}">
+                <text class="cuIcon-close"></text>
+              </view>
+            </view>
+          </view> -->
+          </view>
+
+        </view>
+        <view class="cu-bar input" style="background:#68B581 !important;">
+          <input class="bg-white c0" placeholder="输入活动内容" focus="{{false}}" maxlength="300" cursor-spacing="10" bindinput="meetingInput"></input>
+          <button class="cu-btn bg-cgreen text-white" bindtap="fabuMeetingTap">发送</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

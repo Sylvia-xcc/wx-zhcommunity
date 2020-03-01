@@ -1,0 +1,9 @@
+<!--pages/user/user-chongzhi/user-chongzhi.wxml-->
+<!-- <view class="bg">
+  <view class=" bg-white padding" style="width:">
+    <view class="font_30 c0">请输入充值金额(元)</view>
+    <input placeholder=""></input>
+
+  </view>
+</view> -->
+<view class="text-gray text-center padding-top-xl" style="width:750rpx;">该功能暂未开放，敬请期待</view>

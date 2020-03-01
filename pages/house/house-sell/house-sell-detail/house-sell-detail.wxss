@@ -1,0 +1,4 @@
+/* pages/house/house-sell/house-sell-detail/house-sell-detail.wxss */
+page{
+  background: #fff !important;
+}

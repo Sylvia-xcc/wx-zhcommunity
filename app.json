@@ -1,0 +1,118 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/homepage/index",
+    "pages/user/index",
+    "pages/message/index",
+    "pages/shop/index",
+    "pages/shop/shop-detail/shop-detail",
+    "pages/shop/shop-cart/shop-cart",
+    "pages/shop/shop-pay-now/shop-pay-now",
+    "pages/shop/shop-address/shop-address",
+    "pages/shop/shop-address-edit/shop-address-edit",
+    "pages/shop/shop-order/shop-order",
+    "pages/shop/shop-order-detail/shop-order-detail",
+    "pages/finance/index",
+    "pages/finance/finance-fabu/finance-fabu",
+    "pages/finance/finance-detail/finance-detail",
+    "pages/finance/finance-user/finance-user",
+    "pages/friendship/index",
+    "pages/friendship/friendship-list/friendship-list",
+    "pages/friendship/friendship-detail/friendship-detail",
+    "pages/friendship/friendship-user/friendship-user",
+    "pages/friendship/friendship-fabu/friendship-fabu",
+    "pages/matchmaker/index",
+    "pages/matchmaker/matchmaker-personal/matchmaker-personal",
+    "pages/matchmaker/matchmaker-edit/matchmaker-edit",
+    "pages/house/index",
+    "pages/house/house-buy/index",
+    "pages/house/house-buy/house-buy-fabu/house-buy-fabu",
+    "pages/house/house-sell/index",
+    "pages/house/house-sell/house-sell-detail/house-sell-detail",
+    "pages/house/house-sell/house-sell-fabu/house-sell-fabu",
+    "pages/community/index",
+    "pages/community/community-news-detail/community-news-detail",
+    "pages/community/community-chat-detail/community-chat-detail",
+    "pages/community/community-jifen-list/community-jifen-list",
+    "pages/community/community-jifen-shop/community-jifen-shop",
+    "pages/community/community-jifen-shop-detail/community-jifen-shop-detail",
+    "pages/commonweal/index",
+    "pages/commonweal/commonweal-fabu/commonweal-fabu",
+    "pages/school/index",
+    "pages/school/school-course-list/school-course-list",
+    "pages/school/school-course-detail/school-course-detail",
+    "pages/school/school-lesson-detail/school-lesson-detail",
+    "pages/job/index",
+    "pages/job/job-detail/job-detail",
+    "pages/job/job-fabu/job-fabu",
+    "pages/job/job-search/job-search",
+    "pages/secondhand/index",
+    "pages/secondhand/secondhand-list/secondhand-list",
+    "pages/secondhand/secondhand-detail/secondhand-detail",
+    "pages/secondhand/secondhand-fabu/secondhand-fabu",
+    "pages/secondhand/secondhand-chat/secondhand-chat",
+    "pages/position/position",
+    "pages/user/user-personal-edit/user-personal-edit",
+    "pages/user/user-fabu/index",
+    "pages/user/user-fabu/user-fabu-secondhand/user-fabu-secondhand",
+    "pages/user/user-fabu/user-fabu-finance/user-fabu-finance",
+    "pages/user/user-fabu/user-fabu-friendship/user-fabu-friendship",
+    "pages/user/user-fabu/user-fabu-community/user-fabu-community",
+    "pages/user/user-fabu/user-fabu-house/user-fabu-house",
+    "pages/user/user-fabu/user-fabu-job/user-fabu-job",
+    "pages/user/user-activity/index",
+    "pages/user/user-activity/user-activity-community/user-activity-community",
+    "pages/user/user-activity/user-activity-school/user-activity-school",
+    "pages/user/user-activity/user-activity-commonweal/user-activity-commonweal",
+    "pages/user/user-collect/index",
+    "pages/user/user-collect/user-collect-secondhand/user-collect-secondhand",
+    "pages/user/user-collect/user-collect-house/user-collect-house",
+    "pages/user/user-collect/user-collect-job/user-collect-job",
+    "pages/user/user-collect/user-collect-community/user-collect-community",
+    "pages/user/user-collect/user-collect-finance/user-collect-finance",
+    "pages/user/user-collect/user-collect-friendship/user-collect-friendship",
+    "pages/user/user-collect/user-collect-shop/user-collect-shop",
+    "pages/user/user-chongzhi/user-chongzhi",
+    "pages/user/collect/collect",
+    "pages/video/index",
+    "pages/video/video-detail/video-detail",
+    "pages/game/llk/llk",
+    "pages/game/ball/ball",
+    "pages/game/fish/index",
+    "pages/authorize/authorize"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "中环国际社区",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#000000",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/icons/btn_tabs_02.png",
+        "selectedIconPath": "images/icons/btn_tabs_01.png"
+      },
+      
+      {
+        "pagePath": "pages/user/index",
+        "text": "我的",
+        "iconPath": "images/icons/btn_tabs_10.png",
+        "selectedIconPath": "images/icons/btn_tabs_09.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于寻找附近的检测点"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

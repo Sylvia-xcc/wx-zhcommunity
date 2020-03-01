@@ -1,0 +1,4 @@
+/* pages/community/community-news-detail/community-news-detail.wxss */
+page{
+  background: #fff !important;
+}

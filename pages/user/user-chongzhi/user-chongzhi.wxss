@@ -1,0 +1,11 @@
+/* pages/user/user-chongzhi/user-chongzhi.wxss */
+
+page {
+  background: #fff !important;
+}
+
+.bg {
+  width: 750rpx;
+  min-height: 350rpx;
+  background: linear-gradient(118deg, rgba(234, 212, 187, 1) 0%, rgba(248, 230, 211, 1) 100%);
+}

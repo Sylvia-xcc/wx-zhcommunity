@@ -1,0 +1,32 @@
+<!--pages/secondhand/secondhand-list/secondhand-list.wxml-->
+<view hidden="{{isLoading}}">
+  <view class="padding-bottom">
+    <view class="cu-card dynamic no-card}}" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="detailTap">
+      <view class="cu-item shadow">
+        <view class="cu-list menu-avatar">
+          <view class="cu-item">
+            <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
+            <view class="content flex-sub">
+              <view class="text-sm text-black text-bold" style="font-size:24rpx;">{{item.nickname}}</view>
+              <view class="text-gray text-xs flex justify-between">
+                {{item.create_time}}
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="text-content text-bold showtwo" style="font-size:24rpx;">
+          {{item.text}}
+        </view>
+        <view class="grid flex-sub padding-lr {{item.imgs.length>1?'col-3 grid-square':'col-1'}}" wx:if="{{item.types==1}}">
+          <view class="bg-img {{item.imgs.length>1?'':'only-img'}}" wx:for="{{item.imgs}}" wx:key="index" wx:for-item="iitem" wx:if="{{index<3}}" style="background-image:url({{iitem}});" data-id="{{index}}" data-dataimg="{{item.imgs}}" catchtap='previewImgTap'>
+          </view>
+        </view>
+        <view class="padding" wx:else>
+          <video src="{{item.videos[0]}}" object-fit="cover" style="width:690rpx; height:242rpx;"></video>
+        </view>
+        <view class="text-content"></view>
+      </view>
+    </view>
+  </view>
+  <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+</view>

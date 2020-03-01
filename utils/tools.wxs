@@ -1,0 +1,22 @@
+var getNumber = function(num) {
+  return Number(num);
+}
+
+var getTimer = function(timer) {
+  return timer.toString().slice(0, 10);
+}
+
+//更换图片路径
+var repalceUrl = function(url) {
+  // var temp = url.split('/');
+  // var path = 'http://q2e416f6i.bkt.clouddn.com/' + temp[temp.length - 1] + '?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim';
+  var path = url + '?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim';
+  return path;
+}
+
+
+module.exports = {
+  getNumber: getNumber,
+  getTimer: getTimer,
+  repalceUrl: repalceUrl,
+}

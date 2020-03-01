@@ -1,0 +1,41 @@
+<!--pages/shop/shop-order/shop-order.wxml-->
+<view hidden="{{isLoading}}">
+  <scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+    <view class="flex text-center">
+      <view class="cu-item flex-sub {{tabCur==0?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{0}}">全部</view>
+      <view class="cu-item flex-sub {{tabCur==1?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{1}}">待付款</view>
+      <view class="cu-item flex-sub {{tabCur==2?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{2}}">待发货</view>
+      <view class="cu-item flex-sub {{tabCur==3?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{3}}">待收货</view>
+      <view class="cu-item flex-sub {{tabCur==4?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{4}}">待评价</view>
+      <view class="cu-item flex-sub {{tabCur==5?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{5}}">已完成</view>
+    </view>
+  </scroll-view>
+
+  <view hidden="{{loading}}" class="padding bg-white margin-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailTap">
+    <view class="flex justify-between padding-bottom ssolid_bottom">
+      <text class="text-gray">订单号：{{item.order_sn}}</text>
+      <text class="text-red">{{item.desc}}</text>
+    </view>
+    <view class="flex padding-tb" wx:for="{{item.product}}" wx:key="index" wx:for-item="iitem">
+      <image src="{{iitem.pro_thumb}}" style="width:186rpx;height:186rpx"></image>
+      <view class="flex-sub padding-left">
+        <view class="c0 showtwo">{{iitem.pro_name}}</view>
+        <view class="flex flex-wrap padding-top-sm">
+          <view class="padding-right-sm padding-bottom-xs" wx:for="{{iitem.pro_buff}}" wx:key="index">
+            <view class="cu-tag line-green radius font_22" style="height:38rpx;">{{item}}</view>
+          </view>
+        </view>
+        <view class="flex justify-between align-center padding-top-xs">
+          <text class="font_34 text-red text-bold">￥{{iitem.pro_price}}元</text>
+          <text class="text-xs text-gray">x{{iitem.pro_num}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="text-right">
+      <view class="c0 font_22 text-right padding-bottom">共计：¥{{item.amount}}</view>
+      <button class="cu-btn radius line-red " style="height:50rpx;">去支付</button>
+    </view>
+  </view>
+
+  <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+</view>

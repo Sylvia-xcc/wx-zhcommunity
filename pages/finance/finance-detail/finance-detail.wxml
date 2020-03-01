@@ -1,0 +1,57 @@
+<!--pages/finance/finance-detail/finance-detail.wxml-->
+<view style="min-height:650rpx;">
+  <view class="padding" style="padding-bottom:0;">
+    <view class="c0">{{detail.content}}</view>
+  </view>
+
+  <view class="cu-card dynamic">
+    <view class="cu-item">
+      <view class="grid flex-sub padding-bottom-sm {{detail.img_list.length>1?'col-3 grid-square':'col-1'}}">
+        <view class="bg-img {{detail.img_list.length>1?'':'only-img'}}" style="background-image:url({{item}});" wx:for="{{detail.img_list}}" wx:key="index" data-id="{{index}}" data-dataimg="{{detail.img_list}}" catchtap='previewImgTap'>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+<view class="bg-white margin-top-sm">
+  <view class="padding-tb">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url({{detail.user_photo}});"></view>
+        <view class="content">
+          <view class="text-bold text-black" style="font-size:24rpx">{{detail.nickname}}</view>
+          <view class="text-gray text-xs">
+            {{detail.create_time}}
+          </view>
+        </view>
+        <view class="padding-right-sm">
+          <view class="flex align-center" bindtap="phoneTap">
+            <view class="cuIcon-comment text-black" style="font-size:38rpx;"></view>
+            <view class="text-black text-xs padding-left-xs">立即沟通</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="padding flex bg-white" style="padding-bottom:250rpx;">
+  <view class="basis-df flex flex-direction align-center" bindtap="collectTap">
+    <image src="/images/shoucang.png" style="width:48rpx;height:48rpx;" wx:if="{{detail.is_collect<=0}}"></image>
+    <image src="/images/shoucang2.png" style="width:48rpx;height:48rpx;" wx:else></image>
+    <text class="text-sm padding-top-xs text-black text-bold">收藏</text>
+  </view>
+  <view class="basis-df flex flex-direction align-center pr">
+    <button open-type="share" class="shareBtn"></button>
+    <image src="/images/zhuanfa.png" style="width:43rpx;height:42rpx;"></image>
+    <text class="text-sm padding-top-xs text-black text-bold">转发</text>
+  </view>
+</view>
+
+<view class="cu-bar bg-white tabbar border shop position-bottom">
+  <view class="submit text-white" style="background:#EF696B;" bindtap="phoneTap">打电话</view>
+  <view class="bg-cgreen submit text-white">在线聊</view>
+</view>

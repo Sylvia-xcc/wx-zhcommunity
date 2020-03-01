@@ -1,0 +1,4 @@
+/* pages/user/user-activity/user-activity-commonweal/user-activity-commonweal.wxss */
+page {
+  background: #fff !important;
+}

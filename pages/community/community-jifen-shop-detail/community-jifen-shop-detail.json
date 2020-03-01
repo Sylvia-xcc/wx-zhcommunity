@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "v-banner": "/components/banner/banner"
+  },
+  "navigationBarTitleText": "积分商品详情"
+}

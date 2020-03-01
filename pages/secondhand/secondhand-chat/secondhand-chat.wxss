@@ -1,0 +1,16 @@
+/* pages/secondhand/secondhand-chat/secondhand-chat.wxss */
+page{
+  background: #fff !important;
+}
+.cu-chat .cu-item>.main {
+  margin-top: 65rpx;
+}
+
+.cu-chat .cu-item .nickname {
+  position: absolute;
+  font-size: 24rpx;
+  color: #999;
+  width: calc(100% - 320rpx);
+  top: 40rpx;
+  left: 160rpx;
+}

@@ -1,0 +1,48 @@
+<!--pages/shop/shop-cart/shop-cart.wxml-->
+<view hidden='{{!isLoading}}'>
+  <view wx:if="{{carts.length>0}}" style="padding-bottom:120rpx;">
+    <block wx:for="{{carts}}" wx:key>
+      <view class="cu-item padding bg-white margin-bottom flex align-center justify-center " data-pid="{{item.pid}}" bindtap="detailTap">
+        <view class="padding-right">
+          <radio class="green" checked="{{item.selected}}" data-index="{{index}}" catchtap="selectList"></radio>
+        </view>
+        <view class="flex-sub padding-top flex">
+          <image src="{{item.thumb}}" style="width:156rpx; height:156rpx;" mode="aspectFill"></image>
+          <view class="padding-left-lg flex-sub">
+            <view class="flex justify-between">
+              <text class="c0 text-bold font_28 showtwo">{{item.name}}测顺利升空的的开始福克斯福克斯福克斯提防康独守空房上课f</text>
+              <text class="cuIcon-delete margin-lr-xs" data-index="{{index}}" catchtap="deleteList"></text>
+            </view>
+            <view class="padding-top-sm">
+              <block wx:for="{{item.gg_name}}" wx:key>
+                <view class="cu-tag margin-bottom-xs sm">{{item}}</view>
+              </block>
+            </view>
+            <view class="padding-top-xl flex justify-between align-center">
+              <text class=" text-bold font_40 text-red">￥{{item.price}}</text>
+              <view class="">
+                <view class="cu-tag padding-lr-sm" data-index='{{index}}' data-cartid="{{item.id}}" catchtap='minusCount'>-</view>
+                <text class="padding-lr">{{item.num}}</text>
+                <view class="cu-tag" data-index='{{index}}' data-cartid="{{item.id}}" catchtap="addCount">+</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class="cu-bar bg-white tabbar border position-bottom solid-top">
+      <view class="padding-left basis-xs flex align-center justify-center">
+        <radio class="green" checked="{{selectAllStatus}}" bindtap="selectAll"></radio>
+        <text class="text-black text-bold font_28 padding-left-xs">全选</text>
+      </view>
+      <view class="text-red text-bold font_30 text-right basis-lg padding-right">
+        <text class="text-gray">合计:</text>  ¥ {{totalPrice}}
+      </view>
+      <view class="bg-green flex align-center justify-center self-stretch  basis-xn" bindtap="jiesuanTap">去结算</view>
+    </view>
+  </view>
+  <view wx:else class="flex flex-direction align-center" style="padding-top:300rpx;">
+    <image src="/images/cart-kong.png" class="cart-kong"></image>
+    <text class="padding-top c3a">购物车空空如也~~</text>
+  </view>
+</view>

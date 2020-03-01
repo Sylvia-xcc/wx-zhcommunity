@@ -1,0 +1,4 @@
+/* pages/school/school-course-detail/school-course-detail.wxss */
+page{
+  background: #fff !important;
+}

@@ -1,0 +1,33 @@
+<!--pages/fish/index.wxml-->
+<image src="/images/fish/bg.png" class="canvas-bg"></image>
+<canvas canvas-id="xcanvas" style="width:{{width}}px; height:{{height}}px;" bindtap="clickTap"></canvas>
+
+<!-- <view class="dian"></view> -->
+
+
+<!-- <cover-view class="popView" hidden="{{showHidden}}">
+  <cover-view class="item" data-id="1" bindtap="gotoTap" wx:if="{{id==1}}">
+    <cover-image src="/images/fish/1.png"></cover-image>
+    <cover-view class="closebtn" catchtap="onClose">
+      <cover-image src="/images/fish/close.png"></cover-image>
+    </cover-view>
+  </cover-view>
+  <cover-view class="item" data-id="2" bindtap="gotoTap" wx:elif="{{id==2}}">
+    <cover-image src="/images/fish/2.png"></cover-image>
+    <cover-view class="closebtn" catchtap="onClose">
+      <cover-image src="/images/fish/close.png"></cover-image>
+    </cover-view>
+  </cover-view>
+  <cover-view class="item" data-id="3" bindtap="gotoTap" wx:elif="{{id==3}}">
+    <cover-image src="/images/fish/3.png"></cover-image>
+    <cover-view class="closebtn" catchtap="onClose">
+      <cover-image src="/images/fish/close.png"></cover-image>
+    </cover-view>
+  </cover-view>
+  <cover-view class="item" data-id="4" bindtap="gotoTap" wx:elif="{{id==4}}">
+    <cover-image src="/images/fish/4.png"></cover-image>
+    <cover-view class="closebtn" catchtap="onClose">
+      <cover-image src="/images/fish/close.png"></cover-image>
+    </cover-view>
+  </cover-view>
+</cover-view> -->

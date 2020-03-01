@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "v-banner": "/components/banner/banner",
+    "v-bottomloading": "/components/bottomLoading/bottomloading"
+  },
+  "navigationBarTitleText": "红娘"
+}

@@ -1,0 +1,24 @@
+/* components/banner/banner.wxss */
+
+swiper image {
+  width: 100%;
+  height: 100%;
+}
+
+swiper-item {
+  position: relative;
+}
+
+.playBtn {
+  width: 96rpx;
+  height: 96rpx;
+  /* background: orange; */
+  position: absolute;
+  left: 327rpx;
+  z-index: 99999;
+}
+
+.playBtn .play-img{
+  width: 96rpx;
+  height: 96rpx;
+}
