@@ -65,6 +65,34 @@ Page({
     })
   },
 
+  cancelTap: function (evt) {
+    let that = this;
+    let id = evt.currentTarget.dataset.id;
+    tip.confirm('是否确定取消参加该活动?').then(res => {
+      http.requestUrl({
+        url: 'account/clearActivity',
+        news: true,
+        method: 'post',
+        data: {
+          id: id,
+          model: 'service',
+          uid: app.d.uid
+        }
+      }).then(res => {
+        tip.success('取消报名成功', 1000);
+        let items = that.data.list;
+        let tmp = [];
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].id != id)
+            tmp.push(items[i]);
+        }
+        that.setData({
+          list: tmp
+        })
+      })
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

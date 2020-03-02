@@ -1,1 +1,33 @@
 <!--pages/job/job-search/job-search.wxml-->
+<view class="cu-bar search bg-gray solid-top">
+  <view class="search-form bg-white radius" style="background:#fff;">
+    <text class="cuIcon-search" style="font-size:28rpx;"></text>
+    <input type="text" placeholder="请输入职位关键词" confirm-type="search" auto-focus="true" focus="true" value="{{searchValue}}" bindinput="searchValueInput" bindconfirm="doSearch"></input>
+  </view>
+</view>
+
+<view hidden="{{isLoading}}">
+  <view class="cu-card dynamic no-card padding-bottom-sm" wx:for="{{list}}" wx:key="index">
+    <view class="cu-item shadow pr" data-id="{{item.id}}" bindtap="detailTap">
+      <view class="cu-list menu-avatar">
+        <view class="cu-item">
+          <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
+          <view class="content flex-sub">
+            <view class="text-sm" style="font-size:24rpx;">{{item.nickname}}</view>
+            <view class="text-gray text-xs flex justify-between">
+              {{item.create_time}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="text-content">
+        <view class="text-sm">{{tabCur==1?'兼职':''}}{{item.job}}</view>
+        <view class="text-cred">{{tabCur==0?item.month_pay=='不限'?'面议':item.month_pay:item.month_pay+'元/'+item.money_type}} </view>
+      </view>
+      <view class="padding-right-sm pa" style="bottom:30rpx; right:30rpx;">
+        <button class="cu-btn radius sm bg-cgreen text-white">联系TA</button>
+      </view>
+    </view>
+  </view>
+  <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+</view>

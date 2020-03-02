@@ -69,7 +69,7 @@ Page({
     console.log('-------', list)
     that.setData({
       list: list,
-      count:120,
+      count:10,
       gameOver:0,
     })
     that.startTimer();

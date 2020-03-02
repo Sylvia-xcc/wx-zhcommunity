@@ -105,7 +105,9 @@ Page({
     })
   },
 
-  loadAddReplay:function(id, value){
+  loadAddReplay: function (id, value) {
+    if (!util.hasAuthorize())
+      return;
     let that = this;
     http.requestUrl({
       url: 'used/addReply',
@@ -123,7 +125,9 @@ Page({
     })
   },
 
-  messageTap: function(evt) {
+  messageTap: function (evt) {
+    if (!util.hasAuthorize())
+      return;
     let id = evt.currentTarget.dataset.id;
     console.log('--------- 留言', id)
     this.selectComponent('#my-textarea').toggleModal(id);
@@ -153,7 +157,9 @@ Page({
     })
   },
 
-  likeMessageTap: function(evt) {
+  likeMessageTap: function (evt) {
+    if (!util.hasAuthorize())
+      return;
     console.log('--------- 留言点赞', evt.currentTarget.dataset)
     let that = this;
     let id = evt.currentTarget.dataset.id;
@@ -182,7 +188,9 @@ Page({
     })
   },
 
-  likeTap: function(evt) {
+  likeTap: function (evt) {
+    if (!util.hasAuthorize())
+      return;
     console.log('--------- 商品点赞');
     let that = this;
     let url = that.data.product.like > 0 ? 'used/removeGoodsLike' : 'used/addGoodsLike';
@@ -204,7 +212,9 @@ Page({
     })
   },
 
-  collectTap: function(evt) {
+  collectTap: function (evt) {
+    if (!util.hasAuthorize())
+      return;
     console.log('--------- 商品收藏')
     let that = this;
     let url = that.data.product.fav > 0 ? 'fav/remove' : 'fav/add';

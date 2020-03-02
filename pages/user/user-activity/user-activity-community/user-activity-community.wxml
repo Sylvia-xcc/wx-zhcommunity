@@ -6,7 +6,7 @@
       <view class="c0 showtwo">{{item.detail.describe}}</view>
       <view class="flex justify-between text-gray font_22 padding-top ">
         <text>{{item.detail.create_time}}</text>
-        <!-- <view class="text-sm text-gray text-right" data-id="{{item.id}}" catchtap="deleteTap">删除</view> -->
+        <view class="text-sm text-gray text-right" data-id="{{item.id}}" catchtap="cancelTap">取消报名</view>
       </view>
     </view>
   </view>

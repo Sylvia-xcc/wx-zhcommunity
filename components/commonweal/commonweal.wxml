@@ -12,9 +12,9 @@
           </view>
         </view>
         <view class="padding-right-sm pa" style="bottom:30rpx; right:30rpx;" >
-          <button class="cu-btn radius sm  text-white bg-green" bindtap="showModal" data-target="bottomModal" wx:if="{{item.join==0}}">去报名</button>
-          <button class="cu-btn radius sm  text-white bg-grey" wx:if="{{item.join==1}}">已报名</button>
-          <button class="cu-btn radius sm  text-white bg-grey" wx:if="{{item.end==1}}">已结束</button>
+          <button class="cu-btn radius sm  text-white bg-green" bindtap="showModal" data-target="bottomModal" wx:if="{{item.join==0 && item.ending==0}}">去报名</button>
+          <button class="cu-btn radius sm  text-white bg-grey" wx:if="{{item.join==1 && item.ending==0}}">已报名</button>
+          <button class="cu-btn radius sm  text-white bg-grey" wx:if="{{item.ending==1}}">已结束</button>
         </view>
       </view>
     </view>
@@ -57,9 +57,9 @@
       </scroll-view>
       <view wx:else class="text-gray">暂无报名，就等你啦</view>
       <view class="padding-lr padding-tb-xl flex flex-direction">
-        <button class="cu-btn radius bg-cgreen margin-tb-sm lg text-white" bindtap="joinTap" wx:if="{{item.join==0}}">立即报名</button>
-        <button class="cu-btn radius bg-grey margin-tb-sm lg" wx:if="{{item.join==1}}">已报名</button>
-        <button class="cu-btn radius bg-grey lg">已结束</button>
+        <button class="cu-btn radius bg-cgreen margin-tb-sm lg text-white" bindtap="joinTap" wx:if="{{item.join==0 && item.ending==0}}">立即报名</button>
+        <button class="cu-btn radius bg-grey margin-tb-sm lg" wx:if="{{item.join==1 && item.ending==0}}">已报名</button>
+        <button class="cu-btn radius bg-grey lg" wx:if="{{item.ending==1}}">已结束</button>
       </view>
     </view>
   </view>

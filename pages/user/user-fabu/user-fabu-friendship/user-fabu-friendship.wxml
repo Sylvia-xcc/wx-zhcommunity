@@ -15,7 +15,7 @@
         <view class="text-red text-bold font_30">￥{{item.money}}元</view>
         <view class="pa" style="bottom:-30rpx; right:0rpx;">
           <view class="text-xs text-gray">{{item.create_time}}</view>
-          <view class="text-sm text-gray text-right padding-top-xs">删除</view>
+          <view class="text-sm text-gray text-right padding-top-xs" data-id="{{item.id}}" catchtap="deleteTap">删除</view>
         </view>
       </view>
     </view>

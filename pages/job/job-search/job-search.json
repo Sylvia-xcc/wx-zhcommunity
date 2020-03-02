@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "v-bottomloading": "/components/bottomLoading/bottomloading"
+  },
+  "navigationBarTitleText": "搜索"
 }

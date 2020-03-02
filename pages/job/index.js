@@ -16,8 +16,8 @@ Page({
     total: 0,
     bottoming: true,
     showBottomLoading: false,
-    isLoading:true,
-    loading:true,
+    isLoading: true,
+    loading: true,
     currentTab: -1,
     displays: 'none',
     monthlypayArr: [],
@@ -126,7 +126,9 @@ Page({
         treatmentArr[i].selected = false;
       }
       treatmentArr.unshift({
-        id:-1, name:'不限',selected:true
+        id: -1,
+        name: '不限',
+        selected: true
       })
       that.setData({
         treatmentArr: treatmentArr
@@ -136,14 +138,17 @@ Page({
     })
   },
 
-  loadList: function() {
-    if (this.data.treatmentArr.length<=0 || this.data.jobArr.length<=0)
+  loadList: function(p = true) {
+    if (this.data.treatmentArr.length <= 0 || this.data.jobArr.length <= 0)
       return;
-    this.setData({
-      loading: true,
-      bottoming: false,
-      showBottomLoading: true,
-    })
+    if (p) {
+      this.setData({
+        loading: true,
+        bottoming: false,
+        showBottomLoading: true,
+      })
+    }
+
     if (this.data.tabCur == 0)
       this.loadFulltimeList();
     else
@@ -153,7 +158,7 @@ Page({
   //获取全职工作列表
   loadFulltimeList: function() {
     let that = this;
-    if(that.data.isLoading)
+    if (that.data.isLoading)
       tip.loading();
     let area = that.data.areaArr[that.data.areaIndex].name;
     console.log('----------- 搜索区域：', area);
@@ -222,14 +227,14 @@ Page({
         total: res.data.total,
         bottoming: true,
         showBottomLoading: false,
-        loading:false,
+        loading: false,
       })
-      setTimeout(function(){
+      setTimeout(function() {
         tip.loaded();
         that.setData({
-          isLoading:false,
+          isLoading: false,
         })
-      },200)
+      }, 200)
     })
   },
 
@@ -242,7 +247,7 @@ Page({
     console.log('----------- 搜索职业类型：', job, that.data.jobArr[that.data.jobIndex].name);
     let money = that.data.jzmoneyArr[that.data.jzmoneyIndex].id;
     console.log('----------- 搜索薪资', money, that.data.jzmoneyArr[that.data.jzmoneyIndex].name)
-    console.log('----------- 搜索最近',that.data.sortIndex)
+    console.log('----------- 搜索最近', that.data.sortIndex)
     let data = {
       listRows: 10,
       page: that.data.page
@@ -251,9 +256,9 @@ Page({
       data.area = area;
     if (job > 0)
       data.job = job;
-    if(money>0)
+    if (money > 0)
       data.month_pay = money;
-    if(that.data.sortIndex>0)
+    if (that.data.sortIndex > 0)
       data.news = true;
 
     http.requestUrl({
@@ -278,7 +283,7 @@ Page({
   },
 
   //类型选择
-  tabSelect: function (evt) {
+  tabSelect: function(evt) {
     let index = evt.currentTarget.dataset.id;
     let that = this;
     if (index == that.data.tabCur)
@@ -288,15 +293,15 @@ Page({
       displays: 'none',
       currentTab: -1,
       page: 1,
-      bottoming:false,
-      showBottomLoading:true,
-      areaIndex:0,
-      jobIndex:0,
-      jzmoneyIndex:0,
-      sortIndex:0,
-      monthlypayIndex:0,
-      worktimeIndex:0,
-      educationId:0,
+      bottoming: false,
+      showBottomLoading: true,
+      areaIndex: 0,
+      jobIndex: 0,
+      jzmoneyIndex: 0,
+      sortIndex: 0,
+      monthlypayIndex: 0,
+      worktimeIndex: 0,
+      educationId: 0,
     })
     let items = that.data.treatmentArr;
     for (var i = 0; i < items.length; i++) {
@@ -431,7 +436,9 @@ Page({
   },
 
   //发布
-  fabuTap: function(evt) {
+  fabuTap: function (evt) {
+    if (!util.hasAuthorize())
+      return;
     wx.navigateTo({
       url: '/pages/job/job-fabu/job-fabu?type=' + this.data.tabCur,
     })
@@ -439,7 +446,7 @@ Page({
   //搜索
   searchTap: function(evt) {
     wx.navigateTo({
-      url: '/pages/job/job-search/job-search?tab='+this.data.tabCur,
+      url: '/pages/job/job-search/job-search?tab=' + this.data.tabCur,
     })
   },
   /**
@@ -491,7 +498,7 @@ Page({
         that.setData({
           page: that.data.page + 1,
         })
-        that.loadList();
+        that.loadList(false);
       }, 800)
     }
   },

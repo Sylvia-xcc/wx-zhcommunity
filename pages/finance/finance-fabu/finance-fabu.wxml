@@ -9,7 +9,7 @@
 
   <view class="cu-form-group">
     <view class="title">联系方式</view>
-    <input placeholder="请输入联系方式" placeholder-class="text-df text-gray" value="{{mobile}}" bindinput="mobileInput"></input>
+    <input placeholder="请输入联系方式" type="number" placeholder-class="text-df text-gray" value="{{mobile}}" bindinput="mobileInput"></input>
   </view>
 
   <view class="cu-form-group">

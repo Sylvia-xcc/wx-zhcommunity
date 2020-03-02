@@ -129,7 +129,9 @@ Page({
   },
 
   //发布
-  fabuTap: function(evt) {
+  fabuTap: function (evt) {
+    if (!util.hasAuthorize())
+      return;
     wx.navigateTo({
       url: '/pages/house/house-buy/house-buy-fabu/house-buy-fabu?type=' + this.data.tabCur,
     })

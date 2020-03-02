@@ -111,6 +111,8 @@ Page({
 
   //收藏
   collectTap: function() {
+    if (!util.hasAuthorize())
+      return;
     let that = this;
     let url = that.data.detail.is_collect > 0 ? 'fav/remove' : 'fav/add';
     let data = that.data.detail.is_collect > 0 ? {
@@ -135,6 +137,8 @@ Page({
 
   likeMessageTap: function(evt) {
     console.log('--------- 留言点赞', evt.currentTarget.dataset)
+    if (!util.hasAuthorize())
+      return;
     let that = this;
     let id = evt.currentTarget.dataset.id;
     let like = evt.currentTarget.dataset.like;
@@ -164,6 +168,8 @@ Page({
   },
 
   messageTap: function(evt) {
+    if (!util.hasAuthorize())
+      return;
     let id = evt.currentTarget.dataset.id;
     console.log('------------ 评论id', id)
     this.selectComponent('#my-textarea').toggleModal(id);

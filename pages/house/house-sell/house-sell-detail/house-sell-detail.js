@@ -47,6 +47,8 @@ Page({
   },
 
   collectTap: function (evt) {
+    if (!util.hasAuthorize())
+      return;
     console.log('--------- 商品收藏')
     let that = this;
     let url = that.data.detail.fav > 0 ? 'fav/remove' : 'fav/add';

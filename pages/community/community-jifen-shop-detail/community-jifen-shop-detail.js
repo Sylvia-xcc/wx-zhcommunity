@@ -10,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    pid: 0,
+    productId: 0,
     banner: ['/images/ershou1.png', '/images/ershou2.png'],
     videoUrl: 'https://www.fengzhankeji.com/qizhuhome/data/upload/2019-11-27/5dde39f275eea.mp4',
   },
@@ -22,12 +22,60 @@ Page({
     console.log('options:', options);
     let that = this;
     that.setData({
-      id: options.id || 0
+      productId: options.id || 0
     })
+    that.loadProductDetail();
 
-    let content = '"<p><img src="https://www.fengzhankeji.com/qizhuhome/data/upload/ueditor/20191212/5df1b500baa3a.jpg" title="5623L-.jpg" alt="5623L-.jpg"/><img src="https://www.fengzhankeji.com/qizhuhome/data/upload/ueditor/20191212/5df1b500d826d.jpg" title="5623L.jpg" alt="5623L.jpg"/></p>"';
-    WxParse.wxParse('content', 'html', content, that, 0);
+  },
 
+  // 商品详情数据获取
+  loadProductDetail: function () {
+    var that = this;
+    tip.loading();
+    http.requestUrl({
+      url: '/wxapp/product/detail',
+      data: {
+        pid: that.data.productId,
+        uid: app.d.uid || 0
+      },
+    }).then(res => {
+      let product = res.product;
+      let isCollect = res.collection;
+
+      let content = res.product.content;
+      WxParse.wxParse('content', 'html', content, that, 0);
+
+      let banner = product.banner;
+      let attr_list = res.attr_list || [];
+
+      let area_main = product.area_main || ''
+      let area = area_main.split('|');
+
+      var realData = {};
+      realData['pid'] = that.data.productId;
+      realData['name'] = product.name;
+      realData['imgUrl'] = product.thumb;
+      realData['price'] = (app.d.vip >= 3) ? product.price_vip : product.price_yh;
+      realData['price_yj'] = product.price;
+      realData['stock'] = product.stock;
+      realData['buynum'] = 1;
+      realData['attrValueList'] = attr_list;
+      that.setData({
+        product: product,
+        isCollect: isCollect,
+        banner: banner,
+        itemData: realData,
+        video: product.video || '',
+        area: area,
+        cont: content,
+      });
+      setTimeout(function () {
+        that.setData({
+          isLoading: true,
+        })
+        tip.loaded()
+      }, 100);
+    })
   },
 
   /**

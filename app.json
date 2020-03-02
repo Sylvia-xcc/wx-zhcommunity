@@ -33,6 +33,7 @@
     "pages/community/index",
     "pages/community/community-news-detail/community-news-detail",
     "pages/community/community-chat-detail/community-chat-detail",
+    "pages/community/community-jifen-index/community-jifen-index",
     "pages/community/community-jifen-list/community-jifen-list",
     "pages/community/community-jifen-shop/community-jifen-shop",
     "pages/community/community-jifen-shop-detail/community-jifen-shop-detail",
@@ -97,7 +98,12 @@
         "iconPath": "images/icons/btn_tabs_02.png",
         "selectedIconPath": "images/icons/btn_tabs_01.png"
       },
-      
+      {
+        "pagePath": "pages/video/index",
+        "text": "视频",
+        "iconPath": "images/icons/btn_tabs_04.png",
+        "selectedIconPath": "images/icons/btn_tabs_03.png"
+      },
       {
         "pagePath": "pages/user/index",
         "text": "我的",

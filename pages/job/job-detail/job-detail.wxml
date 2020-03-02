@@ -1,5 +1,6 @@
 <!--pages/job/job-detail/job-detail.wxml-->
-<view class="cu-card dynamic }}" style="background-image:url(/images/job-bg.png);background-repeat:no-repeat; background-size:100% 100%;-moz-background-size:100% 100%;">
+<view hidden="{{isLoading}}">
+<view class="cu-ard dynamic }}" style="background-image:url(/images/job-bg.png);background-repeat:no-repeat; background-size:100% 100%;-moz-background-size:100% 100%;">
   <view class="cu-item shadow">
     <view class="padding">
       <view class="font_28 text-bold">{{detail.job}}</view>
@@ -81,4 +82,5 @@
 <view class="cu-bar bg-white tabbar border shop position-bottom">
   <view class="submit text-white" style="background:#EF696B;" bindtap="phoneTap">打电话</view>
   <view class="bg-cgreen submit text-white">在线聊</view>
+</view>
 </view>

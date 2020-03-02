@@ -51,19 +51,19 @@ const hasAuthorize = () => {
   let user = getApp().globalData.userInfo;
   console.log("=====>>>> userinfo", user, getApp().d.uid)
   if (getApp().d.uid == undefined) {
-    tip.error('请登录后操作',1000);
-    // wx.showModal({
-    //   title: '提示',
-    //   content: '您尚未登录，是否前往登录页面',
-    //   success(res) {
-    //     console.log("是否前往授权页面", res);
-    //     if (res.confirm) {
-    //       wx.navigateTo({
-    //         url: '/pages/login/index',
-    //       })
-    //     }
-    //   }
-    // })
+    // tip.error('请登录后操作',1000);
+    wx.showModal({
+      title: '提示',
+      content: '您尚未登录，是否前往登录页面',
+      success(res) {
+        console.log("是否前往授权页面", res);
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '/pages/authorize/authorize',
+          })
+        }
+      }
+    })
     return false;
   }
   return true;

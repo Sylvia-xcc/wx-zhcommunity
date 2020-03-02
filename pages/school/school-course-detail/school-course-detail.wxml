@@ -1,6 +1,11 @@
 <!--pages/school/school-course-detail/school-course-detail.wxml-->
 <view class="padding">
-  <v-banner banner="{{banner}}" videoUrl="{{videoUrl}}"></v-banner>
+  <!-- <v-banner banner="{{banner}}" videoUrl="{{videoUrl}}"></v-banner> -->
+  <swiper class="screen-swiper " indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+    <swiper-item wx:for="{{banner}}" wx:key>
+      <image src="{{item.url}}" mode="aspectFill"></image>
+    </swiper-item>
+  </swiper>
 </view>
 
 <view>
@@ -15,7 +20,7 @@
         </view>
       </view>
       <view class="padding-right-sm pa" style="bottom:40rpx; right:30rpx;" bindtap="guanzhuTap">
-        <button class="cu-btn radius sm bg-cgreen text-white" wx:if="{{detail.like==0}}" >+关注</button>
+        <button class="cu-btn radius sm bg-cgreen text-white" wx:if="{{detail.like==0}}">+关注</button>
         <button class="cu-btn radius sm bg-grey text-white" wx:else>已关注</button>
       </view>
     </view>
@@ -55,10 +60,13 @@
     <view class=" cuIcon-post"></view>
     转发
   </view>
-  <view class="action" style="width:96rpx;" bindtap="messageTap">
-    <view class=" cuIcon-pic"></view> 生产海报
+  <view class="action" style="width:96rpx;" bindtap="posterTap">
+    <view class=" cuIcon-pic"></view> 生成海报
   </view>
   <view class="btn-group" style="justify-content: flex-end !important; padding-right:30rpx !important;">
     <button class="cu-btn bg-green round shadow-blur" bindtap="joinTap">{{detail.join==0?'立即报名':'前往课程'}}</button>
   </view>
 </view>
+
+<!-- 海报组件 -->
+<v-poster id='poster' drawDataList="{{canvasData}}"></v-poster>

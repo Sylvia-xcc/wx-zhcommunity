@@ -113,6 +113,8 @@ Page({
   },
 
   fabuTap: function() {
+    if (!util.hasAuthorize())
+      return;
     wx.navigateTo({
       url: '/pages/finance/finance-fabu/finance-fabu',
     })

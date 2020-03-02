@@ -68,8 +68,29 @@ Page({
   },
 
   deleteTap: function (evt) {
+    let that = this;
     let id = evt.currentTarget.dataset.id;
-
+    tip.confirm('是否确定删除改发布?').then(res => {
+      http.requestUrl({
+        url: 'wxapp/FinanceIndex/delete',
+        method: 'post',
+        data: {
+          id: id,
+          user_id: app.d.uid
+        }
+      }).then(res => {
+        tip.success('删除成功', 1000);
+        let items = that.data.list;
+        let tmp = [];
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].id != id)
+            tmp.push(items[i]);
+        }
+        that.setData({
+          list: tmp
+        })
+      })
+    })
   },
 
   /**

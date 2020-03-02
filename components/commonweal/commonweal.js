@@ -1,6 +1,7 @@
 // components/commonweal/commonweal.js
 const app = getApp();
 const http = require('../../utils/http.js');
+const util = require('../../utils/util.js');
 import tip from '../../utils/tip.js';
 Component({
   /**
@@ -36,6 +37,8 @@ Component({
     },
 
     joinTap:function(){
+      if (!util.hasAuthorize())
+        return;
       let that = this;
       http.requestUrl({
         url: 'activities/join',
@@ -47,14 +50,27 @@ Component({
         method:'post',
       }).then(res => {
         tip.success('报名成功', 1000);
-        let item = that.data.item;
-        item.join = 1;
-        that.setData({
-          item:item,
-        })
         that.hideModal();
+        that.updateDetail();
       })
     },
+
+    updateDetail: function () {
+      let that = this;
+      http.requestUrl({
+        url: 'activities/detail',
+        news: true,
+        data: {
+          uid: app.d.uid,
+          id: that.data.item.id,
+        },
+      }).then(res => {
+        that.setData({
+          item: res.data,
+        })
+      })
+    },
+
     //预览
     previewImgTap: function (evt) {
       let id = evt.currentTarget.dataset.id;

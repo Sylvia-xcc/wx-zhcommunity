@@ -194,6 +194,8 @@ Page({
 
 
   showModal(e) {
+    if (!util.hasAuthorize())
+      return;
     this.setData({
       modalName: e.currentTarget.dataset.target
     })

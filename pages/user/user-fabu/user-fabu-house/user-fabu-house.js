@@ -45,7 +45,6 @@ Page({
     setTimeout(function() {
       that.loadFabuList();
     }, 400)
-
   },
 
   //买房列表
@@ -73,7 +72,7 @@ Page({
         total: res.data.total,
         bottoming: true,
         showBottomLoading: false,
-        loading:false,
+        loading: false,
       })
       setTimeout(function() {
         tip.loaded();
@@ -102,6 +101,35 @@ Page({
     let id = evt.currentTarget.dataset.id;
     wx.navigateTo({
       url: '/pages/house/house-sell/house-sell-detail/house-sell-detail?id=' + id + '&type=' + this.data.tabCur,
+    })
+  },
+
+  deleteTap: function(evt) {
+    let that = this;
+    let id = evt.currentTarget.dataset.id;
+    let model = that.data.tabCur == 0 ? 'house_buy' : that.data.tabCur == 1 ? 'house_hire' : that.data.tabCur == 2 ? 'house_ask_hire' : 'house_ask_buy';
+    tip.confirm('是否确定删除改发布?').then(res => {
+      http.requestUrl({
+        url: 'account/clearPost',
+        news: true,
+        method: 'post',
+        data: {
+          id: id,
+          model: model,
+          uid: app.d.uid
+        }
+      }).then(res => {
+        tip.success('删除成功', 1000);
+        let items = that.data.list;
+        let tmp = [];
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].id != id)
+            tmp.push(items[i]);
+        }
+        that.setData({
+          list: tmp
+        })
+      })
     })
   },
 

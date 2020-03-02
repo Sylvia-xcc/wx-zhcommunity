@@ -1,4 +1,8 @@
 // pages/job/job-search/job-search.js
+const app = getApp()
+const util = require('../../../utils/util.js');
+const http = require('../../../utils/http.js');
+import tip from '../../../utils/tip.js';
 Page({
   data: {
     tabCur: 0,
@@ -7,7 +11,8 @@ Page({
     total: 0,
     bottoming: true,
     showBottomLoading: false,
-    isLoading: true,
+    searchValue: '',
+    isLoading: true
   },
 
   /**
@@ -19,7 +24,40 @@ Page({
     that.setData({
       tabCur: options.tab || 0,
     })
-    that.loadList();
+  },
+
+  doSearch() {
+    let that = this;
+    let searchKey = that.data.searchValue;
+    console.log('===> search', searchKey)
+    if (searchKey == '' || searchKey == undefined) {
+      tip.confirm('请输入相关搜索')
+      return;
+    }
+    that.setData({
+      page: 1,
+      bottoming: true,
+      showBottomLoading: false,
+      isLoading: true
+    })
+    tip.loading('加载中...')
+    setTimeout(function() {
+      that.loadList();
+    }, 500)
+
+  },
+
+  searchValueInput(evt) {
+    let that = this;
+    that.setData({
+      searchValue: evt.detail.value
+    })
+    if (!that.data.searchValue) {
+      that.setData({
+        list: [],
+        page: 1,
+      })
+    }
   },
 
   loadList: function() {
@@ -33,66 +71,17 @@ Page({
   //获取全职工作列表
   loadFulltimeList: function() {
     let that = this;
-    if (that.data.isLoading)
-      tip.loading();
-    let area = that.data.areaArr[that.data.areaIndex].name;
-    console.log('----------- 搜索区域：', area);
-    let job = that.data.jobArr[that.data.jobIndex].id;
-    console.log('----------- 搜索职业类型：', job, that.data.jobArr[that.data.jobIndex].name);
-    let monthlypay = that.data.monthlypayArr[that.data.monthlypayIndex].id;
-    console.log('----------- 搜索月薪', monthlypay, that.data.monthlypayArr[that.data.monthlypayIndex].name)
-    let years = that.data.worktimeArr[that.data.worktimeIndex].id;
-    console.log('----------- 搜索年限', years, that.data.worktimeArr[that.data.worktimeIndex].name);
-    let education = that.data.educationArr[that.data.educationId].id;
-    console.log('----------- 搜索学历', education, that.data.educationArr[that.data.educationId].name);
-    let items = that.data.treatmentArr;
-    let treatment = [];
-    for (var i = 0; i < items.length; i++) {
-      if (items[i].selected) {
-        if (i == 0) {
-          treatment = [];
-          break;
-        }
-        treatment.push(items[i].id);
-      }
-    }
-    console.log('---------- 搜索福利待遇', treatment);
-    let data = {
-      listRows: 10,
-      page: that.data.page
-    };
-    let num = 0;
-    if (area != '不限')
-      data.area = area;
-    if (job > 0)
-      data.job = job;
-    if (monthlypay > 0) {
-      data.month_pay = monthlypay;
-      num++;
-    }
-    if (years > 0) {
-      data.years = years;
-      num++;
-    }
-    if (education > 0) {
-      data.education = education;
-      num++;
-    }
-    if (treatment.length > 0) {
-      data.treatment = treatment;
-      num++;
-    }
-    that.setData({
-      shaixuanNum: num
-    })
-
     http.requestUrl({
       url: 'job/fulltimeList',
       news: true,
-      data: data,
+      data: {
+        listRows: 10,
+        page: that.data.page,
+        keywords: that.data.searchValue,
+      },
     }).then(res => {
       let items = that.data.list;
-      if (that.data.page == 1) {
+      if (that.data.page == 10) {
         items = res.data.data
       } else {
         items = items.concat(res.data.data)
@@ -102,7 +91,6 @@ Page({
         total: res.data.total,
         bottoming: true,
         showBottomLoading: false,
-        loading: false,
       })
       setTimeout(function() {
         tip.loaded();
@@ -116,33 +104,17 @@ Page({
   //获取兼职工作列表
   loadParttimeList: function() {
     let that = this;
-    let area = that.data.areaArr[that.data.areaIndex].name;
-    console.log('----------- 搜索区域：', area);
-    let job = that.data.jobArr[that.data.jobIndex].id;
-    console.log('----------- 搜索职业类型：', job, that.data.jobArr[that.data.jobIndex].name);
-    let money = that.data.jzmoneyArr[that.data.jzmoneyIndex].id;
-    console.log('----------- 搜索薪资', money, that.data.jzmoneyArr[that.data.jzmoneyIndex].name)
-    console.log('----------- 搜索最近', that.data.sortIndex)
-    let data = {
-      listRows: 10,
-      page: that.data.page
-    };
-    if (area != '不限')
-      data.area = area;
-    if (job > 0)
-      data.job = job;
-    if (money > 0)
-      data.month_pay = money;
-    if (that.data.sortIndex > 0)
-      data.news = true;
-
     http.requestUrl({
       url: 'job/parttimeList',
       news: true,
-      data: data,
+      data: {
+        listRows: 6,
+        page: that.data.page,
+        keywords: that.data.searchValue,
+      },
     }).then(res => {
       let items = that.data.list;
-      if (that.data.page == 1) {
+      if (that.data.page == 10) {
         items = res.data.data
       } else {
         items = items.concat(res.data.data)
@@ -152,8 +124,40 @@ Page({
         total: res.data.total,
         bottoming: true,
         showBottomLoading: false,
-        loading: false,
       })
+      setTimeout(function() {
+        tip.loaded();
+        that.setData({
+          isLoading: false,
+        })
+      }, 200)
     })
+  },
+  
+  //详情
+  detailTap: function (evt) {
+    let id = evt.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/job/job-detail/job-detail?id=' + id + '&type=' + this.data.tabCur,
+    })
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function() {
+    let that = this;
+    if (that.data.list.length < that.data.total && that.data.bottoming) { //有更多时加载
+      that.setData({
+        showBottomLoading: true,
+        bottoming: false,
+      })
+      setTimeout(function() {
+        that.setData({
+          page: that.data.page + 1,
+        })
+        that.loadList();
+      }, 800)
+    }
   },
 })

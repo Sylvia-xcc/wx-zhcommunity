@@ -9,43 +9,170 @@ Page({
    * 页面的初始数据
    */
   data: {
+    uid: 0,
+    isLoading: true,
     upload_pic: [],
     upload_max: 9, //上传图片最大数量
     optype: 0, //0：图片 1：视频
-    sexArray: [{ id: 1, name: '男' }, { id: 2, name: '女' }],//性别
-    sexIndex:-1,
-    date:'',//出生年月
-    region:[],//地区
+    sexArray: [{
+      id: 1,
+      name: '男'
+    }, {
+      id: 2,
+      name: '女'
+    }], //性别
+    sexIndex: -1,
+    date: '', //出生年月
+    region: [], //地区
     xueliArray: [],
-    xueliIndex:-1,
-    zhiye:'',
+    xueliIndex: -1,
+    zhiye: '',
     moneyArray: [],
-    moneyIndex:-1,
-    provinces:[],
-    multiArray:[],
-    multiIndex:[],
-    nickname:'',
-    stature:'',
-    college:'',
-    occupation:'',
-    weixin:'',
-    intro:'',
-    hobby:'',
-    emotion:'',
-    demand:'',
+    moneyIndex: -1,
+    provinces: [],
+    multiArray: [],
+    multiIndex: [],
+    nickname: '',
+    stature: '',
+    college: '',
+    occupation: '',
+    weixin: '',
+    intro: '',
+    hobby: '',
+    emotion: '',
+    demand: '',
+    a: false,
+    b: false,
   },
 
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
+    console.log('options:', options);
     let that = this;
+    that.setData({
+      uid: options.uid || 0,
+    })
+    tip.loading();
     that.loadProvinceList();
     that.loadInfoList();
   },
 
-  submitTap:function(evt){
+  canFit: function() {
+    let that = this;
+    if (that.data.a && that.data.b) {
+      if (that.data.uid > 0)
+        this.loadUserInof();
+      else {
+        tip.loaded();
+        that.setData({
+          isLoading: false,
+        })
+      }
+    }
+  },
+
+  loadUserInof: function() {
+    let that = this;
+    http.requestUrl({
+      url: 'matchmaker/own',
+      news: true,
+      data: {
+        uid: that.data.uid,
+      }
+    }).then(res => {
+      let moneyArray = that.data.moneyArray;
+      let moneyIndex = -1;
+      for (var i = 0; i < moneyArray.length; i++) {
+        if (moneyArray[i].name == res.data.income) {
+          moneyIndex = moneyArray[i].id;
+          return;
+        }
+      }
+      let xueliArray = that.data.xueliArray;
+      let xueliIndex = -1;
+      for (var i = 0; i < xueliArray.length; i++) {
+        if (xueliArray[i].name == res.data.education) {
+          xueliIndex = xueliArray[i].id;
+          return;
+        }
+      }
+      that.setData({
+        upload_pic: res.data.photo || [],
+        nickname: res.data.name,
+        sexIndex: res.data.sex - 1,
+        date: res.data.birthday,
+        stature: res.data.height,
+        college: res.data.school,
+        occupation: res.data.job,
+        wx_account: res.data.wx_account,
+        intro: res.data.intro,
+        hobby: res.data.hobby,
+        emotion: res.data.felling,
+        demand: res.data.requirement,
+        moneyIndex: moneyIndex,
+        xueliIndex:xueliIndex,
+      })
+      setTimeout(function() {
+        tip.loaded();
+        that.setData({
+          isLoading: false,
+        })
+      }, 600)
+    })
+  },
+
+  loadInfoList: function() {
+    let that = this;
+    http.requestUrl({
+      url: 'matchmaker/info',
+      news: true,
+    }).then(res => {
+      that.setData({
+        moneyArray: res.data.income,
+        xueliArray: res.data.education,
+        a: true,
+      })
+      that.canFit();
+    })
+  },
+
+  loadProvinceList: function() {
+    let that = this;
+    http.requestUrl({
+      url: 'matchmaker/province',
+      news: true,
+    }).then(res => {
+      that.setData({
+        provinces: res.data
+      })
+      that.loadCityList(that.data.provinces[0].id);
+    })
+  },
+
+  loadCityList: function(id) {
+    let that = this;
+    http.requestUrl({
+      url: 'matchmaker/city',
+      news: true,
+      data: {
+        province: id
+      }
+    }).then(res => {
+      let multiArray = [that.data.provinces, res.data]
+      that.setData({
+        multiArray: multiArray,
+        b: true,
+      })
+      that.canFit();
+    })
+  },
+
+
+
+  submitTap: function(evt) {
     let that = this;
 
     console.log('-------昵称：', that.data.nickname);
@@ -62,16 +189,16 @@ Page({
     console.log('-------兴趣爱好：', that.data.hobby);
     console.log('-------感情观：', that.data.emotion);
     console.log('-------对另一半要求', that.data.demand);
-    
-    if (that.data.upload_pic.length<=0){
-      tip.error('请上传头像',1000);
+
+    if (that.data.upload_pic.length <= 0) {
+      tip.error('请上传头像', 1000);
       return;
     }
-    if (that.data.nickname=='') {
+    if (that.data.nickname == '') {
       tip.error('请填写微信昵称', 1000);
       return;
     }
-    if (that.data.sexIndex <0) {
+    if (that.data.sexIndex < 0) {
       tip.error('请选择性别', 1000);
       return;
     }
@@ -168,78 +295,38 @@ Page({
           wx_id: app.d.uid,
         }
       }).then(res => {
-          tip.loaded();
-          wx.navigateBack();
+        tip.loaded();
+        wx.navigateBack();
       })
     })
   },
 
-  loadInfoList: function () {
-    let that = this;
-    http.requestUrl({
-      url: 'matchmaker/info',
-      news: true,
-    }).then(res => {
-      that.setData({
-        moneyArray:res.data.income,
-        xueliArray:res.data.education,
-      })
-    })
-  },
 
-  loadProvinceList:function(){
-    let that = this;
-    http.requestUrl({
-      url: 'matchmaker/province',
-      news: true,
-    }).then(res => {
-      that.setData({
-        provinces:res.data
-      })
-      that.loadCityList(that.data.provinces[0].id);
-    })
-  },
 
-  loadCityList:function(id){
-    let that = this;
-    http.requestUrl({
-      url: 'matchmaker/city',
-      news: true,
-      data:{
-        province:id
-      }
-    }).then(res => {
-      let multiArray = [that.data.provinces, res.data]
-      that.setData({
-        multiArray: multiArray,
-      })
-    })
-  },
-
-  bindMultiPickerColumnChange:function(evt){
+  bindMultiPickerColumnChange: function(evt) {
     // console.log('---------->>>aa ', evt)
     let that = this;
     let column = evt.detail.column;
     let value = evt.detail.value;
-    if(column==0){
+    if (column == 0) {
       that.loadCityList(that.data.provinces[value].id);
     }
   },
 
-  bindMultiPickerChange:function(evt){
+  bindMultiPickerChange: function(evt) {
     console.log('----------地区 ', evt)
     this.setData({
-      multiIndex:evt.detail.value
+      multiIndex: evt.detail.value
     })
   },
 
-  sexPickerChange:function(evt){
+  sexPickerChange: function(evt) {
     this.setData({
-      sexIndex:evt.detail.value
+      sexIndex: evt.detail.value
     })
   },
 
-  dateChange: function (evt) {
+  dateChange: function(evt) {
     this.setData({
       date: evt.detail.value
     })
@@ -251,65 +338,65 @@ Page({
   //   })
   // },
 
-  xueliPickerChange: function (e) {
+  xueliPickerChange: function(e) {
     this.setData({
       xueliIndex: e.detail.value
     })
   },
 
-  zhiyePickerChange: function (e) {
+  zhiyePickerChange: function(e) {
     this.setData({
       zhiyeIndex: e.detail.value
     })
   },
 
-  moneyPickerChange: function (e) {
+  moneyPickerChange: function(e) {
     this.setData({
       moneyIndex: e.detail.value
     })
   },
 
-  nicknameInput:function(evt){
+  nicknameInput: function(evt) {
     this.setData({
-      nickname:evt.detail.value
+      nickname: evt.detail.value
     })
   },
-  statureInput: function (evt) {
+  statureInput: function(evt) {
     this.setData({
       stature: evt.detail.value
     })
   },
-  collegeInput: function (evt) {
+  collegeInput: function(evt) {
     this.setData({
       college: evt.detail.value
     })
   },
-  occupationInput: function (evt) {
+  occupationInput: function(evt) {
     this.setData({
       occupation: evt.detail.value
     })
   },
-  weixinInput: function (evt) {
+  weixinInput: function(evt) {
     this.setData({
       weixin: evt.detail.value
     })
   },
-  introInput: function (evt) {
+  introInput: function(evt) {
     this.setData({
       intro: evt.detail.value
     })
   },
-  hobbyInput: function (evt) {
+  hobbyInput: function(evt) {
     this.setData({
       hobby: evt.detail.value
     })
   },
-  emotionInput: function (evt) {
+  emotionInput: function(evt) {
     this.setData({
       emotion: evt.detail.value
     })
   },
-  demandInput: function (evt) {
+  demandInput: function(evt) {
     this.setData({
       demand: evt.detail.value
     })
@@ -369,49 +456,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

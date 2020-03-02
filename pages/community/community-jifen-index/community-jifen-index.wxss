@@ -1,0 +1,18 @@
+/* pages/community/community-jifen-index/community-jifen-index.wxss */
+page{
+  background: #fff !important;
+}
+
+
+swiper image {
+  width: 100%;
+  height: 100%;
+}
+
+swiper-item {
+  position: relative;
+}
+
+.line-right{
+  border-right: 2rpx solid #68B581;
+}

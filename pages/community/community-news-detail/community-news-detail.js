@@ -78,6 +78,8 @@ Page({
 
   //收藏
   collectTap: function () {
+    if (!util.hasAuthorize())
+      return;
     let that = this;
     let url = that.data.detail.is_collect > 0 ? 'fav/remove' : 'fav/add';
     let data = that.data.detail.is_collect > 0 ? {
@@ -100,7 +102,9 @@ Page({
     })
   },
 
-  likeMessageTap:function(evt){
+  likeMessageTap: function (evt) {
+    if (!util.hasAuthorize())
+      return;
     console.log(evt)
     let mid = evt.currentTarget.dataset.id;
     let pid = evt.currentTarget.dataset.gid;
@@ -119,7 +123,9 @@ Page({
     })
   },
 
-  messageTap: function(evt) {
+  messageTap: function (evt) {
+    if (!util.hasAuthorize())
+      return;
     let id = evt.currentTarget.dataset.id;
     console.log('------------ 评论id', id)
     this.selectComponent('#my-textarea').toggleModal(id);

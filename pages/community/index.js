@@ -19,7 +19,6 @@ Page({
     showBottomLoading: false,
     isLoading: true,
     loading: true,
-    jifenCur: 2,
     modalName: null,
     address: null,
     upload_pic: [],
@@ -61,6 +60,7 @@ Page({
       peoples: peoples
     })
     that.loadList();
+    that.loadBanner();
   },
 
   /**
@@ -74,7 +74,21 @@ Page({
         address: address
       })
     }
+  },
 
+  loadBanner: function() {
+    let that = this;
+    http.requestUrl({
+      url: 'banner/index',
+      news: true,
+      data: {
+        model: 2,
+      }
+    }).then(res => {
+      that.setData({
+        banner: res.data
+      })
+    })
   },
 
   loadList: function() {
@@ -235,10 +249,13 @@ Page({
       endBool: false,
       chatMsg: '',
       meeting: '',
+      people:-1,
     })
   },
 
   showModal(e) {
+    if (!util.hasAuthorize())
+      return;
     this.setData({
       modalName: e.currentTarget.dataset.target
     })
@@ -303,6 +320,7 @@ Page({
       }).then(res => {
         tip.loaded();
         tip.success('发布成功', 1000);
+        that.reset();
         that.hideModal();
       })
     })
@@ -388,6 +406,7 @@ Page({
       }).then(res => {
         tip.loaded();
         tip.success('发布成功', 1000);
+        that.reset();
         that.hideModal();
       })
     })

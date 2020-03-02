@@ -1,4 +1,5 @@
 <!--pages/matchmaker/matchmaker-edit/matchmaker-edit.wxml-->
+<view hidden="{{isLoading}}">
 <view class="margin padding bg-white">
   <view class="flex align-center">
     <view class="cuIcon-titles text-green"></view>
@@ -27,7 +28,7 @@
   </view>
   <view class="cu-form-group">
     <view class="title">昵称</view>
-    <input placeholder="请输入微信昵称" class="text-right" bindinput="nicknameInput"></input>
+    <input placeholder="请输入微信昵称" class="text-right" value="{{nickname}}" bindinput="nicknameInput"></input>
   </view>
   <view class="cu-form-group">
     <view class="title">性别</view>
@@ -49,7 +50,7 @@
   </view>
   <view class="cu-form-group">
     <view class="title">身高</view>
-    <input placeholder="请输入身高(cm)" type="number" class="text-right" bindinput="statureInput"></input>
+    <input placeholder="请输入身高(cm)" type="number" class="text-right" value="{{stature}}" bindinput="statureInput"></input>
   </view>
   <view class="cu-form-group">
     <view class="title">所在城市</view>
@@ -69,7 +70,7 @@
   </view>
   <view class="cu-form-group">
     <view class="title">毕业院校</view>
-    <input placeholder="请输入毕业院校名称" class="text-right" bindinput="collegeInput"></input>
+    <input placeholder="请输入毕业院校名称" class="text-right" value="{{college}}" bindinput="collegeInput"></input>
   </view>
   <view class="cu-form-group">
     <view class="title">学历</view>
@@ -83,7 +84,7 @@
 
   <view class="cu-form-group">
     <view class="title">职业</view>
-    <input placeholder="请填写职业名称" class="text-right" bindinput="occupationInput"></input>
+    <input placeholder="请填写职业名称" class="text-right" value="{{occupation}}" bindinput="occupationInput"></input>
   </view>
 
   <view class="cu-form-group">
@@ -97,7 +98,7 @@
   </view>
   <view class="cu-form-group">
     <view class="title">微信号</view>
-    <input placeholder="请输入微信号(选填)" class="text-right" bindinput="weixinInput"></input>
+    <input placeholder="请输入微信号(选填)" class="text-right" value="{{wx_account}}" bindinput="weixinInput"></input>
   </view>
 </view>
 
@@ -107,7 +108,7 @@
     <view class="font_26 text-bold c0">自我介绍</view>
   </view>
   <view class="cu-form-group">
-    <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="introInput" placeholder="多行文本输入框"></textarea>
+    <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="introInput" value="{{intro}}" placeholder="多行文本输入框"></textarea>
   </view>
 </view>
 
@@ -117,7 +118,7 @@
     <view class="font_26 text-bold c0">兴趣爱好</view>
   </view>
   <view class="cu-form-group">
-    <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="hobbyInput" placeholder="多行文本输入框"></textarea>
+    <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="hobbyInput" value="{{hobby}}" placeholder="多行文本输入框"></textarea>
   </view>
 </view>
 
@@ -127,7 +128,7 @@
     <view class="font_26 text-bold c0">感情观</view>
   </view>
   <view class="cu-form-group">
-    <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="emotionInput" placeholder="多行文本输入框"></textarea>
+    <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="emotionInput" value="{{emotion}}" placeholder="多行文本输入框"></textarea>
   </view>
 </view>
 
@@ -137,10 +138,11 @@
     <view class="font_26 text-bold c0">对另一半的要求</view>
   </view>
   <view class="cu-form-group">
-    <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="demandInput" placeholder="多行文本输入框"></textarea>
+    <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="demandInput" value="{{demand}}" placeholder="多行文本输入框"></textarea>
   </view>
 </view>
 
 <view class="padding flex flex-direction" bindtap="submitTap">
   <button class="cu-btn bg-green lg">保存</button>
+</view>
 </view>

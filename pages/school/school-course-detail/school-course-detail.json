@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "v-banner": "/components/banner/banner"
+    "v-banner": "/components/banner/banner",
+    "v-poster": "/components/poster/index"
   },
   "navigationBarTitleText": "课程详情"
 }

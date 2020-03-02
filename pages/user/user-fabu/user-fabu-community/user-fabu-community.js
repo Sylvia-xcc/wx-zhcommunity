@@ -84,34 +84,6 @@ Page({
     })
   },
 
-  //约会列表
-  loadMeetingList: function() {
-    let that = this;
-    http.requestUrl({
-      url: 'meeting/index',
-      news: true,
-      data: {
-        page: that.data.page,
-        count: 10,
-        uid: app.d.uid
-      }
-    }).then(res => {
-      let items = that.data.list;
-      if (that.data.page == 1) {
-        items = res.data.data
-      } else {
-        items = items.concat(res.data.data)
-      }
-      that.setData({
-        list: items,
-        total: res.data.total,
-        bottoming: true,
-        showBottomLoading: false,
-        loading: false,
-      })
-    })
-  },
-
   tabSelect: function(evt) {
     let id = evt.currentTarget.dataset.id;
     let that = this;
@@ -131,6 +103,35 @@ Page({
     let id = evt.currentTarget.dataset.id;
     wx.navigateTo({
       url: '/pages/community/community-chat-detail/community-chat-detail?id=' + id,
+    })
+  },
+
+  deleteTap: function (evt) {
+    let that = this;
+    let id = evt.currentTarget.dataset.id;
+    let model = that.data.tabCur == 0 ? 'chating' : 'meeting';
+    tip.confirm('是否确定删除改发布?').then(res => {
+      http.requestUrl({
+        url: 'account/clearPost',
+        news: true,
+        method: 'post',
+        data: {
+          id: id,
+          model: model,
+          uid: app.d.uid
+        }
+      }).then(res => {
+        tip.success('删除成功', 1000);
+        let items = that.data.list;
+        let tmp = [];
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].id != id)
+            tmp.push(items[i]);
+        }
+        that.setData({
+          list: tmp
+        })
+      })
     })
   },
 

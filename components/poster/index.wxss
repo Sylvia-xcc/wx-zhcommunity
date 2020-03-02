@@ -39,6 +39,6 @@
   background: rgba(252, 92, 101, 1);
   border-radius: 100rpx;
 }
-button:not([size='mini']){
+/* button:not([size='mini']){
    width: 606rpx;
-}
+} */

@@ -107,7 +107,9 @@ Page({
     })
   },
 
-  fabuTap: function(evt) {
+  fabuTap: function (evt) {
+    if (!util.hasAuthorize())
+      return;
     wx.navigateTo({
       url: '/pages/friendship/friendship-fabu/friendship-fabu',
     })

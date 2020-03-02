@@ -10,7 +10,7 @@
   </scroll-view>
 
   <view hidden="{{loading}}">
-    <view class="padding flex solid-bottom " wx:if="{{tabCur==0||tabCur==1}}" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="detailTap">
+    <view class="padding flex solid-bottom " wx:if="{{tabCur==0||tabCur==1}}" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailTap">
       <view>
         <image src="{{item.photo.img[0]}}" class="radius" style="width:186rpx;height:186rpx;" mode="aspectFill"></image>
       </view>
@@ -27,10 +27,10 @@
           <text class="text-gray text-sm padding-left-sm" wx:if="{{tabCur==0}}">{{item.avg_pay}}元/㎡</text>
         </view>
         <view class="pa" style="bottom:0rpx; right:0">
-          <view class="font_22 text-gray padding-bottom-sm text-right">2020-01-02{{item.create_time}}</view>
+          <view class="font_22 text-gray padding-bottom-sm text-right">{{item.create_time}}</view>
           <view class="text-sm">
-            <text class="text-green text-sm">审核中</text>
-            <text class="text-gray text-sm padding-left">删除</text>
+            <!-- <text class="text-green text-sm">审核中</text> -->
+            <text class="text-gray text-sm padding-left" data-id="{{item.id}}" catchtap="deleteTap">删除</text>
           </view>
         </view>
       </view>
@@ -48,8 +48,8 @@
       <view class="" style="width:230rpx;">
         <view class="font_22 text-gray text-right">{{item.create_time}}</view>
         <view class="text-sm text-right padding-top-xs">
-          <text class="text-green text-sm">审核中</text>
-          <text class="text-gray text-sm padding-left">删除</text>
+          <!-- <text class="text-green text-sm">审核中</text> -->
+          <text class="text-gray text-sm padding-left" data-id="{{item.id}}" catchtap="deleteTap">删除</text>
         </view>
       </view>
     </view>

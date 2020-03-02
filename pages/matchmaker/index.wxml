@@ -123,7 +123,7 @@
     <view wx:else>
       <view class="flex flex-wrap justify-between padding">
         <view class="msg-item" wx:for="{{list}}" wx:key="index" data-id="{{item.cid}}" bindtap="detailTap">
-          <image src="{{item.photo[0]}}" class="msg-item-img"></image>
+          <image src="{{item.photo[0]}}" class="msg-item-img" mode="aspectFill"></image>
           <view class="padding-lr-sm padding-top-xs pr">
             <view>
               <text class="c0 text-bold font_26">{{item.name}}</text>
@@ -154,7 +154,7 @@
       <view class='user-box flex align-center justify-center margin-lr'>
         <image class="blur" src="{{user!=null?user.photo[0]:'/images/head.png'}}" mode="aspectFill"></image>
         <view class="padding-xl text-white pa flex flex-direction align-center ">
-          <image class="cu-avatar round xl" src="{{user.photo[0]}}" style="width:160rpx;height:160rpx; background-color:#fff;"></image>
+          <image class="cu-avatar round xl" src="{{user.photo[0]}}" style="width:160rpx;height:160rpx; background-color:#fff;" mode="aspectFill"></image>
           <view class="padding text-lg  font_30 text-bold">{{user.name}}</view>
           <view class="flex align-center text-white" bindtap="editTap">
             <view class="padding-right-sm" style="padding-top:-6rpx;">编辑个人资料</view>

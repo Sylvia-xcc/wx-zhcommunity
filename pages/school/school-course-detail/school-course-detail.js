@@ -2,6 +2,7 @@
 const app = getApp()
 const util = require('../../../utils/util.js');
 const http = require('../../../utils/http.js');
+const poster = require('../../../components/poster/poster.js');
 import tip from '../../../utils/tip.js';
 Page({
 
@@ -53,7 +54,7 @@ Page({
     })
   },
 
-  joinTap: function(evt) {
+  joinTap: function (evt) {
     let that = this;
     if (that.data.detail.join > 0) {
       wx.navigateTo({
@@ -61,6 +62,8 @@ Page({
       })
       return;
     }
+    if (!util.hasAuthorize())
+      return;
     http.requestUrl({
       url: 'teacher/addJoin',
       news: true,
@@ -75,7 +78,9 @@ Page({
     })
   },
 
-  guanzhuTap: function(evt) {
+  guanzhuTap: function (evt) {
+    if (!util.hasAuthorize())
+      return;
     let that = this;
     let url = (that.data.detail.like == 0) ? 'teacher/addTeacherLike' : 'teacher/removeTeacherLike';
     let data = {
@@ -91,7 +96,8 @@ Page({
       method: 'post',
       data: data
     }).then(res => {
-      tip.success('报名成功', 1000);
+      let msg = (that.data.detail.like == 0)?'关注成功':'取消关注成功';
+      tip.success(msg, 1000);
       that.loadCourseDetail();
     })
   },
@@ -110,7 +116,9 @@ Page({
   },
 
   //收藏
-  collectTap: function() {
+  collectTap: function () {
+    if (!util.hasAuthorize())
+      return;
     let that = this;
     let url = that.data.detail.fav > 0 ? 'fav/remove' : 'fav/add';
     let data = that.data.detail.fav > 0 ? {
@@ -131,6 +139,19 @@ Page({
       tip.success(msg, 1000);
       that.loadCourseDetail();
     })
+  },
+
+  //生成海报
+  posterTap: function (evt) {
+    let that = this;
+    let data = poster.getDrawCanvasData({
+      name: that.data.detail.name,
+      desc: that.data.detail.intro,
+      photo: that.data.detail.thumb,
+      price: that.data.detail.username,
+      code: '',
+    });
+    that.selectComponent('#poster').generatePaper(data)
   },
 
   /**

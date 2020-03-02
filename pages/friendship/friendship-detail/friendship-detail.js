@@ -50,6 +50,8 @@ Page({
   },
 
   collectTap: function (evt) {
+    if (!util.hasAuthorize())
+      return;
     let that = this;
     http.requestUrl({
       url: 'wxapp/QingyiIndex/collect',

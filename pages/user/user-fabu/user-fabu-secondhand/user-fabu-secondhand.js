@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    uid:0,
+    uid: 0,
     list: [],
     page: 1,
     total: 0,
@@ -22,9 +22,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log('options:',options);
+    console.log('options:', options);
     this.setData({
-      uid:options.uid||app.d.uid,
+      uid: options.uid || app.d.uid,
     })
     this.loadList();
   },
@@ -39,8 +39,8 @@ Page({
       data: {
         listRows: 10,
         page: that.data.page,
-        uid:that.data.uid,
-        model:'used',
+        uid: that.data.uid,
+        model: 'used',
       }
     }).then(res => {
       let items = that.data.list;
@@ -72,8 +72,31 @@ Page({
   },
 
   deleteTap: function(evt) {
+    let that = this;
     let id = evt.currentTarget.dataset.id;
-
+    tip.confirm('是否确定删除改发布?').then(res => {
+      http.requestUrl({
+        url: 'account/clearPost',
+        news: true,
+        method: 'post',
+        data: {
+          id: id,
+          model: 'used',
+          uid: app.d.uid
+        }
+      }).then(res => {
+        tip.success('删除成功', 1000);
+        let items = that.data.list;
+        let tmp = [];
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].id != id)
+            tmp.push(items[i]);
+        }
+        that.setData({
+          list:tmp
+        })
+      })
+    })
   },
 
   /**

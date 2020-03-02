@@ -39,7 +39,7 @@ module.exports = {
 
     data.content.push({
       type: 'text',
-      content: '柒筑创意家居',
+      content: '中环国际社区',
       top: 97,
       left: 170,
       fontSize: 24,
@@ -55,7 +55,7 @@ module.exports = {
     if (price != '') {
       data.content.push({
         type: 'text',
-        content: '￥' + price,
+        content: price,
         top: 586,
         left: 34,
         fontSize: 28,
@@ -69,11 +69,11 @@ module.exports = {
       // console.log('-------- price', price.length)
 
       let yj = detail.price_yj||'';
-      if (yj != '') {
+      if (yj != '' || yj != undefined) {
         let len = (price.length + 1) * 15 + 44;
         data.content.push({
           type: 'text',
-          content: '￥' + yj,
+          content:  yj,
           top: 586,
           left: len,
           fontSize: 20,
@@ -95,7 +95,6 @@ module.exports = {
         })
       }
     }
-
 
     let business = detail.desc;
     if (business != '') {

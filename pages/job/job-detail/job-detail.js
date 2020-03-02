@@ -12,6 +12,7 @@ Page({
     id: 0,
     markers: [],
     isFload: false,
+    isLoading: true,
     detail: null,
   },
 
@@ -30,12 +31,14 @@ Page({
   //详情
   loadJobDetail: function() {
     let that = this;
+    if (that.data.isLoading)
+      tip.loading();
     http.requestUrl({
       url: 'job/fulltimeDetail',
       news: true,
       data: {
         id: that.data.id,
-        uid:app.d.uid,
+        uid: app.d.uid,
       }
     }).then(res => {
       let detail = res.data;
@@ -49,17 +52,19 @@ Page({
   },
 
   //收藏
-  collectTap: function() {
+  collectTap: function () {
+    if (!util.hasAuthorize())
+      return;
     let that = this;
     let url = that.data.detail.fav > 0 ? 'fav/remove' : 'fav/add';
     let data = that.data.detail.fav > 0 ? {
       id: that.data.detail.fav,
       uid: app.d.uid
     } : {
-        uid: app.d.uid,
-        model: 'job',
-        mid: that.data.detail.id,
-      }
+      uid: app.d.uid,
+      model: 'job',
+      mid: that.data.detail.id,
+    }
     http.requestUrl({
       url: url,
       news: true,
@@ -111,8 +116,16 @@ Page({
     }];
     that.setData({
       about: about,
-      markers: markers
+      markers: markers,
+
     })
+    setTimeout(function() {
+      tip.loaded();
+      that.setData({
+        isLoading: false,
+      })
+    }, 400)
+
   },
 
   markerTap: function(evt) {

@@ -20,10 +20,10 @@ const requestUrl = ({
     }
     var hostUrl = news ? app.d.hostUrlNew : app.d.hostUrl;
     if (method == 'get') {
-      console.log('-------------- data:', data );
+      // console.log('-------------- data:', data );
       if (data && data.uid === undefined){
         delete data.uid;
-        console.log("========================", data)
+        // console.log("========================", data)
       }
     }
     wx.request({
@@ -87,8 +87,9 @@ const request = function(path, data) {
 const uploadFile = function(data) {
   return new Promise((resolve, reject) => {
     let url = 'http://education.fengzhankeji.com/api/../addons/qiniu/index/upload'; //data.url || 'common/upload';
-    // console.log('------------------- upload:', data.tempFilePaths)
-    if (data.tempFilePaths.indexOf('http://tmp/') == -1) {
+    console.log('------------------- upload:', data.tempFilePaths)
+    if (data.tempFilePaths.indexOf('.com') > -1) {
+      console.log('------------>>> 已上传的图片')
       let obj = {
         code: 1,
         data: {

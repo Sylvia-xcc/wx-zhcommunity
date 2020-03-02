@@ -26,6 +26,7 @@ Page({
   onLoad: function (options) {
     this.loadCategoryList();
     this.loadList();
+    this.loadBannerList();
   },
 
   /**
@@ -44,6 +45,18 @@ Page({
     }).then(res => {
       that.setData({
         categoryList:res.data
+      })
+    })
+  },
+
+  loadBannerList: function () {
+    let that = this;
+    http.requestUrl({
+      url: 'used/banner',
+      news: true,
+    }).then(res => {
+      that.setData({
+        slide: res.data
       })
     })
   },
@@ -98,6 +111,8 @@ Page({
   },
 
   fabuTap: function (evt) {
+    if (!util.hasAuthorize())
+      return;
     wx.navigateTo({
       url: '/pages/secondhand/secondhand-fabu/secondhand-fabu',
     })
