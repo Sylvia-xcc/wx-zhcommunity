@@ -33,6 +33,21 @@ Page({
     })
   },
 
+  loadJifenList:function(){
+    let that = this;
+    http.requestUrl({
+      url: 'banner/index',
+      news: true,
+      data: {
+        model: 2,
+      }
+    }).then(res => {
+      that.setData({
+        banner: res.data
+      })
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

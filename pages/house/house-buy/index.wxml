@@ -15,7 +15,7 @@
     <view class="cu-bar search bg-white">
       <view class="search-form round" style="background:#fff; border:1rpx solid #999;">
         <text class="cuIcon-search"></text>
-        <input type="text" placeholder="请输入职位关键词" confirm-type="search" bindtap="searchTap"></input>
+        <input type="text" placeholder="请输入搜索关键词" confirm-type="search" bindtap="searchTap"></input>
       </view>
       <view class="action">
         <button class="cu-btn bg-green shadow-blur round" bindtap="fabuTap">发布+</button>

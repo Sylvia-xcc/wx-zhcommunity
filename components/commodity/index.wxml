@@ -10,7 +10,7 @@
           <text class=" text-df text-bold" style="color:#000;">{{itemData.name}}</text>
           <view class="flex justify-between padding-top align-center">
             <view>
-              <text class='cart-popup-top-pricenew'>{{optype=='buyjifen'?'需要积分：':'￥'}}{{itemData.price}}</text>
+              <text class='cart-popup-top-pricenew'>{{optype=='buyjifen'?'积分：':'￥'}}{{itemData.price}}</text>
               <text class='cart-popup-top-priceold' wx:if="{{itemData.price_yj}}">￥{{itemData.price_yj}}</text>
             </view>
             <text class="stock">库存：{{itemData.stock}}</text>

@@ -11,7 +11,7 @@ Page({
   data: {
     addrId: 0,
     address: {},
-    region: ['北京市', '北京市', '东城区'],
+    region: [],
     isdefault: 0,
     addressLen: 1,
   },

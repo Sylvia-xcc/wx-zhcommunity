@@ -29,12 +29,7 @@ Page({
   onShow: function () {
     if (!util.hasAuthorize())
       return;
-    if (!app.globalData.updateCart) {
-      this.setData({
-        isLoading: false
-      })
-      this.loadCartList();
-    }
+    this.loadCartList();
   },
 
   /**加载数据*/
@@ -71,7 +66,7 @@ Page({
     if (id <= 0)
       return;
     wx.navigateTo({
-      url: '/pages/detail/detail?productId=' + id,
+      url: '/pages/shop/shop-detail/shop-detail?id=' + id,
     })
   },
 
@@ -211,11 +206,11 @@ Page({
       }
     }
     if (cartIds === '') {
-      tip.success('请选择商品！', 2000)
+      tip.error('请选择商品！', 2000)
       return;
     }
     wx.navigateTo({
-      url: '/pages/pay/pay-cart/pay-cart?cartId=' + cartIds,
+      url: '/pages/shop/shop-pay-cart/shop-pay-cart?cartId=' + cartIds,
     })
   },
 

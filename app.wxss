@@ -52,7 +52,7 @@
 .font_24 {font-size: 24rpx !important;}
 .font_26 {font-size: 26rpx !important;}
 .font_28 {font-size: 28rpx !important;}
-.font_30{font-size:30rpx;}
+.font_30{font-size:30rpx !important;}
 .font_34 {font-size: 34rpx !important; }
 .font_40 {font-size: 40rpx !important; }
 
@@ -102,6 +102,11 @@
 
 .my-shadow-top{
   box-shadow:0rpx -6rpx 7rpx 0rpx rgba(0, 0, 0, 0.05);
+}
+
+.my-shadow2{
+  border:1rpx solid rgba(245,245,245,1);
+  box-shadow:0rpx 7rpx 2rpx 0rpx rgba(198,199,198,0.11);
 }
 
 .layout-col{

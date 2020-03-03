@@ -1,0 +1,6 @@
+<!--pages/shop/shop-pay-result/shop-pay-result.wxml-->
+<view class='con'>
+  <image src="http://www.fengzhankeji.com/flower/images/{{type=='success'?'pay-success':'pay-fail'}}.png"></image>
+  <text class='pay-t1'>{{type=='success'?'恭喜您 本次支付成功！':'很遗憾本次支付失败～'}}</text>
+  <view class='btn center' bindtap='goHome'>继续逛逛</view>
+</view>

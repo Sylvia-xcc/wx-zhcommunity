@@ -13,6 +13,8 @@ Page({
     productId: 0,
     banner: ['/images/ershou1.png', '/images/ershou2.png'],
     videoUrl: 'https://www.fengzhankeji.com/qizhuhome/data/upload/2019-11-27/5dde39f275eea.mp4',
+    product:null,
+    itemData: {}, //购物车属性对象
   },
 
   /**
@@ -76,6 +78,19 @@ Page({
         tip.loaded()
       }, 100);
     })
+  },
+
+  buyTap: function (evt) {
+    if (!util.hasAuthorize()) {
+      return;
+    }
+    let that = this;
+    // if (parseInt(that.data.usejifen) < parseInt(that.data.product.jifen)) {
+    //   tip.success('积分不足！')
+    //   return;
+    // }
+    this.selectComponent('#my-commodity').toggleModal('buyjifen');
+    // that.payTicket();
   },
 
   /**

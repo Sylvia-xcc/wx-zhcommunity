@@ -39,6 +39,7 @@ Component({
       let imgw = evt.detail.width; //图片宽度
       let swiperH = winWid * imgh / imgw;
       swiperH = (swiperH >= that.data.swiperH) ? swiperH : that.data.swiperH;
+      swiperH= 300;
       let btnH = (swiperH-96)/2;
       btnH = btnH>=that.data.btnH?btnH:that.data.btnH;
       that.setData({
@@ -47,6 +48,15 @@ Component({
         num:that.data.num+1
       })
       // console.log('------num', that.data.num, swiperH)
+    },
+
+    previewImgTap:function(evt){
+      let id = evt.currentTarget.dataset.id;
+      let dataimg = evt.currentTarget.dataset.dataimg;
+      wx.previewImage({
+        current: dataimg[id],
+        urls: dataimg
+      });
     },
 
     /**video自带播放事件监听*/

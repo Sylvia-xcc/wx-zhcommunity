@@ -1,34 +1,43 @@
 <!--pages/shop/index.wxml-->
-<view class="cu-bar search">
-  <view class="search-form round" style="background:#fff;">
-    <text class="cuIcon-search"></text>
-    <input type="text" placeholder="请输入关键词" confirm-type="search" bindtap="searchTap"></input>
-  </view>
-</view>
-
-<scroll-view scroll-x class=" nav" scroll-with-animation scroll-left="{{scrollLeft}}">
-  <view class="cu-item flex-sub {{tabCur==0?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-index="{{0}}" data-id="{{0}}">精选</view>
-  <view class="cu-item flex-sub {{tabCur==index+1?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-index="{{index+1}}" data-id="{{item.id}}" wx:for="{{classify}}" wx:key="index">{{item.name}}</view>
-</scroll-view>
-
-<swiper class="screen-swiper" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-  <swiper-item wx:for="{{banner}}" wx:key>
-    <image src="{{item.slide_pic}}" mode="aspectFill"></image>
-  </swiper-item>
-</swiper>
-
-<view>
-  <view class="padding flex solid-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailTap">
-    <view>
-      <image src="{{item.thumb}}" style="width:224rpx;height:224rpx;"></image>
-    </view>
-    <view class="padding-left-sm pr flex-sub">
-      <view class="text-df c0 showtwo">{{item.name}}</view>
-      <view class="font_22 text-gray padding-top-xs">200人已购买</view>
-      <view class="cu-tag line-red radius margin-top-sm" style="height:38rpx;">购买可获得{{item.jifen_get}}积分</view>
-      <view class="text-red text-bold" style="font-size:40rpx; padding-top:15rpx;">￥{{item.price}}元</view>
-      <button class="cu-btn radius bg-green sm pa" style="right:0rpx; bottom:0rpx;">立即购买</button>
+<view hidden="{{isLoading}}">
+  <view class="cu-bar search">
+    <view class="search-form round" style="background:#fff;">
+      <text class="cuIcon-search"></text>
+      <input type="text" placeholder="请输入关键词" confirm-type="search" bindtap="searchTap"></input>
     </view>
   </view>
+
+  <scroll-view scroll-x class=" nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+    <view class="cu-item flex-sub {{tabCur==0?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-index="{{0}}" data-id="{{0}}">精选</view>
+    <view class="cu-item flex-sub {{tabCur==index+1?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-index="{{index+1}}" data-id="{{item.id}}" wx:for="{{classify}}" wx:key="index">{{item.name}}</view>
+  </scroll-view>
+
+  <swiper class="screen-swiper" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" wx:if="{{tabCur==0}}">
+    <swiper-item wx:for="{{banner}}" wx:key>
+      <image src="{{item.slide_pic}}" mode="aspectFill"></image>
+    </swiper-item>
+  </swiper>
+
+  <view class="padding-bottom margin bg-white flex flex-wrap" wx:if="{{tabCur>0 && cates.length>0}}">
+      <view class="flex align-center flex-direction basis-xs margin-top" wx:for="{{cates}}" wx:key="index" data-id="{{item.id}}" catchtap="catesTap">
+        <image src="{{item.thumb}}" style="width:94rpx;height:94rpx;" mode="aspectFill"></image>
+        <view class="text-sm padding-top-sm">{{item.name}}</view>
+      </view>
+  </view>
+
+  <view>
+    <view class="padding flex solid-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailTap">
+      <view>
+        <image src="{{item.thumb}}" style="width:224rpx;height:224rpx;" mode="aspectFill"></image>
+      </view>
+      <view class="padding-left-sm pr flex-sub">
+        <view class="text-df c0 showtwo">{{item.name}}</view>
+        <view class="font_22 text-gray padding-top-xs">200人已购买</view>
+        <view class="cu-tag line-red radius margin-top-sm" style="height:38rpx;">购买可获得{{item.jifen_get}}积分</view>
+        <view class="text-red text-bold" style="font-size:40rpx; padding-top:15rpx;">￥{{item.price}}元</view>
+        <button class="cu-btn radius bg-green sm pa" style="right:0rpx; bottom:0rpx;">立即购买</button>
+      </view>
+    </view>
+  </view>
+  <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
 </view>
-<v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>

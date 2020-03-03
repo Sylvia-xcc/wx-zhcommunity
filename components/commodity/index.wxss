@@ -35,6 +35,7 @@
   width: 100%;
   background: #fff;
   opacity: 0.8;
+  padding-top: 50rpx;
 }
 
 .cart-popup-con {
@@ -170,8 +171,8 @@
   width: 24rpx;
   height: 23rpx;
   position: absolute;
-  right: 24rpx;
-  top: 30rpx;
+  right: 20rpx;
+  top: 15rpx;
 }
 
 .fts24 {

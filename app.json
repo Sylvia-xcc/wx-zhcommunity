@@ -8,6 +8,7 @@
     "pages/shop/shop-detail/shop-detail",
     "pages/shop/shop-cart/shop-cart",
     "pages/shop/shop-pay-now/shop-pay-now",
+    "pages/shop/shop-pay-cart/shop-pay-cart",
     "pages/shop/shop-address/shop-address",
     "pages/shop/shop-address-edit/shop-address-edit",
     "pages/shop/shop-order/shop-order",
@@ -37,6 +38,7 @@
     "pages/community/community-jifen-list/community-jifen-list",
     "pages/community/community-jifen-shop/community-jifen-shop",
     "pages/community/community-jifen-shop-detail/community-jifen-shop-detail",
+    "pages/community/community-jifen-shop-pay/community-jifen-shop-pay",
     "pages/commonweal/index",
     "pages/commonweal/commonweal-fabu/commonweal-fabu",
     "pages/school/index",
@@ -80,7 +82,11 @@
     "pages/game/llk/llk",
     "pages/game/ball/ball",
     "pages/game/fish/index",
-    "pages/authorize/authorize"
+    "pages/authorize/authorize",
+    "pages/house/house-buy/house-buy-search/house-buy-search",
+    "pages/house/house-sell/house-sell-search/house-sell-search",
+    "pages/finance/finance-search/finance-search",
+    "pages/shop/shop-pay-result/shop-pay-result"
   ],
   "window": {
     "backgroundTextStyle": "dark",

@@ -20,9 +20,9 @@
       <image src="{{iitem.pro_thumb}}" style="width:186rpx;height:186rpx"></image>
       <view class="flex-sub padding-left">
         <view class="c0 showtwo">{{iitem.pro_name}}</view>
-        <view class="flex flex-wrap padding-top-sm">
+        <view class="flex flex-wrap padding-top-xs">
           <view class="padding-right-sm padding-bottom-xs" wx:for="{{iitem.pro_buff}}" wx:key="index">
-            <view class="cu-tag line-green radius font_22" style="height:38rpx;">{{item}}</view>
+            <view class="cu-tag bg-gray radius sm " >{{item}}</view>
           </view>
         </view>
         <view class="flex justify-between align-center padding-top-xs">

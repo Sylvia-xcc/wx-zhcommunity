@@ -56,7 +56,7 @@ Page({
     })
     let id = that.data.classify[that.data.tabCur].id;
     http.requestUrl({
-      url: 'wxapp//QingyiIndex/getList',
+      url: 'wxapp/QingyiIndex/getList',
       data: {
         paging: 1,
         page: that.data.page,

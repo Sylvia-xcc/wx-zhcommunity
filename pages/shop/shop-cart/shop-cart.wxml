@@ -1,8 +1,8 @@
 <!--pages/shop/shop-cart/shop-cart.wxml-->
 <view hidden='{{!isLoading}}'>
-  <view wx:if="{{carts.length>0}}" style="padding-bottom:120rpx;">
+  <view wx:if="{{carts.length>0}}" class="margin-top-xs" style="padding-bottom:120rpx;">
     <block wx:for="{{carts}}" wx:key>
-      <view class="cu-item padding bg-white margin-bottom flex align-center justify-center " data-pid="{{item.pid}}" bindtap="detailTap">
+      <view class="cu-item padding bg-white margin-bottom-xs flex align-center justify-center " data-pid="{{item.pid}}" bindtap="detailTap">
         <view class="padding-right">
           <radio class="green" checked="{{item.selected}}" data-index="{{index}}" catchtap="selectList"></radio>
         </view>
@@ -18,12 +18,12 @@
                 <view class="cu-tag margin-bottom-xs sm">{{item}}</view>
               </block>
             </view>
-            <view class="padding-top-xl flex justify-between align-center">
+            <view class="padding-top flex justify-between align-center">
               <text class=" text-bold font_40 text-red">￥{{item.price}}</text>
-              <view class="">
-                <view class="cu-tag padding-lr-sm" data-index='{{index}}' data-cartid="{{item.id}}" catchtap='minusCount'>-</view>
-                <text class="padding-lr">{{item.num}}</text>
-                <view class="cu-tag" data-index='{{index}}' data-cartid="{{item.id}}" catchtap="addCount">+</view>
+              <view class="solid radius">
+                <view class="cu-tag radius" data-index='{{index}}' data-cartid="{{item.id}}" catchtap='minusCount'><text class="cuIcon-move"></text></view>
+                <view class="cu-tag bg-white">{{item.num}}</view>
+                <view class="cu-tag radius" data-index='{{index}}' data-cartid="{{item.id}}" catchtap="addCount"><text class="cuIcon-add"></text></view>
               </view>
             </view>
           </view>
@@ -41,8 +41,9 @@
       <view class="bg-green flex align-center justify-center self-stretch  basis-xn" bindtap="jiesuanTap">去结算</view>
     </view>
   </view>
-  <view wx:else class="flex flex-direction align-center" style="padding-top:300rpx;">
-    <image src="/images/cart-kong.png" class="cart-kong"></image>
-    <text class="padding-top c3a">购物车空空如也~~</text>
+  <view wx:else class="flex flex-direction align-center text-sm" style="padding-top:300rpx;">
+    <image src="/images/cart-kong.png" class="cart-kong" style="width:244rpx;height:179rpx;"></image>
+    <text class="padding-top text-gray">亲，你的购物车还是空的哦~</text>
+    <navigator url="/pages/shop/index" hover-class="none" class="text-red padding-top-xs">快去商城逛逛吧>></navigator>
   </view>
 </view>

@@ -112,6 +112,15 @@ Page({
     })
   },
 
+  //搜索
+  searchTap: function (evt) {
+    let that = this;
+    let id = that.data.classify[that.data.tabCur].id;
+    wx.navigateTo({
+      url: '/pages/finance/finance-search/finance-search?tab=' + id,
+    })
+  },
+
   fabuTap: function() {
     if (!util.hasAuthorize())
       return;

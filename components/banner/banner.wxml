@@ -9,6 +9,9 @@
       <block wx:if="{{item.url}}">
         <image src="{{item.url}}" data-src='{{item.url}}' bindtap='previewImgTap' bindload='setContainerHeight' mode='aspectFill'></image>
       </block>
+      <block wx:else>
+        <image src="{{item}}" data-src='{{item}}' bindtap='previewImgTap' bindload='setContainerHeight' mode='aspectFill'></image>
+      </block>
     </swiper-item>
   </block>
   <view class="playBtn" wx:if="{{videoUrl!='' && current==0 }}" bindtap="playVideo" style="top:{{btnH}}px;">

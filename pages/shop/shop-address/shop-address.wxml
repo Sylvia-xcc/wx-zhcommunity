@@ -32,5 +32,5 @@
 
 
 <navigator url="/pages/shop/shop-address-edit/shop-address-edit?len={{address.length}} " hover-class="none ">
-  <button class="bg-red position-bottom">新增地址</button>
+  <button class="bg-green position-bottom">新增地址</button>
 </navigator>

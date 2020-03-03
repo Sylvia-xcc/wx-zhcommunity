@@ -10,50 +10,49 @@ Page({
    * 页面的初始数据
    */
   data: {
-    productId:0,
-    banner:['/images/ershou1.png','/images/ershou2.png'],
-    product:null,
+    productId: 0,
+    banner: [],
+    video: '',
+    product: null,
     attrValueList: [], //购物车属性数组
     itemData: {}, //购物车属性对象
+    isCollect: 0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    console.log('options:',options);
+  onLoad: function(options) {
+    console.log('options:', options);
     let that = this;
     that.setData({
-      productId:options.id||0
+      productId: options.id || 0
     })
 
     that.loadProductDetail();
-    
+
   },
 
-  loadProductDetail: function () {
+  loadProductDetail: function() {
     let that = this;
     tip.loading();
     http.requestUrl({
       url: 'wxapp/product/detail',
       data: {
-        uid:app.d.uid,
+        uid: app.d.uid,
         pid: that.data.productId
       }
     }).then(res => {
       let product = res.product;
-      let isCollect = res.collection;
 
       let content = res.product.content;
       WxParse.wxParse('content', 'html', content, that, 0);
 
-      let banner = [];
-      for (var i = 0; i < product.banner.length; i++){
-        banner.push(product.banner[i].url);
-      }
-      
+      let banner = product.banner;
+      // for (var i = 0; i < product.banner.length; i++){
+      //   banner.push(product.banner[i].url);
+      // }
       let attr_list = res.attr_list || [];
-
       var realData = {};
       realData['pid'] = that.data.productId;
       realData['name'] = product.name;
@@ -65,11 +64,12 @@ Page({
       realData['attrValueList'] = attr_list;
       that.setData({
         product: product,
-        isCollect: isCollect,
+        isCollect: res.collection,
         banner: banner,
         itemData: realData,
+        video: product.video,
       });
-      setTimeout(function () {
+      setTimeout(function() {
         that.setData({
           isLoading: true,
         })
@@ -78,7 +78,7 @@ Page({
     })
   },
 
-  buyTap: function (evt) {
+  buyTap: function(evt) {
     if (!util.hasAuthorize()) {
       return;
     }
@@ -86,52 +86,73 @@ Page({
     this.selectComponent('#my-commodity').toggleModal(optype);
   },
 
+  collectTap: function(evt) {
+    if (!util.hasAuthorize()) {
+      return;
+    }
+    let that = this;
+    http.requestUrl({
+      url: 'wxapp/product/collection',
+      data: {
+        uid: app.d.uid,
+        pid: that.data.productId
+      }
+    }).then(res => {
+      let collect = that.data.isCollect;
+      tip.success(collect == 0 ? '收藏成功' : '取消成功');
+      that.setData({
+        isCollect: collect == 0 ? 1 : 0
+      })
+    })
+  },
+
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

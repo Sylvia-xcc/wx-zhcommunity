@@ -108,7 +108,7 @@ Page({
       url: 'job/parttimeList',
       news: true,
       data: {
-        listRows: 6,
+        listRows: 10,
         page: that.data.page,
         keywords: that.data.searchValue,
       },

@@ -25,58 +25,49 @@
     </view>
   </view>
 
-  <view class="cu-list menu margin-top bg-white sm-border padding-tb">
-    <block wx:for="{{productData}}" wx:key>
-      <view class="cu-item">
-        <image src="{{item.thumb}}" mode="aspectFill" class="margin-bottom" style="width:190rpx;height:190rpx;"></image>
-        <view class="content padding-left">
-          <view class="text-black text-lg text-bold">{{item.name}}</view>
-          <view class="padding-tb-sm">
-            <view class="cu-tag bg-gray" wx:for="{{item.gg_name}}" wx:key>{{item}}</view>
-          </view>
-          <view class="flex justify-between">
-            <view>
-              <text class="text-black text-bold">￥{{item.price}}</text>
-              <!-- <text class="padding-left-sm text-line-through text-xs text-gray">￥{{item.price}}</text> -->
+  <view class="cu-list menu bg-white sm-border padding-tb" style="padding-bottom:120rpx;">
+    <view class="cu-item" wx:for="{{productData}}" wx:key="index">
+      <view class="content">
+        <view class="flex" class="margin-bottom {{index!=0?'margin-top':''}}">
+          <image src="{{item.thumb}}" mode="aspectFill" style="width:156rpx;height:156rpx;"></image>
+          <view class="flex-sub  content padding-left" style='height:156rpx;'>
+            <text class="c0 font_28 showtwo">{{item.name}}</text>
+            <view class="padding-top-sm">
+              <view class="cu-tag bg-gray radius" style="margin-left:0 !important; margin-right:10rpx;" wx:for="{{item.gg_name}}" wx:key="index">{{item}}</view>
             </view>
-            <text class="text-gray">x {{buyNum}}</text>
+          </view>
+          <view class="basis-xn text-right" style='height:156rpx;'>
+            <view class="text-red  font_30">￥{{item.price}}</view>
+            <view class="text-gray font_22">x {{item.num}}</view>
           </view>
         </view>
       </view>
-    </block>
-    <view class="cu-item ">
-      <view class="text-bold text-black">运费</view>
-      <view class="text-bold text-black text-price">{{fastPrice}}</view>
     </view>
-    <view class="cu-item arrow" wx:if="{{coupon_list.length>0}}" bindtap="couponTap">
-      <view class="text-bold text-black">优惠劵</view>
-      <view class=" text-red">
-        <block wx:if="{{couponId<=0}}">不使用优惠劵</block>
-        <block wx:else>{{coupon.coupon_name}}</block>
-      </view>
+    <view class="flex justify-between padding-lr padding-tb-sm font_22 ">
+      <view class=" text-black">运费</view>
+      <view class=" text-gray text-price">{{fastPrice}}</view>
     </view>
-    <view class="cu-item ">
-      <view class="text-bold text-black">共{{totalNum}}件</view>
-      <view class="text-bold text-black text-price">{{totalPrice}}</view>
+    <view class="flex justify-between padding-lr padding-tb-sm font_22 ">
+      <view class=" text-black">可获得积分</view>
+      <view class=" text-gray">{{jifen}}</view>
     </view>
-    <view class="cu-item ">
-      <view class="text-bold text-black">可获得积分</view>
-      <view class="text-bold text-black">{{jifen}}</view>
-    </view>
-    <view class="cu-item ">
-      <view class="padding-top" style="width:100%;">
-        <text class="text-bold text-black ">买家留言:</text>
-        <view class="margin-top-sm solid padding-sm"  wx:if="{{!showModal}}">
-          <textarea maxlength="-1" style="width:100%;" placeholder-class='padding-sm' disabled="{{modalName!=null}}" bindinput="remarkInput" value="{{remark}}" placeholder="请用户填写备注留言"></textarea>
+    <view class="flex justify-between padding-lr padding-tb-sm font_22 ">
+      <view class="" style="width:100%;">
+        <text class="text-black ">买家留言:</text>
+        <view class="margin-top-sm solid padding-sm" wx:if="{{!showModal}}">
+          <textarea maxlength="-1" style="width:100%; height:200rpx;" placeholder-class='padding-sm' disabled="{{modalName!=null}}" bindinput="remarkInput" value="{{remark}}" placeholder="请用户填写备注留言"></textarea>
         </view>
       </view>
     </view>
   </view>
 
-  <view class="padding text-center text-xl text-bold text-black">总计：¥{{price}}</view>
-  <view class="padding-bottom-xl text-center">
-    <button class="bg-green" style="width:90%;" bindtap='submitTap'>微信支付</button>
+
+  <view class="cu-bar bg-white tabbar border shop position-bottom my-shadow2">
+    <view class="action text-right font_30" style="width:50%;">
+      <text class="text-gray font_22">共{{totalNum}}件</text> 合计：
+      <text class="text-red">¥{{totalPrice}}</text>
+    </view>
+    <view class="bg-orange submit" style="background-color:#FDBF68" data-paytype="weixin" bindtap='submitTap'>微信支付</view>
+    <view class="bg-red submit" data-paytype="cash" bindtap='submitTap'>余额支付</view>
   </view>
 </view>
-
-<my-coupon id='my-coupon' bind:onCouponChoiceTap='onCouponChoiceTap' bind:toggleModal='toggleModal' coupons_list="{{coupon_list}}" couponId="{{couponId}}"></my-coupon>

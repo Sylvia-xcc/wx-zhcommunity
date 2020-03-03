@@ -1,0 +1,16 @@
+/* pages/shop/shop-pay-result/shop-pay-result.wxss */
+page{
+  background: #fff;
+}
+.con {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.con image {
+  width: 444rpx;
+  height: 477rpx;
+  margin-top: 100rpx;
+}

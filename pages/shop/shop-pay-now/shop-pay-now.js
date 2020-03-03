@@ -1,5 +1,5 @@
 // pages/shop/shop-pay-now/shop-pay-now.js
-var app = getApp();
+const app = getApp();
 const util = require('../../../utils/util.js');
 const http = require('../../../utils/http.js');
 import tip from '../../../utils/tip.js';
@@ -15,18 +15,12 @@ Page({
     hasAddress: false,
     productData: [],
     fastPrice: 0,
-    coupon_list: [],
-    totalPrice: '',
-    pay_price: 0, //除优惠劵价格
-    price: 0, //最终支付价格
+    totalPrice: '',//最终支付价格
     remark: '',
     paytype: "weixin",
-    couponId: 0,
-    coupon: null,
     isLoading: false,
     jifen: 0,
     totalNum: 0,
-    showModal: false,
   },
 
   /**
@@ -61,8 +55,7 @@ Page({
     var that = this;
     tip.loading();
     http.requestUrl({
-      url: '/wxapp/payment/buyNow',
-      method: 'post',
+      url: 'wxapp/payment/buy_now',
       data: {
         pid: that.data.productId,
         uid: app.d.uid,
@@ -81,39 +74,47 @@ Page({
         address: res.address, //地址
         productData: res.product, //商品列表
         fastPrice: res.express_money, //运费
-        pay_price: res.pay_price,
-        price: res.pay_price,
-        totalPrice: res.price, //不含运费价格
-        userInfo: res.userinfo,
-        // jifen_use: res.jifen_use,
+        totalPrice: res.price, 
         hasAddress: hasAddress,
-        coupon_list: res.coupon_list, //优惠劵
-        money: res.userinfo.money,
-        vip: res.userinfo.is_vip,
         isLoading: true,
-        jifen: jifen,
+        jifen: jifen||0,
         totalNum: totalNum
       });
-      let couponId = (res.coupon_list.length > 0) ? res.coupon_list[0].coupon_id : 0;
-      that.updateCoupons(couponId);
       tip.loaded();
     });
   },
 
   //提交订单
   submitTap: function (evt) {
+    let that = this;
+    let payType = evt.currentTarget.dataset.paytype;
+    if (that.data.address == null) {
+      tip.success('请填写收货地址')
+      return;
+    }
+    if (payType == 'cash') {
+      if (that.data.money < that.data.price) {
+        tip.confirm('余额不足,是否前往充值').then(res => {
+          wx.navigateTo({
+            url: '/pages/user/user-chongzhi/user-chongzhi',
+          })
+        })
+        return;
+      }
+    }
+    that.setData({
+      paytype: payType,
+    })
     //创建订单
-    var that = this;
     http.requestUrl({
-      url: '/wxapp/payment/payment',
+      url: 'wxapp/Payment/payment',
       method: 'post',
       data: {
         uid: app.d.uid,
         pay_type: that.data.paytype,
+        use_jifen: 0, //that.data.use_jifen ? 1 : 0
         address_id: that.data.address.id, //地址的id
         remark: that.data.remark, //用户备注
-        use_jifen: 0, //that.data.use_jifen ? 1 : 0
-        coupons_id: that.data.couponId,
         pid: that.data.productId,
         num: that.data.buyNum,
         buff: that.data.buff,
@@ -158,52 +159,6 @@ Page({
     })
   },
 
-  couponTap: function (evt) {
-    this.selectComponent("#my-coupon").toggleModal();
-  },
-
-  toggleModal(evt) {
-    let showModal = evt.detail.showModal;
-    console.log('---------------', evt.detail)
-    this.setData({
-      showModal: showModal
-    })
-  },
-
-  onCouponChoiceTap: function (evt) {
-    console.log('----- 组件选择的优惠劵id', evt)
-    let that = this;
-    let couponId = evt.detail.couponId;
-    that.updateCoupons(couponId);
-  },
-  //优惠劵计算价格
-  updateCoupons: function (couponId) {
-    let that = this;
-    let pay_price = that.data.pay_price;
-    let price = that.data.pay_price;
-    let coupon = null;
-    for (var i = 0; i < that.data.coupon_list.length; i++) {
-      let item = that.data.coupon_list[i]
-      if (item && item.coupon_id == couponId) {
-        coupon = item;
-        console.log(pay_price, item.coupon_amount)
-        if (item.coupon_type.value == 10) { //满减
-          price = util.sub(pay_price, item.coupon_amount);
-        } else if (item.coupon_type.value == 20) {//折扣
-          price = util.mul(pay_price, item.coupon_amount / 10);
-        }
-      }
-    }
-    console.log('------------- 优惠卷减', price)
-    price = util.floatRound(price)
-    price = price <= 0 ? 0.01 : price;
-    that.setData({
-      couponId: couponId,
-      price: price,
-      coupon: coupon
-    })
-  },
-
   remarkInput: function (evt) {
     this.setData({
       remark: evt.detail.value
@@ -213,20 +168,20 @@ Page({
   /**支付成功*/
   paySuccess: function () {
     wx.redirectTo({
-      url: '../pay-success/pay-success',
+      url: '/pages/shop/shop-pay-result/shop-pay-result?type=success',
     })
   },
 
   /**支付失败*/
   payFail: function () {
     wx.redirectTo({
-      url: '../pay-fail/pay-fail',
+      url: '/pages/shop/shop-pay-result/shop-pay-result?type=fail',
     })
   },
 
   addressTap: function (evt) {
     wx.navigateTo({
-      url: '/pages/address/address',
+      url: '/pages/shop/shop-address/shop-address',
     })
   },
 

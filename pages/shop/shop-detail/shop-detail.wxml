@@ -1,12 +1,12 @@
 <!--pages/shop/shop-detail/shop-detail.wxml-->
 <view class="padding-lr bg-white padding-bottom">
-  <v-banner banner="{{banner}}"></v-banner>
+  <v-banner banner="{{banner}}" videoUrl="{{video}}"></v-banner>
   <view class="text-df c0 padding-top-sm">{{product.name}}</view>
   <view class="padding-top padding-bottom-xs">
-    <text class="text-red" style="font-size:40rpx;">￥{{product.price_vip}}元</text>
-    <text class="text-gray font_26 padding-left text-line-through">{{product.price_yj}}</text>
+    <text class="text-red" style="font-size:40rpx;">￥{{product.price_yh}}元</text>
+    <text class="text-gray font_26 padding-left text-line-through">{{product.price}}</text>
   </view>
-  <view class="text-gray font_26">库存：{{product.sort}}</view>
+  <view class="text-gray font_26">库存：{{product.stock}}</view>
 </view>
 
 <view class="padding bg-white margin-top">
@@ -24,7 +24,7 @@
   <template is="wxParse" data="{{wxParseData:content.nodes}}" style="width:370px" />
 </view>
 
-<view class="cu-bar bg-white tabbar border position-bottom">
+<view class="cu-bar bg-white tabbar border position-bottom my-shadow2">
   <button class="action" open-type="share">
     <view class="margin-bottom-xs">
       <image src="/images/zhuanfa.png" style="width:36rpx;height:35rpx;"></image>
@@ -33,13 +33,13 @@
   </button>
   <view class="action" bindtap="collectTap">
     <view  class="margin-bottom-xs">
-      <image src="/images/shoucang.png" style="width:40rpx;height:40rpx;"></image>
+      <image src="/images/shoucang.png" style="width:40rpx;height:40rpx;" wx:if="{{isCollect<=0}}"></image>
+      <image src="/images/shoucang2.png" style="width:40rpx;height:40rpx;" wx:else></image>
     </view>
-     已收藏
+     {{isCollect<=0?'收藏':'已收藏'}}
   </view>
-
   <view class="bg-green submit" data-optype="addcart" bindtap="buyTap">加入购物车</view>
   <view class="bg-red submit" data-optype="buynow" bindtap="buyTap">立即购买</view>
 </view>
 <!-- 购物车属性组件 -->
-<my-commodity id="my-commodity" commodityData="{{itemData}}"></my-commodity>
+<v-commodity id="my-commodity" commodityData="{{itemData}}"></v-commodity>

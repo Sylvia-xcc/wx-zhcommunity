@@ -371,6 +371,13 @@ Page({
       url: '/pages/house/house-sell/house-sell-detail/house-sell-detail?id=' + id + '&type=' + this.data.tabCur,
     })
   },
+
+  searchTap: function (evt) {
+    wx.navigateTo({
+      url: '/pages/house/house-sell/house-sell-search/house-sell-search?tab=' + this.data.tabCur,
+    })
+  },
+
   // 筛选
   tabNav: function(evt) {
     let that = this;

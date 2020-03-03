@@ -1,0 +1,4 @@
+/* pages/finance/finance-search/finance-search.wxss */
+page{
+  background: #fff !important;
+}

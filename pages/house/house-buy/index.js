@@ -137,6 +137,12 @@ Page({
     })
   },
 
+  searchTap:function(evt){
+    wx.navigateTo({
+      url: '/pages/house/house-buy/house-buy-search/house-buy-search?tab=' + this.data.tabCur,
+    })
+  },
+
   telTap: function(evt) {
     let number = evt.currentTarget.dataset.number;
     console.log('---------', number)

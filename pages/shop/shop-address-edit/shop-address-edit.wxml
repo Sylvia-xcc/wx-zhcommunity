@@ -1,28 +1,33 @@
 <!--pages/shop/shop-address-edit/shop-address-edit.wxml-->
 <form bindsubmit="formSubmit">
   <view class="cu-form-group">
-    <input type='text' placeholder="收货人姓名" name="name" value="{{address.username}}"></input>
+    <view class="title">收货人</view>
+    <input type='text' placeholder="请输入收货人姓名" placeholder-class="text-gray text-df" name="name" value="{{address.username}}"></input>
   </view>
   <view class="cu-form-group">
-    <input type='number' maxlength="11" placeholder="联系方式" name="mobile" value="{{address.phone}}"></input>
+    <view class="title">联系方式</view>
+    <input type='number' maxlength="11" placeholder="请输入联系方式" placeholder-class="text-gray text-df" name="mobile" value="{{address.phone}}"></input>
   </view>
   <view class="cu-form-group">
+    <view class="title">所在地区</view>
     <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
       <view class="picker" style="text-align: left;">
-        {{region[0]}}，{{region[1]}}，{{region[2]}}
+        <text wx:if="{{region.length<=0}}" class="text-gray text-df" >请现在所在地区</text>
+        <text wx:else>{{region[0]}}，{{region[1]}}，{{region[2]}}</text>        
       </view>
     </picker>
   </view>
   <view class="cu-form-group flex-direction align-start">
-    <textarea maxlength="-1" disabled="{{modalName!=null}}" placeholder="详细地址" name='address' value="{{address.addr}}"></textarea>
+    <view class="title">详细地址</view>
+    <textarea maxlength="-1" disabled="{{modalName!=null}}" placeholder="请输入详细地址" placeholder-class="text-gray text-df" name='address' value="{{address.addr}}"></textarea>
   </view>
   <view class="cu-form-group margin-top">
     <view class="title">设为默认地址</view>
-    <switch class="round orange" checked="{{address.default==1}}" bindtap="defaultTap"></switch>
+    <switch class="round green" checked="{{address.default==1}}" bindtap="defaultTap"></switch>
   </view>
   <view class="cu-form-group margin-top" wx:if="{{addrId>0}}" bindtap="delAddress">
     <view class="title text-red">删除收货地址</view>
   </view>
 
-  <button class="bg-red position-bottom" formType="submit">保存</button>
+  <button class="bg-green position-bottom" formType="submit">保存</button>
 </form>

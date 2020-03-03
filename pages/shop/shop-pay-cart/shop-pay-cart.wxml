@@ -1,0 +1,73 @@
+<!--pages/shop/shop-pay-cart/shop-pay-cart.wxml-->
+<view hidden="{{!isLoading}}">
+  <view class="cu-list menu margin-top bg-white padding-tb">
+    <view class="cu-item arrow" wx:if="{{hasAddress}}" bindtap='addressTap'>
+      <view class="text-sl">
+        <text class="cuIcon-locationfill text-red "></text>
+      </view>
+      <view class="content padding-left-xs">
+        <view class="text-black text-bold">
+          <text>{{address.username}}</text>
+          <text class="padding-left">{{address.phone}}</text>
+        </view>
+        <view class="text-gray text-sm">
+          {{address.province}}{{address.city}}{{address.areas}}{{address.addr}}
+        </view>
+      </view>
+    </view>
+    <view class="cu-item" wx:else bindtap='addressTap'>
+      <view class="content text-gray  flex flex-row align-center justify-center">
+        <view class="text-sl padding-right-sm">
+          <text class="cuIcon-add "></text>
+        </view>
+        添加收货地址
+      </view>
+    </view>
+  </view>
+
+  <view class="cu-list menu margin-top bg-white sm-border padding-tb" style="padding-bottom:120rpx;">
+    <view class="cu-item" wx:for="{{productData}}" wx:key="index">
+      <view class="content">
+        <view class="flex" class="margin-bottom {{index!=0?'margin-top':''}}">
+          <image src="{{item.thumb}}" mode="aspectFill" style="width:156rpx;height:156rpx;"></image>
+          <view class="flex-sub  content padding-left" style='height:156rpx;'>
+            <text class="c0 font_28 showtwo">{{item.name}}</text>
+            <view class="padding-top-sm">
+              <view class="cu-tag bg-gray radius" style="margin-left:0 !important; margin-right:10rpx;" wx:for="{{item.gg_name}}" wx:key="index">{{item}}</view>
+            </view>
+          </view>
+          <view class="basis-xn text-right" style='height:156rpx;'>
+            <view class="text-red  font_30">￥{{item.price}}</view>
+            <view class="text-gray font_22">x {{item.num}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="flex justify-between padding-lr padding-tb-sm font_22 ">
+      <view class=" text-black">运费</view>
+      <view class=" text-gray text-price">{{fastPrice}}</view>
+    </view>
+    <view class="flex justify-between padding-lr padding-tb-sm font_22 ">
+      <view class=" text-black">可获得积分</view>
+      <view class=" text-gray">{{jifen}}</view>
+    </view>
+    <view class="flex justify-between padding-lr padding-tb-sm font_22 ">
+      <view class="" style="width:100%;">
+        <text class="text-black ">买家留言:</text>
+        <view class="margin-top-sm solid padding-sm" wx:if="{{!showModal}}">
+          <textarea maxlength="-1" style="width:100%; height:200rpx;" placeholder-class='padding-sm' disabled="{{modalName!=null}}" bindinput="remarkInput" value="{{remark}}" placeholder="请用户填写备注留言"></textarea>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="cu-bar bg-white tabbar border shop position-bottom my-shadow2">
+    <view class="action text-right font_30" style="width:50%;">
+      <text class="text-gray font_22">共{{totalNum}}件</text> 合计：
+      <text class="text-red">¥{{totalPrice}}</text>
+    </view>
+    <view class="bg-orange submit" style="background-color:#FDBF68" data-paytype="weixin" bindtap='submitTap'>微信支付</view>
+    <view class="bg-red submit" data-paytype="cash" bindtap='submitTap'>余额支付</view>
+  </view>
+</view>

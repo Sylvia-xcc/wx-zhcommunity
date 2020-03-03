@@ -46,7 +46,7 @@ Component({
       });
     },
     toggleModal(value) {
-      console.log('>>>>>> ', value)
+      // console.log('>>>>>> ', value)
       this.setData({
         showModal: !this.data.showModal,
         optype: value || 'addcart'
@@ -126,7 +126,7 @@ Component({
     sureCartTap(evt) {
       let that = this;
       let value = that.getAttrValue(true);
-      console.log('click =========', that.data.optype, value, that.data.itemData['stock']);
+      console.log('click 确定购买 =========', that.data.optype, value, that.data.itemData['stock']);
       if (value == '' && that.data.attrValueList.length > 0)
         return;
       let stock = that.data.itemData['stock'];
@@ -152,10 +152,9 @@ Component({
         wx.navigateTo({
           url: '/pages/shop/shop-pay-now/shop-pay-now?pid=' + that.data.itemData.pid + '&buff=' + value + '&buy_num=' + that.data.buynum
         });
-      } else if (that.data.optype == 'buyjifen'){
-        
+      } else if (that.data.optype == 'buyjifen'){        
         wx.navigateTo({
-          url: '/pages/pay/pay-jifen/pay-jifen?pid=' + that.data.itemData.pid + '&buy_num=' + that.data.buynum
+          url: '/pages/community/community-jifen-shop-pay/community-jifen-shop-pay?pid=' + that.data.itemData.pid + '&buff=' + value + '&buy_num=' + that.data.buynum
         });
       }
 
