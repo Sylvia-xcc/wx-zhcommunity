@@ -1,0 +1,32 @@
+<!--pages/friendship/friendship-search/friendship-search.wxml-->
+<view class="cu-bar search bg-gray solid-top">
+  <view class="search-form bg-white radius" style="background:#fff;">
+    <text class="cuIcon-search" style="font-size:28rpx;"></text>
+    <input type="text" placeholder="请输入搜索关键词" confirm-type="search" auto-focus="true" focus="true" value="{{searchValue}}" bindinput="searchValueInput" bindconfirm="doSearch"></input>
+  </view>
+</view>
+
+<view hidden="{{isLoading}}">
+  <view class="padding flex justify-center align-center" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailTap">
+      <view>
+        <image src="{{item.file_list[0]}}" class="ridius" style="width:224rpx;height:224rpx;"></image>
+      </view>
+      <view class="flex-sub padding-left-sm pr">
+        <view class="text-bold c0 text-df showtwo">{{item.intro}}</view>
+        <view class="padding-top-xs flex flex-wrap">
+          <view class="padding-right-xs padding-bottom-xs" wx:for="{{item.tag_list}}" wx:key="index" wx:if="{{index<3}}">
+            <view class="cu-tag line-gray radius" style="height:38rpx;">{{item.name}}</view>
+          </view>
+        </view>
+        <view class="text-red text-bold font_30">￥{{item.money}}元</view>
+        <view class="flex align-center justify-between">
+          <view class="flex align-center padding-top-xs">
+            <image src="{{item.user_photo}}" class="cu-avatar sm round"></image>
+            <view class="text-xs c0 padding-left-xs">{{item.nickname}}</view>
+          </view>
+          <button class="cu-btn radius bg-green sm ">联系TA</button>
+        </view>
+      </view>
+    </view>
+  <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+</view>

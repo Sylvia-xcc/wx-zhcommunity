@@ -1,4 +1,5 @@
 <!--pages/shop/shop-detail/shop-detail.wxml-->
+<view hidden="{{isLoading}}">
 <view class="padding-lr bg-white padding-bottom">
   <v-banner banner="{{banner}}" videoUrl="{{video}}"></v-banner>
   <view class="text-df c0 padding-top-sm">{{product.name}}</view>
@@ -43,3 +44,4 @@
 </view>
 <!-- 购物车属性组件 -->
 <v-commodity id="my-commodity" commodityData="{{itemData}}"></v-commodity>
+</view>

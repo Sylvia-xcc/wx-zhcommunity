@@ -20,7 +20,7 @@
   <view class="cu-list menu  bg-white sm-border padding-tb">
     <view class="cu-item">
       <view class="content">
-        <view class="flex padding-bottom" wx:for="{{productData}}" wx:key="index" wx:for-item="iitem">
+        <view class="flex padding-bottom" wx:for="{{productData}}" wx:key="index" wx:for-item="iitem" data-id="{{iitem.pro_id}}" catchtap="detailTap">
           <image src="{{iitem.pro_thumb}}" style="width:186rpx;height:186rpx"></image>
           <view class="flex-sub padding-left">
             <view class="c0 showtwo">{{iitem.pro_name}}</view>
@@ -37,6 +37,17 @@
     </view>
   </view>
 
+  <view class="bg-white padding margin-top" wx:if="{{orderData.status==30}}">
+    <view class="flex align-center ">
+      <view class="cuIcon-titles text-green"></view>
+      <view class="c0 padding-left-xs">物流信息</view>
+    </view>
+    <view class="text-gray text-sm padding-left">
+      <view class="padding-top-sm">快递名称：{{orderData.kuaidi_name}}</view>
+      <view class="padding-top-sm">快递单号：{{orderData.kuaidi_number}}</view>
+    </view>
+  </view>
+
   <view class="bg-white padding margin-top">
     <view class="flex align-center ">
       <view class="cuIcon-titles text-green"></view>
@@ -46,6 +57,7 @@
     </view>
     <view class="text-gray text-sm padding-left">
       <view class="padding-top-sm">获得积分：{{jifen}}积分</view>
+      <view class="padding-top-sm">支付方式：{{orderData.pay_type}}</view>
       <view class="padding-top-sm">订单编号：{{orderData.order_sn}}</view>
       <view class="padding-top-sm">创建时间：{{orderData.addtime}}</view>
       <view class="padding-top-sm flex">联系客服：
@@ -67,12 +79,14 @@
     </view>
   </view>
 
-  <view class="cu-bar bg-white tabbar border shop position-bottom my-shadow2">
-    <view class="action text-right font_30" style="width:50%;">
+  <view style="height:120rpx;"></view>
+
+  <view class="cu-bar bg-white tabbar border shop position-bottom my-shadow2" wx:if="{{orderData.status==10}}">
+    <view class="action text-right font_30" style="width:75%;">
       <text class="text-gray font_22">共{{totalNum}}件</text> 合计：
       <text class="text-red">¥{{orderData.amount}}</text>
     </view>
-    <view class="bg-orange submit" style="background-color:#FDBF68" wx:if="{{orderData.pay_type=='微信支付'}}" bindtap='submitTap'>微信支付</view>
-    <view class="bg-red submit" data-paytype="cash" bindtap='submitTap'>余额支付</view>
+    <view class="bg-orange submit" style="background-color:#FDBF68" wx:if="{{orderData.pay_type=='微信支付'}}" bindtap='payTap'>微信支付</view>
+    <view class="bg-red submit" data-paytype="cash" bindtap='submitTap' wx:else>余额支付</view>
   </view>
 </view>

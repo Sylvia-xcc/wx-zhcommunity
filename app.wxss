@@ -44,6 +44,10 @@
 
 .bg-B0{background: #979797;}
 
+.bg-gradient1{
+  background:linear-gradient(118deg,rgba(234,212,187,1) 0%,rgba(248,230,211,1) 100%);
+}
+
 
 /* 字号 */
 .font_16 {font-size: 16rpx;}
@@ -70,7 +74,7 @@
 .fl_r{ float: right;}
 
 /*  */
-.br{ border-radius: 10rpx;}
+.br{ border-radius: 10rpx !important;}
 .s_solid{border:1rpx solid #666;}
 .s_solid_bottom{border-bottom: 2rpx solid #666;}
 .ssolid_top{border-top: 1rpx solid #eee;}

@@ -6,7 +6,7 @@
       <image class="cu-avatar round xl" src="/images/head.png" style="width:110rpx;height:110rpx; background-color:#fff;"></image>
       <view class="flex-sub padding-left ">
         <view style="z-index:999" class="">我是谁谁谁</view>
-        <button class="cu-btn round sm bg-green margin-top-sm">+关注</button>
+        <button class="cu-btn round sm bg-green margin-top-sm" bindtap="guanzhuTap">+关注</button>
       </view>
     </view>
     <view class="padding-lr-xl text-white flex justify-between text-sm" style="padding-top:80rpx;">

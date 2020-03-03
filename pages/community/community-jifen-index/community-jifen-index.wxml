@@ -52,16 +52,14 @@
 
   <view wx:if="{{jifenCur==0}}">
     <view class="bg-cgreen flex justify-between padding-tb-sm text-white">
-      <text class="basis-xs text-center">排名</text>
-      <text class="basis-xs text-center">昵称</text>
-      <text class="basis-xs text-center">奖励</text>
-      <text class="basis-sm text-center">签到时间</text>
+      <text class="basis-xm text-center">排名</text>
+      <text class="basis-xm text-center">昵称</text>
+      <text class="basis-xm text-center">奖励</text>
     </view>
-    <view class="flex justify-between align-center padding-tb-sm font-26 {{index%2==1?'bg-gray':''}}" wx:for="{{10}}" wx:key="index">
-      <text class="basis-xs text-center">{{index+1}}</text>
-      <text class="basis-xs text-center">张三</text>
-      <text class="basis-xs text-center">10积分</text>
-      <text class="basis-sm text-center">2019-01-30 14:02:28</text>
+    <view class="flex justify-between align-center padding-tb-sm font-26 {{index%2==1?'bg-gray':''}}" wx:for="{{list}}" wx:key="index">
+      <text class="basis-xm text-center">{{index+1}}</text>
+      <text class="basis-xm text-center">{{item.name}}</text>
+      <text class="basis-xm text-center">{{item.score}}积分</text>
     </view>
   </view>
 
@@ -71,10 +69,10 @@
       <text class="basis-xm text-center">昵称</text>
       <text class="basis-xm text-center">连续签到天数</text>
     </view>
-    <view class="flex justify-between padding-tb-sm font-26 {{index%2==1?'bg-gray':''}}" wx:for="{{10}}" wx:key="index">
+    <view class="flex justify-between padding-tb-sm font-26 {{index%2==1?'bg-gray':''}}" wx:for="{{list}}" wx:key="index">
       <text class="basis-xm text-center">{{index+1}}</text>
-      <text class="basis-xm text-center">张三</text>
-      <text class="basis-xm text-center">15天</text>
+      <text class="basis-xm text-center">{{item.name}}</text>
+      <text class="basis-xm text-center">{{item.score}}天</text>
     </view>
   </view>
 
@@ -84,10 +82,10 @@
       <text class="basis-xm text-center">昵称</text>
       <text class="basis-xm text-center">积分</text>
     </view>
-    <view class="flex justify-between padding-tb-sm font-26 {{index%2==1?'bg-gray':''}}" wx:for="{{10}}" wx:key="index">
+    <view class="flex align-center justify-between padding-tb-sm font-26 {{index%2==1?'bg-gray':''}}" wx:for="{{list}}" wx:key="index">
       <text class="basis-xm text-center">{{index+1}}</text>
-      <text class="basis-xm text-center">张三</text>
-      <text class="basis-xm text-center">273646</text>
+      <text class="basis-xm text-center">{{item.nickname}}</text>
+      <text class="basis-xm text-center">{{item.jifen}}</text>
     </view>
   </view>
 </view>

@@ -40,7 +40,7 @@ const requestUrl = ({
           clearTimeout(loadingTimer);
         }
         if (res.statusCode == 404) {
-          tip.success('网络异常！', 2000)
+          tip.error('网络异常！', 2000)
           return;
         }
         let code = news ? res.data.code : res.data.status;
@@ -58,7 +58,7 @@ const requestUrl = ({
       },
       fail: (res) => {
         console.log('-------------- fail:', res)
-        tip.success('网络异常！', 2000)
+        tip.error('网络异常！', 2000)
         // reject(res.data);
       },
     })

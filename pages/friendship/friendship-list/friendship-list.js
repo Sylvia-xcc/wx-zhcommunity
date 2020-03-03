@@ -115,6 +115,15 @@ Page({
     })
   },
 
+  //搜索
+  searchTap: function (evt) {
+    let that = this;
+    let id = that.data.classify[that.data.tabCur].id;
+    wx.navigateTo({
+      url: '/pages/friendship/friendship-search/friendship-search?tab=' + id,
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

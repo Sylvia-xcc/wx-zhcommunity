@@ -1,4 +1,8 @@
 // pages/community/community-jifen-index/community-jifen-index.js
+const app = getApp()
+const util = require('../../../utils/util.js');
+const http = require('../../../utils/http.js');
+import tip from '../../../utils/tip.js';
 Page({
 
   /**
@@ -6,7 +10,7 @@ Page({
    */
   data: {
     banner: ['/images/ershou1.png', '/images/ershou2.png'],
-    jifenCur: 2,
+    jifenCur: 0,
     list: [],
     page: 1,
     total: 0,
@@ -20,7 +24,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.loadJifenList();
+  },
 
+  loadJifenList: function () {
+    let that = this;
+    let url = that.data.jifenCur == 0 ? 'source/today' : that.data.jifenCur == 1 ? 'source/signTop10' : 'source/index';
+    http.requestUrl({
+      url: url,
+      news: true,
+    }).then(res => {
+      that.setData({
+        list: res.data
+      })
+    })
   },
 
   tabJFSelect: function (evt) {
@@ -31,22 +48,10 @@ Page({
     that.setData({
       jifenCur: id
     })
+    that.loadJifenList();
   },
 
-  loadJifenList:function(){
-    let that = this;
-    http.requestUrl({
-      url: 'banner/index',
-      news: true,
-      data: {
-        model: 2,
-      }
-    }).then(res => {
-      that.setData({
-        banner: res.data
-      })
-    })
-  },
+  
 
   /**
    * 生命周期函数--监听页面初次渲染完成

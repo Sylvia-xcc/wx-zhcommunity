@@ -1,0 +1,21 @@
+<!--pages/user/user-follows/user-follows.wxml-->
+<view hidden="{{isLoading}}">
+  <view wx:if="{{list.length>0}}">
+    <view class="padding flex align-center justify-between ssolid_bottom" wx:for="{{10}}" wx:key="index">
+      <view class="flex align-center">
+        <image src="/images/head.png" class="cu-avatar round lg"></image>
+        <view class="padding-left">
+          <view class="font_26 c0 text-bold">烟雨</view>
+          <view class="font_22 text-gray padding-top-xs">粉丝：20</view>
+        </view>
+      </view>
+      <button class="cu-btn radius line-green sm" catchtap="guanzhuTap">互关</button>
+    </view>
+    <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+  </view>
+  <view wx:else class="text-center" style="padding-top:200rpx;">
+    <image src="/images/kong.png" style="width:350rpx; height:274rpx;"></image>
+    <view class="text-gray padding-top-sm text-sm">亲，还没有任何人关注你哦~~</view>
+  </view>
+
+</view>

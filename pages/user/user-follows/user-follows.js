@@ -1,5 +1,5 @@
-// pages/community/community-jifen-list/community-jifen-list.js
-const app = getApp()
+// pages/user/user-follows/user-follows.js
+const app = getApp();
 const util = require('../../../utils/util.js');
 const http = require('../../../utils/http.js');
 import tip from '../../../utils/tip.js';
@@ -9,36 +9,43 @@ Page({
    * 页面的初始数据
    */
   data: {
+    uid: 0,
     list: [],
     page: 1,
     total: 0,
     bottoming: true,
     showBottomLoading: false,
-    isLoading: true,
+    // isLoading: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.loadJifenList();
+    console.log('options:', options);
+    let that = this;
+    that.setData({
+      uid: options.uid || app.d.uid,
+    })
+    that.loadFollowsList();
   },
 
-  loadJifenList: function () {
+  loadFollowsList: function () {
     let that = this;
+    tip.loading();
     http.requestUrl({
-      url: 'source/userList',
+      url: 'user/followList',
       news: true,
-      data:{
-        uid:app.d.uid,
-        page: that.data.page,
-        count: 10,
+      data: {
+        uid: that.data.uid || app.d.uid
       }
     }).then(res => {
-      that.setData({
-        list: res.data
-      })
+
     })
+  },
+
+  guanzhuTap: function (evt) {
+
   },
 
   /**
@@ -80,7 +87,19 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    let that = this;
+    if (that.data.list.length < that.data.total && that.data.bottoming) { //有更多时加载
+      that.setData({
+        showBottomLoading: true,
+        bottoming: false,
+      })
+      setTimeout(function () {
+        that.setData({
+          page: that.data.page + 1,
+        })
+        that.loadFollowsList(false);
+      }, 800)
+    }
   },
 
   /**

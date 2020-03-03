@@ -33,7 +33,8 @@
     </view>
     <view class="text-right">
       <view class="c0 font_22 text-right padding-bottom">共计：¥{{item.amount}}</view>
-      <button class="cu-btn radius line-red " style="height:50rpx;">去支付</button>
+      <button class="cu-btn radius line-red " style="height:50rpx;" wx:if="{{item.status==10}}"  data-ordersn="{{item.order_sn}}" catchtap="payTap">去支付</button>
+      <button class="cu-btn radius line-red " style="height:50rpx;" wx:if="{{item.status==30}}" data-id='{{item.id}}' catchtap="sureTap">确认收获</button>
     </view>
   </view>
 

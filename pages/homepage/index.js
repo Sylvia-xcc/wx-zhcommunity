@@ -24,6 +24,10 @@ Page({
     })
   },
 
+  guanzhuTap:function(evt){
+
+  },
+
   tabSelect:function(evt){
     this.setData({
       tabCur:evt.currentTarget.dataset.id

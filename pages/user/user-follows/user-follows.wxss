@@ -1,0 +1,4 @@
+/* pages/user/user-follows/user-follows.wxss */
+page{
+  background: #fff !important;
+}

@@ -1,1 +1,5 @@
 /* pages/shop/shop-order/shop-order.wxss */
+
+.cu-btn {
+  padding: 0 15rpx !important;
+}

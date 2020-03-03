@@ -17,6 +17,7 @@ Page({
     attrValueList: [], //购物车属性数组
     itemData: {}, //购物车属性对象
     isCollect: 0,
+    isLoading:true,
   },
 
   /**
@@ -30,12 +31,12 @@ Page({
     })
 
     that.loadProductDetail();
-
   },
 
   loadProductDetail: function() {
     let that = this;
-    tip.loading();
+    if(that.data.isLoading)
+      tip.loading();
     http.requestUrl({
       url: 'wxapp/product/detail',
       data: {
@@ -49,9 +50,6 @@ Page({
       WxParse.wxParse('content', 'html', content, that, 0);
 
       let banner = product.banner;
-      // for (var i = 0; i < product.banner.length; i++){
-      //   banner.push(product.banner[i].url);
-      // }
       let attr_list = res.attr_list || [];
       var realData = {};
       realData['pid'] = that.data.productId;
@@ -71,10 +69,10 @@ Page({
       });
       setTimeout(function() {
         that.setData({
-          isLoading: true,
+          isLoading: false,
         })
         tip.loaded()
-      }, 100);
+      }, 200);
     })
   },
 
