@@ -80,7 +80,7 @@
     <view class="padding-tb">
       <view class="cu-list menu-avatar">
         <view class="cu-item">
-          <view class="cu-avatar round lg" style="background-image:url({{detail.avatar}});"></view>
+          <view class="cu-avatar round lg" style="background-image:url({{detail.avatar}});" data-uid="{{detail.uid}}" catchtap="personalTap"></view>
           <view class="content">
             <view class="text-bold text-black" style="font-size:24rpx">{{detail.u_name}}</view>
             <view class="text-gray text-xs">

@@ -93,74 +93,27 @@ Page({
       method: 'post',
       data: {
         uid: app.d.uid,
-        pay_type: that.data.paytype,
+        pay_type: 'integral',
         address_id: that.data.address.id, //地址的id
         remark: that.data.remark, //用户备注
         use_jifen: 0, //that.data.use_jifen ? 1 : 0
-        coupons_id: that.data.couponId,
         pid: that.data.productId,
         num: that.data.buyNum,
         buff: that.data.buff,
       },
     }).then((res) => {
-      if (res.pay_type == 'cash') {
-        that.paySuccess();
-      } else if (res.pay_type == 'offline') {
-        that.paySuccess();
-      } else if (res.pay_type == 'weixin') {
-        that.wxpay(res);
-      }
+      tip.success('兑换成功',1000);
+      wx.navigateBack();
     })
   },
 
-  //调起微信支付
-  wxpay: function (order) {
-    let that = this
-    http.requestUrl({
-      url: '/wxapp/Wxpay/wxpay',
-      data: {
-        order_id: order.order_id,
-        order_sn: order.order_sn,
-        uid: app.d.uid,
-      },
-      method: 'POST',
-    }).then((res) => {
-      let order = res.arr;
-      wx.requestPayment({
-        timeStamp: order.timeStamp,
-        nonceStr: order.nonceStr,
-        package: order.package,
-        signType: 'MD5',
-        paySign: order.paySign,
-        success: function (res) {
-          that.paySuccess();
-        },
-        fail: function (res) {
-          that.payFail();
-        }
-      })
-    })
-  },
+  
 
   remarkInput: function (evt) {
     this.setData({
       remark: evt.detail.value
     })
-  },
-
-  /**支付成功*/
-  paySuccess: function () {
-    wx.redirectTo({
-      url: '../pay-success/pay-success',
-    })
-  },
-
-  /**支付失败*/
-  payFail: function () {
-    wx.redirectTo({
-      url: '../pay-fail/pay-fail',
-    })
-  },
+  },  
 
   addressTap: function (evt) {
     wx.navigateTo({

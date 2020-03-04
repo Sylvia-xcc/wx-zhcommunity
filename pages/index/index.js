@@ -10,7 +10,7 @@ Page({
    */
   data: {
     showLoading:true,
-    swiperList: ['/images/ershou1.png','/images/ershou2.png']
+    swiperList: ['/images/head.png','/images/head.png']
   },
 
   /**

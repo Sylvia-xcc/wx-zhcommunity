@@ -82,5 +82,10 @@ Component({
         urls: dataimg
       });
     },
+
+    personalTap: function (evt) {
+      let uid = evt.currentTarget.dataset.uid;
+      util.personal(uid);
+    },
   }
 })

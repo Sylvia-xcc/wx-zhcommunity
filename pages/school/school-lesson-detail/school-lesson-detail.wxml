@@ -40,7 +40,7 @@
   <view class="padding" wx:if="{{tabCur==1}}">
     <view class="cu-list menu-avatar comment">
       <view class="cu-item solid-bottom" wx:for="{{pptlist}}" wx:key="index"  data-url="{{item.filename}}" catchtap="downloadfileTap">
-        <view class="cu-avatar radius lg" style="left:0 !important; background-image:url(/images/ppt.png);"></view>
+        <view class="cu-avatar radius lg" style="left:0 !important; background-image:url(http://image.fengzhankeji.com/static/ppt.png);"></view>
         <view class="content pr">
           <view class="text-black text-bold" style="font-size:24rpx;">{{item.name}}</view>
           <view class="text-gray text-xs">{{item.create_time}}</view>

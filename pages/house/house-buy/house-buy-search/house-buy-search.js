@@ -140,6 +140,11 @@ Page({
     })
   },
 
+  personalTap: function (evt) {
+    let uid = evt.currentTarget.dataset.uid;
+    util.personal(uid);
+  },
+
   /**
    * 页面上拉触底事件的处理函数
    */

@@ -1,16 +1,15 @@
-// pages/video/index.js
-const app = getApp();
-const util = require('../../utils/util.js');
-const http = require('../../utils/http.js');
-import tip from '../../utils/tip.js';
+// pages/user/user-message/index.js
+const app = getApp()
+const util = require('../../../utils/util.js');
+const http = require('../../../utils/http.js');
+import tip from '../../../utils/tip.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    tabCur: 0,
-    classify: [],
+    tabCur: 1,
     list: [],
     page: 1,
     total: 0,
@@ -24,95 +23,106 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.loadVideoTab();
+    this.loadList();
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-    
-  },
-  //
-  loadVideoTab: function () {
+  loadList: function() {
     let that = this;
-    if (that.data.isLoading)
-      tip.loading();
-    http.requestUrl({
-      url: 'wxapp/ServiceNewsVideoClass/lists',
-      data: {
-        page: that.data.page,
-        count: 10,
-      }
-    }).then(res => {
-      that.setData({
-        classify:res.data.list
-      })
-      that.loadVideoList();
-    })
+    if (that.data.tabCur == 2)
+      that.loadPaperList();
+    else if (that.data.tabCur == 1)
+      that.loadCommentList();
   },
 
-
-  //视频列表
-  loadVideoList: function() {
+  loadCommentList: function() {
     let that = this;
-    let id = that.data.classify[that.data.tabCur].id;
     http.requestUrl({
-      url: 'wxapp/service/getNewsList',
+      url: 'comments/getList',
+      news: true,
       data: {
+        uid: app.d.uid,
+        listRows: 10,
         page: that.data.page,
-        count: 10,
         type: 2,
-        video_class_id:id
       }
     }).then(res => {
       let items = that.data.list;
       if (that.data.page == 1) {
-        items = res.data.list
+        items = res.data.data
       } else {
-        items = items.concat(res.data.list)
+        items = items.concat(res.data.data)
       }
       that.setData({
         list: items,
         total: res.data.total,
         bottoming: true,
         showBottomLoading: false,
-        loading: false,
       })
-      setTimeout(function() {
-        tip.loaded();
-        that.setData({
-          isLoading: false,
-        })
-      }, 400)
+    })
+  },
+
+  loadPaperList: function() {
+    let that = this;
+    http.requestUrl({
+      url: 'paper/index',
+      news: true,
+      data: {
+        uid: app.d.uid,
+        listRows: 10,
+        page: that.data.page,
+      }
+    }).then(res => {
+      let items = that.data.list;
+      if (that.data.page == 1) {
+        items = res.data.data
+      } else {
+        items = items.concat(res.data.data)
+      }
+      that.setData({
+        list: items,
+        total: res.data.total,
+        bottoming: true,
+        showBottomLoading: false,
+      })
     })
   },
 
   tabSelect: function(evt) {
-    let index = evt.currentTarget.dataset.index;
     let that = this;
+    let index = evt.currentTarget.dataset.index;
     if (that.data.tabCur == index)
       return;
     that.setData({
-      tabCur: index,
+      tabCur: index
     })
-    that.loadVideoList();
+    that.loadList();
   },
 
   detailTap: function(evt) {
     let id = evt.currentTarget.dataset.id;
+    let model = evt.currentTarget.dataset.model;
+    let url = '';
+    if (model == 'used')
+      url = '/pages/secondhand/secondhand-detail/secondhand-detail?id=';
+
+    if (url == '')
+      return;
     wx.navigateTo({
-      url: '/pages/community/community-news-detail/community-news-detail?id=' + id,
+      url: url + id,
     })
-    // wx.navigateTo({
-    //   url: '/pages/video/video-detail/video-detail?id=' + id,
-    // })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
 
   },
 
@@ -151,7 +161,7 @@ Page({
         that.setData({
           page: that.data.page + 1,
         })
-        that.loadVideoList();
+        that.loadList(false);
       }, 800)
     }
   },

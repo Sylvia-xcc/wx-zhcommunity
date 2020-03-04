@@ -1,7 +1,7 @@
 /* pages/authorize/authorize.wxss */
 page
 {
-  background-color: rgb(230, 230, 230);
+  background: #fff !important;
 }
 .head {
   text-align: center;

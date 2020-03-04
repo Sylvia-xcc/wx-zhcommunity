@@ -4,9 +4,12 @@
   <view class="text-gray text-xs padding-top-xs">{{detail.create_time}}</view>
   <view class="text-sm padding-top-sm">{{detail.desc}}
   </view>
-  <view class="padding-top">
+  <view class="padding-top" wx:if="{{detail.type<=1}}">
     <import src="../../../wxParse/wxParse.wxml" />
     <template is="wxParse" data="{{wxParseData:content.nodes}}" style="width:370px" />
+  </view>
+  <view class="padding-top">
+    <video src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" style="width:690rpx;"></video>
   </view>
   <view class="text-black text-xs text-left padding-tb">
     <text>评论({{total}})</text>
@@ -19,7 +22,7 @@
   <view>
     <view class="cu-list menu-avatar comment">
       <view class="cu-item solid-bottom" style="padding-left:90rpx !important;" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="messageTap">
-        <view class="cu-avatar round" style="left:0 !important; background-image:url({{item.user_photo}});"></view>
+        <view class="cu-avatar round" style="left:0 !important; background-image:url({{item.user_photo}});" data-uid="{{item.user_id}}" catchtap="personalTap"></view>
         <view class="content">
           <view class="text-black text-bold" style="font-size:24rpx;">{{item.user_name}}</view>
           <view class="text-black text-content font_22 flex align-center">
@@ -34,7 +37,7 @@
           <view>
             <view class="cu-list menu-avatar comment" wx:for="{{item.childNode}}" wx:key="index" wx:for-item="iitem" catchtap>
               <view class="cu-item" style="padding-left:90rpx !important; padding-right:0 !important; padding-bottom:0 !important;">
-                <view class="cu-avatar round" style="left:0 !important; background-image:url({{item.user_photo}});"></view>
+                <view class="cu-avatar round" style="left:0 !important; background-image:url({{iitem.user_photo}});" data-uid="{{iitem.user_id}}" catchtap="personalTap"></view>
                 <view class="content">
                   <view class="text-black text-bold" style="font-size:24rpx;">{{iitem.user_name}}</view>
                   <view class="text-black text-content font_22 flex align-center">

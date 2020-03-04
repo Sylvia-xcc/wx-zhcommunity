@@ -10,6 +10,8 @@ Page({
    */
   data: {
     user:null,
+    info:null,
+    isLoading:true,
   },
 
   /**
@@ -23,10 +25,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({
+    let that = this;
+    that.setData({
       user: app.globalData.userInfo || null
     })
     console.log('----user:', app.globalData.userInfo)
+    if(that.data.user)
+      that.loadPersonInfo();
+  },
+
+  loadPersonInfo: function () {
+    let that = this;
+    http.requestUrl({
+      url: 'common/info',
+      news: true,
+      data: {
+        aid: app.d.uid,
+      },
+    }).then(res => {
+      that.setData({
+        info: res.data
+      })
+    })
   },
 
   /**

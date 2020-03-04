@@ -1,70 +1,75 @@
 <!--pages/homepage/index.wxml-->
-<view class='user-box flex '>
-  <image class="blur" src="{{user!=null?user.photo[0]:'/images/head.png'}}" mode="aspectFill"></image>
-  <view class="padding-xl text-white flex pa flex-direction" style="padding-top:120rpx; width:100%;">
-    <view class="flex">
-      <image class="cu-avatar round xl" src="/images/head.png" style="width:110rpx;height:110rpx; background-color:#fff;"></image>
-      <view class="flex-sub padding-left ">
-        <view style="z-index:999" class="">我是谁谁谁</view>
-        <button class="cu-btn round sm bg-green margin-top-sm" bindtap="guanzhuTap">+关注</button>
+<view hidden="{{isLoading}}">
+  <view class='user-box flex '>
+    <image class="blur" src="{{user!=null?user.avatar:'/images/head.png'}}" mode="aspectFill"></image>
+    <view class="padding-xl text-white flex pa flex-direction" style="padding-top:120rpx; width:100%;">
+      <view class="flex">
+        <image class="cu-avatar round xl" src="{{user.avatar}}" style="width:110rpx;height:110rpx; background-color:#fff;"></image>
+        <view class="flex-sub padding-left flex flex-direction justify-center">
+          <view style="z-index:999" class="">{{user.nickname}}</view>
+          <view wx:if="{{!isOwn}}">
+            <button class="cu-btn round sm bg-green margin-top-sm" bindtap="guanzhuTap" wx:if="{{user.isfollow==0}}">+关注</button>
+            <button class="cu-btn round sm line-green margin-top-sm" bindtap="guanzhuTap" wx:else>已关注</button>
+          </view>
+        </view>
+      </view>
+      <view class="padding-lr-xl text-white flex justify-between text-sm" style="padding-top:80rpx;">
+        <view>{{user.action}} 发布</view>
+        <view>{{user.news}} 动态</view>
+        <view>{{user.follow}} 关注</view>
+        <view>{{user.fans}} 粉丝</view>
       </view>
     </view>
-    <view class="padding-lr-xl text-white flex justify-between text-sm" style="padding-top:80rpx;">
-      <view>发布</view>
-      <view>动态</view>
-      <view>关注</view>
-      <view>粉丝</view>
-    </view>
   </view>
-</view>
 
-<scroll-view scroll-x class=" nav text-center">
-  <view class="cu-item flex-sub {{tabCur==1?'text-cgreen text-bold nav-cur':''}}" style="width:200rpx;" bindtap="tabSelect" data-id="{{1}}">ta的活动</view>
-  <view class="cu-item flex-sub {{tabCur==0?'text-cgreen text-bold nav-cur':''}}" style="width:200rpx;" bindtap="tabSelect" data-id="{{0}}">ta的收藏</view>
-</scroll-view>
+  <scroll-view scroll-x class=" nav text-center">
+    <view class="cu-item flex-sub {{tabCur==1?'text-cgreen text-bold nav-cur':''}}" style="width:200rpx;" bindtap="tabSelect" data-id="{{1}}">ta的活动</view>
+    <view class="cu-item flex-sub {{tabCur==0?'text-cgreen text-bold nav-cur':''}}" style="width:200rpx;" bindtap="tabSelect" data-id="{{0}}">ta的收藏</view>
+  </scroll-view>
 
-<view class="margin flex flex-wrap justify-between" wx:if="{{tabCur==1}}">
-  <navigator url="/pages/user/user-activity/user-activity-community/user-activity-community?uid={{uid}}" hover-class="none" class="item">
-    <image src="/images/a1.png" class="grid-img"></image>
-    <text>社区服务</text>
-  </navigator>
-  <navigator url="/pages/user/user-activity/user-activity-school/user-activity-school" hover-class="none" class="item">
-    <image src="/images/a7.png" class="grid-img"></image>
-    <text>小雅课堂</text>
-  </navigator>
-  <navigator url="/pages/user/user-activity/user-activity-commonweal/user-activity-commonweal" hover-class="none" class="item">
-    <image src="/images/a9.png" class="grid-img"></image>
-    <text>公益活动</text>
-  </navigator>
-</view>
+  <view class="margin flex flex-wrap justify-between" wx:if="{{tabCur==1}}">
+    <navigator url="/pages/user/user-activity/user-activity-community/user-activity-community?uid={{uid}}" hover-class="none" class="item">
+      <image src="/images/a1.png" class="grid-img"></image>
+      <text>社区服务</text>
+    </navigator>
+    <navigator url="/pages/user/user-activity/user-activity-school/user-activity-school?uid={{uid}}" hover-class="none" class="item">
+      <image src="/images/a7.png" class="grid-img"></image>
+      <text>小雅课堂</text>
+    </navigator>
+    <navigator url="/pages/user/user-activity/user-activity-commonweal/user-activity-commonweal?uid={{uid}}" hover-class="none" class="item">
+      <image src="/images/a9.png" class="grid-img"></image>
+      <text>公益活动</text>
+    </navigator>
+  </view>
 
-<view class="margin flex flex-wrap justify-between" wx:else>
-  <navigator url="/pages/user/user-collect/user-collect-secondhand/user-collect-secondhand?uid={{uid}}" hover-class="none" class="item">
-    <image src="/images/a2.png" class="grid-img"></image>
-    <text>二手物品</text>
-  </navigator>
-  <navigator url="/pages/user/user-collect/user-collect-house/user-collect-house" hover-class="none" class="item">
-    <image src="/images/a5.png" class="grid-img"></image>
-    <text>房管家</text>
-  </navigator>
-  <navigator url="/pages/user/user-collect/user-collect-job/user-collect-job" hover-class="none" class="item">
-    <image src="/images/a6.png" class="grid-img"></image>
-    <text>附近工作</text>
-  </navigator>
-  <navigator url="/pages/user/user-collect/user-collect-community/user-collect-community" hover-class="none" class="item">
-    <image src="/images/a1.png" class="grid-img"></image>
-    <text>社区服务</text>
-  </navigator>
-  <navigator url="/pages/user/user-collect/user-collect-finance/user-collect-finance" hover-class="none" class="item">
-    <image src="/images/a8.png" class="grid-img"></image>
-    <text>金融服务</text>
-  </navigator>
-  <navigator url="/pages/user/user-collect/user-collect-friendship/user-collect-friendship" hover-class="none" class="item">
-    <image src="/images/a4.png" class="grid-img"></image>
-    <text>情义有价</text>
-  </navigator>
-  <navigator url="/pages/user/user-collect/user-collect-shop/user-collect-shop" hover-class="none" class="item">
+  <view class="margin flex flex-wrap justify-between" wx:else>
+    <navigator url="/pages/user/user-collect/user-collect-secondhand/user-collect-secondhand?uid={{uid}}" hover-class="none" class="item">
+      <image src="/images/a2.png" class="grid-img"></image>
+      <text>二手物品</text>
+    </navigator>
+    <navigator url="/pages/user/user-collect/user-collect-house/user-collect-house?uid={{uid}}" hover-class="none" class="item">
+      <image src="/images/a5.png" class="grid-img"></image>
+      <text>房管家</text>
+    </navigator>
+    <navigator url="/pages/user/user-collect/user-collect-job/user-collect-job?uid={{uid}}" hover-class="none" class="item">
+      <image src="/images/a6.png" class="grid-img"></image>
+      <text>附近工作</text>
+    </navigator>
+    <navigator url="/pages/user/user-collect/user-collect-community/user-collect-community?uid={{uid}}" hover-class="none" class="item">
+      <image src="/images/a1.png" class="grid-img"></image>
+      <text>社区服务</text>
+    </navigator>
+    <navigator url="/pages/user/user-collect/user-collect-finance/user-collect-finance?uid={{uid}}" hover-class="none" class="item">
+      <image src="/images/a8.png" class="grid-img"></image>
+      <text>金融服务</text>
+    </navigator>
+    <navigator url="/pages/user/user-collect/user-collect-friendship/user-collect-friendship?uid={{uid}}" hover-class="none" class="item">
+      <image src="/images/a4.png" class="grid-img"></image>
+      <text>情义有价</text>
+    </navigator>
+    <!-- <navigator url="/pages/user/user-collect/user-collect-shop/user-collect-shop" hover-class="none" class="item">
     <image src="/images/a10.png" class="grid-img"></image>
     <text>精选商城</text>
-  </navigator>
+  </navigator> -->
+  </view>
 </view>

@@ -26,18 +26,35 @@ Page({
 
   loadJifenList: function () {
     let that = this;
+    if(that.data.isLoading)
+      tip.loading();
     http.requestUrl({
       url: 'source/userList',
       news: true,
       data:{
         uid:app.d.uid,
         page: that.data.page,
-        count: 10,
+        count: 20,
       }
     }).then(res => {
+      let items = that.data.list;
+      if (that.data.page == 1) {
+        items = res.data.data
+      } else {
+        items = items.concat(res.data.data)
+      }
       that.setData({
-        list: res.data
+        list: items,
+        total: res.data.total,
+        bottoming: true,
+        showBottomLoading: false,
       })
+      setTimeout(function(){
+        tip.loaded();
+        that.setData({
+          isLoading:false,
+        })
+      },400)
     })
   },
 
@@ -80,7 +97,19 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    let that = this;
+    if (that.data.list.length < that.data.total && that.data.bottoming) { //有更多时加载
+      that.setData({
+        showBottomLoading: true,
+        bottoming: false,
+      })
+      setTimeout(function () {
+        that.setData({
+          page: that.data.page + 1,
+        })
+        that.loadJifenList();
+      }, 800)
+    }
   },
 
   /**

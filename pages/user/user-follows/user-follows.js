@@ -15,7 +15,7 @@ Page({
     total: 0,
     bottoming: true,
     showBottomLoading: false,
-    // isLoading: true,
+    isLoading: true,
   },
 
   /**
@@ -34,18 +34,63 @@ Page({
     let that = this;
     tip.loading();
     http.requestUrl({
-      url: 'user/followList',
+      url: 'account/followList',
       news: true,
       data: {
         uid: that.data.uid || app.d.uid
       }
     }).then(res => {
-
+      let items = that.data.list;
+      if (that.data.page == 10) {
+        items = res.data.data
+      } else {
+        items = items.concat(res.data.data)
+      }
+      that.setData({
+        list: items,
+        total: res.data.total,
+        bottoming: true,
+        showBottomLoading: false,
+      })
+      setTimeout(function () {
+        tip.loaded();
+        that.setData({
+          isLoading: false,
+        })
+      }, 400)
     })
   },
 
   guanzhuTap: function (evt) {
+    if (!util.hasAuthorize())
+      return;
+    let that = this;
+    let id = evt.currentTarget.dataset.id;
+    http.requestUrl({
+      url: 'account/removeFollow',
+      news: true,
+      data: {
+        id: id,
+        uid: app.d.uid
+      },
+      method: 'post',
+    }).then(res => {
+      tip.success('取消关注成功', 1000);
+      let items = that.data.list;
+      let tmp = [];
+      for(var i=0; i<items.length; i++){
+        if(items[i].fans!=id)
+          tmp.push(items[i]);
+      }
+      that.setData({
+        list:tmp
+      })
+    })
+  },
 
+  personalTap: function (evt) {
+    let uid = evt.currentTarget.dataset.uid;
+    util.personal(uid);
   },
 
   /**

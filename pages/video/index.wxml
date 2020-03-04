@@ -8,18 +8,19 @@
   </scroll-view>
 
   <view class="padding-tb">
-    <view wx:for="{{10}}" wx:key="index" data-id="{{item.id}}" bindtap="detailTap">
-      <view class="bg-img bg-mask padding-tb-xl" style="background-image: url('/images/ershou2.png');height: 340rpx;">
-        <view class="padding-lr text-white">
-          <view class="padding-xs">
-            钢铁之翼钢铁之翼钢铁之翼钢铁之翼钢铁之翼钢铁之翼钢铁之翼钢铁之翼钢铁之翼
+    <view class="padding-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="detailTap">
+      <view class="bg-img bg-mask padding-tb-xl " style="background-image: url('{{item.photo}}');height: 340rpx;">
+        <view class="padding-lr text-white pr">
+          <view class="padding-xs showtwo">
+            {{item.title}}
           </view>
+          <image src="/images/play_btn.png" class="pa" style="width:96rpx;height:96rpx; left:320rpx;"></image>
         </view>
       </view>
       <view class="flex align-center padding-lr padding-tb-sm">
         <image src="/images/head.png" class="cu-avatar round"></image>
-        <text class="padding-left text-sm c0">中环国际社区</text>
-        <text class="flex-sub text-right text-xs text-gray">1266次播放</text>
+        <text class="padding-left-sm text-sm c0">中环国际社区</text>
+        <text class="flex-sub text-right text-xs text-gray">{{item.views}}次播放</text>
       </view>
     </view>
   </view>

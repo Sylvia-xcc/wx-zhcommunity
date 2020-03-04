@@ -1,6 +1,6 @@
 <!--pages/job/job-detail/job-detail.wxml-->
 <view hidden="{{isLoading}}">
-<view class="cu-ard dynamic }}" style="background-image:url(/images/job-bg.png);background-repeat:no-repeat; background-size:100% 100%;-moz-background-size:100% 100%;">
+<view class="cu-ard dynamic }}" style="background-image:url(http://image.fengzhankeji.com/static/job-bg.png);background-repeat:no-repeat; background-size:100% 100%;-moz-background-size:100% 100%;">
   <view class="cu-item shadow">
     <view class="padding">
       <view class="font_28 text-bold">{{detail.job}}</view>
@@ -48,7 +48,7 @@
   <view class="padding-tb">
     <view class="cu-list menu-avatar">
       <view class="cu-item">
-        <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);"></view>
+        <view class="cu-avatar round lg" style="background-image:url({{detail.avatar}});" data-uid="{{detail.uid}}" catchtap="personalTap"></view>
         <view class="content">
           <view class="text-bold text-black" style="font-size:24rpx">{{detail.nickname}}</view>
           <view class="text-gray text-xs">

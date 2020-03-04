@@ -21,19 +21,19 @@
     </view>
     <view class="flex justify-between padding-tb-xl">
       <navigator url="/pages/user/user-fabu/index" hover-class="none" class="flex flex-direction align-center">
-        <view class="font_26">20</view>
+        <view class="font_26">{{info.action||0}}</view>
         <view class="text-sm padding-top-xs">我的发布</view>
       </navigator>
-      <view class="flex flex-direction align-center">
-        <view class="font_26">20</view>
+      <navigator url="/pages/user/user-message/index" hover-class="none" class="flex flex-direction align-center">
+        <view class="font_26">{{info.news||0}}</view>
         <view class="text-sm padding-top-xs">我的动态</view>
-      </view>
+      </navigator>
       <navigator url="/pages/user/user-follows/user-follows" hover-class="none" class="flex flex-direction align-center">
-        <view class="font_26">20</view>
+        <view class="font_26">{{info.follow||0}}</view>
         <view class="text-sm padding-top-xs">我的关注</view>
       </navigator>
       <navigator url="/pages/user/user-fans/index" hover-class="none" class="flex flex-direction align-center">
-        <view class="font_26">20</view>
+        <view class="font_26">{{info.fans||0}}</view>
         <view class="text-sm padding-top-xs">我的粉丝</view>
       </navigator>
     </view>

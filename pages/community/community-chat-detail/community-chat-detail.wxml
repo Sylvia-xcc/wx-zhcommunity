@@ -2,7 +2,7 @@
 <view hidden="{{isLoading}}">
 <view class="cu-card dynamic no-card bg-white padding-bottom">
   <view class="cu-item shadow">
-    <view class="cu-list menu-avatar">
+    <view class="cu-list menu-avatar" data-uid="{{detail.uid}}" catchtap="personalTap">
       <view class="cu-item pr">
         <view class="cu-avatar round lg" style="background-image:url({{detail.avatar}});"></view>
         <view class="content flex-sub">
@@ -31,7 +31,7 @@
   <view>
     <view class="cu-list menu-avatar comment">
       <view class="cu-item solid-bottom" style="padding-left:90rpx !important;" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" >
-        <view class="cu-avatar round" style="left:0 !important; background-image:url({{item.avatar}});"></view>
+        <view class="cu-avatar round" style="left:0 !important; background-image:url({{item.avatar}});" data-uid="{{item.uid}}" catchtap="personalTap"></view>
         <view class="content">
           <view class="text-black text-bold" style="font-size:24rpx;">{{item.nickname}}</view>
           <view class="text-black text-content font_22 flex align-center">

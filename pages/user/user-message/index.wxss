@@ -1,0 +1,4 @@
+/* pages/user/user-message/index.wxss */
+page{
+  background: #fff !important;
+}

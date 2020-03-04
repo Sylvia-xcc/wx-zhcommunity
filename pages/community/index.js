@@ -120,6 +120,7 @@ Page({
       data: {
         page: that.data.page,
         count: 10,
+        type:1,
       }
     }).then(res => {
       let items = that.data.list;
@@ -228,6 +229,11 @@ Page({
     wx.navigateTo({
       url: '/pages/community/community-chat-detail/community-chat-detail?id=' + id,
     })
+  },
+
+  personalTap: function (evt) {
+    let uid = evt.currentTarget.dataset.uid;
+    util.personal(uid);
   },
 
   tabJFSelect: function(evt) {

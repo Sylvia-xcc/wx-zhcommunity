@@ -1,8 +1,9 @@
 <!--pages/authorize/authorize.wxml-->
 <view class="head">
-  <image src="../../images/tongguo.png" mode='widthFix' class="head_p"></image>
-  <view class="haed_name">中环国际社区</view>
-  <view class="padding flex flex-direction">
-    <button class="cu-btn bg-green margin-tb-sm lg" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGetUserInfo">立即登录</button>
+  <image src="http://image.fengzhankeji.com/static/tongguo.png" mode='widthFix' style="width:166rpx;"></image>
+  <view class="text-green padding-top-lg padding-bottom" style="font-size:45rpx;">中环国际社区</view>
+  <view class="text-green font_30" >这是slogan这是slogan这是slogan</view>
+  <view class="padding flex flex-direction" style="padding-top:110rpx;">
+    <button class="cu-btn bg-green margin-tb-sm lg br" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGetUserInfo">授权登录</button>
   </view>
 </view>

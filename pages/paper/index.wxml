@@ -1,0 +1,47 @@
+<!--pages/paper/index.wxml-->
+
+
+<view class="bg-img padding-tb-xl" style="background-image: url('http://image.fengzhankeji.com/static/paper-bg.png');height: 100vh;">
+  <view class="padding-xl text-white flex align-center flex-direction">
+    <view class="pr" style="width:445rpx; height:542rpx;">
+      <image src="http://image.fengzhankeji.com/static/paper-z.png" style="width:445rpx; height:542rpx;"></image>
+      <view class="pa" style="z-index:99; left:50rpx; top:60rpx;">
+        <view class="text-black" style="margin-top:80rpx; width:350rpx;height:200rpx;">
+          {{info.content}}
+        </view>
+        <view class="padding-top text-center">
+          <button class="cu-btn round text-cyan" bindtap="showModal" data-target="DialogModal2">去送祝福给Ta</button>
+        </view>
+        <view class="text-gray font_22 text-right margin-top padding-right" style="width:350rpx" bindtap="nextTap">下一张>></view>
+      </view>
+
+    </view>
+    <view style="padding-top:300rpx;">
+      <button class="cu-btn radius bg-green" bindtap="showModal" data-target="DialogModal">我也来偷偷说一句~</button>
+    </view>
+  </view>
+</view>
+
+<view class="cu-modal {{(modalName=='DialogModal' || modalName=='DialogModal2')?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">小纸条</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      <view class="solids padding">
+        <textarea wx:if="{{modalName=='DialogModal' || modalName=='DialogModal2'}}" maxlength="{{max}}" bindinput="textareaInput" value="{{msg}}" placeholder="{{modalName=='DialogModal'?'请输入偷偷想说的话~~':'请输入对ta祝福的话~~'}}" placeholder-class="text-left" style="width:500rpx; height:150rpx;"></textarea>
+        <view class="font_22 text-gray text-right">可输入({{msg.length}}/{{max}})</view>
+      </view>
+
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <!-- <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button> -->
+        <button class="cu-btn bg-green margin-left" bindtap="submitTap">确定</button>
+      </view>
+    </view>
+  </view>
+</view>

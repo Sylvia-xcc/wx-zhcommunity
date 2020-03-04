@@ -1,7 +1,7 @@
 <!--pages/house/house-sell/house-sell-fabu/house-sell-fabu.wxml-->
 <view style="display:{{displays}}">
   <view>
-    <image src="/images/upload.png" style="width:750rpx;height:430rpx;" bindtap="addImageTap"></image>
+    <image src="http://image.fengzhankeji.com/static/upload.png" style="width:750rpx;height:430rpx;" bindtap="addImageTap"></image>
   </view>
   <form>
     <view class="cu-form-group">

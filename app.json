@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/paper/index",
+    "pages/authorize/authorize",
     "pages/homepage/index",
     "pages/user/index",
     "pages/message/index",
@@ -88,7 +90,7 @@
     "pages/game/llk/llk",
     "pages/game/ball/ball",
     "pages/game/fish/index",
-    "pages/authorize/authorize"
+    "pages/user/user-message/index"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -115,8 +117,8 @@
       {
         "pagePath": "pages/user/index",
         "text": "我的",
-        "iconPath": "images/icons/btn_tabs_10.png",
-        "selectedIconPath": "images/icons/btn_tabs_09.png"
+        "iconPath": "images/icons/btn_tabs_08.png",
+        "selectedIconPath": "images/icons/btn_tabs_07.png"
       }
     ]
   },

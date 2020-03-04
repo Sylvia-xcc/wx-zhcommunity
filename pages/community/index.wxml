@@ -38,7 +38,7 @@
   <view class="padding-tb" wx:if="{{tabCur==2}}">
     <view hidden="{{loading}}" class="cu-card dynamic no-card solid-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailChatTap">
       <view class="cu-item shadow">
-        <view class="cu-list menu-avatar">
+        <view class="cu-list menu-avatar" data-uid="{{item.uid}}" bindtap="personalTap">
           <view class="cu-item pr">
             <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
             <view class="content flex-sub">
@@ -53,7 +53,7 @@
           {{item.content}}
         </view>
         <view class="grid flex-sub padding-lr padding-bottom {{item.photos.length>1?'col-3 grid-square':'col-1'}}">
-          <view wx:for="{{item.photos}}" wx:key="index" wx:for-item="iitem" class="bg-img {{item.photos.length>1?'':'only-img'}}" style="background-image:url({{iitem}});" data-id="{{index}}" data-dataimg="{{item.photos}}" catchtap='previewImgTap'>
+          <view wx:for="{{item.photos}}" wx:key="index" wx:for-item="iitem" class="bg-img {{item.photos.length>1?'':'only-img'}}" style="background-image:url({{iitem}});" data-id="{{index}}" data-dataimg="{{item.photos}}" >
           </view>
         </view>
       </view>

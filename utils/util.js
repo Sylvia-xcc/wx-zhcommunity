@@ -45,6 +45,16 @@ function copyObj(obj){
 }
 
 
+const personal = (uid) =>{
+  let id = getApp().d.uid;
+  // if(uid==id)
+  //   return;
+  wx.navigateTo({
+    url: '/pages/homepage/index?uid=' + uid,
+  })
+}
+
+
 
 /**是否授权*/
 const hasAuthorize = () => {
@@ -193,4 +203,5 @@ module.exports = {
   delHtmlTag,
   findHtmlImg,
   copyObj: copyObj,
+  personal,
 }

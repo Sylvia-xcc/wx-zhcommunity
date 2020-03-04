@@ -11,7 +11,7 @@
     <view class="cu-item shadow pr">
       <view class="cu-list menu-avatar">
         <view class="cu-item">
-          <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
+          <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});" data-uid="{{item.uid}}" catchtap="personalTap"></view>
           <view class="content flex-sub">
             <view class="text-sm" style="font-size:24rpx;">{{item.name}}</view>
             <view class="text-gray text-xs flex justify-between">

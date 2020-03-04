@@ -42,7 +42,7 @@
     </view>
   </view>
   <view wx:else class="flex flex-direction align-center text-sm" style="padding-top:300rpx;">
-    <image src="/images/cart-kong.png" class="cart-kong" style="width:244rpx;height:179rpx;"></image>
+    <image src="http://image.fengzhankeji.com/static/cart-kong.png" class="cart-kong" style="width:244rpx;height:179rpx;"></image>
     <text class="padding-top text-gray">亲，你的购物车还是空的哦~</text>
     <navigator url="/pages/shop/index" hover-class="none" class="text-red padding-top-xs">快去商城逛逛吧>></navigator>
   </view>

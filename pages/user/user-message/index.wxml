@@ -1,0 +1,37 @@
+<!--pages/user/user-message/index.wxml-->
+<scroll-view scroll-x class="bg-white nav">
+  <view class="flex padding-lr text-center">
+    <view class="cu-item flex-sub {{tabCur==0?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-index="{{0}}">点赞</view>
+    <view class="cu-item flex-sub {{tabCur==1?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-index="{{1}}">评论</view>
+    <view class="cu-item flex-sub {{tabCur==2?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-index="{{2}}">我的小纸条</view>
+  </view>
+</scroll-view>
+
+<view wx:if="{{tabCur==1}}">
+  <view class="flex padding align-center" wx:for="{{list}}" wx:key="item" data-model="{{item.model}}" data-id="{{item.mid}}" catchtap="detailTap"> 
+    <view class="flex flex-sub align-center">
+      <image src="{{item.avatar}}" class="cu-avatar round lg"></image>
+      <view class="padding-left-sm flex-sub align-center">
+        <view class="text-sm c0">{{item.nickname}} 评论：</view>
+        <view class="font_22 text-gray text-cut" style="width:300rpx;">{{item.content}}</view>
+      </view>
+    </view>
+    <view class="basis-xn padding-right-sm text-xs text-gray flex">
+      <view class="margin-right" style="width:4rpx;height:36rpx;background:#999;"></view>{{item.create_time}}
+    </view>
+    <image src="{{item.thumb}}" class="radius" style="width:102rpx;height:102rpx;"></image>
+  </view>
+
+</view>
+
+<view wx:if="{{tabCur==2}}">
+  <view class="flex align-center padding solid-bottom" wx:for="{{list}}" wx:key="item">
+    <view class="flex-sub">
+      <view class="text-sm c0">我给
+        <text class="text-gray padding-lr-xs">{{item.nickname}}</text> 写了一个小纸条</view>
+      <view class="font_26 c0 padding-top-xs">{{item.content}}</view>
+    </view>
+    <view class="basis-xn text-center text-xs text-gray">{{item.create_time}}</view>
+  </view>
+</view>
+<v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
