@@ -44,15 +44,14 @@ Page({
   },
 
   toOtherTap:function(){
+    console.log('-------- 跳转其他小程序')
     wx.navigateToMiniProgram({
-      appId: '',
-      path: 'page/index/index?id=123',
-      extraData: {
-        foo: 'bar'
-      },
-      envVersion: 'develop',
+      appId: 'wx2c314ac4404bb74f',
+      path: 'pages/index/index',
+      envVersion: 'trial',
       success(res) {
         // 打开成功
+        console.log('------打开成功')
       }
     })
   },

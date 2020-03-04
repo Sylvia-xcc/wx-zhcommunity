@@ -13,4 +13,5 @@ page{
   margin-right: 20rpx;
   text-align: center;
   padding-top: 20rpx;
+  margin: 10rpx;
 }

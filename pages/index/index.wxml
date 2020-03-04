@@ -58,8 +58,8 @@
     <scroll-view scroll-x style="white-space: nowrap;overflow:hidden;">
       <block wx:for="{{6}}" wx:key="index">
         <view class="gz-item" bindtap="toOtherTap">
-          <image src="/images/head.png" style="width:132rpx;height:112rpx;"></image>
-          <view class="text-gray font_26 padding-top-5">京东</view>
+          <image src="/images/head.png" class="cu-avatar round lg" style="width:112rpx;height:112rpx;"></image>
+          <view class="text-gray font_26 padding-top-5">柒筑</view>
         </view>
       </block>
     </scroll-view>
