@@ -1,27 +1,29 @@
 <!--pages/community/community-jifen-shop-detail/community-jifen-shop-detail.wxml-->
-<view class="padding">
-  <v-banner banner="{{banner}}" videoUrl="{{videoUrl}}"></v-banner>
-  <view class="text-df text-bold padding-tb-sm">{{product.intro}}
+<view hidden="{{isLoading}}">
+  <view class="padding">
+    <v-banner banner="{{banner}}" videoUrl="{{videoUrl}}"></v-banner>
+    <view class="text-df text-bold padding-tb-sm">{{product.intro}}
+    </view>
+    <view class="  ">
+      <text class="font_30 text-red text-bold">{{product.price_yh}}积分</text>
+      <text class="text-gray padding-left text-line-through">￥{{product.price}}</text>
+    </view>
   </view>
-  <view class="  ">
-    <text class="font_30 text-red text-bold">{{product.price_yh}}积分</text>
-    <text class="text-gray padding-left text-line-through">￥{{product.price}}</text>
+
+  <view class="padding" style="padding-bottom:120rpx;">
+    <view class="font_26 text-bold padding-tb">商品详情</view>
+    <import src="../../../wxParse/wxParse.wxml" />
+    <template is="wxParse" data="{{wxParseData:content.nodes}}" style="width:370px" />
   </view>
-</view>
-
-<view class="padding" style="padding-bottom:120rpx;">
-  <view class="font_26 text-bold padding-tb">商品详情</view>
-  <import src="../../../wxParse/wxParse.wxml" />
-  <template is="wxParse" data="{{wxParseData:content.nodes}}" style="width:370px" />
-</view>
 
 
-<view class="cu-bar bg-white tabbar border shop position-bottom bg-cgreen">
-  <view class="action text-white " style="height:100rpx; border-right: 4rpx solid #fff;">
-    <view class="cuIcon-home" style="font-size:60rpx;padding-top:20rpx;"></view>
+  <view class="cu-bar bg-white tabbar border shop position-bottom bg-cgreen">
+    <view class="action text-white " style="height:100rpx; border-right: 4rpx solid #fff;">
+      <view class="cuIcon-home" style="font-size:60rpx;padding-top:20rpx;"></view>
+    </view>
+    <view class="bg-cgreen submit text-white font_34 text-bold" bindtap="buyTap">立即兑换</view>
   </view>
-  <view class="bg-cgreen submit text-white font_34 text-bold" bindtap="buyTap">立即兑换</view>
-</view>
 
-<!-- 购物车属性组件 -->
-<v-commodity id="my-commodity" commodityData="{{itemData}}"></v-commodity>
+  <!-- 购物车属性组件 -->
+  <v-commodity id="my-commodity" commodityData="{{itemData}}"></v-commodity>
+</view>

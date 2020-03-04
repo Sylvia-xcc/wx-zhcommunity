@@ -38,9 +38,9 @@
       </navigator>
     </view>
     <view class="flex justify-between padding-lr padding-top-xl" style="padding-top:100rpx;">
-      <text class="font_30 text-bold">致昌社区会员充值</text>
+      <text class="font_30 text-bold">中环国际社区会员充值</text>
       <navigator url="/pages/user/user-chongzhi/user-chongzhi" hover-class="none">
-        <button class="cu-btn round bg-brown">立即充值</button>
+        <button class="cu-btn round bg-gradient1 text-brown">立即充值</button>
       </navigator>
     </view>
   </view>

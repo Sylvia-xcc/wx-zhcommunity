@@ -15,6 +15,7 @@ Page({
     videoUrl: 'https://www.fengzhankeji.com/qizhuhome/data/upload/2019-11-27/5dde39f275eea.mp4',
     product:null,
     itemData: {}, //购物车属性对象
+    isLoading:true,
   },
 
   /**
@@ -33,7 +34,8 @@ Page({
   // 商品详情数据获取
   loadProductDetail: function () {
     var that = this;
-    tip.loading();
+    if(that.data.isLoading)
+      tip.loading();
     http.requestUrl({
       url: '/wxapp/product/detail',
       data: {
@@ -73,10 +75,10 @@ Page({
       });
       setTimeout(function () {
         that.setData({
-          isLoading: true,
+          isLoading: false,
         })
         tip.loaded()
-      }, 100);
+      }, 400);
     })
   },
 

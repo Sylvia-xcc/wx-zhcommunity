@@ -1,4 +1,5 @@
 <!--pages/community/community-news-detail/community-news-detail.wxml-->
+<view hidden="{{isLoading}}">
 <view class="padding">
   <view class="font_30 text-bold c0">{{detail.title}}</view>
   <view class="text-gray text-xs padding-top-xs">{{detail.create_time}}</view>
@@ -8,8 +9,8 @@
     <import src="../../../wxParse/wxParse.wxml" />
     <template is="wxParse" data="{{wxParseData:content.nodes}}" style="width:370px" />
   </view>
-  <view class="padding-top">
-    <video src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" style="width:690rpx;"></video>
+  <view class="padding-top" wx:else>
+    <video src="{{detail.video}}" style="width:690rpx;"></video>
   </view>
   <view class="text-black text-xs text-left padding-tb">
     <text>评论({{total}})</text>
@@ -75,4 +76,6 @@
     <button open-type="share" class="shareBtn"></button>
     <view class=" cuIcon-post text-gray"></view>
   </view>
+</view>
+
 </view>

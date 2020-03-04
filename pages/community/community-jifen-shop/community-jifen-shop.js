@@ -15,6 +15,7 @@ Page({
     bottoming: true,
     showBottomLoading: false,
     isLoading: true,
+    jifen:0,
   },
 
   /**
@@ -22,6 +23,30 @@ Page({
    */
   onLoad: function(options) {
     this.loadProductList();
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.loadUserInfo();
+  },
+
+  loadUserInfo:function(){
+    let that = this;
+    if (that.data.isLoading)
+      tip.loading();
+    http.requestUrl({
+      url: 'wxapp/user/userinfo',
+      data: {
+        uid:app.d.uid
+      }
+    }).then(res => {
+      that.setData({
+        jifen:res.userinfo.jifen
+      })
+      app.globalData.userInfo = res.userinfo;
+    })
   },
 
   loadProductList: function() {
@@ -71,12 +96,7 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
+  
 
   /**
    * 生命周期函数--监听页面隐藏

@@ -1,7 +1,7 @@
 <!--pages/user/user-collect/user-collect-finance/user-collect-finance.wxml-->
 <view hidden="{{isLoading}}">
   <view class="flex padding solid-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailTap">
-    <image src="{{item.img_list[0]}}" style="width:156rpx;height:156rpx;" wx:if="{{item.img_list!=null && item.img_list.length>0}}"></image>
+    <image src="{{item.img_list[0]}}" mode="aspectFill" style="width:156rpx;height:156rpx;" wx:if="{{item.img_list!=null && item.img_list.length>0}}"></image>
     <view class="flex-sub padding-left">
       <view class="c0 showtwo">{{item.content}}</view>
       <view class="flex justify-between align-center text-gray font_22 padding-top-xl ">

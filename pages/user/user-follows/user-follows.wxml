@@ -3,7 +3,7 @@
   <view wx:if="{{list.length>0}}">
     <view class="padding flex align-center justify-between ssolid_bottom" wx:for="{{list}}" wx:key="index">
       <view class="flex align-center">
-        <image src="{{item.avtar}}" class="cu-avatar round lg" data-uid="{{item.fans}}" catchtap="personalTap"></image>
+        <image src="{{item.avtar}}" mode="aspectFill" class="cu-avatar round lg" data-uid="{{item.fans}}" catchtap="personalTap"></image>
         <view class="padding-left">
           <view class="font_26 c0 text-bold">{{item.nickname}}</view>
           <view class="font_22 text-gray padding-top-xs">粉丝：{{item.fansCount}}</view>

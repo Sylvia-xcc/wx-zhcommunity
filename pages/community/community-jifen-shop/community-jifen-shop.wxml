@@ -1,9 +1,10 @@
 <!--pages/community/community-jifen-shop/community-jifen-shop.wxml-->
 <view hidden="{{isLoading}}">
   <view class="margin-lr margin-top-sm radius bg-white padding-tb padding-lr-sm text-bold flex justify-between">
-    <view>您的总积分：778</view>
+    <view>您的总积分：{{jifen}}</view>
     <navigator url="/pages/community/community-jifen-index/community-jifen-index" hover-class="none" class="text-underline">积分榜</navigator>
   </view>
+  <!-- <navigator url="/pages/shop/shop-order/shop-order?integral=1" hover-class="none" class="text-underline">积分订单</navigator> -->
   <view class="padding-tb-xl">
     <view class="text-bold text-center font_30">每周限时兑换马克杯</view>
     <view class="padding flex flex-wrap justify-between">

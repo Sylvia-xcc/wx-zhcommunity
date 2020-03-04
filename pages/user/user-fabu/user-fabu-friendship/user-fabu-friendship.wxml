@@ -3,7 +3,7 @@
   <view class="bg-white" hidden="{{loading}}">
     <view class="padding flex justify-center align-center ssolid_bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailTap">
       <view>
-        <image src="{{item.file_list[0]}}" class="ridius" style="width:186rpx;height:186rpx;" wx:if="{{item.file_list.length>0}}"></image>
+        <image src="{{item.file_list[0]}}" mode="aspectFill" class="ridius" style="width:186rpx;height:186rpx;" wx:if="{{item.file_list.length>0}}"></image>
       </view>
       <view class="flex-sub padding-left-sm pr flex flex-direction justify-between" style="min-height:160rpx;">
         <view class=" c0 text-df showtwo" >{{item.intro}}</view>

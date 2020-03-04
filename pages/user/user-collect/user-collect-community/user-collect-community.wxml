@@ -2,7 +2,7 @@
 <view hidden="{{isLoading}}">
   <view class="padding-tb">
     <view class="flex padding solid-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.mid}}" catchtap="detailNewsTap">
-      <image src="{{item.thumb}}" class="radius" style="width:156rpx;height:156rpx;"></image>
+      <image src="{{item.thumb}}" mode="aspectFill" class="radius" style="width:156rpx;height:156rpx;"></image>
       <view class="flex-sub padding-left ">
         <view class="c0 showtwo" style="min-height:80rpx;">{{item.favName}}</view>
         <view class="flex justify-between text-gray font_22 padding-top ">

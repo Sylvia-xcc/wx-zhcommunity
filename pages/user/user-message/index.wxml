@@ -10,7 +10,7 @@
 <view wx:if="{{tabCur==1}}">
   <view class="flex padding align-center" wx:for="{{list}}" wx:key="item" data-model="{{item.model}}" data-id="{{item.mid}}" catchtap="detailTap"> 
     <view class="flex flex-sub align-center">
-      <image src="{{item.avatar}}" class="cu-avatar round lg"></image>
+      <image src="{{item.avatar}}" mode="aspectFill" class="cu-avatar round lg"></image>
       <view class="padding-left-sm flex-sub align-center">
         <view class="text-sm c0">{{item.nickname}} 评论：</view>
         <view class="font_22 text-gray text-cut" style="width:300rpx;">{{item.content}}</view>

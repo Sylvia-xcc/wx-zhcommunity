@@ -17,6 +17,7 @@ Page({
     bottoming: true,
     showBottomLoading: false,
     detail: null,
+    isLoading:true,
   },
 
   /**
@@ -35,6 +36,8 @@ Page({
   //详情
   loadNewsDetail: function() {
     let that = this;
+    if(that.data.isLoading)
+      tip.loading();
     http.requestUrl({
       url: 'wxapp/service/newsDetails',
       data: {
@@ -47,6 +50,12 @@ Page({
       that.setData({
         detail: res.data
       })
+      setTimeout(function(){
+        tip.loaded();
+        that.setData({
+          isLoading:false,
+        })
+      },600)
     })
   },
 

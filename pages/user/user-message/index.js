@@ -104,6 +104,8 @@ Page({
     let url = '';
     if (model == 'used')
       url = '/pages/secondhand/secondhand-detail/secondhand-detail?id=';
+    else if(model == 'chat')
+      url = '/pages/community/community-chat-detail/community-chat-detail?id=';
 
     if (url == '')
       return;

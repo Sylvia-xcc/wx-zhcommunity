@@ -37,7 +37,7 @@
             </view>
           </view>
           <view class="basis-xn text-right" style='height:156rpx;'>
-            <view class="text-red  font_30">积分：{{item.price}}</view>
+            <view class="text-red  font_30"> <text class="text-xs">积分</text> {{item.price}}</view>
             <view class="text-gray font_22">x {{item.num}}</view>
           </view>
         </view>

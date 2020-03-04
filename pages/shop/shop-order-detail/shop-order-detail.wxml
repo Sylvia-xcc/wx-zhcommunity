@@ -21,23 +21,24 @@
     <view class="cu-item">
       <view class="content">
         <view class="flex padding-bottom" wx:for="{{productData}}" wx:key="index" wx:for-item="iitem" data-id="{{iitem.pro_id}}" catchtap="detailTap">
-          <image src="{{iitem.pro_thumb}}" style="width:186rpx;height:186rpx"></image>
+          <image src="{{iitem.pro_thumb}}" mode="aspectFill" style="width:186rpx;height:186rpx"></image>
           <view class="flex-sub padding-left">
             <view class="c0 showtwo">{{iitem.pro_name}}</view>
-            <view class="cu-tag bg-gray radius sm ">{{iitem.pro_buff}}</view>
+            <view class="cu-tag bg-gray radius sm" wx:if="{{iitem.pro_buff!=''}}">{{iitem.pro_buff}}</view>
             <view class="flex justify-between align-center padding-top-xs">
-              <text class="font_34 text-red text-bold">￥{{iitem.pro_price}}元</text>
+            <text class="font_34 text-red text-bold" wx:if="{{orderData.pay_type=='积分支付'}}">{{iitem.pro_price}}积分</text>
+              <text class="font_34 text-red text-bold" wx:else>￥{{iitem.pro_price}}元</text>
               <text class="text-xs text-gray">x{{iitem.pro_num}}</text>
             </view>
           </view>
         </view>
-        <view class="c0 font_22 text-right ">共计：¥{{orderData.price}}</view>
+        <view class="c0 font_22 text-right ">共计：{{orderData.pay_type=='积分支付'?'':'¥'}}{{orderData.price}}</view>
         <view class="c0 font_22 text-right ">运费(快递)：{{orderData.express_money}}</view>
       </view>
     </view>
   </view>
 
-  <view class="bg-white padding margin-top" wx:if="{{orderData.status==30}}">
+  <view class="bg-white padding margin-top" wx:if="{{orderData.status>=30}}">
     <view class="flex align-center ">
       <view class="cuIcon-titles text-green"></view>
       <view class="c0 padding-left-xs">物流信息</view>

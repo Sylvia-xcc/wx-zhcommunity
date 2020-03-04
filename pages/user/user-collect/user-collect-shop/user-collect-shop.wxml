@@ -1,10 +1,10 @@
 <!--pages/user/user-collect/user-collect-shop/user-collect-shop.wxml-->
 <view hidden="{{isLoading}}">
-  <view class="flex padding solid-bottom" wx:for="{{10}}" wx:key="index" data-id="{{item.id}}" catchtap="detailTap">
-    <image src="/images/head.png" style="width:156rpx;height:156rpx;" ></image>
+  <view class="flex padding solid-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailTap">
+    <image src="{{item.thumb}}" style="width:156rpx;height:156rpx;" mode="aspectFill" ></image>
     <view class="flex-sub padding-left flex flex-direction justify-between" style="height:156rpx;" >
-      <view class="c0 showtwo">自然堂水润洗面奶水乳护肤品套装爽肤水乳液补水化妆品</view>
-      <view class="text-red" style="font-size:40rpx">¥299元</view>
+      <view class="c0 showtwo">{{item.name}}</view>
+      <view class="text-red" style="font-size:40rpx">¥{{item.price_yh}}元</view>
     </view>
   </view>
   <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>

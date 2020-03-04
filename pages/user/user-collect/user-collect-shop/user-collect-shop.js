@@ -21,39 +21,36 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.loadList();
   },
 
-  loadList: function () {
+  loadList: function() {
     let that = this;
     if (that.data.isLoading)
       tip.loading();
     http.requestUrl({
-      url: 'wxapp/QingyiIndex/getList',
+      url: 'wxapp/User/collection',
       data: {
-        paging: 1,
-        page: that.data.page,
-        count: 10,
-        user_id: app.d.uid,
-        is_own: 1,
+        uid: app.d.uid,
+        p: that.data.page,
+        count: 10
       }
     }).then(res => {
       let items = that.data.list;
       if (that.data.page == 1) {
-        items = res.data.list;
+        items = res.product_list;
       } else {
-        items = items.concat(res.data.list)
+        items = items.concat(res.product_list)
       }
       that.setData({
         list: items,
-        total: res.data.page.total,
+        total: res.page.totalRows,
         bottoming: true,
         showBottomLoading: false,
       })
-      setTimeout(function () {
-        if (that.data.isLoading)
-          tip.loaded();
+      setTimeout(function() {
+        tip.loaded();
         that.setData({
           isLoading: false
         })
@@ -62,7 +59,7 @@ Page({
   },
 
 
-  detailTap: function (evt) {
+  detailTap: function(evt) {
     let id = evt.currentTarget.dataset.id;
     wx.navigateTo({
       url: '/pages/friendship/friendship-detail/friendship-detail?id=' + id,
@@ -72,49 +69,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
     let that = this;
     if (that.data.list.length < that.data.total && that.data.bottoming) { //有更多时加载
       that.setData({
         showBottomLoading: true,
         bottoming: false,
       })
-      setTimeout(function () {
+      setTimeout(function() {
         that.setData({
           page: that.data.page + 1,
         })
@@ -126,7 +123,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

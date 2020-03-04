@@ -9,8 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabCur:0,
-    scrollLeft: 0, 
+    tabCur: 0,
+    scrollLeft: 0,
     status: ["all", "pay", "deliver", "receive", "evaluate", "finish"],
     list: [],
     page: 1,
@@ -18,20 +18,32 @@ Page({
     bottoming: true,
     showBottomLoading: false,
     isLoading: true,
-    loading:true,
+    loading: true,
+    integral: 0,//0不区分；1普通订单；2积分订单
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
+    console.log('options:', options);
+    let that = this;
+    that.setData({
+      integral: options.integral || 0,
+      tabCur: options.currentTab || 0,
+    })
+    if (that.data.integral == 1) {
+      wx.setNavigationBarTitle({
+        title: '积分商城订单',
+      })
+    }
     this.loadOrderList();
   },
 
   //订单列表
-  loadOrderList: function () {
+  loadOrderList: function() {
     let that = this;
-    if(that.data.isLoading)
+    if (that.data.isLoading)
       tip.loading();
     let status = that.data.status[that.data.tabCur];
     http.requestUrl({
@@ -40,8 +52,9 @@ Page({
         uid: app.d.uid,
         order_type: status,
         p: that.data.page,
+        integral: that.data.integral,
       },
-      method:'post'
+      method: 'post'
     }).then(res => {
       let items = that.data.list;
       if (that.data.page == 1) {
@@ -54,41 +67,41 @@ Page({
         total: res.total_count,
         bottoming: true,
         showBottomLoading: false,
-        loading:false,
+        loading: false,
       })
-      setTimeout(function(){
+      setTimeout(function() {
         tip.loaded();
         that.setData({
-          isLoading:false,
+          isLoading: false,
         })
       }, 400)
     })
   },
 
-  tabSelect:function(evt){
+  tabSelect: function(evt) {
     let id = evt.currentTarget.dataset.id;
     let that = this;
-    if(that.data.tabCur==id)
+    if (that.data.tabCur == id)
       return;
     that.setData({
-      tabCur:id,
+      tabCur: id,
       scrollLeft: (id - 1) * 60,
-      list:[],
-      loading:true,
-      page:1,
+      list: [],
+      loading: true,
+      page: 1,
     })
     that.loadOrderList();
   },
 
-  detailTap:function(evt){
+  detailTap: function(evt) {
     let id = evt.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/shop/shop-order-detail/shop-order-detail?id='+id,
+      url: '/pages/shop/shop-order-detail/shop-order-detail?id=' + id,
     })
   },
 
   //立即支付
-  payTap: function (evt) {
+  payTap: function(evt) {
     let that = this;
     let order_sn = evt.currentTarget.dataset.ordersn;
     if (!order_sn) {
@@ -110,13 +123,13 @@ Page({
         package: order.package,
         signType: 'MD5',
         paySign: order.paySign,
-        success: function (res) {
+        success: function(res) {
           tip.success('支付成功!', 1000)
           wx.redirectTo({
-            url: '../order/order?currentTab=2',
+            url: '/pages/shop/shop-order/shop-order?currentTab=2',
           });
         },
-        fail: function (res) {
+        fail: function(res) {
           console.log(res)
           tip.success('支付失败', 1000)
         }
@@ -125,7 +138,7 @@ Page({
   },
 
   //确认收货
-  sureTap: function (evt) {
+  sureTap: function(evt) {
     let orderId = evt.currentTarget.dataset.id;
     let that = this;
     wx.showModal({
@@ -141,8 +154,9 @@ Page({
             },
             method: 'post'
           }).then((res) => {
-            wx.navigateTo({
-              url: './order-success/order-success',
+            tip.success('收货成功',1000);
+            wx.redirectTo({
+              url: '/pages/shop/shop-order/shop-order?currentTab=5',
             });
           });
         }
@@ -154,49 +168,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
     let that = this;
     if (that.data.list.length < that.data.total && that.data.bottoming) { //有更多时加载
       that.setData({
         showBottomLoading: true,
         bottoming: false,
       })
-      setTimeout(function () {
+      setTimeout(function() {
         that.setData({
           page: that.data.page + 1,
         })
@@ -208,7 +222,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

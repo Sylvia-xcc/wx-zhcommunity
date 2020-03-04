@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/school/school-course-fabu/school-course-fabu",
     "pages/paper/index",
     "pages/authorize/authorize",
     "pages/homepage/index",
@@ -85,12 +86,12 @@
     "pages/user/user-chongzhi/user-chongzhi",
     "pages/user/user-fans/index",
     "pages/user/user-follows/user-follows",
+    "pages/user/user-message/index",
     "pages/video/index",
     "pages/video/video-detail/video-detail",
     "pages/game/llk/llk",
     "pages/game/ball/ball",
-    "pages/game/fish/index",
-    "pages/user/user-message/index"
+    "pages/game/fish/index"
   ],
   "window": {
     "backgroundTextStyle": "dark",

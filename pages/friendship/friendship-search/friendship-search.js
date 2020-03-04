@@ -98,7 +98,7 @@ Page({
   detailTap: function (evt) {
     let id = evt.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/job/job-detail/job-detail?id=' + id,
+      url: '/pages/friendship/friendship-detail/friendship-detail?id=' + id,
     })
   },
 

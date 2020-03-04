@@ -1,0 +1,27 @@
+/* pages/school/school-course-fabu/school-course-fabu.wxss */
+
+page {
+  background: #fff !important;
+}
+
+.cu-form-group .title {
+  min-width: calc(4em + 30rpx);
+}
+
+.cu-form-group+.cu-form-group {
+  border: none;
+}
+
+.cu-form-group input{
+  border: 1rpx solid #EDEDED;
+  border-radius: 6rpx;
+  padding: 10rpx;
+  height: 55rpx;
+  font-size: 28rpx;
+}
+
+.cu-form-group textarea{
+border: 1rpx solid #EDEDED;
+  border-radius: 6rpx;
+  padding: 10rpx;
+}

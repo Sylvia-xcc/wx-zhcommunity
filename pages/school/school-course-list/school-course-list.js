@@ -14,18 +14,18 @@ Page({
     total: 0,
     bottoming: true,
     showBottomLoading: false,
-    isLoading:true,
-    lectureId:0,
+    isLoading: true,
+    lectureId: 0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     console.log('options:', options)
     let that = this;
     that.setData({
-      lectureId:options.id || 1
+      lectureId: options.id || 1
     })
     // that.loadLectureList();
   },
@@ -33,20 +33,20 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    if(this.data.lectureId>0)
+  onShow: function() {
+    if (this.data.lectureId > 0)
       this.loadLectureList();
   },
 
   //获取课程列表列表
-  loadLectureList: function () {
+  loadLectureList: function() {
     let that = this;
-    if(that.data.isLoading)
+    if (that.data.isLoading)
       tip.loading();
     http.requestUrl({
       url: 'teacher/index',
-      news:true,
-      data:{
+      news: true,
+      data: {
         listRows: 10,
         page: that.data.page
       }
@@ -63,7 +63,7 @@ Page({
         bottoming: true,
         showBottomLoading: false,
       })
-      setTimeout(function () {
+      setTimeout(function() {
         if (that.data.isLoading)
           tip.loaded();
         that.setData({
@@ -73,52 +73,60 @@ Page({
     })
   },
 
-  detailTap:function(evt){
+  detailTap: function(evt) {
     let id = evt.currentTarget.dataset.lid;
     wx.navigateTo({
-      url: '/pages/school/school-course-detail/school-course-detail?id='+id,
+      url: '/pages/school/school-course-detail/school-course-detail?id=' + id,
+    })
+  },
+
+  fabuTap: function(evt) {
+    if (!util.hasAuthorize())
+      return;
+    wx.navigateTo({
+      url: '/pages/school/school-course-fabu/school-course-fabu',
     })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
     let that = this;
     if (that.data.list.length < that.data.total && that.data.bottoming) { //有更多时加载
       that.setData({
         showBottomLoading: true,
         bottoming: false,
       })
-      setTimeout(function () {
+      setTimeout(function() {
         that.setData({
           page: that.data.page + 1,
         })
@@ -130,7 +138,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })
