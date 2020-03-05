@@ -18,6 +18,7 @@ Page({
     bottoming: true,
     showBottomLoading: false,
     isLoading: true,
+    loading:true,
     msgNum: 2,
     scrollLeft: 0,
     modalName: null,
@@ -46,6 +47,7 @@ Page({
     yearsIndex: -1,
     detail: null,
     user: null,
+    city:[],
   },
 
   /**
@@ -65,6 +67,21 @@ Page({
    */
   onShow: function() {
     // this.loadTab();
+  },
+
+  loadCityList: function (id=820) {
+    let that = this;
+    http.requestUrl({
+      url: 'matchmaker/city',
+      news: true,
+      data: {
+        province: id
+      }
+    }).then(res => {      
+      that.setData({
+        city: res.data,
+      })
+    })
   },
 
   loadOwnInfo: function() {
@@ -105,6 +122,8 @@ Page({
       that.loadRandInfo();
     else if (that.data.tabCur == 1)
       that.loadList();
+    else if(that.data.tabCur==2)
+      that.loadUser();
   },
 
   loadMsgList: function() {
@@ -151,7 +170,7 @@ Page({
   loadRandInfo: function() {
     let that = this;
     that.setData({
-      isLoading: true,
+      loading: true,
     })
     tip.loading();
     http.requestUrl({
@@ -167,7 +186,7 @@ Page({
       setTimeout(function() {
         tip.loaded();
         that.setData({
-          isLoading: false,
+          loading: false,
         })
       }, 200)
     })
@@ -257,7 +276,6 @@ Page({
   nolikeTap: function(evt) {
     let that = this;
     let id = evt.currentTarget.dataset.id;
-    that.loadRandInfo();
     http.requestUrl({
       url: 'matchmaker/addUnLike',
       news: true,
@@ -267,7 +285,20 @@ Page({
       },
       method: 'post',
     }).then(res => {
+      that.loadRandInfo();
+    })
+  },
 
+  loadUser:function(){
+    let that = this; 
+    http.requestUrl({
+      url: 'matchmaker/preference',
+      news: true,
+      data: {
+        uid: app.d.uid,
+      },
+    }).then(res => {
+      
     })
   },
 

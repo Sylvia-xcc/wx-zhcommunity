@@ -4,12 +4,12 @@
     <view class="flex padding-bottom-xl" wx:if="{{user}}">
       <navigator url="/pages/homepage/index" hover-class="none">
         <view class="cu-avatar-group">
-          <view class="cu-avatar round lg" style="background-image:url({{user.avatarUrl}}); "></view>
+          <view class="cu-avatar round lg" style="background-image:url({{user.avatarurl}}); "></view>
         </view>
       </navigator>
       <view class="padding-left-xs">
         <view class="font_30 padding-left-sm padding-bottom-xs flex align-center">
-          <text class="padding-right">{{user.nickName}}</text>
+          <text class="padding-right">{{user.nickname}}</text>
           <!-- <image src="/images/sign.png" style="width:64rpx;height:28rpx;"></image> -->
         </view>
         <navigator url="/pages/user/user-personal-edit/user-personal-edit" hover-class="none" class="cu-tag font_22" style="background:rgba(65,151,93,0.58); border-radius:24px;">账号管理></navigator>

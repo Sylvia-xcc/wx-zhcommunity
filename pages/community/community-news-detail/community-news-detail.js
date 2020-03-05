@@ -17,7 +17,7 @@ Page({
     bottoming: true,
     showBottomLoading: false,
     detail: null,
-    isLoading:true,
+    isLoading: true,
   },
 
   /**
@@ -36,26 +36,28 @@ Page({
   //详情
   loadNewsDetail: function() {
     let that = this;
-    if(that.data.isLoading)
+    if (that.data.isLoading)
       tip.loading();
     http.requestUrl({
       url: 'wxapp/service/newsDetails',
       data: {
         id: that.data.id,
-        user_id:app.d.uid,
+        user_id: app.d.uid,
       }
     }).then(res => {
-      let content = res.data.content;
-      WxParse.wxParse('content', 'html', content, that, 0);
+      if (res.data) {
+        let content = res.data.content;
+        WxParse.wxParse('content', 'html', content, that, 0);
+      }
       that.setData({
         detail: res.data
       })
-      setTimeout(function(){
+      setTimeout(function() {
         tip.loaded();
         that.setData({
-          isLoading:false,
+          isLoading: false,
         })
-      },600)
+      }, 600)
     })
   },
 
@@ -67,7 +69,7 @@ Page({
         id: that.data.id,
         page: that.data.page,
         count: 10,
-        user_id:app.d.uid,
+        user_id: app.d.uid,
       }
     }).then(res => {
       let items = that.data.list;
@@ -86,7 +88,7 @@ Page({
   },
 
   //收藏
-  collectTap: function () {
+  collectTap: function() {
     if (!util.hasAuthorize())
       return;
     let that = this;
@@ -95,15 +97,15 @@ Page({
       id: that.data.detail.is_collect,
       uid: app.d.uid
     } : {
-        uid: app.d.uid,
-        model: 'news',
-        mid: that.data.detail.id,
-      }
+      uid: app.d.uid,
+      model: 'news',
+      mid: that.data.detail.id,
+    }
     http.requestUrl({
       url: url,
       news: true,
       data: data,
-      method:'post',
+      method: 'post',
     }).then(res => {
       let msg = that.data.detail.is_collect > 0 ? '取消收藏成功' : '收藏成功';
       tip.success(msg, 1000);
@@ -111,7 +113,7 @@ Page({
     })
   },
 
-  likeMessageTap: function (evt) {
+  likeMessageTap: function(evt) {
     if (!util.hasAuthorize())
       return;
     console.log(evt)
@@ -123,16 +125,16 @@ Page({
       url: 'wxapp/service/newsCommonsLike',
       data: {
         uid: app.d.uid,
-        mid:mid
+        mid: mid
       },
       method: 'post',
     }).then(res => {
-      tip.success(like<=0?'点赞成功':'取消点赞成功',1000);
+      tip.success(like <= 0 ? '点赞成功' : '取消点赞成功', 1000);
       that.loadCommnetInfo(pid);
     })
   },
 
-  messageTap: function (evt) {
+  messageTap: function(evt) {
     if (!util.hasAuthorize())
       return;
     let id = evt.currentTarget.dataset.id;
@@ -187,17 +189,17 @@ Page({
       }
     }).then(res => {
       let items = that.data.list;
-      for(var i=0; i<items.length;i++){
-        if(items[i].id==id)
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].id == id)
           items[i] = res.data[0];
       }
       that.setData({
-        list:items
+        list: items
       })
     })
   },
 
-  personalTap: function (evt) {
+  personalTap: function(evt) {
     let uid = evt.currentTarget.dataset.uid;
     util.personal(uid);
   },

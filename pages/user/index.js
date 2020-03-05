@@ -30,8 +30,24 @@ Page({
       user: app.globalData.userInfo || null
     })
     console.log('----user:', app.globalData.userInfo)
+    that.loadUserInfo();
     if(that.data.user)
       that.loadPersonInfo();
+  },
+
+  loadUserInfo: function () {
+    let that = this;
+    http.requestUrl({
+      url: 'wxapp/user/userinfo',
+      data: {
+        uid: app.d.uid
+      }
+    }).then(res => {
+      that.setData({
+        user: res.userinfo
+      })
+      app.globalData.userInfo = res.userinfo;
+    })
   },
 
   loadPersonInfo: function () {

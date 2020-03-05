@@ -1,6 +1,6 @@
 <!--pages/matchmaker/matchmaker-personal/matchmaker-personal.wxml-->
 <view class="padding" hidden="{{isLoading}}">
-  <v-banner banner="{{detail.photo}}"></v-banner>
+  <v-banner banner="{{detail.photo}}" radius="{{true}}"></v-banner>
   <view class="padding bg-white radius margin-top-sm item">
     <view class=" flex justify-between">
       <view class="font_30 c0 text-bold">{{detail.name}}

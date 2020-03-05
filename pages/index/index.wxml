@@ -19,7 +19,7 @@
     <image src="/images/a3.png" style="width:129rpx;height:128rpx;"></image>
     <view class="font_26 c0">红娘</view>
   </navigator>
-  <navigator url="/pages/friendship/index" hover-class="none" class="flex align-center flex-direction basis-xs padding-bottom">
+  <navigator url="/pages/friendship/friendship-list/friendship-list" hover-class="none" class="flex align-center flex-direction basis-xs padding-bottom">
     <image src="/images/a4.png" style="width:129rpx;height:128rpx;"></image>
     <view class="font_26 c0">情义有价</view>
   </navigator>
@@ -56,9 +56,9 @@
   </view>
   <view class="">
     <scroll-view scroll-x style="white-space: nowrap;overflow:hidden;">
-      <block wx:for="{{6}}" wx:key="index">
+      <block wx:for="{{1}}" wx:key="index">
         <view class="gz-item" bindtap="toOtherTap">
-          <image src="/images/head.png" class="cu-avatar round lg" style="width:112rpx;height:112rpx;"></image>
+          <image src="https://images.fengzhankeji.com/weixin/20191226/5e047e5d1336b.png" class="cu-avatar round lg" style="width:112rpx;height:112rpx;"></image>
           <view class="text-gray font_26 padding-top-5">柒筑</view>
         </view>
       </block>
@@ -66,7 +66,7 @@
   </view>
 </view>
 
-<navigator url="/pages/game/fish/index" hover-class="none" class="padding">
+<navigator url="/pages/game/llk/llk" hover-class="none" class="padding">
   <view class="padding-bottom-sm">
     <text class="cuIcon-titles text-green"></text>
     <text class="c0 text-bold">休闲游戏</text>
@@ -84,28 +84,3 @@
   </view>
 
 </view>
-
-
-<!-- <navigator url="/pages/commonweal/index" hover-class="none" class="padding flex flex-direction">
-  <button class="cu-btn bg-grey lg">公益活动</button>
-</navigator> -->
-
-<!-- <navigator url="/pages/game/llk/llk" hover-class="none" class="padding flex flex-direction">
-  <button class="cu-btn bg-grey lg">连连看小游戏</button>
-</navigator> -->
-
-<!-- <navigator url="/pages/community/index" hover-class="none" class="padding flex flex-direction">
-  <button class="cu-btn bg-grey lg">社区服务</button>
-</navigator> -->
-
-<!-- <navigator url="/pages/matchmaker/index" hover-class="none" class="padding flex flex-direction">
-  <button class="cu-btn bg-grey lg">红娘</button>
-</navigator> -->
-
-<!-- <navigator url="/pages/friendship/index" hover-class="none" class="padding flex flex-direction">
-  <button class="cu-btn bg-grey lg">情义有价</button>
-</navigator> -->
-
-<!-- <navigator url="/pages/finance/index" hover-class="none" class="padding flex flex-direction">
-  <button class="cu-btn bg-grey lg">金融服务</button>
-</navigator> -->

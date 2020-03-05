@@ -91,9 +91,7 @@ Page({
       return;
     }
     //判断手机号
-    var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
-    if (!myreg.test(value.mobile)) {
-      tip.success('填写正确手机号')
+    if (!util.filterMobile(value.mobile)) {
       return;
     }
     if (value.address == '') {

@@ -86,7 +86,6 @@ const request = function(path, data) {
 
 const uploadFile = function(data) {
   return new Promise((resolve, reject) => {
-    let url = 'http://education.fengzhankeji.com/api/../addons/qiniu/index/upload'; //data.url || 'common/upload';
     console.log('------------------- upload:', data.tempFilePaths)
     if (data.tempFilePaths.indexOf('.com') > -1) {
       console.log('------------>>> 已上传的图片')
@@ -98,8 +97,9 @@ const uploadFile = function(data) {
       }
       resolve(obj);
     }
+    let path = '../addons/qiniu/index/upload'; //data.url || 'common/upload';
     wx.uploadFile({
-      url: url, //app.d.hostUrlNew + url,
+      url: app.d.hostUrlNew + path,
       filePath: data.tempFilePaths,
       name: 'file',
       formData: {

@@ -1,86 +1,86 @@
 <!--pages/job/job-detail/job-detail.wxml-->
 <view hidden="{{isLoading}}">
-<view class="cu-ard dynamic }}" style="background-image:url(http://image.fengzhankeji.com/static/job-bg.png);background-repeat:no-repeat; background-size:100% 100%;-moz-background-size:100% 100%;">
-  <view class="cu-item shadow">
-    <view class="padding">
-      <view class="font_28 text-bold">{{detail.job}}</view>
-      <view class="text-cred font_28 padding-top-xs" >{{detail.type==1?detail.month_pay=='不限'?'面议':detail.month_pay:detail.month_pay+'元/'+detail.money_type}}</view>
-      <view class="font_22" wx:if="{{detail.type==2}}">
-        <view class="text-bold padding-top-xs">{{detail.pay_type}}</view>
-        <view class="padding-top-xs">
-          <text class="text-bold">工作时间：</text>
-          <text class="text-gray">{{detail.work_day}}</text>
-        </view>
-        <view class="padding-top-xs" wx:if="{{detail.validity_time==1}}">
-          <text class="text-bold">有效期限：</text>
-          <text class="text-gray">长期有效</text>
-        </view>
-      </view>
-    </view>
-    <view class="text-content" wx:if="{{detail.type==1}}">
-      <view class="flex flex-wrap">
-        <view class="padding-bottom-xs padding-right-sm" wx:for="{{detail.treatment}}" wx:key="index">
-          <view class="cu-tag line-gray radius">{{item}}</view>
-        </view>
-      </view>
-    </view>
-
-    <view class="padding">
-      <view class="text-bold text-sm">职位描述：</view>
-      <view class="font_22 text-gray padding-top-xs" wx:if="{{detail.type==1}}">
-        <text class="c6">经验{{detail.years}}</text>
-        <text class="padding-lr-sm text-black text-bold">|</text>
-        <text class="c6">{{detail.education=='不限'?'学历不限':detail.education}}</text>
-      </view>
-      <view class="text-sm padding-top-xs ">
-        <text class="fload {{isFload?'show':'hide'}}">{{detail.description}}</text>
-        <view class="text-blue text-sm padding-top-sm text-right">
-          <text wx:if="{{!isFload && detail.description.length>50}}" bindtap="floadTap">展开</text>
-          <text wx:if="{{isFload && detail.description.length>50}}" bindtap="floadTap">收起</text>
-        </view>
-      </view>
-    </view>
-  </view>
-</view>
-<map id="map" longitude="{{about.longitude}}" latitude="{{about.latitude}}" enable-scroll="{{false}}" enable-zoom="{{false}}" scale="14" markers="{{markers}}" controls="{{controls}}" bindcallouttap="markerTap" show-location style="width: 100%; height: 232rpx;"></map>
-
-<view class="bg-white margin-top-sm">
-  <view class="padding-tb">
-    <view class="cu-list menu-avatar">
-      <view class="cu-item">
-        <view class="cu-avatar round lg" style="background-image:url({{detail.avatar}});" data-uid="{{detail.uid}}" catchtap="personalTap"></view>
-        <view class="content">
-          <view class="text-bold text-black" style="font-size:24rpx">{{detail.nickname}}</view>
-          <view class="text-gray text-xs">
-            {{detail.create_time}}
+  <view class="cu-ard dynamic" style="background-image:url(http://image.fengzhankeji.com/static/job-bg.png);background-repeat:no-repeat; background-size:100% 100%;-moz-background-size:100% 100%;">
+    <view class="cu-item shadow">
+      <view class="padding">
+        <view class="font_28 text-bold">{{detail.job}}</view>
+        <view class="text-cred font_28 padding-top-xs">{{detail.type==1?detail.month_pay=='不限'?'面议':detail.month_pay:detail.month_pay+'元/'+detail.money_type}}</view>
+        <view class="font_22" wx:if="{{detail.type==2}}">
+          <view class="text-bold padding-top-xs">{{detail.pay_type}}</view>
+          <view class="padding-top-xs">
+            <text class="text-bold">工作时间：</text>
+            <text class="text-gray">{{detail.work_day}}</text>
+          </view>
+          <view class="padding-top-xs" wx:if="{{detail.validity_time==1}}">
+            <text class="text-bold">有效期限：</text>
+            <text class="text-gray">长期有效</text>
           </view>
         </view>
-        <view class="padding-right-sm">
-          <view class="flex align-center" bindtap="phoneTap">
-            <view class="cuIcon-comment text-black" style="font-size:38rpx;"></view>
-            <view class="text-black text-xs padding-left-xs">立即沟通</view>
+      </view>
+      <view class="text-content padding-lr" wx:if="{{detail.type==1}}">
+        <view class="flex flex-wrap">
+          <view class="padding-bottom-xs padding-right-sm" wx:for="{{detail.treatment}}" wx:key="index">
+            <view class="cu-tag line-gray radius">{{item}}</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="padding">
+        <view class="text-bold text-sm">职位描述：</view>
+        <view class="font_22 text-gray padding-top-xs" wx:if="{{detail.type==1}}">
+          <text class="c6">经验{{detail.years}}</text>
+          <text class="padding-lr-sm text-black text-bold">|</text>
+          <text class="c6">{{detail.education=='不限'?'学历不限':detail.education}}</text>
+        </view>
+        <view class="text-sm padding-top-xs ">
+          <text class="fload {{isFload?'show':'hide'}}">{{detail.description}}</text>
+          <view class="text-blue text-sm padding-top-sm text-right">
+            <text wx:if="{{!isFload && detail.description.length>50}}" bindtap="floadTap">展开</text>
+            <text wx:if="{{isFload && detail.description.length>50}}" bindtap="floadTap">收起</text>
           </view>
         </view>
       </view>
     </view>
   </view>
-</view>
+  <map id="map" longitude="{{about.longitude}}" latitude="{{about.latitude}}" enable-scroll="{{false}}" enable-zoom="{{false}}" scale="14" markers="{{markers}}" controls="{{controls}}" bindcallouttap="markerTap" show-location style="width: 100%; height: 232rpx;"></map>
 
-<view class="padding flex bg-white" style="padding-bottom:250rpx;">
-  <view class="basis-df flex flex-direction align-center" bindtap="collectTap">
-    <image src="/images/shoucang.png" style="width:48rpx;height:48rpx;" wx:if="{{detail.fav<=0}}"></image>
-    <image src="/images/shoucang2.png" style="width:48rpx;height:48rpx;" wx:else></image>
-    <text class="text-sm padding-top-xs text-black text-bold">收藏</text>
+  <view class="bg-white margin-top-sm">
+    <view class="padding-tb">
+      <view class="cu-list menu-avatar">
+        <view class="cu-item">
+          <view class="cu-avatar round lg" style="background-image:url({{detail.avatar}});" data-uid="{{detail.uid}}" catchtap="personalTap"></view>
+          <view class="content">
+            <view class="text-bold text-black" style="font-size:24rpx">{{detail.nickname}}</view>
+            <view class="text-gray text-xs">
+              {{detail.create_time}}
+            </view>
+          </view>
+          <view class="padding-right-sm">
+            <view class="flex align-center" bindtap="phoneTap">
+              <view class="cuIcon-comment text-black" style="font-size:38rpx;"></view>
+              <view class="text-black text-xs padding-left-xs">立即沟通</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
-  <view class="basis-df flex flex-direction align-center pr">
-    <button open-type="share" class="shareBtn"></button>
-    <image src="/images/zhuanfa.png" style="width:43rpx;height:42rpx;"></image>
-    <text class="text-sm padding-top-xs text-black text-bold">转发</text>
-  </view>
-</view>
 
-<view class="cu-bar bg-white tabbar border shop position-bottom">
-  <view class="submit text-white" style="background:#EF696B;" bindtap="phoneTap">打电话</view>
-  <view class="bg-cgreen submit text-white">在线聊</view>
-</view>
+  <view class="padding flex bg-white" style="padding-bottom:250rpx;">
+    <view class="basis-df flex flex-direction align-center" bindtap="collectTap">
+      <image src="/images/shoucang.png" style="width:48rpx;height:48rpx;" wx:if="{{detail.fav<=0}}"></image>
+      <image src="/images/shoucang2.png" style="width:48rpx;height:48rpx;" wx:else></image>
+      <text class="text-sm padding-top-xs text-black text-bold">收藏</text>
+    </view>
+    <view class="basis-df flex flex-direction align-center pr">
+      <button open-type="share" class="shareBtn"></button>
+      <image src="/images/zhuanfa.png" style="width:43rpx;height:42rpx;"></image>
+      <text class="text-sm padding-top-xs text-black text-bold">转发</text>
+    </view>
+  </view>
+
+  <view class="cu-bar bg-white tabbar border shop position-bottom">
+    <view class="submit text-white" style="background:#EF696B;" bindtap="phoneTap">打电话</view>
+    <view class="bg-cgreen submit text-white">在线聊</view>
+  </view>
 </view>

@@ -22,3 +22,7 @@ swiper-item {
   width: 96rpx;
   height: 96rpx;
 }
+
+.radius{
+  border-radius: 10rpx;
+}

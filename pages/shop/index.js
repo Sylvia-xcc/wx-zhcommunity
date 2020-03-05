@@ -17,9 +17,11 @@ Page({
     bottoming: true,
     showBottomLoading: false,
     isLoading: true,
+    loading: true,
     banner: ['/images/ershou1.png'],
     classify: [],
     cates: [],
+    cartId: 0,
   },
 
   /**
@@ -27,7 +29,25 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    that.loadShopHome();
+    that.loadList();
+  },
+
+  loadList: function(p = true) {
+    let that = this;
+    if (p) {
+      that.setData({
+        bottoming: false,
+        showBottomLoading: true,
+        loading: true,
+      })
+    }
+
+    setTimeout(function() {
+      if (that.data.tabCur == 0)
+        that.loadShopHome();
+      else
+        that.loadProductList();
+    }, 600)
   },
 
   loadShopHome: function() {
@@ -42,6 +62,10 @@ Page({
         banner: res.banner,
         list: res.product_new,
         classify: res.cate_one,
+        loading: false,
+        bottoming: true,
+        showBottomLoading: false,
+        total:res.product_new.length,
       });
       setTimeout(function() {
         tip.loaded();
@@ -53,17 +77,19 @@ Page({
   },
 
   /**物品分类列表数据*/
-  loadProductList: function(cid, id) {
+  loadProductList: function() {
     let that = this;
+    let cid = that.data.classify[that.data.tabCur - 1].id;
     http.requestUrl({
       url: 'wxapp/index/cate_product',
       data: {
-        cate_id: id,
+        cate_id: that.data.cartId,
         cid: cid,
-        page: that.data.page,
+        p: that.data.page,
         count: 10,
         uid: app.d.uid || 0
       },
+      method: 'post',
     }).then((res) => {
       let items = that.data.list;
       if (that.data.page == 1) {
@@ -75,8 +101,11 @@ Page({
         list: items,
         total: res.page.totalRows,
         cates: res.category,
+        bottoming: true,
+        showBottomLoading: false,
+        loading: false,
       })
-
+      console.log('-----------------', that.data.total, that.data.list.length)
     })
   },
 
@@ -90,23 +119,31 @@ Page({
       tabCur: index,
       scrollLeft: (index - 1) * 60,
       page: 1,
+      cartId: 0,
+      list:[],
     })
-    if (index != 0) {
-      that.loadProductList(id, 0);
-    }
+    that.loadList();
   },
 
   catesTap: function(evt) {
     let that = this;
     let id = evt.currentTarget.dataset.id;
-    let cid = that.data.classify[that.data.tabCur - 1].id;
-    that.loadProductList(cid, id);
+    that.setData({
+      cartId: id,
+    })
+    that.loadProductList();
   },
 
   detailTap: function(evt) {
     let id = evt.currentTarget.dataset.id;
     wx.navigateTo({
       url: '/pages/shop/shop-detail/shop-detail?id=' + id,
+    })
+  },
+
+  searchTap:function(evt){
+    wx.navigateTo({
+      url: '/pages/shop/shop-search/shop-search',
     })
   },
 
@@ -149,7 +186,19 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    let that = this;
+    if (that.data.list.length < that.data.total && that.data.bottoming) { //有更多时加载
+      that.setData({
+        showBottomLoading: true,
+        bottoming: false,
+      })
+      setTimeout(function() {
+        that.setData({
+          page: that.data.page + 1,
+        })
+        that.loadList(false);
+      }, 800)
+    }
   },
 
   /**

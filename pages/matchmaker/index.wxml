@@ -1,89 +1,94 @@
 <!--pages/matchmaker/index.wxml-->
 
+
 <view hidden="{{isLoading}}">
-  <view class="padding" style="padding-bottom:150rpx;" wx:if="{{tabCur==0}}">
-    <v-banner banner="{{detail.photo}}"></v-banner>
-    <view class="padding bg-white radius margin-top-sm item">
-      <view class=" flex justify-between">
-        <view class="font_30 c0 text-bold">{{detail.name}}
-          <view class="cu-tag bg-cgreen radius text-white margin-left-sm" style="height:40rpx;">身份证已认证</view>
+  <view hidden="{{loading}}" wx:if="{{tabCur==0}}">
+    <view wx:if="{{detail==null}}" class="bg-img" style="background-image: url('http://image.fengzhankeji.com/static/match.png');height: 100vh;">
+    </view>
+    <view wx:else class="padding" style="padding-bottom:150rpx;">
+      <v-banner banner="{{detail.photo}}" radius="{{true}}"></v-banner>
+      <view class="padding bg-white radius margin-top-sm item">
+        <view class=" flex justify-between">
+          <view class="font_30 c0 text-bold">{{detail.name}}
+            <view class="cu-tag bg-cgreen radius text-white margin-left-sm" style="height:40rpx;">身份证已认证</view>
+          </view>
+          <view class="flex align-center">
+            <text class="cuIcon-locationfill text-gray " style="font-size:34rpx;"></text>
+            <text class="text-gray padding-left-xs font_22">{{detail.province}} {{detail.city}}</text>
+          </view>
         </view>
-        <view class="flex align-center">
-          <text class="cuIcon-locationfill text-gray " style="font-size:34rpx;"></text>
-          <text class="text-gray padding-left-xs font_22">{{detail.province}} {{detail.city}}</text>
+        <view class=" flex flex-wrap justify-start padding-top">
+          <view class="cu-tag bg-gray radius c0 margin-bottom-sm">年龄：{{detail.age}}</view>
+          <view class="cu-tag bg-gray radius c0 margin-bottom-sm">身高：{{detail.height}}cm</view>
+          <view class="cu-tag bg-gray radius c0 margin-bottom-sm">毕业院校：{{detail.school}}</view>
+          <view class="cu-tag bg-gray radius c0 margin-bottom-sm">职业：{{detail.job}}</view>
+          <view class="cu-tag bg-gray radius c0 margin-bottom-sm">年薪：{{detail.income}}</view>
         </view>
       </view>
-      <view class=" flex flex-wrap justify-start padding-top">
-        <view class="cu-tag bg-gray radius c0 margin-bottom-sm">年龄：{{detail.age}}</view>
-        <view class="cu-tag bg-gray radius c0 margin-bottom-sm">身高：{{detail.height}}cm</view>
-        <view class="cu-tag bg-gray radius c0 margin-bottom-sm">毕业院校：{{detail.school}}</view>
-        <view class="cu-tag bg-gray radius c0 margin-bottom-sm">职业：{{detail.job}}</view>
-        <view class="cu-tag bg-gray radius c0 margin-bottom-sm">年薪：{{detail.income}}</view>
-      </view>
-    </view>
 
-    <view class="padding bg-white radius margin-top-sm item">
-      <view class="font_26 c0 text-bold">
-        <text class="cuIcon-titles text-green" style="font-size:30rpx;"></text>
-        <text> 自我介绍</text>
-      </view>
-      <view class="text-sm c0 padding-top-sm">
-        {{detail.intro}}
-      </view>
-    </view>
-
-    <view class="padding bg-white radius margin-top-sm item">
-      <view class="font_26 c0 text-bold">
-        <text class="cuIcon-titles text-green" style="font-size:30rpx;"></text>
-        <text> 兴趣爱好</text>
-      </view>
-      <view class="text-sm c0 padding-top-sm">
-        {{detail.hobby}}
-      </view>
-    </view>
-
-    <view class="padding bg-white radius margin-top-sm item">
-      <view class="font_26 c0 text-bold">
-        <text class="cuIcon-titles text-green" style="font-size:30rpx;"></text>
-        <text> 感情观</text>
-      </view>
-      <view class="text-sm c0 padding-top-sm">
-        {{detail.felling}}
-      </view>
-    </view>
-
-    <view class="padding bg-white radius margin-top-sm item">
-      <view class="font_26 c0 text-bold">
-        <text class="cuIcon-titles text-green" style="font-size:30rpx;"></text>
-        <text> 对另一半的要求</text>
-      </view>
-      <view class="text-sm c0 padding-top-sm">
-        {{detail.requirement}}
-      </view>
-    </view>
-
-    <view class="padding bg-white radius margin-top-sm item">
-      <view class="font_26 c0 text-bold">
-        <text class="cuIcon-titles text-green" style="font-size:30rpx;"></text>
-        <text> 微信号</text>
-      </view>
-      <view class="text-sm c0 padding-top-sm flex flex-direction align-center">
-        <view class="pr">{{detail.wx_account}}
-          <view class="text-blue pa" style="top:-4rpx; right:-80rpx;" data-text="weixinhao1273" bindtap="copyTap">复制</view>
+      <view class="padding bg-white radius margin-top-sm item">
+        <view class="font_26 c0 text-bold">
+          <text class="cuIcon-titles text-green" style="font-size:30rpx;"></text>
+          <text> 自我介绍</text>
         </view>
-        <text class="padding-tb-xs text-red">or</text>
-        <text>只有对方关注您才可以查看微信号哦</text>
+        <view class="text-sm c0 padding-top-sm">
+          {{detail.intro}}
+        </view>
       </view>
-    </view>
 
-    <view class="padding  radius margin-top-sm flex justify-around">
-      <view class="text-center" data-id="{{detail.id}}" bindtap="nolikeTap">
-        <image src="/images/h2.png" style="width:110rpx;height:110rpx;"></image>
-        <view class="font_26 text-bold c0">换一个</view>
+      <view class="padding bg-white radius margin-top-sm item">
+        <view class="font_26 c0 text-bold">
+          <text class="cuIcon-titles text-green" style="font-size:30rpx;"></text>
+          <text> 兴趣爱好</text>
+        </view>
+        <view class="text-sm c0 padding-top-sm">
+          {{detail.hobby}}
+        </view>
       </view>
-      <view class="text-center" data-id="{{detail.id}}" bindtap="likeTap">
-        <image src="/images/h1.png" style="width:110rpx;height:110rpx;"></image>
-        <view class="font_26 text-bold c0">打招呼</view>
+
+      <view class="padding bg-white radius margin-top-sm item">
+        <view class="font_26 c0 text-bold">
+          <text class="cuIcon-titles text-green" style="font-size:30rpx;"></text>
+          <text> 感情观</text>
+        </view>
+        <view class="text-sm c0 padding-top-sm">
+          {{detail.felling}}
+        </view>
+      </view>
+
+      <view class="padding bg-white radius margin-top-sm item">
+        <view class="font_26 c0 text-bold">
+          <text class="cuIcon-titles text-green" style="font-size:30rpx;"></text>
+          <text> 对另一半的要求</text>
+        </view>
+        <view class="text-sm c0 padding-top-sm">
+          {{detail.requirement}}
+        </view>
+      </view>
+
+      <view class="padding bg-white radius margin-top-sm item">
+        <view class="font_26 c0 text-bold">
+          <text class="cuIcon-titles text-green" style="font-size:30rpx;"></text>
+          <text> 微信号</text>
+        </view>
+        <view class="text-sm c0 padding-top-sm flex flex-direction align-center">
+          <view class="pr">{{detail.wx_account}}
+            <view class="text-blue pa" style="top:-4rpx; right:-80rpx;" data-text="weixinhao1273" bindtap="copyTap">复制</view>
+          </view>
+          <text class="padding-tb-xs text-red">or</text>
+          <text>只有对方关注您才可以查看微信号哦</text>
+        </view>
+      </view>
+
+      <view class="padding  radius margin-top-sm flex justify-around">
+        <view class="text-center" data-id="{{detail.id}}" bindtap="nolikeTap">
+          <image src="/images/h2.png" style="width:110rpx;height:110rpx;"></image>
+          <view class="font_26 text-bold c0">换一个</view>
+        </view>
+        <view class="text-center" data-id="{{detail.id}}" bindtap="likeTap">
+          <image src="/images/h1.png" style="width:110rpx;height:110rpx;"></image>
+          <view class="font_26 text-bold c0">打招呼</view>
+        </view>
       </view>
     </view>
   </view>
@@ -141,7 +146,6 @@
               <text wx:elif="{{msgNum==3}}">挽回</text>
               <text wx:elif="{{msgNum==4}}">心动</text>
             </view>
-            <!-- <image src="/images/h3.png" class="pa" style="width:70rpx;height:70rpx; bottom:0rpx; right:20rpx;"></image> -->
           </view>
         </view>
       </view>

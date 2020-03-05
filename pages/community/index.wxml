@@ -18,13 +18,17 @@
       </block>
     </swiper>
 
-    <view hidden="{{loading}}" class="cu-card dynamic no-card}}" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="detailNewsTap">
-      <view class="cu-item shadow">
+    <view hidden="{{loading}}" class="cu-card dynamic no-card " wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="detailNewsTap">
+      <view class="cu-item shadow ssolid_bottom ">
         <view class="showone text-sm text-bold padding-tb-sm">{{item.title}}</view>
-        <view class="grid flex-sub col-1">
-          <view class="bg-img only-img radius" style="background-image:url({{item.photo}});"></view>
+        <view class="padding-bottom" wx:if="{{item.editor_imgurls.length>0}}">
+          <view class="grid flex-sub padding-lr padding-bottom col-3 grid-square" wx:if="{{item.editor_imgurls.length>1}}">
+            <view wx:for="{{item.editor_imgurls}}" wx:key="index" wx:for-item="iitem" wx:if="{{index<3}}" class="bg-img" style="background-image:url({{iitem}});">
+            </view>
+          </view>
+          <image wx:else src="{{item.editor_imgurls[0]}}" class="radius" style="width:300rpx;height:340rpx;" mode="aspectFill"></image>
         </view>
-        <view class="text-gray text-sm text-left padding-tb">
+        <view class="text-gray text-sm text-left padding-bottom ">
           <text>{{item.create_time}}</text>
           <text class="padding-left-sm">评论({{item.comments_num}})</text>
         </view>
@@ -33,7 +37,7 @@
     <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
   </view>
 
-  
+
 
   <view class="padding-tb" wx:if="{{tabCur==2}}">
     <view hidden="{{loading}}" class="cu-card dynamic no-card solid-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailChatTap">
@@ -53,7 +57,7 @@
           {{item.content}}
         </view>
         <view class="grid flex-sub padding-lr padding-bottom {{item.photos.length>1?'col-3 grid-square':'col-1'}}">
-          <view wx:for="{{item.photos}}" wx:key="index" wx:for-item="iitem" class="bg-img {{item.photos.length>1?'':'only-img'}}" style="background-image:url({{iitem}});" data-id="{{index}}" data-dataimg="{{item.photos}}" >
+          <view wx:for="{{item.photos}}" wx:key="index" wx:for-item="iitem" class="bg-img {{item.photos.length>1?'':'only-img'}}" style="background-image:url({{iitem}});" data-id="{{index}}" data-dataimg="{{item.photos}}">
           </view>
         </view>
       </view>

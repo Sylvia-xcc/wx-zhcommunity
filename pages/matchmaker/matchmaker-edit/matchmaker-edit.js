@@ -41,8 +41,7 @@ Page({
     hobby: '',
     emotion: '',
     demand: '',
-    a: false,
-    b: false,
+    info: null,
   },
 
 
@@ -56,25 +55,33 @@ Page({
       uid: options.uid || 0,
     })
     tip.loading();
-    that.loadProvinceList();
     that.loadInfoList();
+  },
+
+  loadInfoList: function() {
+    let that = this;
+    http.requestUrl({
+      url: 'matchmaker/info',
+      news: true,
+    }).then(res => {
+      that.setData({
+        moneyArray: res.data.income,
+        xueliArray: res.data.education,
+      })
+      that.canFit();
+    })
   },
 
   canFit: function() {
     let that = this;
-    if (that.data.a && that.data.b) {
-      if (that.data.uid > 0)
-        this.loadUserInof();
-      else {
-        tip.loaded();
-        that.setData({
-          isLoading: false,
-        })
-      }
+    if (that.data.uid > 0 && that.data.info == null)
+      this.loadUserInfo();
+    if (that.data.uid <= 0) {
+      that.loadProvinceList();
     }
   },
 
-  loadUserInof: function() {
+  loadUserInfo: function() {
     let that = this;
     http.requestUrl({
       url: 'matchmaker/own',
@@ -88,7 +95,7 @@ Page({
       for (var i = 0; i < moneyArray.length; i++) {
         if (moneyArray[i].name == res.data.income) {
           moneyIndex = moneyArray[i].id;
-          return;
+          break;
         }
       }
       let xueliArray = that.data.xueliArray;
@@ -96,10 +103,11 @@ Page({
       for (var i = 0; i < xueliArray.length; i++) {
         if (xueliArray[i].name == res.data.education) {
           xueliIndex = xueliArray[i].id;
-          return;
+          break;
         }
       }
       that.setData({
+        info: res.data,
         upload_pic: res.data.photo || [],
         nickname: res.data.name,
         sexIndex: res.data.sex - 1,
@@ -113,31 +121,14 @@ Page({
         emotion: res.data.felling,
         demand: res.data.requirement,
         moneyIndex: moneyIndex,
-        xueliIndex:xueliIndex,
+        xueliIndex: xueliIndex,
       })
-      setTimeout(function() {
-        tip.loaded();
-        that.setData({
-          isLoading: false,
-        })
-      }, 600)
+
+      that.loadProvinceList();
     })
   },
 
-  loadInfoList: function() {
-    let that = this;
-    http.requestUrl({
-      url: 'matchmaker/info',
-      news: true,
-    }).then(res => {
-      that.setData({
-        moneyArray: res.data.income,
-        xueliArray: res.data.education,
-        a: true,
-      })
-      that.canFit();
-    })
-  },
+
 
   loadProvinceList: function() {
     let that = this;
@@ -148,11 +139,24 @@ Page({
       that.setData({
         provinces: res.data
       })
-      that.loadCityList(that.data.provinces[0].id);
+      if (that.data.uid > 0) {
+        let provinces = that.data.provinces;
+        let multiIndex = that.data.multiIndex;
+        for (var i = 0; i < provinces.length; i++) {
+          if (provinces[i].name == that.data.info.province) {
+            that.loadCityList(provinces[i].id, true);
+            multiIndex[0] = i;
+          }
+        }
+        that.setData({
+          multiIndex: multiIndex
+        })
+      } else
+        that.loadCityList(that.data.provinces[0].id);
     })
   },
 
-  loadCityList: function(id) {
+  loadCityList: function(id, init = false) {
     let that = this;
     http.requestUrl({
       url: 'matchmaker/city',
@@ -164,17 +168,29 @@ Page({
       let multiArray = [that.data.provinces, res.data]
       that.setData({
         multiArray: multiArray,
-        b: true,
       })
-      that.canFit();
+      if (init) {
+        let multiIndex = that.data.multiIndex;
+        for (var i = 0; i < res.data.length; i++) {
+          if (res.data[i].name == that.data.info.city) {
+            multiIndex[1] = i;
+          }
+        }
+        that.setData({
+          multiIndex: multiIndex,
+        })
+      }
+      setTimeout(function() {
+        tip.loaded();
+        that.setData({
+          isLoading: false,
+        })
+      }, 400)
     })
   },
 
-
-
   submitTap: function(evt) {
     let that = this;
-
     console.log('-------昵称：', that.data.nickname);
     console.log('-------性别：', that.data.sexArray[that.data.sexIndex].name);
     console.log('-------生日：', that.data.date);
@@ -271,8 +287,9 @@ Page({
     Promise.all(temp).then(res => {
       console.log('-------上传完成', files, that.data.optype)
       let content = JSON.stringify(files);
+      let url = that.data.info == null ? 'matchmaker/addMaker' :'matchmaker/edit';
       http.requestUrl({
-        url: 'matchmaker/addMaker',
+        url: url,
         news: true,
         method: 'post',
         data: {
@@ -293,6 +310,7 @@ Page({
           requirement: that.data.demand,
           wx_account: that.data.weixin,
           wx_id: app.d.uid,
+          uid:app.d.uid,
         }
       }).then(res => {
         tip.loaded();

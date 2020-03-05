@@ -10,13 +10,41 @@ Page({
    */
   data: {
     money: '',
+    list:[],
+    selectId:0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.loadRechargeList();
+  },
 
+  loadRechargeList:function(){
+    let that = this;
+    http.requestUrl({
+      url: 'wxapp/Recharge/getList',
+    }).then((res) => {
+      that.setData({
+        list:res.data.list
+      })
+    })
+  },
+
+  selectedTap:function(evt){
+    let id = evt.currentTarget.dataset.id;
+    let money = evt.currentTarget.dataset.money;
+    let that = this;
+    if(that.data.selectId==id)
+    {
+      id = 0;
+      money = '';
+    }
+    that.setData({
+      selectId:id,
+      money:money,
+    })
   },
 
   submitTap: function(evt) {
@@ -31,6 +59,7 @@ Page({
       data: {
         money: that.data.money,
         uid: app.d.uid,
+        recharge_id:that.data.selectId,
       },
       method: 'POST',
     }).then((res) => {

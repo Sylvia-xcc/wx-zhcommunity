@@ -1,4 +1,8 @@
 // pages/user/user-personal-edit/user-personal-edit.js
+const app = getApp()
+const util = require('../../../utils/util.js');
+const http = require('../../../utils/http.js');
+import tip from '../../../utils/tip.js';
 Page({
 
   /**
@@ -6,7 +10,7 @@ Page({
    */
   data: {
     nickname: '',
-    job: '111',
+    job: '',
     birthday: '',
     address: [],
     sex: [{
@@ -17,14 +21,40 @@ Page({
       name: '女'
     }],
     sexIndex: -1,
-    upload_pic: ['/images/head.png'],
+    avatar: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.loadPersonalInfo();
+  },
 
+  loadPersonalInfo: function() {
+    let that = this;
+    http.requestUrl({
+      url: 'account/info',
+      news: true,
+      data: {
+        uid: app.d.uid,
+      },
+    }).then(res => {
+      let sex = res.data.sex - 1;
+      let address = []
+      if (res.data.province != '')
+        address = [res.data.province, res.data.city, res.data.area];
+      let birthday = res.data.birthday;
+      birthday = (birthday == '0000-00-00') ? '' : birthday;
+      that.setData({
+        avatar: res.data.avatar,
+        birthday: birthday,
+        job: res.data.job,
+        nickname: res.data.nickname,
+        sexIndex: sex,
+        address: address,
+      })
+    })
   },
 
   submitTap: function() {
@@ -34,6 +64,36 @@ Page({
     console.log('------------- 生日：', that.data.birthday);
     console.log('------------- 常驻：', that.data.address);
     console.log('------------- 行业：', that.data.job);
+
+
+    http.uploadFile({
+      tempFilePaths: that.data.avatar,
+    }).then(res => {
+      if (typeof res == 'string') {
+        res = JSON.parse(res);
+      }
+      console.log('上传完路径', res)
+      if (res.code == 1) {
+        http.requestUrl({
+          url: 'account/info',
+          news: true,
+          method: 'post',
+          data: {
+            uid: app.d.uid,
+            avatar: res.data.url,
+            nickname: that.data.nickname,
+            sex: that.data.sexIndex + 1,
+            birthday: that.data.birthday,
+            job: that.data.job,
+            province: that.data.address[0],
+            city: that.data.address[1],
+            area: that.data.address[2],
+          },
+        }).then(res => {
+          tip.success('修改成功', 1000);
+        })
+      }
+    })
   },
 
   sexChange: function(evt) {
@@ -74,7 +134,7 @@ Page({
       success: (res) => {
         console.log(res)
         this.setData({
-          upload_pic: res.tempFilePaths
+          avatar: res.tempFilePaths[0]
         })
       }
     });

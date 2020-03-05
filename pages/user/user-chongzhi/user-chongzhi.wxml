@@ -6,10 +6,10 @@
       <input placeholder="请输入要充值的金额" type="number" value="{{money}}" bindinput="moneyInput" placeholder-class="text-gray" class="c0" style="font-size:60rpx; height:100rpx;"></input>
     </view>
     <view class="padding-tb flex flex-wrap">
-      <view class="padding-xs basis-xn" wx:for="{{10}}" wx:key="index">
-        <view class="item active">
-          <view class="font_34 c0">200</view>
-          <view class="font_22 text-red">送10</view>
+      <view class="padding-xs" wx:for="{{list}}" wx:key="index" data-index="{{index}}" data-id="{{item.id}}" data-money="{{item.money}}" bindtap="selectedTap">
+        <view class="item {{item.id==selectId?'active':''}} ">
+          <view class="font_34 c0">{{item.money}}</view>
+          <view class="font_22 text-red">送{{item.addition}}{{item.type==20?'积分':''}}</view>
         </view>
       </view>
     </view>

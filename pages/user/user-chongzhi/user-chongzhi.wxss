@@ -11,10 +11,11 @@ page {
 }
 
 .item {
-  min-height: 92rpx;
+  max-height: 92rpx;
+  min-width: 130rpx;
   border: 1px solid rgba(0, 0, 0, 1);
   border-radius: 6px;
-  padding: 10rpx 30rpx;
+  padding: 10rpx;
   text-align: center;
   display: flex;
   flex-direction: column;

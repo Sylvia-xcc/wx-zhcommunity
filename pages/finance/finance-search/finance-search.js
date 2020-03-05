@@ -65,7 +65,7 @@ Page({
     http.requestUrl({
       url: 'wxapp/FinanceIndex/getList',
       data: {
-        keywords: that.data.searchValue,
+        keyword: that.data.searchValue,
         paging: 1,
         page: that.data.page,
         count: 10,

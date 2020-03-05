@@ -35,7 +35,8 @@ Page({
         uid: app.d.uid,
         p: that.data.page,
         count: 10
-      }
+      },
+      method:'post'
     }).then(res => {
       let items = that.data.list;
       if (that.data.page == 1) {
@@ -59,10 +60,10 @@ Page({
   },
 
 
-  detailTap: function(evt) {
+  detailTap: function (evt) {
     let id = evt.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/friendship/friendship-detail/friendship-detail?id=' + id,
+      url: '/pages/shop/shop-detail/shop-detail?id=' + id,
     })
   },
 

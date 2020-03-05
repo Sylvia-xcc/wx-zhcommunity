@@ -1,2 +1,23 @@
 <!--pages/shop/shop-search/shop-search.wxml-->
-<text>pages/shop/shop-search/shop-search.wxml</text>
+<view class="cu-bar search bg-gray solid-top">
+  <view class="search-form bg-white radius" style="background:#fff;">
+    <text class="cuIcon-search" style="font-size:28rpx;"></text>
+    <input type="text" placeholder="请输入职位关键词" confirm-type="search" auto-focus="true" focus="true" value="{{searchValue}}" bindinput="searchValueInput" bindconfirm="doSearch"></input>
+  </view>
+</view>
+
+<view hidden="{{isLoading}}">
+  <view class="padding flex solid-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailTap">
+        <view>
+          <image src="{{item.thumb}}" style="width:224rpx;height:224rpx;" mode="aspectFill"></image>
+        </view>
+        <view class="padding-left-sm pr flex-sub">
+          <view class="text-df c0 showtwo">{{item.name}}</view>
+          <view class="font_22 text-gray padding-top-xs">200人已购买</view>
+          <view class="cu-tag line-red radius margin-top-sm" style="height:38rpx;">购买可获得{{item.jifen_get}}积分</view>
+          <view class="text-red text-bold" style="font-size:40rpx; padding-top:15rpx;">￥{{item.price}}元</view>
+          <button class="cu-btn radius bg-green sm pa" style="right:0rpx; bottom:0rpx;">立即购买</button>
+        </view>
+      </view>
+  <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+</view>

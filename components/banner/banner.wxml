@@ -4,13 +4,13 @@
   <swiper-item wx:if="{{videoUrl!=''}}">
     <video id="myvideo" src='{{videoUrl}}' style='width:100%;height:100%;' bindplay="play" bindpause="pause" bindended="pause" controls="{{false}}" show-center-play-btn="{{false}}"></video>
   </swiper-item>
-  <block wx:for="{{banner}}" wx:key="this">
+  <block wx:for="{{banner}}" wx:key="index">
     <swiper-item>
       <block wx:if="{{item.url}}">
-        <image src="{{item.url}}" data-src='{{item.url}}' bindtap='previewImgTap' bindload='setContainerHeight' mode='aspectFill'></image>
+        <image src="{{item.url}}" class="{{radius?'radius':''}}" data-type='url' data-id="{{index}}" bindtap='previewImgTap' bindload='setContainerHeight' mode='aspectFill'></image>
       </block>
       <block wx:else>
-        <image src="{{item}}" data-src='{{item}}' bindtap='previewImgTap' bindload='setContainerHeight' mode='aspectFill'></image>
+        <image src="{{item}}" class="{{radius?'radius':''}}" data-type='image' data-id="{{index}}" bindtap='previewImgTap' bindload='setContainerHeight' mode='aspectFill'></image>
       </block>
     </swiper-item>
   </block>

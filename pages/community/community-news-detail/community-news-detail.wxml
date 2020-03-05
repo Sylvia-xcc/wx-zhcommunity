@@ -1,81 +1,87 @@
 <!--pages/community/community-news-detail/community-news-detail.wxml-->
 <view hidden="{{isLoading}}">
-<view class="padding">
-  <view class="font_30 text-bold c0">{{detail.title}}</view>
-  <view class="text-gray text-xs padding-top-xs">{{detail.create_time}}</view>
-  <view class="text-sm padding-top-sm">{{detail.desc}}
-  </view>
-  <view class="padding-top" wx:if="{{detail.type<=1}}">
-    <import src="../../../wxParse/wxParse.wxml" />
-    <template is="wxParse" data="{{wxParseData:content.nodes}}" style="width:370px" />
-  </view>
-  <view class="padding-top" wx:else>
-    <video src="{{detail.video}}" style="width:690rpx;"></video>
-  </view>
-  <view class="text-black text-xs text-left padding-tb">
-    <text>评论({{total}})</text>
-    <text class="padding-left">{{detail.views}}次阅读</text>
-  </view>
-</view>
+  <block wx:if="{{detail!=null}}">
+    <view class="padding">
+      <view class="font_30 text-bold c0">{{detail.title}}</view>
+      <view class="text-gray text-xs padding-top-xs">{{detail.create_time}}</view>
+      <view class="text-sm padding-top-sm">{{detail.desc}}
+      </view>
+      <view class="padding-top" wx:if="{{detail.type<=1}}">
+        <import src="../../../wxParse/wxParse.wxml" />
+        <template is="wxParse" data="{{wxParseData:content.nodes}}" style="width:370px" />
+      </view>
+      <view class="padding-top" wx:else>
+        <video src="{{detail.video}}" style="width:690rpx;"></video>
+      </view>
+      <view class="text-black text-xs text-left padding-tb">
+        <text>评论({{total}})</text>
+        <text class="padding-left">{{detail.views}}次阅读</text>
+      </view>
+    </view>
 
-<view class="padding bg-white" style="padding-bottom:150rpx;">
-  <!-- <view class="c0 font_26 text-bold">全部留言（{{total}}）</view> -->
-  <view>
-    <view class="cu-list menu-avatar comment">
-      <view class="cu-item solid-bottom" style="padding-left:90rpx !important;" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="messageTap">
-        <view class="cu-avatar round" style="left:0 !important; background-image:url({{item.user_photo}});" data-uid="{{item.user_id}}" catchtap="personalTap"></view>
-        <view class="content">
-          <view class="text-black text-bold" style="font-size:24rpx;">{{item.user_name}}</view>
-          <view class="text-black text-content font_22 flex align-center">
-            <view class="flex-sub">{{item.content}}</view>
-            <view class="cuIcon-appreciate margin-left {{item.is_like>0?'text-cgreen':''}}" style="font-size:40rpx;" data-id="{{item.id}}" data-like="{{item.is_like}}" data-gid="{{item.id}}" catchtap="likeMessageTap"></view>
-          </view>
-          <view class="flex">
-            <view class="text-gray text-xs">{{item.create_time}}</view>
-            <view class="text-blue text-xs padding-left-sm">评论</view>
-          </view>
+    <view class="padding bg-white" style="padding-bottom:150rpx;">
+      <!-- <view class="c0 font_26 text-bold">全部留言（{{total}}）</view> -->
+      <view>
+        <view class="cu-list menu-avatar comment">
+          <view class="cu-item solid-bottom" style="padding-left:90rpx !important;" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="messageTap">
+            <view class="cu-avatar round" style="left:0 !important; background-image:url({{item.user_photo}});" data-uid="{{item.user_id}}" catchtap="personalTap"></view>
+            <view class="content">
+              <view class="text-black text-bold" style="font-size:24rpx;">{{item.user_name}}</view>
+              <view class="text-black text-content font_22 flex align-center">
+                <view class="flex-sub">{{item.content}}</view>
+                <view class="cuIcon-appreciate margin-left {{item.is_like>0?'text-cgreen':''}}" style="font-size:40rpx;" data-id="{{item.id}}" data-like="{{item.is_like}}" data-gid="{{item.id}}" catchtap="likeMessageTap"></view>
+              </view>
+              <view class="flex">
+                <view class="text-gray text-xs">{{item.create_time}}</view>
+                <view class="text-blue text-xs padding-left-sm">评论</view>
+              </view>
 
-          <view>
-            <view class="cu-list menu-avatar comment" wx:for="{{item.childNode}}" wx:key="index" wx:for-item="iitem" catchtap>
-              <view class="cu-item" style="padding-left:90rpx !important; padding-right:0 !important; padding-bottom:0 !important;">
-                <view class="cu-avatar round" style="left:0 !important; background-image:url({{iitem.user_photo}});" data-uid="{{iitem.user_id}}" catchtap="personalTap"></view>
-                <view class="content">
-                  <view class="text-black text-bold" style="font-size:24rpx;">{{iitem.user_name}}</view>
-                  <view class="text-black text-content font_22 flex align-center">
-                    <view class="flex-sub">回复 {{item.user_name}}： {{iitem.content}}</view>
-                    <view class="cuIcon-appreciate margin-left {{iitem.is_like>0?'text-cgreen':''}}" style="font-size:40rpx;" data-id="{{iitem.id}}" data-like="{{iitem.is_like}}" data-gid="{{iitem.parent_id}}" catchtap="likeMessageTap"></view>
-                  </view>
-                  <view class="flex justify-between">
-                    <view class="text-gray text-xs">{{iitem.create_time}}</view>
+              <view>
+                <view class="cu-list menu-avatar comment" wx:for="{{item.childNode}}" wx:key="index" wx:for-item="iitem" catchtap>
+                  <view class="cu-item" style="padding-left:90rpx !important; padding-right:0 !important; padding-bottom:0 !important;">
+                    <view class="cu-avatar round" style="left:0 !important; background-image:url({{iitem.user_photo}});" data-uid="{{iitem.user_id}}" catchtap="personalTap"></view>
+                    <view class="content">
+                      <view class="text-black text-bold" style="font-size:24rpx;">{{iitem.user_name}}</view>
+                      <view class="text-black text-content font_22 flex align-center">
+                        <view class="flex-sub">回复 {{item.user_name}}： {{iitem.content}}</view>
+                        <view class="cuIcon-appreciate margin-left {{iitem.is_like>0?'text-cgreen':''}}" style="font-size:40rpx;" data-id="{{iitem.id}}" data-like="{{iitem.is_like}}" data-gid="{{iitem.parent_id}}" catchtap="likeMessageTap"></view>
+                      </view>
+                      <view class="flex justify-between">
+                        <view class="text-gray text-xs">{{iitem.create_time}}</view>
+                      </view>
+                    </view>
                   </view>
                 </view>
               </view>
+
             </view>
           </view>
-
         </view>
+        <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
       </view>
     </view>
-    <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
-  </view>
-</view>
-<my-textarea id='my-textarea' bind:OnSubmit='OnSubmit'></my-textarea>
+    <my-textarea id='my-textarea' bind:OnSubmit='OnSubmit'></my-textarea>
 
 
-<view class="cu-bar input position-bottom" style="box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);">
-  <view class="bg-gray margin-lr-sm margin-tb-xs padding-xs text-gray radius text-sm" style="width:440rpx;" bindtap="messageTap">快来说说你的想法</view>
-  <view class="action pr" style="margin-left:0 !important;" bindtap="messageTap">
-    <view class="cuIcon-message text-gray">
-      <view class="cu-tag badge">{{total}}</view>
+    <view class="cu-bar input position-bottom" style="box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);">
+      <view class="bg-gray margin-lr-sm margin-tb-xs padding-xs text-gray radius text-sm" style="width:440rpx;" bindtap="messageTap">快来说说你的想法</view>
+      <view class="action pr" style="margin-left:0 !important;" bindtap="messageTap">
+        <view class="cuIcon-message text-gray">
+          <view class="cu-tag badge">{{total}}</view>
+        </view>
+      </view>
+      <view class="action" style="margin-left:0 !important;" bindtap="collectTap">
+        <text class="cuIcon-favor {{detail.is_collect>0?'text-green':'text-gray'}}"></text>
+      </view>
+      <view class="action pr" style="width:48rpx; margin-right:0 !important; margin-left:0 !important;">
+        <button open-type="share" class="shareBtn"></button>
+        <view class=" cuIcon-post text-gray"></view>
+      </view>
     </view>
-  </view>
-  <view class="action" style="margin-left:0 !important;" bindtap="collectTap">
-    <text class="cuIcon-favor {{detail.is_collect>0?'text-green':'text-gray'}}"></text>
-  </view>
-  <view class="action pr" style="width:48rpx; margin-right:0 !important; margin-left:0 !important;">
-    <button open-type="share" class="shareBtn"></button>
-    <view class=" cuIcon-post text-gray"></view>
-  </view>
-</view>
 
+  </block>
+  <view wx:else class="text-center" style="padding-top:200rpx;">
+    <image src="http://image.fengzhankeji.com/static/sorry.png" style="width:350rpx; height:274rpx;"></image>
+    <view class="text-gray padding-top-sm text-sm">亲，新闻已被删除了哦~~</view>
+  </view>
 </view>

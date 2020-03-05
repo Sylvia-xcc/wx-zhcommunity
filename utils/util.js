@@ -186,6 +186,16 @@ const findHtmlImg = (str) =>{
   return srcArr;
 }
 
+//手机号检测
+const filterMobile = (mobile) =>{
+  var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+  if (!myreg.test(mobile)) {
+    tip.success('填写正确手机号')
+    return false;
+  }
+  return true;
+}
+
 module.exports = {
   formatNumber: formatNumber,
   formatTime: formatTime,
@@ -204,4 +214,5 @@ module.exports = {
   findHtmlImg,
   copyObj: copyObj,
   personal,
+  filterMobile,
 }

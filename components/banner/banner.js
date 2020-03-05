@@ -11,6 +11,10 @@ Component({
     videoUrl: {
       type: String,
       value: ''
+    },
+    radius: {
+      type: Boolean,
+      value: false,
     }
   },
 
@@ -24,7 +28,7 @@ Component({
     isVideoPlay: false, //视频是否在播放
     interval: 5000,
     current: 0,
-    num:0,
+    num: 0,
   },
 
   /**
@@ -39,23 +43,33 @@ Component({
       let imgw = evt.detail.width; //图片宽度
       let swiperH = winWid * imgh / imgw;
       swiperH = (swiperH >= that.data.swiperH) ? swiperH : that.data.swiperH;
-      swiperH= 300;
-      let btnH = (swiperH-96)/2;
-      btnH = btnH>=that.data.btnH?btnH:that.data.btnH;
+      swiperH = 300;
+      let btnH = (swiperH - 96) / 2;
+      btnH = btnH >= that.data.btnH ? btnH : that.data.btnH;
       that.setData({
         swiperH: swiperH, //设置高度
-        btnH:btnH,
-        num:that.data.num+1
+        btnH: btnH,
+        num: that.data.num + 1
       })
       // console.log('------num', that.data.num, swiperH)
     },
 
-    previewImgTap:function(evt){
+    previewImgTap: function(evt) {
+      let that = this;
       let id = evt.currentTarget.dataset.id;
-      let dataimg = evt.currentTarget.dataset.dataimg;
+      let type = evt.currentTarget.dataset.type;
+      let items = that.data.banner;
+      let imgs = [];
+      if (type == 'url') {
+        for (var i = 0; i < items.length; i++) {
+          imgs.push(items[i].url);
+        }
+      } else {
+        imgs = items;
+      }
       wx.previewImage({
-        current: dataimg[id],
-        urls: dataimg
+        current: imgs[id],
+        urls: imgs
       });
     },
 
