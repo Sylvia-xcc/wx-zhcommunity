@@ -11,13 +11,14 @@ Page({
   data: {
     id: 0,
     detail: null,
-    isLoading:true,
+    isLoading: true,
+    video: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     console.log('options:', options);
     let that = this;
     that.setData({
@@ -26,9 +27,9 @@ Page({
     that.loadDetail();
   },
 
-  loadDetail: function () {
+  loadDetail: function() {
     let that = this;
-    if(that.data.isLoading)
+    if (that.data.isLoading)
       tip.loading();
     http.requestUrl({
       url: 'wxapp/QingyiIndex/getDetail',
@@ -37,25 +38,27 @@ Page({
         user_id: app.d.uid
       }
     }).then(res => {
+      let video = res.data.video_list ? res.data.video_list[0] : '';
       that.setData({
-        detail: res.data
+        detail: res.data,
+        video: video
       })
-      setTimeout(function(){
+      setTimeout(function() {
         tip.loaded();
         that.setData({
-          isLoading:false,
+          isLoading: false,
         })
-      },400)
+      }, 400)
     })
   },
 
-  collectTap: function (evt) {
+  collectTap: function(evt) {
     if (!util.hasAuthorize())
       return;
     let that = this;
     http.requestUrl({
       url: 'wxapp/QingyiIndex/collect',
-      method:'post',
+      method: 'post',
       data: {
         uid: app.d.uid,
         mid: that.data.id
@@ -68,7 +71,7 @@ Page({
   },
 
   //预览
-  previewImgTap: function (evt) {
+  previewImgTap: function(evt) {
     let id = evt.currentTarget.dataset.id;
     let dataimg = evt.currentTarget.dataset.dataimg;
     wx.previewImage({
@@ -78,14 +81,14 @@ Page({
   },
 
   //拨打电话
-  phoneTap: function () {
+  phoneTap: function() {
     let that = this;
     wx.makePhoneCall({
       phoneNumber: that.data.detail.mobile,
     })
   },
 
-  personalTap: function (evt) {
+  personalTap: function(evt) {
     let uid = evt.currentTarget.dataset.uid;
     util.personal(uid);
   },
@@ -93,49 +96,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

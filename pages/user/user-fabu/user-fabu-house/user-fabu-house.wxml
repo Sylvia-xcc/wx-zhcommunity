@@ -30,7 +30,7 @@
           <view class="font_22 text-gray padding-bottom-sm text-right">{{item.create_time}}</view>
           <view class="text-sm">
             <!-- <text class="text-green text-sm">审核中</text> -->
-            <text class="text-gray text-sm padding-left" data-id="{{item.id}}" catchtap="deleteTap">删除</text>
+            <text class="text-gray text-sm padding-left" data-id="{{item.id}}" catchtap="deleteTap" wx:if="{{isOwn}}">删除</text>
           </view>
         </view>
       </view>
@@ -49,7 +49,7 @@
         <view class="font_22 text-gray text-right">{{item.create_time}}</view>
         <view class="text-sm text-right padding-top-xs">
           <!-- <text class="text-green text-sm">审核中</text> -->
-          <text class="text-gray text-sm padding-left" data-id="{{item.id}}" catchtap="deleteTap">删除</text>
+          <text class="text-gray text-sm padding-left" data-id="{{item.id}}" catchtap="deleteTap" wx:if="{{isOwn}}">删除</text>
         </view>
       </view>
     </view>

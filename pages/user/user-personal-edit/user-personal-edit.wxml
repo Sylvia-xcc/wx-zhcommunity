@@ -1,5 +1,6 @@
 <!--pages/user/user-personal-edit/user-personal-edit.wxml-->
 
+<view hidden="{{isLoading}}">
 <view class="margin radius">
   <view class="cu-form-group">
     <view class="title">头像</view>
@@ -48,4 +49,5 @@
 </view>
 <view class="padding flex flex-direction">
   <button class="cu-btn bg-green lg" bindtap="submitTap">修改</button>
+</view>
 </view>

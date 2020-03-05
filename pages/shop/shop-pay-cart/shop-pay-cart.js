@@ -13,8 +13,8 @@ Page({
     address: null,
     productData: [],
     userInfo: null,
-    fastPrice: 0,//运费
-    totalPrice: 0,//实际支付
+    fastPrice: 0, //运费
+    totalPrice: 0, //实际支付
     hasAddress: false,
     remark: '',
     paytype: 'weixin',
@@ -28,40 +28,48 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    console.log('options:',options)
+  onLoad: function(options) {
+    console.log('options:', options)
     let that = this;
     that.setData({
       cartId: options.cartId || 0
     })
     app.globalData.address = null;
-    console.log('----load address', app.globalData.address);
-    that.loadProductDetail();
+    // console.log('----load address', app.globalData.address);
+    // that.loadProductDetail();
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     console.log('----show', app.globalData.address);
     if (app.globalData.address) {
       this.setData({
         address: app.globalData.address,
-        hasAddress: app.globalData.address ? true : false,
+        hasAddress: true,
+      })
+    } else {
+      this.setData({
+        address: null,
+        hasAddress: false,
       })
     }
+    this.loadProductDetail();
   },
 
   /**物品详细信息*/
-  loadProductDetail: function () {
-    var that = this;
+  loadProductDetail: function() {
+    let that = this;
     tip.loading();
+    let addressId = that.data.hasAddress ? that.data.address.id : 0;
     http.requestUrl({
       url: '/wxapp/payment/buy_cart',
       method: 'post',
       data: {
         cart_id: that.data.cartId,
         uid: app.d.uid,
+        address_id: addressId,
       },
     }).then((res) => {
       let hasAddress = (res.address) ? true : false;
@@ -75,11 +83,11 @@ Page({
         address: res.address, //地址
         productData: res.product, //商品列表
         fastPrice: res.express_money, //运费
-        totalPrice: res.price, 
+        totalPrice: res.price,
         userInfo: res.userinfo,
         hasAddress: hasAddress,
         isLoading: true,
-        jifen: jifen||0,
+        jifen: jifen || 0,
         totalNum: totalNum,
         money: res.userinfo.money
       });
@@ -88,7 +96,7 @@ Page({
   },
 
   //提交订单
-  submitTap: function (evt) {
+  submitTap: function(evt) {
     let that = this;
     let payType = evt.currentTarget.dataset.paytype;
     if (that.data.address == null) {
@@ -135,7 +143,7 @@ Page({
   },
 
   //调起微信支付
-  wxpay: function (order) {
+  wxpay: function(order) {
     let that = this
     http.requestUrl({
       url: '/wxapp/Wxpay/wxpay',
@@ -153,38 +161,38 @@ Page({
         package: order.package,
         signType: 'MD5',
         paySign: order.paySign,
-        success: function (res) {
+        success: function(res) {
           that.paySuccess();
         },
-        fail: function (res) {
+        fail: function(res) {
           that.payFail();
         }
       })
     })
   },
 
-  remarkInput: function (evt) {
+  remarkInput: function(evt) {
     this.setData({
       remark: evt.detail.value
     })
   },
 
   /**支付成功*/
-  paySuccess: function () {
+  paySuccess: function() {
     wx.redirectTo({
       url: '/pages/shop/shop-pay-result/shop-pay-result?type=success',
     })
   },
 
   /**支付失败*/
-  payFail: function () {
+  payFail: function() {
     wx.redirectTo({
       url: '/pages/shop/shop-pay-result/shop-pay-result?type=fail',
     })
   },
 
 
-  addressTap: function (evt) {
+  addressTap: function(evt) {
     wx.navigateTo({
       url: '/pages/shop/shop-address/shop-address',
     })

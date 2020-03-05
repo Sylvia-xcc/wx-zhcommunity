@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLoading:true,
     nickname: '',
     job: '',
     birthday: '',
@@ -33,6 +34,8 @@ Page({
 
   loadPersonalInfo: function() {
     let that = this;
+    if(that.data.isLoading)
+      tip.loading();
     http.requestUrl({
       url: 'account/info',
       news: true,
@@ -54,6 +57,12 @@ Page({
         sexIndex: sex,
         address: address,
       })
+      setTimeout(function(){
+        tip.loaded();
+        that.setData({
+          isLoading:false,
+        })
+      },400)
     })
   },
 
@@ -91,6 +100,7 @@ Page({
           },
         }).then(res => {
           tip.success('修改成功', 1000);
+          wx.navigateBack();
         })
       }
     })

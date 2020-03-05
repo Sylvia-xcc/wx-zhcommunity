@@ -9,22 +9,31 @@ Page({
    * 页面的初始数据
    */
   data: {
+    uid: 0,
     list: [],
     page: 1,
     total: 0,
     bottoming: true,
     showBottomLoading: false,
     isLoading: true,
+    isOwn: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
+    console.log('options:', options);
+    this.setData({
+      uid: options.uid || app.d.uid,
+    })
+    this.setData({
+      isOwn: uid == app.d.uid ? true : false
+    })
     this.loadList();
   },
 
-  loadList: function () {
+  loadList: function() {
     let that = this;
     if (that.data.isLoading)
       tip.loading();
@@ -50,7 +59,7 @@ Page({
         bottoming: true,
         showBottomLoading: false,
       })
-      setTimeout(function () {
+      setTimeout(function() {
         if (that.data.isLoading)
           tip.loaded();
         that.setData({
@@ -60,14 +69,16 @@ Page({
     })
   },
 
-  detailTap: function (evt) {
+  detailTap: function(evt) {
+    if (!this.data.isOwn)
+      return;
     let id = evt.currentTarget.dataset.id;
     wx.navigateTo({
       url: '/pages/finance/finance-detail/finance-detail?id=' + id,
     })
   },
 
-  deleteTap: function (evt) {
+  deleteTap: function(evt) {
     let that = this;
     let id = evt.currentTarget.dataset.id;
     tip.confirm('是否确定删除改发布?').then(res => {
@@ -96,49 +107,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
     let that = this;
     if (that.data.list.length < that.data.total && that.data.bottoming) { //有更多时加载
       that.setData({
         showBottomLoading: true,
         bottoming: false,
       })
-      setTimeout(function () {
+      setTimeout(function() {
         that.setData({
           page: that.data.page + 1,
         })
@@ -150,7 +161,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

@@ -12,7 +12,7 @@
         <view class="c0 showtwo">{{item.content}}</view>
         <view class="flex justify-between text-gray font_22 padding-top ">
           <text>{{item.create_time}}</text>
-          <view class="text-sm text-gray text-right" data-id="{{item.id}}" catchtap="deleteTap">删除</view>
+          <view class="text-sm text-gray text-right" data-id="{{item.id}}" catchtap="deleteTap" wx:if="{{isOwn}}">删除</view>
         </view>
       </view>
     </view>
@@ -25,7 +25,7 @@
         <view class="c0 showtwo">{{item.describe}}</view>
         <view class="flex justify-between text-gray font_22 padding-top ">
           <text>{{item.create_time}}</text>
-          <view class="text-sm text-gray text-right" data-id="{{item.id}}" catchtap="deleteTap">删除</view>
+          <view class="text-sm text-gray text-right" data-id="{{item.id}}" catchtap="deleteTap"  wx:if="{{isOwn}}">删除</view>
         </view>
       </view>
     </view>

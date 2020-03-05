@@ -91,7 +91,7 @@ Page({
         that.setData({
           isLoading: false
         })
-      }, 200)
+      }, 600)
     })
   },
 

@@ -13,7 +13,7 @@
 
   <view class="bg-white padding ssolid_bottom">
     <view class="text-sm c9 padding-bottom-xs">初步预算</view>
-    <input placeholder="请输入初步预算价格（元）" placeholder-class="c3 text-df" type="number" value="{{money}}" bindinput="moneyInput"></input>
+    <input placeholder="请输入初步预算价格（元）" placeholder-class="c3 text-df" value="{{money}}" bindinput="moneyInput"></input>
     <view class="flex align-center padding-top-xs" bindtap="checkTap">
       <view class="cuIcon-round text-gray" wx:if="{{checked}}"></view>
       <view class="cuIcon-roundcheckfill text-green" wx:else></view>
@@ -29,7 +29,8 @@
   <view class="padding bg-white ssolid_bottom">
     <view class="text-sm c9 ">上传附件</view>
     <view class="padding-top-sm  ">
-      <view class="grid col-3 grid-square flex-sub">
+      <v-upload binduploadFun="updateFile" upload_pic="{{upload_pic}}" video="{{video}}"></v-upload>
+      <!-- <view class="grid col-3 grid-square flex-sub">
         <view class="bg-img" wx:for="{{upload_pic}}" wx:key="index" bindtap="previewImg" data-url="{{upload_pic[index]}}">
           <image src='{{upload_pic[index]}}' mode='aspectFill'></image>
           <view class="cu-tag bg-red" catchtap="delTap" data-index="{{index}}">
@@ -39,18 +40,7 @@
         <view class="solids bg-gray" bindtap="chooseImage" wx:if="{{upload_pic.length<upload_max}}">
           <text class="cuIcon-cameraadd " style="font-size:36px;"></text>
         </view>
-        <!-- <view class="solids bg-gray" bindtap="chooseVideo" wx:if="{{upload_pic.length<=0 && video==''}}">
-        <text class="cuIcon-video " style="font-size:36px;"></text>
       </view> -->
-      </view>
-      <!-- <view wx:if="{{video!=''}}" class="flex justify-center" style="width:100%;">
-      <view class="pr" style="width:300px;">
-        <video src="{{video}}"></video>
-        <view class="cu-tag bg-black pa" style="right:0rpx;" catchtap="delTap" data-index="{{index}}">
-          <text class="cuIcon-close"></text>
-        </view>
-      </view>
-    </view> -->
     </view>
   </view>
 

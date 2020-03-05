@@ -8,7 +8,7 @@
         <text>评论 {{item.comments}}条</text>
         <text>{{item.create_time}}</text>
       </view>
-      <view class="text-sm text-gray text-right" data-id="{{item.id}}" catchtap="deleteTap">删除</view>
+      <view class="text-sm text-gray text-right" data-id="{{item.id}}" catchtap="deleteTap" wx:if="{{isOwn}}">删除</view>
     </view>
   </view>
   <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>

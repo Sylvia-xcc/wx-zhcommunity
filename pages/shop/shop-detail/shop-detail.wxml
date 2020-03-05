@@ -16,8 +16,8 @@
 
 <view class="padding bg-white margin-top">
   <view class="font_22 c0 padding-bottom-xs">服务：7天无理由退款</view>
-  <view class="font_22 c0 padding-bottom-xs">运费：包邮</view>
-  <view class="font_22 c0 padding-bottom-xs">规格：请选择颜色/尺寸</view>
+  <view class="font_22 c0 padding-bottom-xs" wx:if="{{product.fid==0}}">运费：包邮</view>
+  <!-- <view class="font_22 c0 padding-bottom-xs">规格：请选择颜色/尺寸</view> -->
 </view>
 
 <view class=" margin-top bg-white padding" style="padding-bottom:120rpx;">

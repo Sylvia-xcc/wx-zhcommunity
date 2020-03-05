@@ -1,7 +1,7 @@
 <!--pages/friendship/friendship-detail/friendship-detail.wxml-->
 <view hidden="{{isLoading}}">
-  <view class="padding">
-    <v-banner banner="{{detail.file_list}}"></v-banner>
+  <view class="padding" wx:if="{{detail && (detail.img_list.length>0 || video!='')}}">
+    <v-banner banner="{{detail.img_list}}" videoUrl="{{video}}"></v-banner>
   </view>
 
   <view class="padding-lr text-sm c0">{{detail.intro}}
@@ -9,12 +9,12 @@
 
   <view class="padding">
     <view class="text-gray text-sm">初步预算</view>
-    <view class="font_26 c0 padding-top-sm">￥{{detail.money}}</view>
-    <view class="font_22 text-gray">{{detail.set_money==1?'不':''}}接受议价</view>
+    <view class="font_26 c0 padding-top-sm">{{detail.money}}</view>
+    <view class="font_22 text-gray padding-top-xs">{{detail.set_money==1?'不':''}}接受议价</view>
   </view>
 
   <view class="padding-lr padding-bottom flex flex-wrap">
-    <view class="padding-right-xs padding-bottom-xs" wx:for="{{detail.tag_list}}" wx:key="index" >
+    <view class="padding-right-xs padding-bottom-xs" wx:for="{{detail.tag_list}}" wx:key="index">
       <view class="cu-tag line-gray radius" style="height:42rpx;">{{item.name}}</view>
     </view>
   </view>

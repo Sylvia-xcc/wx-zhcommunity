@@ -7,7 +7,7 @@
       <view class="flex justify-between align-center text-gray font_22 padding-top-xl ">
         <text>{{item.detail.create_time}}</text>
         <view class="flex">
-          <view class="text-sm text-gray text-right padding-left" data-id="{{item.id}}" catchtap="cancelTap">取消报名</view>
+          <view class="text-sm text-gray text-right padding-left" data-id="{{item.id}}" catchtap="cancelTap" wx:if="{{isOwn}}">取消报名</view>
         </view>
       </view>
     </view>

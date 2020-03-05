@@ -55,26 +55,6 @@ Page({
     })
   },
 
-  //购物时选择的收货地址
-  setDefault: function(evt) {
-    var that = this;
-    var addrId = e.currentTarget.dataset.id;
-    http.requestUrl({
-      url: '/wxapp/Address/set_default',
-      data: {
-        uid: app.d.uid,
-        addr_id: addrId
-      }
-    }).then(res => {
-      var cartId = that.data.cartId;
-      if (cartId > 0) {
-        wx.redirectTo({
-          url: '../../order/pay?cartId=' + cartId,
-        });
-      }
-    })
-  },
-
   //选择收货地址
   selectTap: function(evt) {
     let addrId = evt.currentTarget.dataset.id;
@@ -92,6 +72,22 @@ Page({
     wx.navigateTo({
       url: '/pages/shop/shop-address-edit/shop-address-edit?addrId=' + addrId,
     })
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+    // console.log('---------- onhide', this.data.address.length)
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+    console.log('---------- onUnload', this.data.address.length)
+    if (this.data.address.length<=0)
+      app.globalData.address=null;
   },
 
   /**

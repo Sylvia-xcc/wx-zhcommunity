@@ -23,8 +23,8 @@ Component({
    */
   data: {
     autoplay: false,
-    swiperH: 0,
-    btnH: 0,
+    swiperH: 300,
+    btnH: 102,
     isVideoPlay: false, //视频是否在播放
     interval: 5000,
     current: 0,

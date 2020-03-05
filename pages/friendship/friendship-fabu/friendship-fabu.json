@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "v-upload":"/components/uploadImage/index"
+  },
   "navigationBarTitleText": "发布需求"
 }

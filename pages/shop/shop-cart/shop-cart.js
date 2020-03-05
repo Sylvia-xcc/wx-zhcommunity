@@ -11,7 +11,7 @@ Page({
   data: {
     carts: [],
     totalPrice: 0, // 总价，初始为0
-    selectAllStatus: true, // 全选状态，默认全选
+    selectAllStatus: false, // 全选状态，默认全选
     selectAllNum: 0, // 选择的数量，默认0
     isLoading: false,
   },
@@ -45,7 +45,7 @@ Page({
       app.globalData.updateCart = true;
       let cart = res.cart_list;
       for (var i = 0; i < cart.length; i++) {
-        cart[i].selected = true;
+        cart[i].selected = false;
       }
       cart.reverse();
       that.setData({
@@ -206,7 +206,7 @@ Page({
       }
     }
     if (cartIds === '') {
-      tip.error('请选择商品！', 2000)
+      tip.error('请选择支付商品', 2000)
       return;
     }
     wx.navigateTo({

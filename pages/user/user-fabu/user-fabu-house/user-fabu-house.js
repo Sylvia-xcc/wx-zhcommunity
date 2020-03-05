@@ -18,6 +18,7 @@ Page({
     showBottomLoading: false,
     isLoading: true,
     loading: true,
+    isOwn: true,
   },
 
   /**
@@ -27,6 +28,9 @@ Page({
     console.log('options:', options);
     this.setData({
       uid: options.uid || app.d.uid,
+    })
+    this.setData({
+      isOwn: uid == app.d.uid ? true : false
     })
     this.loadList();
   },

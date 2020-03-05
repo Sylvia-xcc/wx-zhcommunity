@@ -14,7 +14,7 @@ swiper-item {
   height: 96rpx;
   /* background: orange; */
   position: absolute;
-  left: 327rpx;
+  left: 305rpx;
   z-index: 99999;
 }
 

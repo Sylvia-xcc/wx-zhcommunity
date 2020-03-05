@@ -1,0 +1,25 @@
+<!--components/uploadImage/index.wxml-->
+<view class="">
+  <view class="grid col-3 grid-square flex-sub">
+    <view wx:if="{{video!=''}}" class="flex justify-center">
+      <view class="pr">
+        <video src="{{video}}" object-fit="cover" style="height:{{height}}px;"></video>
+        <view class="cu-tag bg-black pa" style="right:{{px}}px;" catchtap="delVideoTap">
+          <text class="cuIcon-close"></text>
+        </view>
+      </view>
+    </view>
+    <view class="bg-img" wx:for="{{upload_pic}}" wx:key="index" bindtap="previewImg" data-url="{{upload_pic[index]}}">
+      <image src='{{upload_pic[index]}}' mode='aspectFill'></image>
+      <view class="cu-tag bg-red" catchtap="delTap" data-index="{{index}}">
+        <text class="cuIcon-close"></text>
+      </view>
+    </view>
+    <view class="solids bg-gray" bindtap="chooseImage" wx:if="{{upload_pic.length<upload_max }}">
+      <text class="cuIcon-cameraadd " style="font-size:36px;"></text>
+    </view>
+    <view class="solids bg-gray" bindtap="chooseVideo" wx:if="{{video==''}}">
+      <text class="cuIcon-video " style="font-size:36px;"></text>
+    </view>
+  </view>
+</view>

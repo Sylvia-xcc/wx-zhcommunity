@@ -18,7 +18,7 @@
 
 
   <view class="cu-bar bg-white tabbar border shop position-bottom bg-cgreen">
-    <view class="action text-white " style="height:100rpx; border-right: 4rpx solid #fff;">
+    <view class="action text-white " style="height:100rpx; border-right: 4rpx solid #fff;" catchtap="backTap">
       <view class="cuIcon-home" style="font-size:60rpx;padding-top:20rpx;"></view>
     </view>
     <view class="bg-cgreen submit text-white font_34 text-bold" bindtap="buyTap">立即兑换</view>

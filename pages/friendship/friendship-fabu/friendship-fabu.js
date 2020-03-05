@@ -99,12 +99,14 @@ Page({
         desc: res.data.intro,
         money:res.data.money,
         mobile: res.data.mobile,
-        upload_pic: res.data.file_list || [],
+        upload_pic: res.data.img_list || [],
+        video: res.data.video_list ? res.data.video_list[0]:'',
         type: type,
         status: res.data.status,
         checked: res.data.set_money==1?false:true,
         tags:items,
       })
+      console.log('-------- video', that.data.video);
       setTimeout(function () {
         tip.loaded();
         that.setData({
@@ -146,14 +148,14 @@ Page({
       tip.error('请填写联系方式', 1000);
       return;
     }
-    if (that.data.upload_pic.length <= 0) {
-      tip.error('请上传附件', 1000);
-      return;
-    }
-    if (that.data.desc == '') {
-      tip.error('请填写具体描述', 1000);
-      return;
-    }
+    // if (that.data.upload_pic.length <= 0) {
+    //   tip.error('请上传附件', 1000);
+    //   return;
+    // }
+    // if (that.data.desc == '') {
+    //   tip.error('请填写具体描述', 1000);
+    //   return;
+    // }
     console.log('--------- 需求类型：', that.data.list[that.data.type].name);
     console.log('--------- 预算价格：', that.data.money);
     console.log('--------- 联系方式：', that.data.mobile);
@@ -167,9 +169,10 @@ Page({
       }
     }
     console.log('--------- 标签：', tags);
-    let {
-      upload_pic
-    } = that.data;
+    let upload_pic = util.copyObj(that.data.upload_pic);
+    let video = that.data.video;
+    if(video!='')
+      upload_pic.unshift(video);
     let temp = [];
     let files = [];
     tip.loading('发布中...');
@@ -190,16 +193,22 @@ Page({
 
     Promise.all(temp).then(res => {
       console.log('-------上传完成', files, that.data.optype)
-      let content = JSON.stringify(files);
+      // let content = JSON.stringify(files);
       if (type == 'submit')
-        that.submit(content,tags);
+        that.submit(files,tags);
       else if (type == 'republish')
-        that.republish(content, tags);
+        that.republish(files, tags);
     })
   },
 
   submit: function (content, tags) {
     let that = this;
+    content.reverse();
+    let imgList = (that.data.video == '') ? content : content.slice(1);
+    let videoList = (that.data.video == '') ? '' : content.slice(0, 1);
+    console.log('---------- uploadfile: ', imgList, videoList)
+    imgList = imgList.length <= 0 ? [] : JSON.stringify(imgList);
+    videoList = videoList.length <= 0 ? [] : JSON.stringify(videoList);
     http.requestUrl({
       url: 'wxapp/QingyiIndex/publish',
       data: {
@@ -207,7 +216,8 @@ Page({
         class_id: that.data.list[that.data.type].id,
         money: that.data.money,
         set_money: that.data.checked ? 0 : 1,
-        file_list: content,
+        img_list: imgList,
+        video_list: videoList,
         intro: that.data.desc,
         tags: tags,
         mobile: that.data.mobile
@@ -221,6 +231,12 @@ Page({
 
   republish: function (content, tags) {
     let that = this;
+    content.reverse();
+    let imgList = (that.data.video == '') ? content : content.slice(1);
+    let videoList = (that.data.video == '') ? '' : content.slice(0, 1);
+    console.log('---------- uploadfile: ', imgList, videoList)
+    imgList = imgList.length <= 0 ? [] : JSON.stringify(imgList);
+    videoList = videoList.length <= 0 ? [] : JSON.stringify(videoList);
     http.requestUrl({
       url: 'wxapp/QingyiIndex/republish',
       method: 'post',
@@ -230,7 +246,8 @@ Page({
         class_id: that.data.list[that.data.type].id,
         money: that.data.money,
         set_money: that.data.checked ? 0 : 1,
-        file_list: content,
+        img_list: imgList,
+        video_list: videoList,
         intro: that.data.desc,
         tags: tags,
         mobile: that.data.mobile
@@ -316,6 +333,15 @@ Page({
     })
   },
 
+  updateFile:function(evt){
+    console.log('upload:', evt.detail)
+    let that = this;
+    that.setData({
+      upload_pic:evt.detail.pics,
+      video: evt.detail.video
+    })
+  },
+
 
   //选择图片
   chooseImage() {
@@ -327,6 +353,7 @@ Page({
       sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album'], //从相册选择
       success: (res) => {
+        console.log('----------- res', res);
         if (this.data.upload_pic.length != 0) {
           this.setData({
             upload_pic: this.data.upload_pic.concat(res.tempFilePaths)

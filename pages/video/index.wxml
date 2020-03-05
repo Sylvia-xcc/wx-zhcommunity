@@ -1,6 +1,6 @@
 <!--pages/video/index.wxml-->
 
-<view>
+<view hidden="{{isLoading}}">
   <scroll-view scroll-x class="bg-white nav">
     <view class="flex padding-lr text-center">
       <view class="cu-item flex-sub {{tabCur==index?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" wx:for="{{classify}}" wx:key="index" data-index="{{index}}" data-id="{{item.id}}">{{item.name}}</view>

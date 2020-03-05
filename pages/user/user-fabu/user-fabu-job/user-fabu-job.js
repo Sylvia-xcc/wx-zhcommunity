@@ -18,6 +18,7 @@ Page({
     showBottomLoading: false,
     isLoading: true,
     loading: true,
+    isOwn: true,
   },
 
   /**
@@ -27,6 +28,9 @@ Page({
     console.log('options:', options);
     this.setData({
       uid: options.uid || app.d.uid,
+    })
+    this.setData({
+      isOwn: uid == app.d.uid ? true : false
     })
     this.loadList();
   },
@@ -83,7 +87,33 @@ Page({
     })
   },
 
-
+  deleteTap: function (evt) {
+    let that = this;
+    let id = evt.currentTarget.dataset.id;
+    tip.confirm('是否确定删除改发布?').then(res => {
+      http.requestUrl({
+        url: 'account/clearPost',
+        news: true,
+        method: 'post',
+        data: {
+          id: id,
+          model: 'job',
+          uid: app.d.uid
+        }
+      }).then(res => {
+        tip.success('删除成功', 1000);
+        let items = that.data.list;
+        let tmp = [];
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].id != id)
+            tmp.push(items[i]);
+        }
+        that.setData({
+          list: tmp
+        })
+      })
+    })
+  },
 
   tabSelect: function(evt) {
     let id = evt.currentTarget.dataset.id;
@@ -107,6 +137,8 @@ Page({
       url: '/pages/job/job-detail/job-detail?id=' + id + '&type=' + this.data.tabCur,
     })
   },
+
+  
 
   /**
    * 生命周期函数--监听页面初次渲染完成

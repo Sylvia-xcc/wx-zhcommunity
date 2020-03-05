@@ -95,8 +95,16 @@ Page({
       return;
     that.setData({
       tabCur: index,
+      page:1,
+      list:[],
+      bottoming: false,
+      showBottomLoading: true,
+      loading: true,
     })
-    that.loadVideoList();
+    setTimeout(function(){
+      that.loadVideoList();
+    },400)
+    
   },
 
   detailTap: function(evt) {
@@ -151,7 +159,7 @@ Page({
         that.setData({
           page: that.data.page + 1,
         })
-        that.loadVideoList();
+        that.loadVideoList(false);
       }, 800)
     }
   },
