@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabCur: 1,
+    tabCur: 0,
     list: [],
     page: 1,
     total: 0,
@@ -30,12 +30,14 @@ Page({
     let that = this;
     if (that.data.tabCur == 2)
       that.loadPaperList();
-    else if (that.data.tabCur == 1)
+    else 
       that.loadCommentList();
   },
 
   loadCommentList: function() {
     let that = this;
+    if(that.data.isLoading)
+      tip.loading();
     http.requestUrl({
       url: 'comments/getList',
       news: true,
@@ -43,7 +45,7 @@ Page({
         uid: app.d.uid,
         listRows: 10,
         page: that.data.page,
-        type: 2,
+        type: that.data.tabCur+1,
       }
     }).then(res => {
       let items = that.data.list;
@@ -57,7 +59,14 @@ Page({
         total: res.data.total,
         bottoming: true,
         showBottomLoading: false,
+        loading: false,
       })
+      setTimeout(function(){
+        tip.loaded();
+        that.setData({
+          isLoading:false,
+        })
+      }, 600)
     })
   },
 
@@ -83,6 +92,7 @@ Page({
         total: res.data.total,
         bottoming: true,
         showBottomLoading: false,
+        loading:false,
       })
     })
   },
@@ -93,25 +103,33 @@ Page({
     if (that.data.tabCur == index)
       return;
     that.setData({
-      tabCur: index
+      tabCur: index,
+      page:1,
+      list:[],
+      loading: true, 
+      bottoming: false,
+      showBottomLoading: true,
     })
-    that.loadList();
+    setTimeout(function(){
+      that.loadList();
+    },400);    
   },
 
   detailTap: function(evt) {
     let id = evt.currentTarget.dataset.id;
     let model = evt.currentTarget.dataset.model;
-    let url = '';
-    if (model == 'used')
-      url = '/pages/secondhand/secondhand-detail/secondhand-detail?id=';
-    else if(model == 'chat')
-      url = '/pages/community/community-chat-detail/community-chat-detail?id=';
+    util.detailTap(model,id);
+    // let url = '';
+    // if (model == 'used')
+    //   url = '/pages/secondhand/secondhand-detail/secondhand-detail?id=';
+    // else if(model == 'chat')
+    //   url = '/pages/community/community-chat-detail/community-chat-detail?id=';
 
-    if (url == '')
-      return;
-    wx.navigateTo({
-      url: url + id,
-    })
+    // if (url == '')
+    //   return;
+    // wx.navigateTo({
+    //   url: url + id,
+    // })
   },
 
   /**

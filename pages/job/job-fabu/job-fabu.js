@@ -165,8 +165,12 @@ Page({
       tip.error('请选择工作地点', 1000);
       return;
     }
-    if (that.data.mobile == '') {
-      tip.error('请填写联系电话', 1000);
+    // if (that.data.mobile == '') {
+    //   tip.error('请填写联系电话', 1000);
+    //   return;
+    // }
+    if (!util.filterMobile(that.data.mobile)) {
+      // tip.error('请填写联系电话', 1000);
       return;
     }
     if (that.data.desc == '') {

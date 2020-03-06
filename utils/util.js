@@ -73,6 +73,8 @@ const detailTap = (model, mid) => {
       url = "/pages/house/house-sell/house-sell-detail/house-sell-detail?id=" + mid;
     else if (model == "score_shop")
       url = "/pages/community/community-jifen-shop-detail/community-jifen-shop-detail?id=" + mid;
+    else if (model == "chat")
+      url = "/pages/community/community-chat-detail/community-chat-detail?id=" + mid;
   }
 
   console.log('------------->>>', model, mid, url)

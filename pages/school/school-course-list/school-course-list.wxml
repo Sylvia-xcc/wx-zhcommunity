@@ -1,15 +1,17 @@
 <!--pages/school/school-course-list/school-course-list.wxml-->
 
 <view class="" hidden="{{isLoading}}">
-  <view class="cu-bar search bg-white">
-    <view class="search-form round" style="background:#fff; border:1rpx solid #999;">
+<view class="cu-bar search bg-gray">
+    <view class="search-form round" style="background:#fff;">
       <text class="cuIcon-search"></text>
-      <input type="text" placeholder="请输入搜索关键词" confirm-type="search" bindtap="searchTap"></input>
+      <input type="text" placeholder="请输入关键词" confirm-type="search" bindtap="searchTap"></input>
     </view>
     <view class="action">
       <button class="cu-btn bg-green shadow-blur round" bindtap="fabuTap">发布+</button>
     </view>
   </view>
+
+  
   <view class="padding">
     <view class="" wx:for="{{list}}" wx:key="index" data-lid="{{item.id}}" bindtap="detailTap">
       <view class="bg-img bg-mask padding-tb-xl radius" style="background-image: url('{{item.thumb}}');height: 414rpx;">

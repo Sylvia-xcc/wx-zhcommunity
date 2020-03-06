@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "v-bottomloading": "/components/bottomLoading/bottomloading",
+    "v-commonweal": "/components/commonweal/commonweal"
+  },
+  "navigationBarTitleText": "搜索"
+}

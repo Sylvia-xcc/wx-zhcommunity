@@ -108,6 +108,12 @@ Page({
     })
   },
 
+  searchTap:function(evt){
+    wx.navigateTo({
+      url: '/pages/commonweal/commonweal-search/commonweal-search',
+    })
+  },
+
   fabuTap: function(evt) {
     let that = this;
     if (that.data.startBool == false) {

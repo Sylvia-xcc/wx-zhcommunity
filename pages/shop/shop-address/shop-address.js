@@ -38,7 +38,8 @@ Page({
       url: '/wxapp/address/index',
       data: {
         uid: app.d.uid,
-      }
+      },
+      loading:true,
     }).then(res => {
       let list = res.address_list;
       list.sort(function(vo1, vo2) {

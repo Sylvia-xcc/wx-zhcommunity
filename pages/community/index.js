@@ -91,7 +91,7 @@ Page({
     })
   },
 
-  swiperTap: function (evt) {
+  swiperTap: function(evt) {
     let mid = evt.currentTarget.dataset.mid;
     let model = evt.currentTarget.dataset.model;
     util.detailTap(model, mid);
@@ -126,7 +126,7 @@ Page({
       data: {
         page: that.data.page,
         count: 10,
-        type:1,
+        type: 1,
       }
     }).then(res => {
       let items = that.data.list;
@@ -237,7 +237,20 @@ Page({
     })
   },
 
-  personalTap: function (evt) {
+  searchTap: function(evt) {
+    let that = this;
+    if (that.data.tabCur == 2) {
+      wx.navigateTo({
+        url: '/pages/community/community-chat-search/community-chat-search',
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/community/community-meeting-search/community-meeting-search',
+      })
+    }
+  },
+
+  personalTap: function(evt) {
     let uid = evt.currentTarget.dataset.uid;
     util.personal(uid);
   },
@@ -261,7 +274,7 @@ Page({
       endBool: false,
       chatMsg: '',
       meeting: '',
-      people:-1,
+      people: -1,
     })
   },
 

@@ -12,16 +12,16 @@ page {
   border: none;
 }
 
-.cu-form-group input{
-  border: 1rpx solid #EDEDED;
+.cu-form-group input {
+  border: 1rpx solid #ededed;
   border-radius: 6rpx;
   padding: 10rpx;
   height: 55rpx;
   font-size: 28rpx;
 }
 
-.cu-form-group textarea{
-border: 1rpx solid #EDEDED;
+.cu-form-group textarea {
+  border: 1rpx solid #ededed;
   border-radius: 6rpx;
   padding: 10rpx;
 }

@@ -1,6 +1,6 @@
 <!--pages/job/index.wxml-->
 <view hidden="{{isLoading}}">
-  <view catchtouchmove="true" class="{{displays=='block'?'swiper-pop':''}}">
+  <view bindtouchmove="true" class="{{displays=='block'?'swiper-pop':''}}">
     <scroll-view scroll-x class="bg-white nav">
       <view class="flex text-center">
         <view class="cu-item flex-sub bg-gray text-black {{tabCur==0?'text-white cur bg-cgreen':''}}" bindtap="tabSelect" data-id="0">
@@ -47,7 +47,7 @@
         </view>
       </view>
 
-      <view catchtouchmove="true" style="display:{{displays}}; height:{{height}}px;">
+      <view bindtouchmove="true" style="display:{{displays}}; height:{{height}}px;">
         <!-- 地区 -->
         <view wx:if="{{currentTab==0}}" class="swiper-con">
           <view wx:for="{{areaArr}}" wx:key="index" class="item flex" data-id="{{index}}" bindtap="areaTap">

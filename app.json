@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/school/school-fabu-detail/school-fabu-detail",
+    "pages/school/school-lesson-fabu/school-lesson-fabu",
     "pages/school/school-course-fabu/school-course-fabu",
     "pages/paper/index",
     "pages/authorize/authorize",
@@ -92,7 +94,11 @@
     "pages/game/llk/llk",
     "pages/game/ball/ball",
     "pages/game/fish/index",
-    "pages/shop/shop-search/shop-search"
+    "pages/shop/shop-search/shop-search",
+    "pages/secondhand/secondhand-search/secondhand-search",
+    "pages/community/community-meeting-search/community-meeting-search",
+    "pages/community/community-chat-search/community-chat-search",
+    "pages/commonweal/commonweal-search/commonweal-search"
   ],
   "window": {
     "backgroundTextStyle": "dark",

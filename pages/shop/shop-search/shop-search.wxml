@@ -2,7 +2,7 @@
 <view class="cu-bar search bg-gray solid-top">
   <view class="search-form bg-white radius" style="background:#fff;">
     <text class="cuIcon-search" style="font-size:28rpx;"></text>
-    <input type="text" placeholder="请输入职位关键词" confirm-type="search" auto-focus="true" focus="true" value="{{searchValue}}" bindinput="searchValueInput" bindconfirm="doSearch"></input>
+    <input type="text" placeholder="请输入搜索关键词" confirm-type="search" auto-focus="true" focus="true" value="{{searchValue}}" bindinput="searchValueInput" bindconfirm="doSearch"></input>
   </view>
 </view>
 

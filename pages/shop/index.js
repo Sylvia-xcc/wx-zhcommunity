@@ -147,6 +147,13 @@ Page({
     })
   },
 
+  swiperTap: function (evt) {
+    console.log('------------', evt)
+    let mid = evt.currentTarget.dataset.mid;
+    let model = evt.currentTarget.dataset.model;
+    util.detailTap(model, mid);
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

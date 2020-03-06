@@ -341,6 +341,8 @@ Page({
       zuqiIndex: 0,
       renovationIndex: 0,
       liftIndex: 0,
+      displays:'none',
+      currentTab:-1,
     })
     let items = that.data.houseSpeArray;
     for (var i = 0; i < items.length; i++) {

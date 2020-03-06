@@ -178,7 +178,7 @@ Page({
     if (that.data.linkname == '') {
       tip.error('请填写联系人', 1000);
       return;
-    } 
+    }
     if (!util.filterMobile(that.data.mobile)) {
       // tip.error('请填写联系电话', 1000);
       return;
@@ -223,10 +223,8 @@ Page({
     console.log('-------- 房屋年龄：', that.data.houseYearArray[that.data.houseYearIndex].value);
     console.log('-------- 房屋售价:', that.data.sellpirce);
     console.log('-------- 房屋产权:', that.data.chanquan);
-    let {
-      uploadPic,
-      videoUrl,
-    } = that.data;
+    let videoUrl = that.data.videoUrl;
+    let uploadPic = util.copyObj(that.data.uploadPic);
     if (videoUrl != '')
       uploadPic.push(videoUrl);
     let temp = [];
@@ -316,14 +314,11 @@ Page({
     console.log('-------- 租期：', that.data.zuqiArray[that.data.zuqiIndex].id, that.data.zuqiArray[that.data.zuqiIndex].value)
     console.log('-------- 付款方式：', that.data.payTypeArray[that.data.payTypeIndex].id, that.data.payTypeArray[that.data.payTypeIndex].name)
 
-    let {
-      uploadPic,
-      videoUrl,
-    } = that.data;
+    let videoUrl = that.data.videoUrl;
+    let uploadPic = util.copyObj(that.data.uploadPic);
     if (videoUrl != '') {
       uploadPic.push(videoUrl);
     }
-
     let temp = [];
     let files = [];
     tip.loading('发布中...');

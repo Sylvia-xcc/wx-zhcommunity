@@ -1,0 +1,33 @@
+<!--pages/community/community-chat-search/community-chat-search.wxml-->
+<view class="cu-bar search bg-gray solid-top">
+  <view class="search-form bg-white radius" style="background:#fff;">
+    <text class="cuIcon-search" style="font-size:28rpx;"></text>
+    <input type="text" placeholder="请输入搜索关键词" confirm-type="search" auto-focus="true" focus="true" value="{{searchValue}}" bindinput="searchValueInput" bindconfirm="doSearch"></input>
+  </view>
+</view>
+
+<view hidden="{{isLoading}}">
+  <view class="cu-card dynamic no-card solid-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailChatTap">
+      <view class="cu-item shadow">
+        <view class="cu-list menu-avatar" data-uid="{{item.uid}}" bindtap="personalTap">
+          <view class="cu-item pr">
+            <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
+            <view class="content flex-sub">
+              <view>{{item.nickname}}</view>
+              <view class="text-gray text-sm flex ">
+                {{item.create_time}}
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="text-content font_24">
+          {{item.content}}
+        </view>
+        <view class="grid flex-sub padding-lr padding-bottom {{item.photos.length>1?'col-3 grid-square':'col-1'}}">
+          <view wx:for="{{item.photos}}" wx:key="index" wx:for-item="iitem" class="bg-img {{item.photos.length>1?'':'only-img'}}" style="background-image:url({{iitem}});" data-id="{{index}}" data-dataimg="{{item.photos}}">
+          </view>
+        </view>
+      </view>
+    </view>
+  <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+</view>

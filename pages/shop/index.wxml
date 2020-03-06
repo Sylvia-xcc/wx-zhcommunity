@@ -13,8 +13,8 @@
   </scroll-view>
 
   <view hidden="{{loading}}">
-    <swiper class="screen-swiper" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" wx:if="{{tabCur==0}}">
-      <swiper-item wx:for="{{banner}}" wx:key="index">
+    <swiper class="screen-swiper" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" wx:if="{{tabCur==0 && banner.length>0}}">
+      <swiper-item wx:for="{{banner}}" wx:key="index" data-mid="{{item.mid}}" data-model="{{item.model}}" bindtap="swiperTap">
         <image src="{{item.slide_pic}}" mode="aspectFill"></image>
       </swiper-item>
     </swiper>
