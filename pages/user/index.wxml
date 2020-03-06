@@ -4,7 +4,7 @@
     <view class="flex padding-bottom-xl" wx:if="{{user}}">
       <navigator url="/pages/homepage/index" hover-class="none">
         <view class="cu-avatar-group">
-          <view class="cu-avatar round lg" style="background-image:url({{user.avatarurl}}); "></view>
+          <view class="cu-avatar round lg" style="background-image:url({{user.avatar}}); "></view>
         </view>
       </navigator>
       <view class="padding-left-xs">

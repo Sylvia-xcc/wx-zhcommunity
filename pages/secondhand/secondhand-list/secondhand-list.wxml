@@ -1,8 +1,8 @@
 <!--pages/secondhand/secondhand-list/secondhand-list.wxml-->
 <view hidden="{{isLoading}}">
   <view class="padding-bottom">
-    <view class="cu-card dynamic no-card}}" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="detailTap">
-      <view class="cu-item shadow">
+    <view class="cu-card dynamic no-card" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="detailTap">
+      <view class="cu-item shadow  ssolid_bottom padding-bottom">
         <view class="cu-list menu-avatar" data-uid="{{item.user_id}}" catchtap="personalTap">
           <view class="cu-item">
             <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
@@ -21,7 +21,7 @@
           <view class="bg-img {{item.imgs.length>1?'':'only-img'}}" wx:for="{{item.imgs}}" wx:key="index" wx:for-item="iitem" wx:if="{{index<3}}" style="background-image:url({{iitem}});" data-id="{{index}}" data-dataimg="{{item.imgs}}" >
           </view>
         </view>
-        <view class="padding" wx:else>
+        <view class="padding-lr" wx:else>
           <video src="{{item.videos[0]}}" object-fit="cover" style="width:690rpx; height:242rpx;"></video>
         </view>
         <view class="text-content"></view>

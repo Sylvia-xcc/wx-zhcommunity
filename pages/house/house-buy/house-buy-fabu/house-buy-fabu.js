@@ -27,20 +27,20 @@ Page({
     renovationIndex: -1,
     rentingTypeArray: [], //租房类型
     rentingTypeIndex: -1,
-    tenancyArray: [],//租期
+    tenancyArray: [], //租期
     tenancyIndex: -1,
     address: null,
-    mobile:'',
-    msg:'',
-    name:'',
-    areaArray:[],
-    areaIndex:-1,
+    mobile: '',
+    msg: '',
+    name: '',
+    areaArray: [],
+    areaIndex: -1,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     console.log('options:', options);
     let that = this;
     let areaArr = Const.areaArr;
@@ -52,7 +52,7 @@ Page({
       // renovationArray: Const.renovationArr,
       rentingTypeArray: Const.rentingTypeArr,
       // tenancyArray: Const.tenancyArr,
-      areaArray:areaArr,
+      areaArray: areaArr,
     })
     wx.setNavigationBarTitle({
       title: that.data.type == 0 ? '发布求购信息' : '发布求租信息',
@@ -63,7 +63,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     let that = this;
     let address = app.globalData.select_address;
     if (address != null) {
@@ -73,7 +73,7 @@ Page({
     }
   },
 
-  loadList: function () {
+  loadList: function() {
     let that = this;
     http.requestUrl({
       url: 'house/info',
@@ -94,54 +94,54 @@ Page({
     })
   },
 
-  sumbitTap: function () {
+  sumbitTap: function() {
     let that = this;
     if (that.data.name == '') {
       tip.error('请填写联系人', 1000);
       return;
     }
-    if(that.data.mobile==''){
-      tip.error('请填写联系方式',1000);
-      return;
-    }    
-    if (that.data.homeTypeIndex<0){
-      tip.error('请选择房屋用途',1000);
+    if (!util.filterMobile(that.data.mobile)) {
+      // tip.error('请填写联系电话', 1000);
       return;
     }
-    if (that.data.spaceIndex<0){
-      tip.error('请选择房屋面积',1000);
+    if (that.data.homeTypeIndex < 0) {
+      tip.error('请选择房屋用途', 1000);
       return;
     }
-    if (that.data.renovationIndex<0){
-      tip.error('请选择装修情况',1000);
+    if (that.data.spaceIndex < 0) {
+      tip.error('请选择房屋面积', 1000);
       return;
     }
-    
-    if (that.data.areaIndex <0){
-      tip.error('请选择地址',1000);
+    if (that.data.renovationIndex < 0) {
+      tip.error('请选择装修情况', 1000);
+      return;
+    }
+
+    if (that.data.areaIndex < 0) {
+      tip.error('请选择地址', 1000);
       return;
     }
 
     console.log('------------- 联系人：', that.data.name);
     console.log('------------- 联系方式：', that.data.mobile);
-    
+
     console.log('------------- 租房用途：', that.data.homeTypeArr[that.data.homeTypeIndex].value);
     console.log('------------- 租房面积：', that.data.spaceArr[that.data.spaceIndex].name);
     console.log('------------- 装修情况：', that.data.renovationArray[that.data.renovationIndex].value);
-    
+
     console.log('------------- 地址：', that.data.areaArray[that.data.areaIndex].name);
     console.log('------------- 备注：', that.data.msg);
 
-    if(that.data.type==0)
+    if (that.data.type == 0)
       that.buySumbit();
     else
       that.rentSubmit();
   },
 
   //求购提交
-  buySumbit:function(){
+  buySumbit: function() {
     let that = this;
-    if (that.data.roomIndex.length<=0){
+    if (that.data.roomIndex.length <= 0) {
       tip.error('请选择房屋户型', 1000);
       return;
     }
@@ -158,7 +158,7 @@ Page({
         room_decorate: that.data.renovationArray[that.data.renovationIndex].id,
         area: that.data.spaceArr[that.data.spaceIndex].id,
         name: that.data.name,
-        layout1: that.data.roomIndex[0]+1,
+        layout1: that.data.roomIndex[0] + 1,
         layout2: that.data.roomIndex[1] + 1,
         layout3: that.data.roomIndex[2] + 1,
         diqu: that.data.areaArray[that.data.areaIndex].name,
@@ -170,7 +170,7 @@ Page({
   },
 
   //求租提交
-  rentSubmit:function(){
+  rentSubmit: function() {
     let that = this;
     if (that.data.rentingTypeIndex < 0) {
       tip.error('请选择租房类型', 1000);
@@ -207,72 +207,72 @@ Page({
   },
 
   //户型选择
-  roomColumnChange: function (evt) {
+  roomColumnChange: function(evt) {
     console.log('------------ 户型选择:', evt.detail.value)
     this.setData({
       roomIndex: evt.detail.value
     })
   },
   //用途(住宅类型)选择
-  homeTypePickerChange: function (evt) {
+  homeTypePickerChange: function(evt) {
     this.setData({
       homeTypeIndex: evt.detail.value
     })
   },
   //面积选择
-  spacePickerChange: function (evt) {
+  spacePickerChange: function(evt) {
     this.setData({
       spaceIndex: evt.detail.value
     })
   },
   //装修情况选择
-  renovationPickerChange: function (evt) {
+  renovationPickerChange: function(evt) {
     this.setData({
       renovationIndex: evt.detail.value
     })
   },
   //租房类型选择
-  rentingTypePickerChange: function (evt) {
+  rentingTypePickerChange: function(evt) {
     this.setData({
       rentingTypeIndex: evt.detail.value
     })
   },
   //租期选择
-  tenancyPickerChange: function (evt) {
+  tenancyPickerChange: function(evt) {
     this.setData({
       tenancyIndex: evt.detail.value
     })
   },
   //区域选择
-  areaPickerChange:function(evt){
+  areaPickerChange: function(evt) {
     this.setData({
       areaIndex: evt.detail.value
     })
   },
 
-  nameInput: function (evt) {
+  nameInput: function(evt) {
     this.setData({
       name: evt.detail.value
     })
   },
 
-  mobileInput:function(evt){
+  mobileInput: function(evt) {
     this.setData({
-      mobile:evt.detail.value
+      mobile: evt.detail.value
     })
   },
 
-  textareaInput:function(evt){
+  textareaInput: function(evt) {
     this.setData({
-      msg:evt.detail.value
+      msg: evt.detail.value
     })
   },
 
   //地址选择
-  addressTap: function (evt) {
+  addressTap: function(evt) {
     console.log('==============')
     wx.getSetting({
-      success: function (res) {
+      success: function(res) {
         console.log(res);
         let a = res.authSetting['scope.userLocation']
         if (a = true) {
@@ -294,21 +294,21 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
     console.log('======== onUnload 清除地址');
     app.globalData.select_address = null;
   },
@@ -316,21 +316,21 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    uid: 0,
     tabCur: 0,
     list: [],
     page: 1,
@@ -22,6 +23,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('options:', options);
+    this.setData({
+      uid: options.uid || app.d.uid,
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     this.loadList();
   },
 
@@ -35,7 +46,7 @@ Page({
         paging: 1,
         page: that.data.page,
         count: 10,
-        user_id: app.d.uid,
+        user_id: that.data.uid,
       }
     }).then(res => {
       let items = that.data.list;
@@ -77,13 +88,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
 
   },
 

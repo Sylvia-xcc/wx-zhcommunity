@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    banner: ['/images/ershou1.png', '/images/ershou2.png'],
+    banner: [],
     jifenCur: 0,
     list: [],
     page: 1,
@@ -18,6 +18,7 @@ Page({
     showBottomLoading: false,
     isLoading: true,
     loading: true,
+    info:null,
   },
 
   /**
@@ -25,6 +26,46 @@ Page({
    */
   onLoad: function (options) {
     this.loadJifenList();
+    this.loadUserInfo();
+    this.loadBanner();
+  },
+
+  loadUserInfo: function () {
+    let that = this;
+    if (that.data.isLoading)
+      tip.loading();
+    http.requestUrl({
+      url: 'account/info',
+      data: {
+        uid: app.d.uid
+      },
+      news: true,
+    }).then(res => {
+      that.setData({
+        info: res.data
+      })
+      setTimeout(function(){
+        tip.loaded();
+        that.setData({
+          isLoading:false,
+        })
+      },600)
+    })
+  },
+
+  loadBanner: function () {
+    let that = this;
+    http.requestUrl({
+      url: 'banner/index',
+      news: true,
+      data: {
+        type: 'score_shop'
+      },
+    }).then(res => {
+      that.setData({
+        banner: res.data,
+      })
+    })
   },
 
   loadJifenList: function () {
@@ -38,6 +79,12 @@ Page({
         list: res.data
       })
     })
+  },
+
+  swiperTap: function (evt) {
+    let mid = evt.currentTarget.dataset.mid;
+    let model = evt.currentTarget.dataset.model;
+    util.detailTap(model, mid);
   },
 
   tabJFSelect: function (evt) {

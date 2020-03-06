@@ -12,7 +12,11 @@
     </view>
     <view class="flex justify-between padding-top">
       <text class="text-red">{{tabCur==0?item.month_pay=='不限'?'面议':item.month_pay:item.month_pay+'元/'+item.money_type}}</text>
-      <text class="text-sm text-gray"  data-id="{{item.id}}" catchtap="deleteTap" wx:if="{{isOwn}}">删除</text>
+      <view>
+        <text class="text-sm text-green padding-right">{{item.status}}</text>
+        <text class="text-sm text-gray" data-id="{{item.id}}" catchtap="deleteTap" wx:if="{{isOwn}}">删除</text>
+      </view>
+
     </view>
   </view>
 

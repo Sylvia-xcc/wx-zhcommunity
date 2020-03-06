@@ -28,8 +28,12 @@ Page({
       uid: options.uid || app.d.uid,
     })
     this.setData({
-      isOwn: uid == app.d.uid ? true : false
+      isOwn: this.data.uid == app.d.uid ? true : false
     })
+  },/**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     this.loadList();
   },
 
@@ -70,11 +74,20 @@ Page({
   },
 
   detailTap: function(evt) {
+    // if (!this.data.isOwn)
+    //   return;
+    let id = evt.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/finance/finance-detail/finance-detail?id=' + id,
+    })
+  },
+
+  editTap:function(evt){
     if (!this.data.isOwn)
       return;
     let id = evt.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/finance/finance-detail/finance-detail?id=' + id,
+      url: '/pages/finance/finance-fabu/finance-fabu?id=' + id,
     })
   },
 
@@ -111,12 +124,7 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
+  
 
   /**
    * 生命周期函数--监听页面隐藏

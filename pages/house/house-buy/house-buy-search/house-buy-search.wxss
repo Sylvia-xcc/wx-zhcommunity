@@ -1,1 +1,2 @@
 /* pages/house/house-buy/house-buy-search/house-buy-search.wxss */
+@import "/pages/job/index.wxss";

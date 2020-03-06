@@ -2,8 +2,8 @@
 <loading id="loading" showLoading="{{showLoading}}"></loading>
 
 <swiper class="screen-swiper " indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-  <swiper-item wx:for="{{swiperList}}" wx:key="index">
-    <image src="{{item}}" mode="aspectFill"></image>
+  <swiper-item wx:for="{{swiperList}}" wx:key="index" data-mid="{{item.mid}}" data-model="{{item.model}}" bindtap="swiperTap">
+    <image src="{{item.slide_pic}}" mode="aspectFill"></image>
   </swiper-item>
 </swiper>
 <view class="padding flex flex-wrap">
@@ -56,10 +56,10 @@
   </view>
   <view class="">
     <scroll-view scroll-x style="white-space: nowrap;overflow:hidden;">
-      <block wx:for="{{1}}" wx:key="index">
-        <view class="gz-item" bindtap="toOtherTap">
-          <image src="https://images.fengzhankeji.com/weixin/20191226/5e047e5d1336b.png" class="cu-avatar round lg" style="width:112rpx;height:112rpx;"></image>
-          <view class="text-gray font_26 padding-top-5">柒筑</view>
+      <block wx:for="{{cates}}" wx:key="index">
+        <view class="gz-item" data-appid="{{item.appId}}" bindtap="toOtherTap">
+          <image src="{{item.url}}" class="cu-avatar round lg" style="width:112rpx;height:112rpx;"></image>
+          <view class="text-gray font_26 padding-top-5">{{item.name}}</view>
         </view>
       </block>
     </scroll-view>
@@ -82,5 +82,128 @@
       <image src="http://image.fengzhankeji.com/static/paper.png" style="width:85rpx;height:81rpx;"></image>
     </navigator>
   </view>
-
 </view>
+
+<scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+  <view class="flex text-center">
+    <view class="cu-item flex-sub {{tabCur==0?'text-cgreen  nav-cur':''}}" bindtap="tabSelect" data-id="{{0}}">二手物品</view>
+    <view class="cu-item flex-sub {{tabCur==1?'text-cgreen  nav-cur':''}}" bindtap="tabSelect" data-id="{{1}}">附近工作</view>
+    <view class="cu-item flex-sub {{tabCur==2?'text-cgreen  nav-cur':''}}" bindtap="tabSelect" data-id="{{2}}">精选商城</view>
+    <view class="cu-item flex-sub {{tabCur==3?'text-cgreen  nav-cur':''}}" bindtap="tabSelect" data-id="{{3}}">公益活动</view>
+    <view class="cu-item flex-sub {{tabCur==4?'text-cgreen  nav-cur':''}}" bindtap="tabSelect" data-id="{{4}}">房管家</view>
+  </view>
+</scroll-view>
+
+<view hidden="{{loading}}">
+  <view wx:if="{{tabCur==0}}">
+    <view class="cu-card dynamic no-card " wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" data-model="used" catchtap="detailTap">
+      <view class="cu-item shadow ssolid_bottom padding-bottom">
+        <view class="cu-list menu-avatar" data-uid="{{item.user_id}}" catchtap="personalTap">
+          <view class="cu-item">
+            <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
+            <view class="content flex-sub">
+              <view class="text-sm text-black text-bold" style="font-size:24rpx;">{{item.nickname}}</view>
+              <view class="text-gray text-xs flex justify-between">
+                {{item.create_time}}
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="text-content text-bold showtwo" style="font-size:24rpx;">
+          {{item.text}}
+        </view>
+        <view class="grid flex-sub padding-lr {{item.imgs.length>1?'col-3 grid-square':'col-1'}}" wx:if="{{item.types==1}}">
+          <view class="bg-img {{item.imgs.length>1?'':'only-img'}}" wx:for="{{item.imgs}}" wx:key="index" wx:for-item="iitem" wx:if="{{index<3}}" style="background-image:url({{iitem}});" data-id="{{index}}" data-dataimg="{{item.imgs}}">
+          </view>
+        </view>
+        <view class="padding-lr" wx:else>
+          <video src="{{item.videos[0]}}" object-fit="cover" style="width:690rpx; height:242rpx;"></video>
+        </view>
+        <view class="text-content"></view>
+      </view>
+    </view>
+  </view>
+  <view wx:elif="{{tabCur==1}}" class="text-center">
+    <view class="cu-capsule radius margin-top">
+      <view class="cu-tag {{tagIndex==0?'bg-green':'line-green'}} " data-id="{{0}}" bindtap="tagSelect">全职</view>
+      <view class="cu-tag {{tagIndex==1?'bg-green':'line-green'}} " data-id="{{1}}" bindtap="tagSelect">兼职</view>
+    </view>
+    <view class="cu-card dynamic no-card solid-bottom padding-bottom-sm" wx:for="{{list}}" wx:key="index">
+      <view class="cu-item shadow pr" data-id="{{item.id}}" data-model="job" bindtap="detailTap">
+        <view class="cu-list menu-avatar">
+          <view class="cu-item">
+            <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
+            <view class="content flex-sub">
+              <view class="text-sm" style="font-size:24rpx;">{{item.nickname}}</view>
+              <view class="text-gray text-xs flex justify-between">
+                {{item.create_time}}
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="text-content text-left">
+          <view class="text-sm">{{tagIndex==1?'兼职':''}}{{item.job}}</view>
+          <view class="text-cred">{{tagIndex==0?item.month_pay=='不限'?'面议':item.month_pay:item.month_pay+'元/'+item.money_type}} </view>
+        </view>
+        <view class="padding-right-sm pa" style="bottom:30rpx; right:30rpx;">
+          <button class="cu-btn radius sm bg-cgreen text-white">联系TA</button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:elif="{{tabCur==2}}">
+    <view class="padding flex solid-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" data-model="product" catchtap="detailTap">
+      <view>
+        <image src="{{item.thumb}}" style="width:224rpx;height:224rpx;" mode="aspectFill"></image>
+      </view>
+      <view class="padding-left-sm pr flex-sub">
+        <view class="text-df c0 showtwo">{{item.name}}</view>
+        <view class="font_22 text-gray padding-top-xs">{{item.sale_num}}人已购买</view>
+        <view class="cu-tag line-red radius margin-top-xs" style="height:38rpx;">购买可获得{{item.jifen_get}}积分</view>
+        <view class="text-red text-bold" style="font-size:40rpx; padding-top:15rpx;">￥{{item.price}}元</view>
+        <button class="cu-btn radius bg-green sm pa" style="right:0rpx; bottom:0rpx;">立即购买</button>
+      </view>
+    </view>
+  </view>
+  <view wx:elif="{{tabCur==3}}">
+    <block wx:for="{{list}}" wx:key="index">
+      <v-commonweal item="{{item}}"></v-commonweal>
+    </block>
+  </view>
+  <view wx:elif="{{tabCur==4}}" class="text-center">
+    <view class="cu-capsule radius margin-top">
+      <view class="cu-tag {{tagIndex==0?'bg-green':'line-green'}}" data-id="{{0}}" bindtap="tagSelect">整租</view>
+      <view class="cu-tag {{tagIndex==1?'bg-green':'line-green'}}" data-id="{{1}}" bindtap="tagSelect">合租</view>
+      <view class="cu-tag {{tagIndex==2?'bg-green':'line-green'}}" data-id="{{2}}" bindtap="tagSelect">售房</view>
+    </view>
+    <view class="padding flex solid-bottom " wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" data-model="house" bindtap="detailTap">
+      <view>
+        <image src="{{item.photo.img[0]}}" class="radius" style="width:224rpx;height:224rpx;" mode="aspectFill"></image>
+      </view>
+      <view class="padding-left-sm flex-sub text-left">
+        <view class="text-df text-bold showtwo">{{item.title}}</view>
+        <view class="font_22 text-gray padding-tb-xs">{{item.layout1}}室{{item.layout2}}厅{{item.layout3}}卫/{{item.measure}}㎡/{{item.chaoxiang}}/{{item.name}}</view>
+        <view class="flex flex-wrap ">
+          <view class="padding-right-xs padding-bottom-xs" wx:for="{{item.tese}}" wx:key="index">
+            <view class="cu-tag line-gray radius font_22" style="height:38rpx;">{{item}}</view>
+          </view>
+        </view>
+        <view>
+          <text class="font_30 text-red text-bold">{{item.money}}{{tagIndex==2?'万':'元/月'}}</text>
+          <text class="text-gray text-sm padding-left-sm" wx:if="{{tabCur==0}}">{{item.avg_pay}}元/㎡</text>
+          <text class="text-gray text-sm padding-left-sm" wx:else>{{item.pay}}</text>
+        </view>
+        <view class="padding-top-sm flex justify-between">
+          <view class="flex align-center">
+            <image src="{{item.avatar}}" class="round" style="width:40rpx;height:40rpx;"></image>
+            <text class="text-xs text-bold padding-left-xs">{{item.u_name}}</text>
+          </view>
+          <view class="padding-right-sm" style="width：140rpx;">
+            <button class="cu-btn radius sm bg-cgreen text-white">联系TA</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>

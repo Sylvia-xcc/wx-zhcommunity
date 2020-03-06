@@ -1,13 +1,13 @@
 <!--pages/finance/finance-detail/finance-detail.wxml-->
-<view style="min-height:650rpx;">
+<view >
   <view class="padding" style="padding-bottom:0;">
     <view class="c0">{{detail.content}}</view>
   </view>
 
   <view class="cu-card dynamic">
     <view class="cu-item">
-      <view class="grid flex-sub padding-bottom-sm {{detail.img_list.length>1?'col-3 grid-square':'col-1'}}">
-        <view class="bg-img {{detail.img_list.length>1?'':'only-img'}}" style="background-image:url({{item}});" wx:for="{{detail.img_list}}" wx:key="index" data-id="{{index}}" data-dataimg="{{detail.img_list}}" catchtap='previewImgTap'>
+      <view class="grid flex-sub padding-bottom-sm col-3 grid-square">
+        <view class="bg-img" style="background-image:url({{item}});" wx:for="{{detail.img_list}}" wx:key="index" data-id="{{index}}" data-dataimg="{{detail.img_list}}" catchtap='previewImgTap'>
         </view>
       </view>
     </view>

@@ -1,5 +1,7 @@
 {
   "usingComponents": {
-    "loading": "/components/loading/loading"
+    "loading": "/components/loading/loading",
+    "v-bottomloading": "/components/bottomLoading/bottomloading",
+    "v-commonweal": "/components/commonweal/commonweal"
   }
 }

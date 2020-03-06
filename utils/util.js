@@ -16,7 +16,7 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
-const formatTime2 = date =>{
+const formatTime2 = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -27,30 +27,61 @@ const formatTime2 = date =>{
  * 将标准时间转化为时间戳(秒)
  * @param time-'2018-09-11 13:50:52'
  * @return 时间戳
-*/
+ */
 function formatTime5(time) {
   var thisTime = time;
   thisTime = thisTime.replace(/-/g, '/');
   var timestamp = new Date(thisTime);
   timestamp = timestamp.getTime();
-  timestamp = Math.floor(timestamp/1000);
+  timestamp = Math.floor(timestamp / 1000);
   return timestamp;
 }
 
 
-function copyObj(obj){
-  var tmp ={};
+function copyObj(obj) {
+  var tmp = {};
   tmp = JSON.parse(JSON.stringify(obj));
   return tmp;
 }
 
 
-const personal = (uid) =>{
+const personal = (uid) => {
   let id = getApp().d.uid;
   // if(uid==id)
   //   return;
   wx.navigateTo({
     url: '/pages/homepage/index?uid=' + uid,
+  })
+}
+
+const detailTap = (model, mid) => {
+  let url = "";
+  console.log('------------->>>', model, mid)
+  if (mid <= 0) {
+    if (model =='activity')
+      url = "/pages/commonweal/index"
+  } else {
+    if (model == 'used')
+      url = "/pages/secondhand/secondhand-detail/secondhand-detail?id=" + mid;
+    else if (model == "product")
+      url = "/pages/shop/shop-detail/shop-detail?id=" + mid;
+    else if (model == "news")
+      url = "/pages/community/community-news-detail/community-news-detail?id=" + mid;
+    else if (model == "job")
+      url = "/pages/job/job-detail/job-detail?id=" + mid;
+    else if (model == "house")
+      url = "/pages/house/house-sell/house-sell-detail/house-sell-detail?id=" + mid;
+    else if (model == "score_shop")
+      url = "/pages/community/community-jifen-shop-detail/community-jifen-shop-detail?id=" + mid;
+  }
+
+  console.log('------------->>>', model, mid, url)
+
+  if (url == "")
+    return;
+
+  wx.navigateTo({
+    url: url ,
   })
 }
 
@@ -80,19 +111,19 @@ const hasAuthorize = () => {
 }
 
 //判断手机号是否授权
-const hasAuthorizePhoneNum=()=>{
-  if(getApp().d.tel == undefined || getApp().d.tel=='')
+const hasAuthorizePhoneNum = () => {
+  if (getApp().d.tel == undefined || getApp().d.tel == '')
     return false;
   return true;
 }
 
 
 //判断是否是该版块版主
-const hasAuthorizeSection=(fid)=>{
+const hasAuthorizeSection = (fid) => {
   let moderator = getApp().globalData.userInfo ? getApp().globalData.userInfo.moderator : [];
-  moderator = moderator||[];
-  for(var i=0; i<moderator.length; i++){
-    if(moderator[i].fid==fid)
+  moderator = moderator || [];
+  for (var i = 0; i < moderator.length; i++) {
+    if (moderator[i].fid == fid)
       return true;
   }
   return false;
@@ -128,7 +159,7 @@ const friendstimer = (time) => {
 }
 
 //浮点型加法
-const add=(num1, num2)=> {
+const add = (num1, num2) => {
   const num1Digits = (num1.toString().split('.')[1] || '').length
   const num2Digits = (num2.toString().split('.')[1] || '').length
   const baseNum = Math.pow(10, Math.max(num1Digits, num2Digits))
@@ -142,7 +173,7 @@ const sub = (num1, num2) => {
   return (mul(num1, baseNum) - mul(num2, baseNum)) / baseNum
 }
 //浮点型乘法
-const mul=(num1, num2)=> {
+const mul = (num1, num2) => {
   const num1String = num1.toString()
   const num2String = num2.toString()
   const num1Digits = (num1String.split('.')[1] || '').length
@@ -163,20 +194,20 @@ const div = (num1, num2) => {
 }
 
 // len表示保留几位数小数
- const floatRound = (num, len = 2) => {
-   let n = div(Math.round(mul(num, Math.pow(10, len))), Math.pow(10, len))
+const floatRound = (num, len = 2) => {
+  let n = div(Math.round(mul(num, Math.pow(10, len))), Math.pow(10, len))
   return n.toFixed(len)
 }
 
 //正则去掉所有的html标记
-const delHtmlTag = (str) =>{
-  return str.replace(/<[^>]+>/g, "");  
+const delHtmlTag = (str) => {
+  return str.replace(/<[^>]+>/g, "");
 }
 
-const findHtmlImg = (str) =>{
+const findHtmlImg = (str) => {
   let imgReg = /<img.*?(?:>|\/>)/gi //匹配图片中的img标签
   let srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i // 匹配图片中的src
-  let arr = str.match(imgReg) || []  //筛选出所有的img
+  let arr = str.match(imgReg) || [] //筛选出所有的img
   let srcArr = []
   for (let i = 0; i < arr.length; i++) {
     let src = arr[i].match(srcReg)
@@ -187,10 +218,10 @@ const findHtmlImg = (str) =>{
 }
 
 //手机号检测
-const filterMobile = (mobile) =>{
+const filterMobile = (mobile) => {
   var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
   if (!myreg.test(mobile)) {
-    tip.success('填写正确手机号')
+    tip.error('请填写正确手机号')
     return false;
   }
   return true;
@@ -215,4 +246,5 @@ module.exports = {
   copyObj: copyObj,
   personal,
   filterMobile,
+  detailTap,
 }

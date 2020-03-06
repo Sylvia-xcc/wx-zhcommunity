@@ -45,28 +45,29 @@ Page({
       }
     }).then(res => {
       let product = res.product;
+      if(product){
+        let content = res.product.content;
+        WxParse.wxParse('content', 'html', content, that, 0);
 
-      let content = res.product.content;
-      WxParse.wxParse('content', 'html', content, that, 0);
-
-      let banner = product.banner;
-      let attr_list = res.attr_list || [];
-      var realData = {};
-      realData['pid'] = that.data.productId;
-      realData['name'] = product.name;
-      realData['imgUrl'] = product.thumb;
-      realData['price'] = (that.data.vip == 0) ? product.price_yh : product.price_vip;
-      realData['price_yj'] = product.price;
-      realData['stock'] = product.stock;
-      realData['buynum'] = 1;
-      realData['attrValueList'] = attr_list;
-      that.setData({
-        product: product,
-        isCollect: res.collection,
-        banner: banner,
-        itemData: realData,
-        video: product.video,
-      });
+        let banner = product.banner;
+        let attr_list = res.attr_list || [];
+        var realData = {};
+        realData['pid'] = that.data.productId;
+        realData['name'] = product.name;
+        realData['imgUrl'] = product.thumb;
+        realData['price'] = (that.data.vip == 0) ? product.price_yh : product.price_vip;
+        realData['price_yj'] = product.price;
+        realData['stock'] = product.stock;
+        realData['buynum'] = 1;
+        realData['attrValueList'] = attr_list;
+        that.setData({
+          product: product,
+          isCollect: res.collection,
+          banner: banner,
+          itemData: realData,
+          video: product.video,
+        });
+      }
       setTimeout(function() {
         that.setData({
           isLoading: false,

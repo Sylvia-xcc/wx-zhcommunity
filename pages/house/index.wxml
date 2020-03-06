@@ -1,6 +1,9 @@
 <!--pages/house/index.wxml-->
 
-<view class="padding flex justify-between">
-  <view class="text-center basis-df" bindtap="buyTap">买/租赁</view>
-  <view class="text-center basis-df" bindtap="sellTap">卖/出租</view>
+<view class="bg-img" style="background-image: url('http://image.fengzhankeji.com/static/house-bg.png');height: 100vh;">
+  <view class="text-center" style="padding-top:660rpx;">
+    <image src="http://image.fengzhankeji.com/static/house-btn1.png" style="width:587rpx; height:130rpx;" bindtap="buyTap"></image>
+    <image src="http://image.fengzhankeji.com/static/house-btn2.png" class="" style="width:587rpx; height:130rpx; margin-top:70rpx;" bindtap="sellTap"></image>
+  </view>
+
 </view>

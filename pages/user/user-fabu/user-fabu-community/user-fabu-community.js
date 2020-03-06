@@ -18,36 +18,36 @@ Page({
     showBottomLoading: false,
     isLoading: true,
     loading: true,
-    isOwn:true,
+    isOwn: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     console.log('options:', options);
     this.setData({
       uid: options.uid || app.d.uid,
     })
     this.setData({
-      isOwn:uid==app.d.uid?true:false
+      isOwn: this.data.uid == app.d.uid ? true : false
     })
     this.loadList();
   },
 
-  loadList: function(p=true) {
+  loadList: function(p = true) {
     let that = this;
     if (that.data.isLoading)
       tip.loading();
-    if(p){
+    if (p) {
       that.setData({
         bottoming: false,
         showBottomLoading: true,
         loading: true,
       })
-    }    
+    }
     setTimeout(function() {
-        that.loadAddList();
+      that.loadAddList();
     }, 400)
 
   },
@@ -79,7 +79,7 @@ Page({
         showBottomLoading: false,
         loading: false,
       })
-      setTimeout(function () {
+      setTimeout(function() {
         tip.loaded();
         that.setData({
           isLoading: false
@@ -103,14 +103,14 @@ Page({
     that.loadList();
   },
 
-  detailChatTap: function (evt) {
+  detailChatTap: function(evt) {
     let id = evt.currentTarget.dataset.id;
     wx.navigateTo({
       url: '/pages/community/community-chat-detail/community-chat-detail?id=' + id,
     })
   },
 
-  deleteTap: function (evt) {
+  deleteTap: function(evt) {
     let that = this;
     let id = evt.currentTarget.dataset.id;
     let model = that.data.tabCur == 0 ? 'chating' : 'meeting';
@@ -140,7 +140,7 @@ Page({
   },
 
   //预览
-  previewImgTap: function (evt) {
+  previewImgTap: function(evt) {
     let id = evt.currentTarget.dataset.id;
     let dataimg = evt.currentTarget.dataset.dataimg;
     wx.previewImage({
@@ -194,7 +194,7 @@ Page({
         showBottomLoading: true,
         bottoming: false,
       })
-      setTimeout(function () {
+      setTimeout(function() {
         that.setData({
           page: that.data.page + 1,
         })

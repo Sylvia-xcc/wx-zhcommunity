@@ -18,7 +18,7 @@
         </view>
       </view>
       <view class="flex align-center padding-lr padding-tb-sm">
-        <image src="/images/head.png" class="cu-avatar round"></image>
+        <image src="http://image.fengzhankeji.com/static/logo2.png" class="cu-avatar round"></image>
         <text class="padding-left-sm text-sm c0">中环国际社区</text>
         <text class="flex-sub text-right text-xs text-gray">{{item.views}}次播放</text>
       </view>

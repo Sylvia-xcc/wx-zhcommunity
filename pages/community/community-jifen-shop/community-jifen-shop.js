@@ -37,15 +37,16 @@ Page({
     if (that.data.isLoading)
       tip.loading();
     http.requestUrl({
-      url: 'wxapp/user/userinfo',
+      url: 'account/info',
       data: {
         uid:app.d.uid
-      }
+      },
+      news:true,
     }).then(res => {
       that.setData({
-        jifen:res.userinfo.jifen
+        jifen:res.data.jifen
       })
-      app.globalData.userInfo = res.userinfo;
+      app.globalData.userInfo = res.data;
     })
   },
 

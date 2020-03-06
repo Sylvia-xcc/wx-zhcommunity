@@ -152,10 +152,10 @@ Page({
     //   tip.error('请上传附件', 1000);
     //   return;
     // }
-    // if (that.data.desc == '') {
-    //   tip.error('请填写具体描述', 1000);
-    //   return;
-    // }
+    if (that.data.desc == '') {
+      tip.error('请填写具体描述', 1000);
+      return;
+    }
     console.log('--------- 需求类型：', that.data.list[that.data.type].name);
     console.log('--------- 预算价格：', that.data.money);
     console.log('--------- 联系方式：', that.data.mobile);
@@ -169,6 +169,7 @@ Page({
       }
     }
     console.log('--------- 标签：', tags);
+    tags = JSON.stringify(tags);
     let upload_pic = util.copyObj(that.data.upload_pic);
     let video = that.data.video;
     if(video!='')
@@ -231,7 +232,8 @@ Page({
 
   republish: function (content, tags) {
     let that = this;
-    content.reverse();
+    // content.reverse();
+    // console.log('------------ content', content)
     let imgList = (that.data.video == '') ? content : content.slice(1);
     let videoList = (that.data.video == '') ? '' : content.slice(0, 1);
     console.log('---------- uploadfile: ', imgList, videoList)

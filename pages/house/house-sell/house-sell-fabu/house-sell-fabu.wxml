@@ -172,7 +172,7 @@
     </view>
     <view class="cu-form-group">
       <view class="title">联系人</view>
-      <input type="number" maxlength="11" placeholder="请输入联系人称呼" placeholder-class="text-gray text-df" bindinput="linkInput"></input>
+      <input placeholder="请输入联系人称呼" placeholder-class="text-gray text-df" bindinput="linkInput"></input>
     </view>
     <view class="cu-form-group">
       <view class="title">联系方式</view>

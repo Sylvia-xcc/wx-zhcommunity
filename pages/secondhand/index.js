@@ -52,13 +52,22 @@ Page({
   loadBannerList: function () {
     let that = this;
     http.requestUrl({
-      url: 'used/banner',
+      url: 'banner/index',
       news: true,
+      data:{
+        type: 'used'
+      }
     }).then(res => {
       that.setData({
         slide: res.data
       })
     })
+  },
+
+  swiperTap: function (evt) {
+    let mid = evt.currentTarget.dataset.mid;
+    let model = evt.currentTarget.dataset.model;
+    util.detailTap(model, mid);
   },
 
   loadList:function(){

@@ -2,8 +2,8 @@
 <view hidden="{{isLoading}}">
   <view class="bg-white" hidden="{{loading}}">
     <view class="padding flex justify-center align-center ssolid_bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailTap">
-      <view>
-        <image src="{{item.file_list[0]}}" mode="aspectFill" class="ridius" style="width:186rpx;height:186rpx;" wx:if="{{item.file_list.length>0}}"></image>
+      <view wx:if="{{item.img_list.length>0}}">
+        <image src="{{item.img_list[0]}}" mode="aspectFill" class="br" style="width:186rpx;height:186rpx;" ></image>
       </view>
       <view class="flex-sub padding-left-sm pr flex flex-direction justify-between" style="min-height:160rpx;">
         <view class=" c0 text-df showtwo">{{item.intro}}</view>
@@ -13,7 +13,7 @@
           </view>
         </view>
         <view class="flex align-center justify-between">
-          <view class="text-red text-bold font_30">￥{{item.money}}元</view>
+          <view class="text-red text-bold font_30" style="width:300rpx;">{{item.money}}</view>
           <view class="text-sm text-gray text-right padding-top-xs">{{item.create_time}}</view>
         </view>
       </view>

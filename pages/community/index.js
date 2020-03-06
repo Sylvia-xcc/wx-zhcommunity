@@ -82,13 +82,19 @@ Page({
       url: 'banner/index',
       news: true,
       data: {
-        model: 2,
+        type: "news",
       }
     }).then(res => {
       that.setData({
         banner: res.data
       })
     })
+  },
+
+  swiperTap: function (evt) {
+    let mid = evt.currentTarget.dataset.mid;
+    let model = evt.currentTarget.dataset.model;
+    util.detailTap(model, mid);
   },
 
   loadList: function() {

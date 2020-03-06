@@ -8,25 +8,25 @@
 
 <view hidden="{{isLoading}}">
   <view class="padding flex justify-center align-center" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailTap">
-      <view wx:if="{{item.img_list.length>0}}">
-        <image src="{{item.img_list[0]}}" class="ridius" style="width:224rpx;height:224rpx;"></image>
+    <view wx:if="{{item.img_list.length>0}}">
+      <image src="{{item.img_list[0]}}" class="br" style="width:224rpx;height:224rpx;" mode="aspectFill"></image>
+    </view>
+    <view class="flex-sub padding-left-sm pr flex justify-around flex-direction" style="min-height:226rpx;">
+      <view class="c0 text-df showtwo" style="">{{item.intro}}</view>
+      <view class="padding-top-xs flex flex-wrap">
+        <view class="padding-right-xs padding-bottom-xs" wx:for="{{item.tag_list}}" wx:key="index" wx:if="{{index<3}}">
+          <view class="cu-tag line-gray radius" style="height:38rpx;">{{item.name}}</view>
+        </view>
       </view>
-      <view class="flex-sub padding-left-sm pr">
-        <view class="text-bold c0 text-df showtwo">{{item.intro}}</view>
-        <view class="padding-top-xs flex flex-wrap">
-          <view class="padding-right-xs padding-bottom-xs" wx:for="{{item.tag_list}}" wx:key="index" wx:if="{{index<3}}">
-            <view class="cu-tag line-gray radius" style="height:38rpx;">{{item.name}}</view>
-          </view>
+      <view class="text-red text-bold font_30 text-cut" style="width:300rpx;">{{item.money}}</view>
+      <view class="flex align-center justify-between">
+        <view class="flex align-center padding-top-xs">
+          <image src="{{item.user_photo}}" class="cu-avatar sm round"></image>
+          <view class="text-xs c0 padding-left-xs">{{item.nickname}}</view>
         </view>
-        <view class="text-red text-bold font_30 text-cut" style="width:300rpx;">{{item.money}}</view>
-        <view class="flex align-center justify-between">
-          <view class="flex align-center padding-top-xs">
-            <image src="{{item.user_photo}}" class="cu-avatar sm round"></image>
-            <view class="text-xs c0 padding-left-xs">{{item.nickname}}</view>
-          </view>
-          <button class="cu-btn radius bg-green sm ">联系TA</button>
-        </view>
+        <button class="cu-btn radius bg-green sm ">联系TA</button>
       </view>
     </view>
+  </view>
   <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
 </view>

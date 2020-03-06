@@ -3,20 +3,28 @@
   <view class="bg-white" hidden="{{loading}}">
     <view class="padding flex justify-center align-center ssolid_bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailTap">
       <view wx:if="{{item.img_list.length>0}}">
-        <image src="{{item.img_list[0]}}" mode="aspectFill" class="ridius" style="width:186rpx;height:186rpx;" ></image>
+        <image src="{{item.img_list[0]}}" mode="aspectFill" class="br" style="width:186rpx;height:186rpx;"></image>
       </view>
       <view class="flex-sub padding-left-sm pr flex flex-direction justify-between" style="min-height:160rpx;">
-        <view class=" c0 text-df showtwo" >{{item.intro}}</view>
-        <view class="padding-top-xs flex flex-wrap">
-          <view class="padding-right-xs padding-bottom-xs" wx:for="{{item.tag_list}}" wx:key="index" wx:if="{{index<3}}">
-            <view class="cu-tag line-gray radius" style="height:38rpx;">{{item.name}}</view>
+        <view class="c0 text-df showtwo">{{item.intro}}</view>
+        <view class="flex justify-between align-center">
+          <view class="padding-top-xs flex-sub flex flex-wrap">
+            <view class="padding-right-xs padding-bottom-xs" wx:for="{{item.tag_list}}" wx:key="index" wx:if="{{index<2}}">
+              <view class="cu-tag line-gray radius" style="height:38rpx;">{{item.name}}</view>
+            </view>
           </view>
+          <view class="text-xs text-gray basis-sm text-right">{{item.create_time}}</view>
         </view>
-        <view class="text-red text-bold font_30 text-cut" style="width:300rpx;">{{item.money}}</view>
-        <view class="pa" style="bottom:-30rpx; right:0rpx;">
-          <view class="text-xs text-gray">{{item.create_time}}</view>
-          <view class="text-sm text-gray text-right padding-top-xs padding-bottom-xs" data-id="{{item.id}}" catchtap="deleteTap" wx:if="{{isOwn}}">删除</view>
+        <view class="flex justify-between align-center">
+          <view class="text-red text-bold font_30 text-cut" style="width:250rpx;">{{item.money}}</view>
+          <view>
+          <text class="text-sm text-green padding-right-sm">{{item.status==0?'审核中':item.status==1?'审核通过':item.status==2?'审核驳回':item.status==3?'已发布':'已撤销'}}</text>
+            <text class="text-sm text-grey padding-right-sm" data-id="{{item.id}}" catchtap="editTap" wx:if="{{isOwn}}">编辑</text>
+            <text class="text-sm text-gray" data-id="{{item.id}}" catchtap="deleteTap" wx:if="{{isOwn}}">删除</text>
+          </view>
+
         </view>
+
       </view>
     </view>
   </view>

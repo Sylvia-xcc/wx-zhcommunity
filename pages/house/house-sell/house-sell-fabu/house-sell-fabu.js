@@ -178,13 +178,13 @@ Page({
     if (that.data.linkname == '') {
       tip.error('请填写联系人', 1000);
       return;
+    } 
+    if (!util.filterMobile(that.data.mobile)) {
+      // tip.error('请填写联系电话', 1000);
+      return;
     }
     if (that.data.orientationsIndex < 0) {
       tip.error('请选择房屋朝向', 1000);
-      return;
-    }
-    if (that.data.mobile == '') {
-      tip.error('请填写联系电话', 1000);
       return;
     }
     if (that.data.uploadPic.length <= 0) {
@@ -280,6 +280,8 @@ Page({
         }
       }).then(res => {
         tip.loaded();
+        tip.success('发布成功', 1000);
+        wx.navigateBack();
       })
     })
   },
@@ -376,7 +378,7 @@ Page({
         }
       }).then(res => {
         tip.loaded();
-        tip.success('发布租房成功', 1000);
+        tip.success('发布成功', 1000);
         wx.navigateBack();
       })
     })

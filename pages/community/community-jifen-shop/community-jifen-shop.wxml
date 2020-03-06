@@ -6,7 +6,7 @@
   </view>
   <!-- <navigator url="/pages/shop/shop-order/shop-order?integral=1" hover-class="none" class="text-underline">积分订单</navigator> -->
   <view class="padding-tb-xl">
-    <view class="text-bold text-center font_30">每周限时兑换马克杯</view>
+    <!-- <view class="text-bold text-center font_30">每周限时兑换马克杯</view> -->
     <view class="padding flex flex-wrap justify-between">
       <view class="bg-white text-sm pr margin-bottom" style="width: 330rpx;height: 486rpx;" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="detailTap">
         <image src="{{item.thumb}}" style="width: 330rpx;height: 365rpx;"></image>

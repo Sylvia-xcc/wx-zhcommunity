@@ -10,7 +10,7 @@ Page({
    */
   data: {
     id: 0,
-    type: 0,
+    type: 0,//1，租，0：售
     detail: null,
     banner: [],
     videoUrl: '',
@@ -24,7 +24,7 @@ Page({
     let that = this;
     that.setData({
       id: options.id || 0,
-      type:options.type || 0,
+      // type:options.type || 0,
     })
     that.loadHouseDetail();
   },
@@ -41,7 +41,8 @@ Page({
     }).then(res => {
       that.setData({
         detail: res.data,
-        videoUrl:res.data.photo.video[0]||''
+        videoUrl: res.data.photo.video[0]||'',
+        type:res.data.level==1?0:1,//相反
       })
     })
   },

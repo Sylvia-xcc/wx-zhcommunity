@@ -8,6 +8,7 @@
         <text>{{item.create_time}}</text>
         <view class="flex">
           <view class="text-sm {{item.status==0?'text-red':item.status==1?'text-green':'text-gray'}}">{{item.status==0?'审核中':item.status==1?'审核通过':item.status==2?'审核驳回':item.status==3?'已发布':'已撤销'}}</view>
+          <view class="text-sm text-grey text-right padding-left" data-id="{{item.id}}" catchtap="editTap" wx:if="{{isOwn}}">编辑</view>
           <view class="text-sm text-gray text-right padding-left" data-id="{{item.id}}" catchtap="deleteTap" wx:if="{{isOwn}}">删除</view>
         </view>
       </view>

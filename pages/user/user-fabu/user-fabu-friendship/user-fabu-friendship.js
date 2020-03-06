@@ -29,8 +29,15 @@ Page({
       uid: options.uid || app.d.uid,
     })
     this.setData({
-      isOwn: uid == app.d.uid ? true : false
+      isOwn: this.data.uid == app.d.uid ? true : false
     })
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     this.loadList();
   },
 
@@ -80,6 +87,13 @@ Page({
     })
   },
 
+  editTap: function(evt) {
+    let id = evt.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/friendship/friendship-fabu/friendship-fabu?id=' + id,
+    })
+  },
+
   deleteTap: function(evt) {
     let that = this;
     let id = evt.currentTarget.dataset.id;
@@ -110,13 +124,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
 
   },
 

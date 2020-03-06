@@ -11,8 +11,8 @@
     <view class="padding-bottom ssolid_bottom cu-item " wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="detailTap">
       <view class="text-df c0 showtwo">{{item.content}}</view>
       <view class="text-gray text-xs padding-top-xs">{{item.create_time}}</view>
-      <view class="grid flex-sub padding-top-sm {{item.img_list.length>1?'col-3 grid-square':'col-1'}}">
-        <view wx:for="{{item.img_list}}" wx:key="index" wx:for-item="iitem" wx:if="{{index<3}}" class="bg-img {{item.img_list.length>1?'':'only-img'}}" style="background-image:url({{iitem}});" data-id="{{index}}" data-dataimg="{{item.img_list}}" catchtap='previewImgTap'>
+      <view class="grid flex-sub padding-top-sm {{item.img_list.length>1?'col-3 grid-square':'col-1'}}" wx:if="{{item.img_list.length>0}}">
+        <view wx:for="{{item.img_list}}" wx:key="index" wx:for-item="iitem" wx:if="{{index<3}}" class="bg-img {{item.img_list.length>1?'':'only-img'}}" style="background-image:url({{iitem}});" data-id="{{index}}" data-dataimg="{{item.img_list}}" >
         </view>
       </view>
 

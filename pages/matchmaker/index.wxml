@@ -96,7 +96,7 @@
   <view wx:if="{{tabCur==1}}" style="padding-bottom:150rpx;">
     <scroll-view scroll-x class=" nav" scroll-with-animation scroll-left="{{scrollLeft}}">
       <view class="flex padding-lr text-center">
-        <view class="cu-item flex-sub {{msgNum==0?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{0}}">消息</view>
+        <!-- <view class="cu-item flex-sub {{msgNum==0?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{0}}">消息</view> -->
         <view class="cu-item flex-sub {{msgNum==1?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{1}}">互相喜欢</view>
         <view class="cu-item flex-sub {{msgNum==2?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{2}}">我喜欢的</view>
         <view class="cu-item flex-sub {{msgNum==3?'text-cgreen text-bold nav-cur':''}}" bindtap="tabSelect" data-id="{{3}}">我无感的</view>
@@ -176,13 +176,16 @@
           <text class="text-black text-sm text-bold padding-left-xs" style="padding-top:5rpx;">偏好设置</text>
         </view>
       </view>
-      <view class="cu-item {{menuArrow?'arrow':''}}">
-        <view class="content flex align-center">
-          <image src="/images/c2.png" class="png" style="width:30rpx;height:29rpx;" mode="aspectFit"></image>
-          <text class="text-black text-sm text-bold padding-left-xs" style="padding-top:5rpx;">状态设置</text>
+      <view class="cu-item {{menuArrow?'arrow':''}}" bindtap="statusTap">
+        <view class="content flex align-center justify-between">
+          <view>
+            <image src="/images/c2.png" class="png" style="width:30rpx;height:29rpx;" mode="aspectFit"></image>
+            <text class="text-black text-sm text-bold padding-left-sm" style="padding-top:5rpx;">状态设置</text>
+          </view>
+          <view class="{{status==0?'text-green':'text-red'}} text-sm text-bold">{{status==0?'开启':'停止'}}</view>
         </view>
       </view>
-      <view class="cu-item {{menuArrow?'arrow':''}}">
+      <view class="cu-item {{menuArrow?'arrow':''}}" bindtap="showModal" data-target="bottomTJModal">
         <view class="content flex align-center">
           <image src="/images/c3.png" class="png" style="width:27rpx;height:26rpx;" mode="aspectFit"></image>
           <text class="text-black text-sm text-bold padding-left-xs" style="padding-top:5rpx;">推荐设置</text>
@@ -194,42 +197,76 @@
       <view class="cu-dialog" catchtap>
         <view class="cu-bar bg-white">
           <view class="action text-gray" bindtap="hideModal">取消</view>
-          <view class="action text-green">确定</view>
+          <view class="action text-green" bindtap="phSetupTap">确定</view>
           <view class="content text-bold">偏好设置</view>
         </view>
-        <view class="padding-xl">
+        <view class="padding-xl bg-white">
           <view class="flex align-center">
             <view class="cuIcon-titles text-green"></view>
-            <view class="text-sm text-bold padding-left-xs">为我推荐</view>
+            <view class="text-sm text-bold padding-left-xs c0">为我推荐</view>
           </view>
           <view class="cu-form-group">
             <view class="title">推荐城市</view>
-            <picker mode="region" bindchange="RegionChange" value="{{region}}" custom-item="{{customItem}}">
+            <picker bindchange="cityRegionChange" value="{{index}}" range="{{city}}" range-key="{{'name'}}">
               <view class="picker">
-                <view wx:if="{{region.length<=0}}">请选择城市</view>
-                <view wx:else>{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
+                <view wx:if="{{cityIndex<0}}">请选择城市</view>
+                <view wx:else>{{city[cityIndex].name}}</view>
               </view>
             </picker>
           </view>
           <view class="cu-form-group">
             <view class="title">自动扩大范围</view>
-            <switch></switch>
+            <switch bindchange="switchTap"></switch>
           </view>
           <view class="cu-form-group">
             <view class="title">推荐学历</view>
-            <picker bindchange="PickerChange" value="{{index}}" range="{{xueliArray}}" range-key="{{'name'}}">
+            <picker bindchange="xueliPickerChange" value="{{index}}" range="{{xueliArray}}" range-key="{{'name'}}">
               <view class="picker">
-                <view wx:if="{{xueliIndex<0}}">请选择学历氛围</view>
+                <view wx:if="{{xueliIndex<0}}">请选择学历范围</view>
                 <view wx:else>{{xueliArray[xueliIndex].name}}</view>
               </view>
             </picker>
           </view>
           <view class="cu-form-group">
             <view class="title">推荐年龄</view>
-            <picker bindchange="PickerChange" value="{{index}}" range="{{xueliArray}}" range-key="{{'name'}}">
+            <picker bindchange="agePickerChange" value="{{index}}" range="{{ageArray}}" range-key="{{'name'}}">
               <view class="picker">
-                <view wx:if="{{xueliIndex<0}}">请选择学历氛围</view>
-                <view wx:else>{{xueliArray[xueliIndex].name}}</view>
+                <view wx:if="{{ageIndex<0}}">请选择年龄范围</view>
+                <view wx:else>{{ageArray[ageIndex].name}}</view>
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="cu-modal bottom-modal {{modalName=='bottomTJModal'?'show':''}}" bindtap="hideModal">
+      <view class="cu-dialog" catchtap>
+        <view class="cu-bar bg-white">
+          <view class="action text-gray" bindtap="hideModal">取消</view>
+          <view class="action text-green" bindtap="tjSetupTap">确定</view>
+          <view class="content text-bold">推荐设置</view>
+        </view>
+        <view class="padding-xl bg-white">
+          <view class="flex align-center">
+            <view class="cuIcon-titles text-green"></view>
+            <view class="text-sm text-bold padding-left-xs c0">请勿将我推荐给这些人</view>
+          </view>
+          <view class="cu-form-group">
+            <view class="title">推荐学历</view>
+            <picker bindchange="xueliPickerChange2" value="{{index}}" range="{{xueliArray}}" range-key="{{'name'}}">
+              <view class="picker">
+                <view wx:if="{{xueliIndex2<0}}">请选择学历范围</view>
+                <view wx:else>{{xueliArray[xueliIndex2].name}}</view>
+              </view>
+            </picker>
+          </view>
+          <view class="cu-form-group">
+            <view class="title">推荐年龄</view>
+            <picker bindchange="agePickerChange2" value="{{index}}" range="{{ageArray}}" range-key="{{'name'}}">
+              <view class="picker">
+                <view wx:if="{{ageIndex2<0}}">请选择年龄范围</view>
+                <view wx:else>{{ageArray[ageIndex2].name}}</view>
               </view>
             </picker>
           </view>

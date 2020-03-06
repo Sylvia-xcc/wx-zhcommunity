@@ -29,7 +29,7 @@ Page({
       uid: options.uid || app.d.uid,
     })
     this.setData({
-      isOwn: uid == app.d.uid ? true : false
+      isOwn: this.data.uid == app.d.uid ? true : false
     })
     this.loadList();
   },

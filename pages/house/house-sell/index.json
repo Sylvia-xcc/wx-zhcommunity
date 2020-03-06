@@ -2,5 +2,5 @@
   "usingComponents": {
     "v-bottomloading": "/components/bottomLoading/bottomloading"
   },
-  "navigationBarTitleText": "卖/出房"
+  "navigationBarTitleText": "出租/出售"
 }

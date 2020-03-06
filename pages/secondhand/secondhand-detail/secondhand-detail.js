@@ -45,30 +45,32 @@ Page({
         uid: app.d.uid,
       }
     }).then(res => {
-      if (p) {
-        let items = that.data.list;
-        if (add) //新增-删除最后一页的数据
-        {
-          let end = (that.data.page - 1) * 10;
-          items = items.slice(0, end);
-          console.log('---------->>> add', items, items.length);
-        }
-        if (that.data.page == 1) {
-          items = res.data.comment.data
+      if(res.data){
+        if (p) {
+          let items = that.data.list;
+          if (add) //新增-删除最后一页的数据
+          {
+            let end = (that.data.page - 1) * 10;
+            items = items.slice(0, end);
+            console.log('---------->>> add', items, items.length);
+          }
+          if (that.data.page == 1) {
+            items = res.data.comment.data
+          } else {
+            items = items.concat(res.data.comment.data)
+          }
+          that.setData({
+            product: res.data.detail,
+            list: items,
+            total: res.data.comment.total,
+            bottoming: true,
+            showBottomLoading: false,
+          })
         } else {
-          items = items.concat(res.data.comment.data)
+          that.setData({
+            product: res.data.detail,
+          })
         }
-        that.setData({
-          product: res.data.detail,
-          list: items,
-          total: res.data.comment.total,
-          bottoming: true,
-          showBottomLoading: false,
-        })
-      } else {
-        that.setData({
-          product: res.data.detail,
-        })
       }
       setTimeout(function(){
         tip.loaded();

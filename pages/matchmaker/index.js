@@ -18,73 +18,44 @@ Page({
     bottoming: true,
     showBottomLoading: false,
     isLoading: true,
-    loading:true,
+    loading: true,
     msgNum: 2,
     scrollLeft: 0,
     modalName: null,
     region: [],
     xueliArray: [],
     xueliIndex: -1,
-    yearsArray: [{
-      id: 0,
-      name: '不限'
-    }, {
-      id: 1,
-      name: '20岁以下'
-    }, {
-      id: 2,
-      name: '20-30岁'
-    }, {
-      id: 3,
-      name: '30-40岁'
-    }, {
-      id: 4,
-      name: '40-50岁'
-    }, {
-      id: 5,
-      name: '50岁以上'
-    }, ],
-    yearsIndex: -1,
+    xueliIndex2: -1,
+    ageArray: [],
+    ageIndex: -1,
+    ageIndex2: -1,
     detail: null,
     user: null,
-    city:[],
+    city: [],
+    cityIndex: -1,
+    large: false,
+    status: 0,
+    a: false,
+    b: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    if (!util.hasAuthorize())
-      return;
-    this.setData({
-      xueliArray: Const.educationArr
-    })
-    this.loadOwnInfo();
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    // this.loadTab();
+    if (!util.hasAuthorize())
+      return;
+    this.loadOwnInfo();
   },
 
-  loadCityList: function (id=820) {
-    let that = this;
-    http.requestUrl({
-      url: 'matchmaker/city',
-      news: true,
-      data: {
-        province: id
-      }
-    }).then(res => {      
-      that.setData({
-        city: res.data,
-      })
-    })
-  },
-
-  loadOwnInfo: function() {
+  loadOwnInfo: function(init = true) {
     let that = this;
     tip.loading();
     wx.request({
@@ -97,7 +68,7 @@ Page({
       },
       method: 'get',
       success: function(res) {
-        console.log('------', res)
+        console.log('------ init 红娘', res)
         if (res.data.code == 3) {
           setTimeout(function() {
             tip.loaded();
@@ -109,7 +80,10 @@ Page({
           that.setData({
             user: res.data.data
           })
-          that.loadTab();
+          if (init)
+            that.loadTab();
+          else
+            tip.loaded();
         }
       },
 
@@ -122,7 +96,7 @@ Page({
       that.loadRandInfo();
     else if (that.data.tabCur == 1)
       that.loadList();
-    else if(that.data.tabCur==2)
+    else if (that.data.tabCur == 2)
       that.loadUser();
   },
 
@@ -289,19 +263,6 @@ Page({
     })
   },
 
-  loadUser:function(){
-    let that = this; 
-    http.requestUrl({
-      url: 'matchmaker/preference',
-      news: true,
-      data: {
-        uid: app.d.uid,
-      },
-    }).then(res => {
-      
-    })
-  },
-
   detailTap: function(evt) {
     let id = evt.currentTarget.dataset.id;
     wx.navigateTo({
@@ -337,7 +298,7 @@ Page({
 
   editTap: function(evt) {
     wx.navigateTo({
-      url: '/pages/matchmaker/matchmaker-edit/matchmaker-edit?uid='+app.d.uid,
+      url: '/pages/matchmaker/matchmaker-edit/matchmaker-edit?uid=' + app.d.uid,
     })
   },
 
@@ -349,6 +310,223 @@ Page({
   hideModal(e) {
     this.setData({
       modalName: null
+    })
+  },
+
+
+  loadUser: function() {
+    let that = this;
+    tip.loading();
+    that.canFit();
+    if (!that.data.a)
+      that.loadInfoList();
+    if (!that.data.b)
+      that.loadCityList();
+
+  },
+
+  canFit: function() {
+    let that = this;
+    if (that.data.a && that.data.b) {
+      setTimeout(function() {
+        tip.loaded();
+        that.loadStatusInfo();
+        that.loadLoveInfo();
+        that.loadNoLoveInfo();
+      }, 400)
+    }
+  },
+
+  loadInfoList: function() {
+    let that = this;
+    http.requestUrl({
+      url: 'matchmaker/info',
+      news: true,
+    }).then(res => {
+      that.setData({
+        xueliArray: res.data.education,
+        ageArray: res.data.age,
+        a: true,
+      })
+      that.canFit();
+    })
+  },
+
+  loadCityList: function(id = 820) {
+    let that = this;
+    http.requestUrl({
+      url: 'matchmaker/city',
+      news: true,
+      data: {
+        province: id
+      }
+    }).then(res => {
+      that.setData({
+        city: res.data,
+        b: true,
+      })
+      that.canFit();
+    })
+  },
+
+  // 偏好设置===============================
+  loadLoveInfo: function(evt) {
+    let that = this;
+    http.requestUrl({
+      url: 'matchmaker/preference',
+      news: true,
+      data: {
+        uid: app.d.uid,
+      },
+    }).then(res => {
+
+    })
+  },
+  phSetupTap: function(evt) {
+    let that = this;
+    let data = {
+      uid: app.d.uid,
+      large: that.data.large ? 1 : 0
+    };
+    if (that.data.cityIndex >= 0) {
+      console.log('------城市：', that.data.city[that.data.cityIndex].name);
+      data.city = that.data.city[that.data.cityIndex].id;
+    }
+    console.log('------范围：', that.data.large);
+    if (that.data.xueliIndex >= 0) {
+      console.log('------学历：', that.data.xueliArray[that.data.xueliIndex].name);
+      data.education = that.data.xueliArray[that.data.xueliIndex].id;
+    }
+    if (that.data.ageIndex >= 0) {
+      console.log('------年龄：', that.data.ageArray[that.data.ageIndex].name);
+      data.age = that.data.ageArray[that.data.ageIndex].id;
+    }
+    that.hideModal();
+    http.requestUrl({
+      url: 'matchmaker/preference',
+      news: true,
+      data: data,
+      method: 'post',
+    }).then(res => {
+      tip.success('修改成功', 1000);
+    })
+
+  },
+
+  xueliPickerChange: function(evt) {
+    this.setData({
+      xueliIndex: evt.detail.value,
+    })
+  },
+
+  agePickerChange: function(evt) {
+    this.setData({
+      ageIndex: evt.detail.value,
+    })
+  },
+
+  cityRegionChange: function(evt) {
+    this.setData({
+      cityIndex: evt.detail.value,
+    })
+  },
+
+  switchTap: function(evt) {
+    this.setData({
+      large: evt.detail.value,
+    })
+  },
+
+  //状态设置================================
+  loadStatusInfo: function() {
+    let that = this;
+    http.requestUrl({
+      url: 'matchmaker/lock',
+      news: true,
+      data: {
+        uid: app.d.uid
+      },
+    }).then(res => {
+      that.setData({
+        status: res.data.status,
+      })
+    })
+  },
+  statusTap: function(evt) {
+    let that = this;
+    wx.showActionSheet({
+      itemList: ['开启推荐', '停止推荐'],
+      success(res) {
+        let status = res.tapIndex;
+        if (status == that.data.status)
+          return;
+        http.requestUrl({
+          url: 'matchmaker/lock',
+          news: true,
+          method: 'post',
+          data: {
+            uid: app.d.uid,
+            status: status
+          },
+        }).then(res => {
+          tip.success('设置成功', 1000);
+          that.setData({
+            status: status,
+          })
+        })
+      },
+    })
+  },
+
+  //推荐设置=========================================
+  loadNoLoveInfo: function() {
+    let that = this;
+    http.requestUrl({
+      url: 'matchmaker/shield',
+      news: true,
+      data: {
+        uid: app.d.uid
+      },
+    }).then(res => {
+
+    })
+  },
+
+  tjSetupTap: function(evt) {
+    let that = this;
+    let data = {};
+    if (that.data.xueliIndex2 >= 0) {
+      console.log('------学历：', that.data.xueliArray[that.data.xueliIndex2].name);
+      data.education = that.data.xueliArray[that.data.xueliIndex2].id;
+    }
+    if (that.data.ageIndex2 >= 0) {
+      console.log('------年龄：', that.data.ageArray[that.data.ageIndex2].name);
+      data.age = that.data.ageArray[that.data.ageIndex2].id;
+    }
+    that.hideModal();
+    if (JSON.stringify(data) === '{}')
+      return;
+    data.uid = app.d.uid;
+    http.requestUrl({
+      url: 'matchmaker/shield',
+      news: true,
+      data: data,
+      method: 'post',
+    }).then(res => {
+      tip.success('修改成功', 1000);
+    })
+
+  },
+
+  xueliPickerChange2: function(evt) {
+    this.setData({
+      xueliIndex2: evt.detail.value,
+    })
+  },
+
+  agePickerChange2: function(evt) {
+    this.setData({
+      ageIndex2: evt.detail.value,
     })
   },
 

@@ -38,15 +38,16 @@ Page({
   loadUserInfo: function () {
     let that = this;
     http.requestUrl({
-      url: 'wxapp/user/userinfo',
+      url: 'account/info',
       data: {
         uid: app.d.uid
-      }
+      },
+      news:true,
     }).then(res => {
       that.setData({
-        user: res.userinfo
+        user: res.data
       })
-      app.globalData.userInfo = res.userinfo;
+      app.globalData.userInfo = res.data;
     })
   },
 

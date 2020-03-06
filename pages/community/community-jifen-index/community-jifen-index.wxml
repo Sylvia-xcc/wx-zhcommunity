@@ -1,10 +1,10 @@
 <!--pages/community/community-jifen-index/community-jifen-index.wxml-->
-<view class="padding-tb">
-  <view class="bg-gray flex flex-direction align-center padding-tb margin-lr">
-    <image src="/images/head.png" class="cu-avatar round lg"></image>
-    <text class="text-bold text-lg padding-tb-sm">圆圆</text>
+<view class="padding-tb" hidden="{{isLoading}}">
+  <view class="bg-gray flex flex-direction align-center padding-tb margin-lr radius">
+    <image src="{{info.avatar}}" class="cu-avatar round lg"></image>
+    <text class="text-bold text-lg padding-tb-sm">{{info.nickname}}</text>
     <view class="flex">
-      <text class="text-cgreen">总积分：778</text>
+      <text class="text-cgreen">总积分：{{info.jifen}}</text>
       <navigator url="/pages/community/community-jifen-list/community-jifen-list" hover-class="none">
         <text class="text-grey padding-left">积分明细>></text>
       </navigator>
@@ -12,32 +12,32 @@
     <view class="flex padding-top" style="width:100%;">
       <view class="flex flex-direction align-center line-right font_22" style="flex-basis: 25%;">
         <view>
-          <text class="text-bold text-lg padding-right-xs">23</text>名</view>
+          <text class="text-bold text-lg padding-right-xs">{{info.rank}}</text>名</view>
         <view>总榜排名</view>
       </view>
       <view class="flex flex-direction align-center line-right font_22" style="flex-basis: 25%;">
         <view>
-          <text class="text-bold text-lg padding-right-xs">5</text>积分</view>
+          <text class="text-bold text-lg padding-right-xs">{{info.today_score}}</text>积分</view>
         <view>今日奖励</view>
       </view>
       <view class="flex flex-direction align-center line-right font_22" style="flex-basis: 25%;">
         <view>
-          <text class="text-bold text-lg padding-right-xs">3</text>天</view>
+          <text class="text-bold text-lg padding-right-xs">{{info.countSignDay}}</text>天</view>
         <view>连续签到</view>
       </view>
       <view class="flex flex-direction align-center font_22" style="flex-basis: 25%;">
         <view>
-          <text class="text-bold text-lg padding-right-xs">23</text>次</view>
+          <text class="text-bold text-lg padding-right-xs">{{info.sumSignDay}}</text>次</view>
         <view>累计签到</view>
       </view>
     </view>
   </view>
 
-  <swiper indicator-dots='true' circular easing-function="linear" autoplay="{{false}}" interval="{{false}}" bindchange="swiperChange" class="padding" style='background:#fff; height:200rpx;'>
+  <swiper indicator-dots='true' circular easing-function="linear" autoplay="{{false}}" interval="{{false}}" bindchange="swiperChange" class="padding" style='background:#fff; height:200rpx;' wx:if="{{banner.length>0}}">
     <block wx:for="{{banner}}" wx:key="this">
-      <swiper-item>
-        <image src="{{item}}" data-src='{{item}}' bindtap='previewImgTap' bindload='setContainerHeight' mode='aspectFill'></image>
-      </swiper-item>
+      <swiper-item data-mid="{{item.mid}}" data-model="{{item.model}}" bindtap="swiperTap">
+          <image src="{{item.slide_pic}}"  mode='aspectFill'></image>
+        </swiper-item>
     </block>
   </swiper>
 
@@ -56,11 +56,12 @@
       <text class="basis-xm text-center">昵称</text>
       <text class="basis-xm text-center">奖励</text>
     </view>
-    <view class="flex justify-between align-center padding-tb-sm font-26 {{index%2==1?'bg-gray':''}}" wx:for="{{list}}" wx:key="index">
+    <view class="flex justify-between align-center padding-tb-sm font-26 {{index%2==1?'bg-gray':''}}" wx:for="{{list}}" wx:key="index" wx:if="{{list.length>0}}">
       <text class="basis-xm text-center">{{index+1}}</text>
       <text class="basis-xm text-center">{{item.name}}</text>
       <text class="basis-xm text-center">{{item.score}}积分</text>
     </view>
+    <view class="padding-tb font-26 text-center" wx:if="{{list.length<=0}}" >暂无上榜数据</view>
   </view>
 
   <view wx:if="{{jifenCur==1}}">
@@ -69,11 +70,12 @@
       <text class="basis-xm text-center">昵称</text>
       <text class="basis-xm text-center">连续签到天数</text>
     </view>
-    <view class="flex justify-between padding-tb-sm font-26 {{index%2==1?'bg-gray':''}}" wx:for="{{list}}" wx:key="index">
+    <view class="flex justify-between padding-tb-sm font-26 {{index%2==1?'bg-gray':''}}" wx:for="{{list}}" wx:key="index"  wx:if="{{list.length>0}}">
       <text class="basis-xm text-center">{{index+1}}</text>
       <text class="basis-xm text-center">{{item.name}}</text>
       <text class="basis-xm text-center">{{item.score}}天</text>
     </view>
+    <view  wx:if="{{list.length<=0}}" class="padding-tb font-26 text-center">暂无上榜数据</view>
   </view>
 
   <view wx:if="{{jifenCur==2}}">
@@ -82,10 +84,11 @@
       <text class="basis-xm text-center">昵称</text>
       <text class="basis-xm text-center">积分</text>
     </view>
-    <view class="flex align-center justify-between padding-tb-sm font-26 {{index%2==1?'bg-gray':''}}" wx:for="{{list}}" wx:key="index">
+    <view class="flex align-center justify-between padding-tb-sm font-26 {{index%2==1?'bg-gray':''}}" wx:for="{{list}}" wx:key="index"  wx:if="{{list.length>0}}">
       <text class="basis-xm text-center">{{index+1}}</text>
       <text class="basis-xm text-center">{{item.nickname}}</text>
       <text class="basis-xm text-center">{{item.jifen}}</text>
     </view>
+    <view  wx:if="{{list.length<=0}}" class="padding-tb font-26 text-center">暂无上榜数据</view>
   </view>
 </view>
