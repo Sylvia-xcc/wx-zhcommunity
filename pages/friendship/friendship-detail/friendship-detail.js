@@ -93,6 +93,10 @@ Page({
     util.personal(uid);
   },
 
+  chatTap: function (evt) {
+    util.liveChatTap();
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

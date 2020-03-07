@@ -119,9 +119,9 @@
       <view>福利待遇(多选)</view>
       <view class="action text-green" data-type="ok" bindtap="hideModal">确定</view>
     </view>
-    <view class="grid col-3 padding-sm">
+    <view class="grid col-3 padding-sm" style="min-height:300rpx;">
       <view wx:for="{{checkbox}}" wx:key="index" class="padding-xs">
-        <button class="cu-btn orange lg block {{item.checked?'bg-cgreen':'line-gray'}}" bindtap="ChooseCheckbox" data-value="{{item.name}}"> {{item.name}}
+        <button class="cu-btn orange lg block sm {{item.checked?'bg-cgreen text-white':'line-gray'}}" bindtap="ChooseCheckbox" data-value="{{item.name}}"> {{item.name}}
         </button>
       </view>
     </view>

@@ -87,6 +87,10 @@ const detailTap = (model, mid) => {
   })
 }
 
+const liveChatTap = ()=>{
+  tip.text('该功能暂未开放，敬请期待~~');
+}
+
 
 
 /**是否授权*/
@@ -249,4 +253,5 @@ module.exports = {
   personal,
   filterMobile,
   detailTap,
+  liveChatTap,
 }

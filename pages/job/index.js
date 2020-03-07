@@ -89,7 +89,8 @@ Page({
       areaArr: Const.areaArr,
       // treatmentArr: Const.treatmentArr,
     })
-    console.log('=============>>', this.data.height);
+    console.log('=============>>', this.data.heigh);
+    // console.log('------------- ', Const.areaArr);
 
     that.loadJobList();
   },

@@ -66,6 +66,20 @@ Page({
     })
   },
 
+  signTap:function(){
+    let that = this;
+    http.requestUrl({
+      url: 'account/sign',
+      news: true,
+      data: {
+        uid: app.d.uid,
+      },
+      method:'post'
+    }).then(res => {
+      tip.success('签到成功',1000);
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

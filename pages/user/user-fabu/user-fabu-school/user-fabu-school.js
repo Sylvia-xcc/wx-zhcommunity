@@ -1,4 +1,4 @@
-// pages/user/user-activity/user-activity-commonweal/user-activity-commonweal.js
+// pages/user/user-fabu/user-fabu-school/user-fabu-school.js
 const app = getApp();
 const util = require('../../../../utils/util.js');
 const http = require('../../../../utils/http.js');
@@ -10,15 +10,16 @@ Page({
    */
   data: {
     uid: 0,
+    tabCur: 1,
     list: [],
     page: 1,
     total: 0,
     bottoming: true,
     showBottomLoading: false,
     isLoading: true,
+    loading: true,
     isOwn: true,
   },
-
 
   /**
    * 生命周期函数--监听页面加载
@@ -34,18 +35,33 @@ Page({
     this.loadList();
   },
 
-  loadList: function () {
+  loadList: function (p = true) {
     let that = this;
     if (that.data.isLoading)
       tip.loading();
+    if (p) {
+      that.setData({
+        loading: true,
+        bottoming: false,
+        showBottomLoading: true,
+      })
+    }
+    setTimeout(function () {
+      that.loadCourseList();
+    }, 400)
+
+  },
+
+  loadCourseList: function () {
+    let that = this;
     http.requestUrl({
-      url: 'account/activity',
+      url: 'account/index',
       news: true,
       data: {
         listRows: 10,
         page: that.data.page,
         uid: that.data.uid,
-        model: 'service'
+        model: 'class',
       }
     }).then(res => {
       let items = that.data.list;
@@ -59,6 +75,7 @@ Page({
         total: res.data.total,
         bottoming: true,
         showBottomLoading: false,
+        loading: false,
       })
       setTimeout(function () {
         tip.loaded();
@@ -69,27 +86,21 @@ Page({
     })
   },
 
-  detailTap: function (evt) {
-    let id = evt.currentTarget.dataset.id;
-    let model = evt.currentTarget.dataset.model;
-    util.detailTap(model,id);
-  },
-
-  cancelTap: function (evt) {
+  deleteTap: function (evt) {
     let that = this;
     let id = evt.currentTarget.dataset.id;
-    tip.confirm('是否确定取消参加该活动?').then(res => {
+    tip.confirm('是否确定删除改发布?').then(res => {
       http.requestUrl({
-        url: 'account/clearActivity',
+        url: 'account/clearPost',
         news: true,
         method: 'post',
         data: {
           id: id,
-          model: 'meeting',
+          model: 'job',
           uid: app.d.uid
         }
       }).then(res => {
-        tip.success('取消报名成功', 1000);
+        tip.success('删除成功', 1000);
         let items = that.data.list;
         let tmp = [];
         for (var i = 0; i < items.length; i++) {
@@ -102,6 +113,31 @@ Page({
       })
     })
   },
+
+  tabSelect: function (evt) {
+    let id = evt.currentTarget.dataset.id;
+    let that = this;
+    if (that.data.tabCur == id)
+      return;
+    that.setData({
+      tabCur: id,
+      page: 1,
+      list: [],
+      bottoming: false,
+      showBottomLoading: true,
+    })
+    that.loadList();
+  },
+
+  //详情
+  detailTap: function (evt) {
+    let id = evt.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/school/school-fabu-detail/school-fabu-detail?id=' + id ,
+    })
+  },
+
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -152,7 +188,7 @@ Page({
         that.setData({
           page: that.data.page + 1,
         })
-        that.loadList();
+        that.loadList(false);
       }, 800)
     }
   },

@@ -9,11 +9,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cid:0,
-    lid:0,
+    cid:0,//课程id
+    lid:0,//课时id
     name: '',
     intro: '',
     video: '',
+    isLoading:true,
   },
 
   /**
@@ -33,6 +34,41 @@ Page({
     this.setData({
       height: height,
       px: px,
+    })
+
+    if(that.data.lid>0){
+      that.loadLessonDetail();
+    }else{
+      that.setData({
+        isLoading:false
+      })
+    }
+  },
+
+  loadLessonDetail:function(){
+    let that = this;
+    if (that.data.isLoading)
+      tip.loading();
+    http.requestUrl({
+      url: 'teacher/editVideo',
+      news: true,
+      data: {
+        id: that.data.lid,
+        uid: app.d.uid,
+      }
+    }).then(res => {
+      that.setData({
+        name:res.data.title,
+        intro:res.data.intro,
+        video:res.data.video
+      })
+      setTimeout(function () {
+        if (that.data.isLoading)
+          tip.loaded();
+        that.setData({
+          isLoading: false
+        })
+      }, 200)
     })
   },
   /**
@@ -64,25 +100,31 @@ Page({
     console.log('------- 课时视频：', that.data.video);
 
     tip.loading('发布中...');
-
     http.uploadFile({
-      tempFilePaths: uploadPic[i]
+      tempFilePaths: that.data.video
     }).then(res => {
       if (typeof res == 'string') {
         res = JSON.parse(res);
       }
       console.log('上传完路径', res)
       if (res.code == 1) {
-        files.push(res.data.url);
-        let content = JSON.stringify(files);
-        console.log('-------上传完成', files, content);
+        let content = res.data.url;
+        console.log('-------上传完成', content);
+        let data = {
+          uid: app.d.uid,
+          pid: that.data.cid,
+          title: that.data.name,
+          intro: that.data.intro,
+          video: content
+        }
+        let url = that.data.lid > 0 ? 'teacher/editVideo' :'teacher/addLesson';
+        if(that.data.lid)
+          data.id = that.data.lid;          
         http.requestUrl({
-          url: 'teacher/add',
+          url: url,
           news: true,
           method: 'post',
-          data: {
-            uid: app.d.uid,
-          }
+          data: data
         }).then(res => {
           tip.loaded();
           tip.success('发布成功', 1000);

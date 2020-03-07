@@ -42,7 +42,7 @@ Page({
       news: true,
       data: {
         id: that.data.id,
-        // uid: app.d.uid,
+        uid: app.d.uid,
       }
     }).then(res => {
       that.setData({

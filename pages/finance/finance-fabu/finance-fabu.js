@@ -112,6 +112,10 @@ Page({
       tip.error('请选择服务类型', 1000);
       return;
     }
+    if (!util.filterMobile(that.data.mobile)) {
+      // tip.error('请填写联系电话', 1000);
+      return;
+    }
     console.log('------------- 发布内容：', that.data.desc);
     console.log('------------- 联系方式：', that.data.mobile);
     console.log('------------- 服务类型：', that.data.list[that.data.type].name);

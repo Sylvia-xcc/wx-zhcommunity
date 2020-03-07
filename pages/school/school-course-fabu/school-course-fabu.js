@@ -9,30 +9,87 @@ Page({
    * 页面的初始数据
    */
   data: {
+    id: 0,
     imgList: [],
-    name: '1',
-    intro: '2',
-    teacher_name: '3',
-    teacher_info: '4',
+    name: '',
+    intro: '',
+    teacher_name: '',
+    teacher_info: '',
     teacher_thumb: '',
     imgList: [],
     thumb: '', //背景
     max: 8,
-    picker: [{
-      name: 'a',
-      id: 1
-    }, {
-      name: 'bb',
-      id: 2
-    }],
+    picker: [],
     pickerIndex: -1,
+    isLoading: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log('options:', options);
+    let that = this;
+    that.setData({
+      id: options.id || 0
+    })
+    that.loadClassType();
+  },
 
+  loadClassType: function () {
+    let that = this;
+    http.requestUrl({
+      url: 'teacher/classType',
+      news: true,
+    }).then(res => {
+      that.setData({
+        picker: res.data
+      })
+      if (that.data.id > 0) {
+        that.loadCourseDetail();
+      } else {
+        that.setData({
+          isLoading: false
+        })
+      }
+    })
+  },
+
+  loadCourseDetail: function() {
+    let that = this;
+    if (that.data.isLoading)
+      tip.loading();
+    http.requestUrl({
+      url: '/teacher/edit',
+      news: true,
+      data: {
+        uid: app.d.uid,
+        id: that.data.id,
+      }
+    }).then(res => {
+      let items = that.data.picker;
+      let id = -1;
+      for(var i=0; i<items.length; i++){
+        if (items[i].name == res.data.content_id_name)
+          id = i;
+      }
+      that.setData({
+        name:res.data.name,
+        intro:res.data.intro,
+        teacher_name: res.data.username,
+        teacher_thumb: res.data.avatar,
+        teacher_info: res.data.lecture_teacher.intro,
+        imgList:res.data.banner||[],
+        thumb:res.data.thumb,
+        pickerIndex:id,
+      })
+      setTimeout(function() {
+        tip.loaded();
+        that.setData({
+          isLoading: false
+        })
+      }, 600)
+    })
   },
 
   /**
@@ -41,6 +98,8 @@ Page({
   onShow: function() {
 
   },
+
+  
 
   submitTap: function() {
     let that = this;
@@ -52,7 +111,7 @@ Page({
       tip.error('请填写课程详情', 1000);
       return;
     }
-    if (that.data.pickerIndex, 0) {
+    if (that.data.pickerIndex < 0) {
       tip.error('请选择课程分类', 1000);
       return;
     }
@@ -88,8 +147,8 @@ Page({
 
 
     let uploadPic = util.copyObj(that.data.imgList);
-    uploadPic.push(that.data.teacher_thumb);
-    uploadPic.push(that.data.thumb);
+    uploadPic.unshift(that.data.thumb);
+    uploadPic.unshift(that.data.teacher_thumb);
     let temp = [];
     let files = [];
     tip.loading('发布中...');
@@ -109,15 +168,31 @@ Page({
     }
 
     Promise.all(temp).then(res => {
-      let content = JSON.stringify(files);
-      console.log('-------上传完成', files, content);
+      // let content = JSON.stringify(files);
+      let teacher_thumb = files.slice(0, 1);
+      let thumb = files.slice(1, 2);
+      let banner = files.slice(2);
+      console.log('-------上传完成', files, teacher_thumb, thumb, banner);
+
+      let url = that.data.id > 0 ? 'teacher/edit' : 'teacher/add';
+      let data={
+        uid: app.d.uid,
+        name: that.data.name,
+        intro: that.data.intro,
+        teacher_name: that.data.teacher_name,
+        teacher_intro: that.data.teacher_info,
+        teacher_thumb: teacher_thumb[0],
+        content_id: that.data.picker[that.data.pickerIndex].id,
+        banner: JSON.stringify(banner),
+        thumb: thumb[0],
+      }
+      if(that.data.id>0)
+        data.id = that.data.id;
       http.requestUrl({
-        url: 'teacher/add',
+        url: url,
         news: true,
         method: 'post',
-        data: {
-          uid: app.d.uid,
-        }
+        data: data
       }).then(res => {
         tip.loaded();
         tip.success('发布成功', 1000);

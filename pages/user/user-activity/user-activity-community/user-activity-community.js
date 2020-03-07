@@ -97,6 +97,12 @@ Page({
     })
   },
 
+  detailTap: function (evt) {
+    let id = evt.currentTarget.dataset.id;
+    let model = evt.currentTarget.dataset.model;
+    util.detailTap(model, id);
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

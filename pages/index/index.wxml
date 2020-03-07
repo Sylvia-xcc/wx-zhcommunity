@@ -1,6 +1,6 @@
 <!--pages/index/index.wxml-->
 <loading id="loading" showLoading="{{showLoading}}"></loading>
-
+<v-startup bindstartup="startupTap"></v-startup>
 <swiper class="screen-swiper " indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
   <swiper-item wx:for="{{swiperList}}" wx:key="index" data-mid="{{item.mid}}" data-model="{{item.model}}" bindtap="swiperTap">
     <image src="{{item.slide_pic}}" mode="aspectFill"></image>
@@ -57,7 +57,7 @@
   <view class="">
     <scroll-view scroll-x style="white-space: nowrap;overflow:hidden;">
       <block wx:for="{{cates}}" wx:key="index">
-        <view class="gz-item" data-appid="{{item.appId}}" bindtap="toOtherTap">
+        <view class="gz-item" data-appid="{{item.appId}}" data-path="{{item.path}}" bindtap="toOtherTap">
           <image src="{{item.url}}" class="cu-avatar round lg" style="width:112rpx;height:112rpx;"></image>
           <view class="text-gray font_26 padding-top-5">{{item.name}}</view>
         </view>
@@ -71,7 +71,7 @@
     <text class="cuIcon-titles text-green"></text>
     <text class="c0 text-bold">休闲游戏</text>
   </view>
-  <image src="http://image.fengzhankeji.com/static/game.png" style="width:690rpx; height:200rpx;"></image>
+  <image src="http://image.fengzhankeji.com/static/game2.png" style="width:690rpx; height:200rpx;"></image>
 </navigator>
 
 <view class="padding-top padding-left">

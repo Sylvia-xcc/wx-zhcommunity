@@ -66,7 +66,7 @@
         </view>
       </view>
 
-      <view class="padding bg-white radius margin-top-sm item">
+      <view class="padding bg-white radius margin-top-sm item" wx:if="{{detail.wx_account!=''}}">
         <view class="font_26 c0 text-bold">
           <text class="cuIcon-titles text-green" style="font-size:30rpx;"></text>
           <text> 微信号</text>
@@ -75,8 +75,8 @@
           <view class="pr">{{detail.wx_account}}
             <view class="text-blue pa" style="top:-4rpx; right:-80rpx;" data-text="weixinhao1273" bindtap="copyTap">复制</view>
           </view>
-          <text class="padding-tb-xs text-red">or</text>
-          <text>只有对方关注您才可以查看微信号哦</text>
+          <!-- <text class="padding-tb-xs text-red">or</text>
+          <text>只有对方关注您才可以查看微信号哦</text> -->
         </view>
       </view>
 
@@ -126,7 +126,7 @@
       </view>
     </view>
     <view wx:else>
-      <view class="flex flex-wrap justify-between padding">
+      <view class="flex flex-wrap justify-between padding" hidden="{{loading}}">
         <view class="msg-item" wx:for="{{list}}" wx:key="index" data-id="{{item.cid}}" bindtap="detailTap">
           <image src="{{item.photo[0]}}" class="msg-item-img" mode="aspectFill"></image>
           <view class="padding-lr-sm padding-top-xs pr">
@@ -140,11 +140,11 @@
             </view>
             <view class="text-bold c0 font_22 padding-tb-xs">{{item.job}}</view>
             <view class="text-bold c0 font_22">{{item.school}}</view>
-            <view class="icon pa" style="bottom:0rpx; right:20rpx;" data-id="{{item.id}}" catchtap="caozuoTap">
+            <view class="icon pa" style="bottom:0rpx; right:20rpx;" data-id="{{item.id}}" catchtap="caozuoTap" wx:if="{{msgNum!=1}}">
               <text wx:if="{{msgNum==1}}">聊天</text>
-              <text wx:elif="{{msgNum==2}}">送爱心</text>
-              <text wx:elif="{{msgNum==3}}">挽回</text>
-              <text wx:elif="{{msgNum==4}}">心动</text>
+              <text wx:if="{{msgNum==2}}">送爱心</text>
+              <text wx:if="{{msgNum==3}}">挽回</text>
+              <text wx:if="{{msgNum==4}}">心动</text>
             </view>
           </view>
         </view>
@@ -216,7 +216,7 @@
           </view>
           <view class="cu-form-group">
             <view class="title">自动扩大范围</view>
-            <switch bindchange="switchTap"></switch>
+            <switch bindchange="switchTap" checked="{{large}}"></switch>
           </view>
           <view class="cu-form-group">
             <view class="title">推荐学历</view>

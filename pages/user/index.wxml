@@ -10,7 +10,9 @@
       <view class="padding-left-xs">
         <view class="font_30 padding-left-sm padding-bottom-xs flex align-center">
           <text class="padding-right">{{user.nickname}}</text>
-          <!-- <image src="/images/sign.png" style="width:64rpx;height:28rpx;"></image> -->
+          <view style="margin-top:15rpx;">
+            <image src="/images/sign.png" style="width:64rpx;height:28rpx;" bindtap="signTap"></image>
+          </view>
         </view>
         <navigator url="/pages/user/user-personal-edit/user-personal-edit" hover-class="none" class="cu-tag font_22" style="background:rgba(65,151,93,0.58); border-radius:24px;">账号管理></navigator>
       </view>
@@ -48,37 +50,37 @@
 
 <view class="padding flex flex-wrap justify-between" style="padding-top:70rpx;">
   <navigator url="/pages/community/community-jifen-shop/community-jifen-shop" hover-class="none" class="flex align-center flex-direction basis-xn margin-bottom-xl item">
-    <image src="/images/u1.png" ></image>
+    <image src="/images/u1.png"></image>
     <text class="c0 padding-top-sm font_26 text-bold">积分商城</text>
   </navigator>
   <navigator url="/pages/community/community-jifen-list/community-jifen-list" hover-class="none" class="flex align-center flex-direction basis-xn item">
-    <image src="/images/u4.png" ></image>
+    <image src="/images/u4.png"></image>
     <text class="c0 padding-top-sm font_26 text-bold">积分明细</text>
   </navigator>
   <navigator url="/pages/shop/shop-cart/shop-cart" hover-class="none" class="flex align-center flex-direction basis-xn item">
-    <image src="/images/u3.png" ></image>
+    <image src="/images/u3.png"></image>
     <text class="c0 padding-top-sm font_26 text-bold">购物车</text>
   </navigator>
   <navigator url="/pages/shop/shop-order/shop-order" hover-class="none" class="flex align-center flex-direction basis-xn item">
-    <image src="/images/u2.png" ></image>
+    <image src="/images/u2.png"></image>
     <text class="c0 padding-top-sm font_26 text-bold">商城订单</text>
   </navigator>
 
   <navigator url="/pages/user/user-activity/index" hover-class="none" class="flex align-center flex-direction basis-xn item">
-    <image src="/images/u5.png" ></image>
+    <image src="/images/u5.png"></image>
     <text class="c0 padding-top-sm font_26 text-bold">我的活动</text>
   </navigator>
   <navigator url="/pages/user/user-collect/index" hover-class="none" class="flex align-center flex-direction basis-xn item">
-    <image src="/images/u6.png" ></image>
+    <image src="/images/u6.png"></image>
     <text class="c0 padding-top-sm font_26 text-bold">我的收藏</text>
   </navigator>
   <navigator url="/" hover-class="none" class="flex align-center flex-direction basis-xn item pr">
     <button open-type="contact" class="shareBtn"></button>
-    <image src="/images/u7.png" ></image>
+    <image src="/images/u7.png"></image>
     <text class="c0 padding-top-sm font_26 text-bold">我的客服</text>
   </navigator>
   <navigator url="/pages/shop/shop-address/shop-address" hover-class="none" class="flex align-center flex-direction basis-xn item">
-    <image src="/images/u8.png" ></image>
+    <image src="/images/u8.png"></image>
     <text class="c0 padding-top-sm font_26 text-bold">收获地址</text>
   </navigator>
 </view>

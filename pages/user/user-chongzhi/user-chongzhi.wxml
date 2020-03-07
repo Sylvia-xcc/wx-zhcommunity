@@ -9,7 +9,7 @@
       <view class="padding-xs" wx:for="{{list}}" wx:key="index" data-index="{{index}}" data-id="{{item.id}}" data-money="{{item.money}}" bindtap="selectedTap">
         <view class="item {{item.id==selectId?'active':''}} ">
           <view class="font_34 c0">{{item.money}}</view>
-          <view class="font_22 text-red">送{{item.addition}}{{item.type==20?'积分':''}}</view>
+          <view class="font_22 text-red">送{{item.addition}}{{item.type==20?'积分':'元'}}</view>
         </view>
       </view>
     </view>

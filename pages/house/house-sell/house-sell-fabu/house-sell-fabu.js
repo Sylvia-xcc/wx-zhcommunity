@@ -128,21 +128,6 @@ Page({
   sumbitTap: function() {
     let that = this;
 
-    console.log('-------- 发布标题：', that.data.title);
-    console.log('-------- 小区名称：', that.data.name);
-    console.log('-------- 面积：', that.data.area);
-    console.log('-------- 房屋楼层：', that.data.floorIndex);
-    console.log('-------- 装修情况：', that.data.renovationArray[that.data.renovationIndex].id, that.data.renovationArray[that.data.renovationIndex].value);
-    console.log('-------- 是否有电梯', that.data.liftArray[that.data.liftIndex].id, that.data.liftArray[that.data.liftIndex].value);
-    console.log('-------- 房屋朝向:', that.data.orientationsArray[that.data.orientationsIndex].name);
-
-    console.log('-------- 房屋特色：', that.data.houseSpeIndex);
-    console.log('-------- 房屋描述：', that.data.desc);
-    console.log('-------- 户型', that.data.roomIndex);
-    console.log('-------- 联系人电话：', that.data.mobile);
-    console.log('-------- 联系人称呼：', that.data.linkname);
-    console.log('-------- 地址：', that.data.address.address);
-
     if (that.data.title == '') {
       tip.error('请填写发布标题', 1000);
       return;
@@ -191,6 +176,21 @@ Page({
       tip.error('请上传图片', 1000);
       return;
     }
+
+    console.log('-------- 发布标题：', that.data.title);
+    console.log('-------- 小区名称：', that.data.name);
+    console.log('-------- 面积：', that.data.area);
+    console.log('-------- 房屋楼层：', that.data.floorIndex);
+    console.log('-------- 装修情况：', that.data.renovationArray[that.data.renovationIndex].id, that.data.renovationArray[that.data.renovationIndex].value);
+    console.log('-------- 是否有电梯', that.data.liftArray[that.data.liftIndex].id, that.data.liftArray[that.data.liftIndex].value);
+    console.log('-------- 房屋朝向:', that.data.orientationsArray[that.data.orientationsIndex].name);
+
+    console.log('-------- 房屋特色：', that.data.houseSpeIndex);
+    console.log('-------- 房屋描述：', that.data.desc);
+    console.log('-------- 户型', that.data.roomIndex);
+    console.log('-------- 联系人电话：', that.data.mobile);
+    console.log('-------- 联系人称呼：', that.data.linkname);
+    console.log('-------- 地址：', that.data.address.address);
 
     if (that.data.type == 0)
       that.houseSellSumbit();

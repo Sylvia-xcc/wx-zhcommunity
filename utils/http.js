@@ -21,7 +21,7 @@ const requestUrl = ({
     var hostUrl = news ? app.d.hostUrlNew : app.d.hostUrl;
     if (method == 'get') {
       // console.log('-------------- data:', data );
-      if (data && data.uid === undefined){
+      if (data && data.uid === undefined) {
         delete data.uid;
         // console.log("========================", data)
       }
@@ -40,6 +40,7 @@ const requestUrl = ({
           clearTimeout(loadingTimer);
         }
         if (res.statusCode == 404) {
+          tip.loaded();
           tip.error('网络异常！', 2000)
           return;
         }
@@ -52,12 +53,13 @@ const requestUrl = ({
             tip.text(str, 2000)
           else
             tip.error(str, 2000)
-
+          tip.loaded();
           // reject(res.data);
         }
       },
       fail: (res) => {
         console.log('-------------- fail:', res)
+        tip.loaded();
         tip.error('网络异常！', 2000)
         // reject(res.data);
       },
@@ -107,7 +109,14 @@ const uploadFile = function(data) {
       },
       success: function(res) {
         console.log('----------- uploadfile', res.data);
-        resolve(res.data)
+        if (typeof res.data == 'string') {
+          let ress = JSON.parse(res.data);
+          if (ress.code == 0) {
+            tip.loaded();
+            tip.error(ress.msg, 1000);
+          }
+          resolve(res.data)
+        }
       }
     })
   })

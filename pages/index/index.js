@@ -23,23 +23,44 @@ Page({
     a: false,
     b: false,
     cates: [{
+        name: '永辉生活超市',
+        url: 'http://image.fengzhankeji.com/static/g6.png',
+        appId: 'wxc9cf7c95499ee604',
+        path: 'pages/scanbuyhome/index'
+      }, {
         name: '柒筑',
         url: 'https://images.fengzhankeji.com/weixin/20191226/5e047e5d1336b.png',
-        appId: 'wx2c314ac4404bb74f'
+        appId: 'wx2c314ac4404bb74f',
+        path: 'pages/index/index'
       }, {
-        name: '徐妆主',
-        url: 'http://image.fengzhankeji.com/static/go1.png',
-        appId: 'wx4e16556f3b59b953'
+        name: '京东',
+        url: 'http://image.fengzhankeji.com/static/g4.png',
+        appId: 'wx91d27dbf599dff74',
+        path: 'pages/index/index'
       },
       {
-        name: '蜂展科技',
-        url: 'http://image.fengzhankeji.com/static/g3.png',
-        appId: 'wxab3b69488268706f'
+        name: '肯德基',
+        url: 'http://image.fengzhankeji.com/static/g5.png',
+        appId: 'wx23dde3ba32269caa',
+        path: 'pages/home/home'
       },
       {
         name: '红杜鹃',
         url: 'http://image.fengzhankeji.com/static/g2.png',
-        appId: 'wx925c033ff5414f58'
+        appId: 'wx925c033ff5414f58',
+        path: 'pages/index/index'
+      },
+      {
+        name: '顺口溜滋补汤锅',
+        url: 'http://image.fengzhankeji.com/static/g7.png',
+        appId: 'wxec640c7ff16e8314',
+        path: 'pages/index/index'
+      },
+      {
+        name: '一把壶',
+        url: 'http://image.fengzhankeji.com/static/g8.png',
+        appId: 'wxa99810e091613a64',
+        path: 'pages/index/index'
       }
     ]
   },
@@ -68,22 +89,25 @@ Page({
   },
   initHome: function() {
     let that = this;
-    wx.showTabBar()
-    if (that.data.showLoading)
-      tip.loading();
     that.setData({
       showLoading: false
     })
+  },
+
+  startupTap: function (evt) {
+    let that = this;
+    wx.showTabBar()
+    tip.loading();
     that.loadBanner();
     that.loadIndex();
   },
 
   canFit: function() {
     let that = this;
-    if(that.data.a && that.data.b){
-      setTimeout(function(){
+    if (that.data.a && that.data.b) {
+      setTimeout(function() {
         tip.loaded();
-      },400)
+      }, 400)
     }
   },
   loadBanner: function() {
@@ -192,13 +216,19 @@ Page({
     util.detailTap(model, mid);
   },
 
+  personalTap:function(evt){
+    let uid = evt.currentTarget.dataset.uid;
+    util.personal(uid);
+  },
+
   toOtherTap: function(evt) {
     console.log('-------- 跳转其他小程序')
     let appId = evt.currentTarget.dataset.appid;
+    let path = evt.currentTarget.dataset.path;
     wx.navigateToMiniProgram({
       appId: appId,
-      path: 'pages/index/index',
-      envVersion: 'trial',
+      path: path,
+      envVersion: 'release',
       success(res) {
         // 打开成功
         console.log('------打开成功')

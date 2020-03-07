@@ -149,7 +149,7 @@ Page({
       desc: that.data.detail.intro,
       photo: that.data.detail.thumb,
       price: that.data.detail.username,
-      code: '',
+      code: 'http://image.fengzhankeji.com/static/code.jpg',
     });
     that.selectComponent('#poster').generatePaper(data)
   },

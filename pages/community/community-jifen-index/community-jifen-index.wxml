@@ -12,22 +12,22 @@
     <view class="flex padding-top" style="width:100%;">
       <view class="flex flex-direction align-center line-right font_22" style="flex-basis: 25%;">
         <view>
-          <text class="text-bold text-lg padding-right-xs">{{info.rank}}</text>名</view>
+          <text class="text-bold text-lg padding-right-xs">{{info.rank||0}}</text>名</view>
         <view>总榜排名</view>
       </view>
       <view class="flex flex-direction align-center line-right font_22" style="flex-basis: 25%;">
         <view>
-          <text class="text-bold text-lg padding-right-xs">{{info.today_score}}</text>积分</view>
+          <text class="text-bold text-lg padding-right-xs">{{info.today_score||0}}</text>积分</view>
         <view>今日奖励</view>
       </view>
       <view class="flex flex-direction align-center line-right font_22" style="flex-basis: 25%;">
         <view>
-          <text class="text-bold text-lg padding-right-xs">{{info.countSignDay}}</text>天</view>
+          <text class="text-bold text-lg padding-right-xs">{{info.countSignDay||0}}</text>天</view>
         <view>连续签到</view>
       </view>
       <view class="flex flex-direction align-center font_22" style="flex-basis: 25%;">
         <view>
-          <text class="text-bold text-lg padding-right-xs">{{info.sumSignDay}}</text>次</view>
+          <text class="text-bold text-lg padding-right-xs">{{info.sumSignDay||0}}</text>次</view>
         <view>累计签到</view>
       </view>
     </view>

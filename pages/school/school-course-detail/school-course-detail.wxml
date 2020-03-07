@@ -3,7 +3,7 @@
   <!-- <v-banner banner="{{banner}}" videoUrl="{{videoUrl}}"></v-banner> -->
   <swiper class="screen-swiper " indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
     <swiper-item wx:for="{{banner}}" wx:key>
-      <image src="{{item.url}}" mode="aspectFill"></image>
+      <image src="{{item}}" mode="aspectFill"></image>
     </swiper-item>
   </swiper>
 </view>

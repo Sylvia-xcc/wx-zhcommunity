@@ -1,16 +1,14 @@
 <!--pages/community/community-jifen-list/community-jifen-list.wxml-->
 <view hidden="{{isLoading}}">
   <view class="bg-cgreen flex justify-between padding-tb-sm text-white">
-    <text class="basis-xs text-center">排名</text>
-    <text class="basis-xs text-center">途径</text>
-    <text class="basis-xs text-center">奖励</text>
-    <text class="basis-sm text-center">获得时间</text>
+    <text class="basis-sm text-center">途径</text>
+    <text class="basis-xs text-center">积分</text>
+    <text class="basis-sm text-center">时间</text>
   </view>
   <view class="flex justify-between align-center padding-tb-sm font-26 {{index%2==1?'bg-gray':''}}" wx:for="{{list}}" wx:key="index">
-    <text class="basis-xs text-center">{{index+1}}</text>
-    <text class="basis-xs text-center">{{item.desc}}</text>
-    <text class="basis-xs text-center">{{item.integral}}积分</text>
-    <text class="basis-sm text-center">{{item.create_time}}</text>
+    <text class="basis-sm text-center text-sm">{{item.desc}}</text>
+    <text class="basis-xs text-center text-sm">{{item.integral}}积分</text>
+    <text class="basis-sm text-center text-sm">{{item.create_time}}</text>
   </view>
   <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
 </view>

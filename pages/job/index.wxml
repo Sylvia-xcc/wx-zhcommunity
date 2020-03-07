@@ -128,7 +128,7 @@
     </view>
   </view>
 
-  <view hidden="{{loading}}">
+  <view hidden="{{loading}}" wx:if="{{displays=='none'}}">
     <view class="cu-card dynamic no-card solid-bottom padding-bottom-sm" wx:for="{{list}}" wx:key="index">
       <view class="cu-item shadow pr" data-id="{{item.id}}" bindtap="detailTap">
         <view class="cu-list menu-avatar">

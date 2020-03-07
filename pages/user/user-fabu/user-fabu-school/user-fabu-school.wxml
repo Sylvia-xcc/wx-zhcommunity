@@ -1,0 +1,15 @@
+<!--pages/user/user-fabu/user-fabu-school/user-fabu-school.wxml-->
+
+<view hidden="{{isLoading}}">
+
+
+  <view class="margin padding bg-white pr " wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="detailTap">
+    <view class="flex align-center">
+      <view class="cu-tag bg-grey radius">{{item.content_id_name}}</view>
+      <view class="c0 padding-left-sm">{{item.name}}</view>
+    </view>
+    <view class="text-green text-right">{{item.status==1?'审核通过':item.status==0?'已删除':item.status==2?'审核未通过':'审核中'}}</view>
+  </view>
+
+  <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
+</view>

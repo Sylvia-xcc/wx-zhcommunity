@@ -61,7 +61,7 @@
     </view>
   </view>
 
-  <view class="padding bg-white radius margin-top-sm item">
+  <view class="padding bg-white radius margin-top-sm item" wx:if="{{detail.wx_account!=''}}">
     <view class="font_26 c0 text-bold">
       <text class="cuIcon-titles text-green" style="font-size:30rpx;"></text>
       <text> 微信号</text>
@@ -70,8 +70,8 @@
       <view class="pr">{{detail.wx_account}}
         <view class="text-blue pa" style="top:-4rpx; right:-80rpx;" data-text="weixinhao1273" bindtap="copyTap">复制</view>
       </view>
-      <text class="padding-tb-xs text-red">or</text>
-      <text>只有对方关注您才可以查看微信号哦</text>
+      <!-- <text class="padding-tb-xs text-red">or</text>
+      <text>只有对方关注您才可以查看微信号哦</text> -->
 
     </view>
   </view>

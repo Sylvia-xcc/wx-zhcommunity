@@ -127,8 +127,8 @@ module.exports = {
       })
     }
     // data.content.push({
-    //   type: 'image-local',
-    //   url: '/images/logo.png',
+    //   type: 'image',
+    //   url: 'http://image.fengzhankeji.com/uploads/20200305/759346438c463da50bda3ba0362c0efe.jpg',
     //   top: 64,
     //   left: 140,
     //   shape: 'square',

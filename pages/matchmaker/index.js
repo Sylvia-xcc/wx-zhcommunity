@@ -10,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabCur: 1,
+    tabCur: 0,
     banner: ['/images/ershou1.png', '/images/ershou2.png'],
     list: [],
     page: 1,
@@ -19,7 +19,7 @@ Page({
     showBottomLoading: false,
     isLoading: true,
     loading: true,
-    msgNum: 2,
+    msgNum: 1,
     scrollLeft: 0,
     modalName: null,
     region: [],
@@ -43,7 +43,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    
+
   },
 
   /**
@@ -129,10 +129,10 @@ Page({
         total: res.data.total,
         bottoming: true,
         showBottomLoading: false,
+        loading: false,
       })
       setTimeout(function() {
-        if (that.data.isLoading)
-          tip.loaded();
+        tip.loaded();
         that.setData({
           isLoading: false
         })
@@ -143,6 +143,8 @@ Page({
   //随机
   loadRandInfo: function() {
     let that = this;
+    if (that.data.isLoading)
+      tip.loading();
     that.setData({
       loading: true,
     })
@@ -161,6 +163,7 @@ Page({
         tip.loaded();
         that.setData({
           loading: false,
+          isLoading: false,
         })
       }, 200)
     })
@@ -210,6 +213,7 @@ Page({
       method: 'post',
     }).then(res => {
       tip.success('挽回成功', 1000);
+      that.reset();
     })
   },
 
@@ -226,6 +230,7 @@ Page({
       method: 'post',
     }).then(res => {
       tip.success('心动成功', 1000);
+      that.reset();
     })
   },
 
@@ -243,9 +248,10 @@ Page({
       method: 'post',
     }).then(res => {
       tip.success('关注成功', 1000);
+      that.loadRandInfo();
     })
   },
-
+  
   //不喜欢
   nolikeTap: function(evt) {
     let that = this;
@@ -292,6 +298,20 @@ Page({
       page: 1,
       bottoming: false,
       showBottomLoading: true,
+      list: [],
+      loading: true,
+    })
+    setTimeout(function() {
+      that.loadList();
+    }, 400);
+  },
+
+  reset: function() {
+    let that = this;
+    that.setData({
+      page: 1,
+      bottoming: false,
+      showBottomLoading: true,
     })
     that.loadList();
   },
@@ -322,7 +342,6 @@ Page({
       that.loadInfoList();
     if (!that.data.b)
       that.loadCityList();
-
   },
 
   canFit: function() {
@@ -379,7 +398,33 @@ Page({
         uid: app.d.uid,
       },
     }).then(res => {
+      if (res.data == null)
+        return;
+      let ages = that.data.ageArray;
+      let age = -1;
+      for (var i = 0; i < ages.length; i++) {
+        if (ages[i].id == res.data.age)
+          age = i;
+      }
+      let educations = that.data.xueliArray;
+      let education = -1;
+      for (i = 0; i < educations.length; i++) {
+        if (educations[i].id == res.data.education)
+          education = i;
+      }
+      let citys = that.data.city;
+      let city = -1;
+      for (i = 0; i < citys.length; i++) {
+        if (citys[i].id == res.data.city)
+          city = i;
+      }
 
+      that.setData({
+        cityIndex: city,
+        xueliIndex: education,
+        ageIndex: age,
+        large: res.data.large == 1 ? true : false
+      })
     })
   },
   phSetupTap: function(evt) {
@@ -488,7 +533,24 @@ Page({
         uid: app.d.uid
       },
     }).then(res => {
-
+      if (res.data == null)
+        return;
+      let ages = that.data.ageArray;
+      let age = -1;
+      for (var i = 0; i < ages.length; i++) {
+        if (ages[i].id == res.data.age)
+          age = i;
+      }
+      let educations = that.data.xueliArray;
+      let education = -1;
+      for (i = 0; i < educations.length; i++) {
+        if (educations[i].id == res.data.education)
+          education = i;
+      }
+      that.setData({
+        xueliIndex2: education,
+        ageIndex2: age,
+      })
     })
   },
 

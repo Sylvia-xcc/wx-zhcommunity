@@ -1,71 +1,73 @@
 <!--pages/school/school-course-fabu/school-course-fabu.wxml-->
-<view class="cu-form-group">
-  <view class="title">课程标题</view>
-  <input placeholder="" placeholder-class="text-gray text-sm" value="{{name}}" bindinput="nameInput"></input>
-</view>
-<view class="cu-form-group align-start">
-  <view class="title">课程详情</view>
-  <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="textareaBInput" placeholder="" placeholder-class="text-gray text-sm" value="{{intro}}" bindinput="introInput"></textarea>
-</view>
-<view class="cu-form-group ">
-  <view class="title">课程内容</view>
-  <picker bindchange="pickerChange" value="{{index}}" range="{{picker}}" range-key="{{'name'}}">
-    <view class="picker solid" class="text-align:left;">
-      <text wx:if="{{pickerIndex<0}}" class="text-gray">请选择课程分类</text>
-      <text wx:else>{{picker[pickerIndex].name}}</text>
+<view hidden="{{isLoading}}">
+  <view class="cu-form-group">
+    <view class="title">课程标题</view>
+    <input placeholder="请输入课程标题" placeholder-class="text-gray text-sm" value="{{name}}" bindinput="nameInput"></input>
+  </view>
+  <view class="cu-form-group align-start">
+    <view class="title">课程详情</view>
+    <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="textareaBInput" placeholder="请输入课程详情" placeholder-class="text-gray text-sm" value="{{intro}}" bindinput="introInput"></textarea>
+  </view>
+  <view class="cu-form-group ">
+    <view class="title">课程分类</view>
+    <picker bindchange="pickerChange" value="{{index}}" range="{{picker}}" range-key="{{'name'}}">
+      <view class="picker">
+        <view wx:if="{{pickerIndex<0}}" class="text-gray text-left">请选择课程分类</view>
+        <view wx:else class="text-left">{{picker[pickerIndex].name}}</view>
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">授课老师</view>
+    <input placeholder="请输入授课老师名字" placeholder-class="text-gray text-df" value="{{teacher_name}}" bindinput="teacherNameInput"></input>
+    <view class="padding-left" bindtap="chooseTeacherImage">
+      <text class="cuIcon-add text-grey text-bold" style="font-size:40rpx;" wx:if="{{teacher_thumb==''}}"></text>
+      <image src="{{teacher_thumb}}" class="cu-avatar round" wx:else></image>
     </view>
-  </picker>
-</view>
-<view class="cu-form-group">
-  <view class="title">授课老师</view>
-  <input placeholder="请输入授课老师名字" placeholder-class="text-gray text-sm" value="{{teacher_name}}" bindinput="teacherNameInput"></input>
-  <view class="padding-left" bindtap="chooseTeacherImage">
-    <text class="cuIcon-add text-grey text-bold" style="font-size:40rpx;" wx:if="{{teacher_thumb==''}}"></text>
-    <image src="{{teacher_thumb}}" class="cu-avatar round" wx:else></image>
   </view>
-</view>
-<view class="cu-form-group align-start">
-  <view class="title">老师简介</view>
-  <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="textareaBInput" placeholder="" placeholder-class="text-gray text-sm" value="{{teacher_info}}" bindinput="teacherInfoInput"></textarea>
-</view>
-<view class="cu-bar bg-white ">
-  <view class="action font_30 text-black">
-    轮播图
+  <view class="cu-form-group align-start ssolid_bottom">
+    <view class="title">老师简介</view>
+    <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="textareaBInput" placeholder="请输入老师简介" placeholder-class="text-gray text-sm" value="{{teacher_info}}" bindinput="teacherInfoInput"></textarea>
   </view>
-</view>
-<view class="cu-form-group">
-  <view class="grid col-4 grid-square flex-sub">
-    <view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{imgList[index]}}">
-      <image src='{{imgList[index]}}' mode='aspectFill'></image>
-      <view class="cu-tag bg-red" catchtap="delImg" data-index="{{index}}">
-        <text class="cuIcon-close"></text>
+  <view class="cu-bar bg-white ">
+    <view class="action font_30 text-black">
+      轮播图
+    </view>
+  </view>
+  <view class="cu-form-group ssolid_bottom">
+    <view class="grid col-4 grid-square flex-sub">
+      <view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{imgList[index]}}">
+        <image src='{{imgList[index]}}' mode='aspectFill'></image>
+        <view class="cu-tag bg-red" catchtap="delImg" data-index="{{index}}">
+          <text class="cuIcon-close"></text>
+        </view>
+      </view>
+      <view class="solids" bindtap="chooseImage" wx:if="{{imgList.length<max}}">
+        <text class="cuIcon-cameraadd"></text>
       </view>
     </view>
-    <view class="solids" bindtap="chooseImage" wx:if="{{imgList.length<max}}">
-      <text class="cuIcon-cameraadd"></text>
+  </view>
+
+  <view class="cu-bar bg-white ">
+    <view class="action font_30 text-black">
+      背景图
     </view>
   </view>
-</view>
-
-<view class="cu-bar bg-white ">
-  <view class="action font_30 text-black">
-    背景图
-  </view>
-</view>
-<view class="cu-form-group">
-  <view class="grid col-4 grid-square flex-sub">
-    <view class="bg-img" bindtap="viewImageTap" data-url="{{thumb}}" wx:if="{{thumb!=''}}">
-      <image src='{{thumb}}' mode='aspectFill'></image>
-      <view class="cu-tag bg-red" catchtap="delImg" data-type="thumb">
-        <text class="cuIcon-close"></text>
+  <view class="cu-form-group">
+    <view class="grid col-4 grid-square flex-sub">
+      <view class="bg-img" bindtap="viewImageTap" data-url="{{thumb}}" wx:if="{{thumb!=''}}">
+        <image src='{{thumb}}' mode='aspectFill'></image>
+        <view class="cu-tag bg-red" catchtap="delImg" data-type="thumb">
+          <text class="cuIcon-close"></text>
+        </view>
+      </view>
+      <view class="solids" wx:else bindtap="chooseThumbImage">
+        <text class="cuIcon-cameraadd"></text>
       </view>
     </view>
-    <view class="solids" wx:else bindtap="chooseThumbImage">
-      <text class="cuIcon-cameraadd"></text>
-    </view>
   </view>
-</view>
 
-<view class="padding flex flex-direction">
-  <button class="cu-btn bg-green lg" bindtap="submitTap">提交</button>
+  <view class="padding flex flex-direction">
+    <button class="cu-btn bg-green lg" bindtap="submitTap">提交</button>
+  </view>
 </view>

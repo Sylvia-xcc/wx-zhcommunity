@@ -287,7 +287,7 @@ Page({
     Promise.all(temp).then(res => {
       console.log('-------上传完成', files, that.data.optype)
       let content = JSON.stringify(files);
-      let url = that.data.info == null ? 'matchmaker/addMaker' :'matchmaker/edit';
+      let url = that.data.info == null ? 'matchmaker/addMaker' : 'matchmaker/edit';
       http.requestUrl({
         url: url,
         news: true,
@@ -310,11 +310,17 @@ Page({
           requirement: that.data.demand,
           wx_account: that.data.weixin,
           wx_id: app.d.uid,
-          uid:app.d.uid,
+          uid: app.d.uid,
         }
       }).then(res => {
         tip.loaded();
-        wx.navigateBack();
+        if (that.data.uid > 0)
+          wx.navigateBack();
+        else {
+          wx.navigateTo({
+            url: '/pages/matchmaker/index',
+          })
+        }
       })
     })
   },

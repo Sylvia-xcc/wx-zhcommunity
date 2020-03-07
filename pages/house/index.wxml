@@ -1,7 +1,7 @@
 <!--pages/house/index.wxml-->
 
 <view class="bg-img" style="background-image: url('http://image.fengzhankeji.com/static/house-bg.png');height: 100vh;">
-  <view class="text-center" style="padding-top:660rpx;">
+  <view class="text-center" style="padding-top:55vh;">
     <image src="http://image.fengzhankeji.com/static/house-btn1.png" style="width:587rpx; height:130rpx;" bindtap="buyTap"></image>
     <image src="http://image.fengzhankeji.com/static/house-btn2.png" class="" style="width:587rpx; height:130rpx; margin-top:70rpx;" bindtap="sellTap"></image>
   </view>

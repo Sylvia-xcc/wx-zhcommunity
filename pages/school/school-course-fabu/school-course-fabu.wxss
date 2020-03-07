@@ -8,7 +8,7 @@ page {
   min-width: calc(4em + 30rpx);
 }
 
-.cu-form-group+.cu-form-group {
+/* .cu-form-group+.cu-form-group {
   border: none;
 }
 
@@ -24,4 +24,4 @@ page {
   border: 1rpx solid #ededed;
   border-radius: 6rpx;
   padding: 10rpx;
-}
+} */

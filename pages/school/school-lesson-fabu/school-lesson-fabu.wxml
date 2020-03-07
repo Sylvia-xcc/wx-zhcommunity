@@ -1,4 +1,5 @@
 <!--pages/school/school-lesson-fabu/school-lesson-fabu.wxml-->
+<view hidden="{{isLoading}}">
 <view class="cu-form-group">
   <view class="title">课时标题</view>
   <input placeholder="请输入课时标题" placeholder-class="text-gray text-df" value="{{name}}" bindinput="nameInput"></input>
@@ -30,4 +31,5 @@
 
 <view class="padding flex flex-direction" style="padding-top:80rpx;">
   <button class="cu-btn bg-green lg" bindtap="submitTap">提交</button>
+</view>
 </view>

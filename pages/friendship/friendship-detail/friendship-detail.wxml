@@ -31,7 +31,7 @@
             </view>
           </view>
           <view class="padding-right-sm">
-            <view class="flex align-center" bindtap="phoneTap">
+            <view class="flex align-center"  bindtap="chatTap">
               <view class="cuIcon-comment text-black" style="font-size:38rpx;"></view>
               <view class="text-black text-xs padding-left-xs">立即沟通</view>
             </view>
@@ -56,6 +56,6 @@
 
   <view class="cu-bar bg-white tabbar border shop position-bottom">
     <view class="submit text-white" style="background:#EF696B;" bindtap="phoneTap">打电话</view>
-    <view class="bg-cgreen submit text-white">在线聊</view>
+    <view class="bg-cgreen submit text-white" bindtap="chatTap">在线聊</view>
   </view>
 </view>

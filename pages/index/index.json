@@ -2,6 +2,7 @@
   "usingComponents": {
     "loading": "/components/loading/loading",
     "v-bottomloading": "/components/bottomLoading/bottomloading",
-    "v-commonweal": "/components/commonweal/commonweal"
+    "v-commonweal": "/components/commonweal/commonweal",
+    "v-startup": "/components/startup/startup"
   }
 }

@@ -18,8 +18,8 @@
     <view class="solids bg-gray" bindtap="chooseImage" wx:if="{{upload_pic.length<upload_max }}">
       <text class="cuIcon-cameraadd " style="font-size:36px;"></text>
     </view>
-    <view class="solids bg-gray" bindtap="chooseVideo" wx:if="{{video==''}}">
+    <!-- <view class="solids bg-gray" bindtap="chooseVideo" wx:if="{{video==''}}">
       <text class="cuIcon-video " style="font-size:36px;"></text>
-    </view>
+    </view> -->
   </view>
 </view>

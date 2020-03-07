@@ -241,9 +241,7 @@ Page({
   },
 
   chatTap: function(evt) {
-    wx.navigateTo({
-      url: '/pages/secondhand/secondhand-chat/secondhand-chat',
-    })
+    util.liveChatTap();
   },
 
   //预览

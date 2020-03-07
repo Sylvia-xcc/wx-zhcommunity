@@ -1,4 +1,8 @@
 // pages/school/school-fabu-detail/school-fabu-detail.js
+const app = getApp()
+const util = require('../../../utils/util.js');
+const http = require('../../../utils/http.js');
+import tip from '../../../utils/tip.js';
 Page({
 
   /**
@@ -6,18 +10,58 @@ Page({
    */
   data: {
     id: 0,
-    list: [1, 5, 6],
-    pptlist:[],
+    list: [],
+    pptlist: [],
+    detail: null,
+    isLoading: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log('options:', options);
+    let that = this;
+    that.setData({
+      id: options.id || 0,
+    })
 
   },
 
-  delTap:function(evt){
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+    this.loadCourseDetail();
+  },
+
+  loadCourseDetail: function() {
+    let that = this;
+    if (that.data.isLoading)
+      tip.loading();
+    http.requestUrl({
+      url: '/teacher/detail',
+      news: true,
+      data: {
+        uid: app.d.uid,
+        id: that.data.id,
+      }
+    }).then(res => {
+      that.setData({
+        detail: res.data,
+        list: res.data.lessons,
+        pptlist: res.data.ppt,
+      })
+      setTimeout(function() {
+        tip.loaded();
+        that.setData({
+          isLoading: false
+        })
+      }, 600)
+    })
+  },
+
+  delTap: function(evt) {
     let index = evt.currentTarget.dataset.id;
     let that = this;
     wx.showModal({
@@ -36,7 +80,7 @@ Page({
     })
   },
 
-  addFileTap:function(evt){
+  addFileTap: function(evt) {
     let that = this;
     wx.chooseMessageFile({
       count: 1,
@@ -44,16 +88,43 @@ Page({
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         console.log(res)
-        if (that.data.pptlist.length != 0) {
-          that.setData({
-            pptlist: that.data.pptlist.concat(res.tempFiles)
-          })
-        } else {
-          that.setData({
-            pptlist: res.tempFiles
-          })
-        }
-        console.log('------', that.data.pptlist)
+        // if (that.data.pptlist.length != 0) {
+        //   that.setData({
+        //     pptlist: that.data.pptlist.concat(res.tempFiles)
+        //   })
+        // } else {
+        //   that.setData({
+        //     pptlist: res.tempFiles
+        //   })
+        // }
+        // console.log('------', that.data.pptlist)
+        var tempFiles = res.tempFiles[0];
+        http.uploadFile({
+          tempFilePaths: tempFiles.path
+        }).then(res => {
+          if (typeof res == 'string') {
+            res = JSON.parse(res);
+          }
+          console.log('上传完路径', res)
+          if (res.code == 1) {
+            let path = res.data.url
+            http.requestUrl({
+              url: 'teacher/addPpt',
+              news: true,
+              method: 'post',
+              data: {
+                pid: that.data.detail.id,
+                name: tempFiles.name,
+                filename: path,
+              }
+            }).then(res => {
+              tip.loaded();
+              tip.success('上传成功', 1000);
+              that.loadCourseDetail();
+            })
+          }
+        })
+
       }
     })
   },
@@ -76,13 +147,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
 
   },
 

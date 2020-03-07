@@ -24,4 +24,8 @@
     <image src="/images/a4.png" class="grid-img"></image>
     <text>情义有价</text>
   </navigator>
+  <navigator url="/pages/user/user-fabu/user-fabu-school/user-fabu-school" hover-class="none" class="item">
+    <image src="/images/a7.png" class="grid-img"></image>
+    <text>小雅课堂</text>
+  </navigator>
 </view>

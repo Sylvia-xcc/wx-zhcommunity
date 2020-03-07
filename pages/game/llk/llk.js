@@ -33,6 +33,18 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
+    this.clearTimer();
+  },
+
+  
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+    this.clearTimer();
+  },
+
+  clearTimer: function () {
     clearTimeout(timer);
   },
 
@@ -86,6 +98,7 @@ Page({
         that.setData({
           gameOver:1,
         })
+        this.clearTimer();
       } else {
         that.startTimer();
       }
@@ -166,6 +179,7 @@ Page({
       that.setData({
         gameOver:2
       })
+      this.clearTimer();
     }
   },
 

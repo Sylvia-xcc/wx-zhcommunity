@@ -98,7 +98,8 @@
     "pages/secondhand/secondhand-search/secondhand-search",
     "pages/community/community-meeting-search/community-meeting-search",
     "pages/community/community-chat-search/community-chat-search",
-    "pages/commonweal/commonweal-search/commonweal-search"
+    "pages/commonweal/commonweal-search/commonweal-search",
+    "pages/user/user-fabu/user-fabu-school/user-fabu-school"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -140,9 +141,12 @@
   },
   "navigateToMiniProgramAppIdList": [
     "wx2c314ac4404bb74f",
-    "wx4e16556f3b59b953",
+    "wx91d27dbf599dff74",
     "wx925c033ff5414f58",
-    "wxab3b69488268706f"
+    "wx23dde3ba32269caa",
+    "wxc9cf7c95499ee604",
+    "wxec640c7ff16e8314",
+    "wxa99810e091613a64"
   ],
   "sitemapLocation": "sitemap.json"
 }
