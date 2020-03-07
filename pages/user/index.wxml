@@ -81,6 +81,6 @@
   </navigator>
   <navigator url="/pages/shop/shop-address/shop-address" hover-class="none" class="flex align-center flex-direction basis-xn item">
     <image src="/images/u8.png"></image>
-    <text class="c0 padding-top-sm font_26 text-bold">收获地址</text>
+    <text class="c0 padding-top-sm font_26 text-bold">收货地址</text>
   </navigator>
 </view>
