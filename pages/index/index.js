@@ -28,11 +28,6 @@ Page({
         appId: 'wxc9cf7c95499ee604',
         path: 'pages/scanbuyhome/index'
       }, {
-        name: '柒筑',
-        url: 'https://images.fengzhankeji.com/weixin/20191226/5e047e5d1336b.png',
-        appId: 'wx2c314ac4404bb74f',
-        path: 'pages/index/index'
-      }, {
         name: '京东',
         url: 'http://image.fengzhankeji.com/static/g4.png',
         appId: 'wx91d27dbf599dff74',
@@ -43,6 +38,11 @@ Page({
         url: 'http://image.fengzhankeji.com/static/g5.png',
         appId: 'wx23dde3ba32269caa',
         path: 'pages/home/home'
+      }, {
+        name: '柒筑',
+        url: 'https://images.fengzhankeji.com/weixin/20191226/5e047e5d1336b.png',
+        appId: 'wx2c314ac4404bb74f',
+        path: 'pages/index/index'
       },
       {
         name: '红杜鹃',
@@ -94,7 +94,7 @@ Page({
     })
   },
 
-  startupTap: function (evt) {
+  startupTap: function(evt) {
     let that = this;
     wx.showTabBar()
     tip.loading();
@@ -216,7 +216,7 @@ Page({
     util.detailTap(model, mid);
   },
 
-  personalTap:function(evt){
+  personalTap: function(evt) {
     let uid = evt.currentTarget.dataset.uid;
     util.personal(uid);
   },

@@ -42,8 +42,8 @@
   <view wx:if="{{tabCur==2}}"  hidden="{{loading}}">
     <view class="flex align-center padding solid-bottom" wx:for="{{list}}" wx:key="item">
       <view class="flex-sub">
-        <view class="text-sm c0">我给
-          <text class="text-gray padding-lr-xs">{{item.nickname}}</text> 写了一个小纸条</view>
+        <view class="text-sm c0">
+          <text class="text-gray padding-lr-xs">{{item.nickname}}</text> 给我写了一个小纸条</view>
         <view class="font_26 c0 padding-top-xs">{{item.content}}</view>
       </view>
       <view class="basis-xn text-center text-xs text-gray">{{item.create_time}}</view>

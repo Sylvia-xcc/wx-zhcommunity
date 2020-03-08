@@ -1,7 +1,11 @@
 <!--pages/school/school-fabu-detail/school-fabu-detail.wxml-->
 <view hidden="{{isLoading}}">
   <view class="margin bg-white br padding">
-    <view class="text-bold">课程标题：{{detail.name}}</view>
+    <view class="flex align-center">
+      <view class="cu-tag bg-green radius sm">{{detail.content_id_name}}</view>
+      <view class="text-bold padding-left-sm">{{detail.name}}</view>
+    </view>
+
     <view class="showtwo text-sm padding-top-xs">{{detail.intro}}</view>
     <view class="padding-top-sm flex justify-between align-center">
       <view>
@@ -41,7 +45,11 @@
       </view>
     </block>
     <view wx:else>暂无课课件，请添加</view>
-    <view class="margin-top-sm text-right">
+    <view class="margin-top-sm flex justify-between">
+      <view class="text-xs text-red basis-xl">
+        <view>Tip:请先将上传的文件传至微信传输助手里，然后从里面上传添加</view>
+        <view>(建议上传doc,docx,xls,xlsx,ppt,pptx,pdf格式文件)</view>
+      </view>
       <button class="cu-btn radius sm bg-green" bindtap="addFileTap">添加</button>
     </view>
   </view>

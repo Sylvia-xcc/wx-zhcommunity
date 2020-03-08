@@ -1,2 +1,6 @@
 /* pages/user/user-collect/index.wxss */
-@import '/pages/user/user-fabu/index.wxss'
+@import '/pages/user/user-fabu/index.wxss';
+
+/* .cont>navigator{
+  width: 33.3%;
+} */

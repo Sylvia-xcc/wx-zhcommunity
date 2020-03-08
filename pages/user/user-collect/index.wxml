@@ -1,5 +1,5 @@
 <!--pages/user/user-collect/index.wxml-->
-<view class="margin flex flex-wrap justify-between">
+<view class="margin flex flex-wrap justify-between cont">
   <navigator url="/pages/user/user-collect/user-collect-secondhand/user-collect-secondhand" hover-class="none" class="item">
     <image src="/images/a2.png" class="grid-img"></image>
     <text>二手物品</text>
@@ -28,4 +28,8 @@
     <image src="/images/a10.png" class="grid-img"></image>
     <text>精选商城</text>
   </navigator>
+  <!-- <navigator url="/pages/user/user-collect/user-collect-school/user-collect-school" hover-class="none" class="item">
+    <image src="/images/a7.png" class="grid-img"></image>
+    <text>小雅课堂</text>
+  </navigator> -->
 </view>

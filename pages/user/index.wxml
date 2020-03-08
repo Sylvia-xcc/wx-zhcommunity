@@ -11,7 +11,7 @@
         <view class="font_30 padding-left-sm padding-bottom-xs flex align-center">
           <text class="padding-right">{{user.nickname}}</text>
           <view style="margin-top:15rpx;">
-            <image src="/images/sign.png" style="width:64rpx;height:28rpx;" bindtap="signTap"></image>
+            <image src="http://image.fengzhankeji.com/static/sign.png" style="width:64rpx;height:28rpx;" bindtap="signTap"></image>
           </view>
         </view>
         <navigator url="/pages/user/user-personal-edit/user-personal-edit" hover-class="none" class="cu-tag font_22" style="background:rgba(65,151,93,0.58); border-radius:24px;">账号管理></navigator>

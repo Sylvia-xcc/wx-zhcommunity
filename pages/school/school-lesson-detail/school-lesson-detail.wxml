@@ -1,7 +1,7 @@
 <!--pages/school/school-lesson-detail/school-lesson-detail.wxml-->
 <view hidden="{{isLoading}}">
   <view class="padding-lr">
-    <video src="https://www.fengzhankeji.com/qizhuhome/data/upload/2019-11-27/5dde39f275eea.mp4" style="width:690rpx;"></video>
+    <video src="{{video}}" style="width:690rpx;"></video>
   </view>
 
   <scroll-view scroll-x class="bg-white nav">
@@ -42,8 +42,8 @@
       <view class="cu-item solid-bottom" wx:for="{{pptlist}}" wx:key="index"  data-url="{{item.filename}}" catchtap="downloadfileTap">
         <view class="cu-avatar radius lg" style="left:0 !important; background-image:url(http://image.fengzhankeji.com/static/ppt.png);"></view>
         <view class="content pr">
-          <view class="text-black text-bold" style="font-size:24rpx;">{{item.name}}</view>
-          <view class="text-gray text-xs">{{item.create_time}}</view>
+          <view class="text-black text-bold" style="font-size:24rpx; width:400rpx;">{{item.name}}</view>
+          <view class="text-gray text-xs" >{{item.create_time}}</view>
           <view class="cuIcon-down margin-left pa" style="font-size:40rpx; right:0rpx; top:20rpx;"></view>
         </view>
       </view>

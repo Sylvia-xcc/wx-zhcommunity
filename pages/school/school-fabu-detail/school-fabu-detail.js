@@ -98,6 +98,7 @@ Page({
         //   })
         // }
         // console.log('------', that.data.pptlist)
+        tip.loading('上传中...');
         var tempFiles = res.tempFiles[0];
         http.uploadFile({
           tempFilePaths: tempFiles.path

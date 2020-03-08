@@ -61,11 +61,11 @@ const detailTap = (model, mid) => {
     if (model =='activity')
       url = "/pages/commonweal/index"
   } else {
-    if (model == 'used')
+    if (model == 'used' || model == "used_like")
       url = "/pages/secondhand/secondhand-detail/secondhand-detail?id=" + mid;
     else if (model == "product")
       url = "/pages/shop/shop-detail/shop-detail?id=" + mid;
-    else if (model == "news")
+    else if (model == "news" || model == "news_like")
       url = "/pages/community/community-news-detail/community-news-detail?id=" + mid;
     else if (model == "job")
       url = "/pages/job/job-detail/job-detail?id=" + mid;
@@ -73,7 +73,7 @@ const detailTap = (model, mid) => {
       url = "/pages/house/house-sell/house-sell-detail/house-sell-detail?id=" + mid;
     else if (model == "score_shop")
       url = "/pages/community/community-jifen-shop-detail/community-jifen-shop-detail?id=" + mid;
-    else if (model == "chat")
+    else if (model == "chat" || model == "chat_like")
       url = "/pages/community/community-chat-detail/community-chat-detail?id=" + mid;
   }
 

@@ -82,11 +82,11 @@
 
       <view class="padding  radius margin-top-sm flex justify-around">
         <view class="text-center" data-id="{{detail.id}}" bindtap="nolikeTap">
-          <image src="/images/h2.png" style="width:110rpx;height:110rpx;"></image>
+          <image src="http://image.fengzhankeji.com/static/h2.png" style="width:110rpx;height:110rpx;"></image>
           <view class="font_26 text-bold c0">换一个</view>
         </view>
         <view class="text-center" data-id="{{detail.id}}" bindtap="likeTap">
-          <image src="/images/h1.png" style="width:110rpx;height:110rpx;"></image>
+          <image src="http://image.fengzhankeji.com/static/h1.png" style="width:110rpx;height:110rpx;"></image>
           <view class="font_26 text-bold c0">打招呼</view>
         </view>
       </view>
@@ -172,14 +172,14 @@
     <view class="cu-list menu margin-top">
       <view class="cu-item {{menuArrow?'arrow':''}}" bindtap="showModal" data-target="bottomPHModal">
         <view class="content flex align-center">
-          <image src="/images/c1.png" class="png" style="width:30rpx;height:27rpx;" mode="aspectFit"></image>
+          <image src="http://image.fengzhankeji.com/static/c1.png" class="png" style="width:30rpx;height:27rpx;" mode="aspectFit"></image>
           <text class="text-black text-sm text-bold padding-left-xs" style="padding-top:5rpx;">偏好设置</text>
         </view>
       </view>
       <view class="cu-item {{menuArrow?'arrow':''}}" bindtap="statusTap">
         <view class="content flex align-center justify-between">
           <view>
-            <image src="/images/c2.png" class="png" style="width:30rpx;height:29rpx;" mode="aspectFit"></image>
+            <image src="http://image.fengzhankeji.com/static/c2.png" class="png" style="width:30rpx;height:29rpx;" mode="aspectFit"></image>
             <text class="text-black text-sm text-bold padding-left-sm" style="padding-top:5rpx;">状态设置</text>
           </view>
           <view class="{{status==0?'text-green':'text-red'}} text-sm text-bold">{{status==0?'开启':'停止'}}</view>
@@ -187,7 +187,7 @@
       </view>
       <view class="cu-item {{menuArrow?'arrow':''}}" bindtap="showModal" data-target="bottomTJModal">
         <view class="content flex align-center">
-          <image src="/images/c3.png" class="png" style="width:27rpx;height:26rpx;" mode="aspectFit"></image>
+          <image src="http://image.fengzhankeji.com/static/c3.png" class="png" style="width:27rpx;height:26rpx;" mode="aspectFit"></image>
           <text class="text-black text-sm text-bold padding-left-xs" style="padding-top:5rpx;">推荐设置</text>
         </view>
       </view>

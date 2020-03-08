@@ -14,6 +14,7 @@ Page({
     banner: [],
     videoUrl: '', //'https://www.fengzhankeji.com/qizhuhome/data/upload/2019-11-27/5dde39f275eea.mp4',
     detail: null,
+    isLoading: true,
   },
 
   /**
@@ -45,16 +46,15 @@ Page({
         detail: res.data,
       })
       setTimeout(function() {
-        if (that.data.isLoading)
-          tip.loaded();
+        tip.loaded();
         that.setData({
           isLoading: false
         })
-      }, 200)
+      }, 400)
     })
   },
 
-  joinTap: function (evt) {
+  joinTap: function(evt) {
     let that = this;
     if (that.data.detail.join > 0) {
       wx.navigateTo({
@@ -78,7 +78,7 @@ Page({
     })
   },
 
-  guanzhuTap: function (evt) {
+  guanzhuTap: function(evt) {
     if (!util.hasAuthorize())
       return;
     let that = this;
@@ -96,7 +96,7 @@ Page({
       method: 'post',
       data: data
     }).then(res => {
-      let msg = (that.data.detail.like == 0)?'关注成功':'取消关注成功';
+      let msg = (that.data.detail.like == 0) ? '关注成功' : '取消关注成功';
       tip.success(msg, 1000);
       that.loadCourseDetail();
     })
@@ -116,7 +116,7 @@ Page({
   },
 
   //收藏
-  collectTap: function () {
+  collectTap: function() {
     if (!util.hasAuthorize())
       return;
     let that = this;
@@ -142,14 +142,14 @@ Page({
   },
 
   //生成海报
-  posterTap: function (evt) {
+  posterTap: function(evt) {
     let that = this;
     let data = poster.getDrawCanvasData({
       name: that.data.detail.name,
       desc: that.data.detail.intro,
       photo: that.data.detail.thumb,
       price: that.data.detail.username,
-      code: 'http://image.fengzhankeji.com/static/code.jpg',
+      code: 'http://image.fengzhankeji.com/static/code2.jpg',
     });
     that.selectComponent('#poster').generatePaper(data)
   },

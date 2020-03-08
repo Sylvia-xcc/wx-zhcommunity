@@ -1,45 +1,41 @@
-// pages/school/school-course-list/school-course-list.js
-const app = getApp()
-const util = require('../../../utils/util.js');
-const http = require('../../../utils/http.js');
-import tip from '../../../utils/tip.js';
+// pages/user/user-collect/user-school/user-school.js
+const app = getApp();
+const util = require('../../../../utils/util.js');
+const http = require('../../../../utils/http.js');
+import tip from '../../../../utils/tip.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    uid: 0,
     list: [],
     page: 1,
     total: 0,
     bottoming: true,
     showBottomLoading: false,
     isLoading: true,
-    lectureId: 0,
+    loading: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    console.log('options:', options)
-    let that = this;
-    that.setData({
-      lectureId: options.id || 1
+  onLoad: function (options) {
+    this.setData({
+      uid: options.uid || app.d.uid
     })
-    // that.loadLectureList();
+    this.loadList();
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-    if (this.data.lectureId > 0)
-      this.loadLectureList();
+  loadList: function (p = true) {
+    let that = this;
+    that.loadNewsList();
   },
 
-  //获取课程列表列表
-  loadLectureList: function() {
+  //新闻列表
+  loadNewsList: function () {
     let that = this;
     if (that.data.isLoading)
       tip.loading();
@@ -48,7 +44,8 @@ Page({
       news: true,
       data: {
         listRows: 10,
-        page: that.data.page
+        page: that.data.page,
+        // uid: that.data.uid,
       }
     }).then(res => {
       let items = that.data.list;
@@ -63,79 +60,82 @@ Page({
         bottoming: true,
         showBottomLoading: false,
       })
-      setTimeout(function() {
-          tip.loaded();
+      setTimeout(function () {
+        tip.loaded();
         that.setData({
           isLoading: false
         })
-      }, 200)
+      }, 400)
     })
   },
 
-  detailTap: function(evt) {
-    let id = evt.currentTarget.dataset.lid;
+  detailNewsTap: function (evt) {
+    let id = evt.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/school/school-course-detail/school-course-detail?id=' + id,
+      url: '/pages/community/community-news-detail/community-news-detail?id=' + id,
     })
   },
 
-  fabuTap: function(evt) {
-    if (!util.hasAuthorize())
-      return;
-    wx.navigateTo({
-      url: '/pages/school/school-course-fabu/school-course-fabu',
-    })
-  },
-
-  searchTap:function(evt){
-    wx.navigateTo({
-      url: '/pages/school/school-search/school-search',
-    })
+  //预览
+  previewImgTap: function (evt) {
+    let id = evt.currentTarget.dataset.id;
+    let dataimg = evt.currentTarget.dataset.dataimg;
+    wx.previewImage({
+      current: dataimg[id],
+      urls: dataimg
+    });
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
     let that = this;
     if (that.data.list.length < that.data.total && that.data.bottoming) { //有更多时加载
       that.setData({
         showBottomLoading: true,
         bottoming: false,
       })
-      setTimeout(function() {
+      setTimeout(function () {
         that.setData({
           page: that.data.page + 1,
         })
-        that.loadLectureList();
+        that.loadList(false);
       }, 800)
     }
   },
@@ -143,7 +143,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

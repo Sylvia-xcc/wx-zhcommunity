@@ -20,13 +20,15 @@ Page({
     detail: null,
     index: 0,
     id: 0,
-    pptlist:[]
+    pptlist:[],
+    video:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log('options:',options)
     let that = this;
     that.setData({
       id: options.id || 0,
@@ -51,6 +53,7 @@ Page({
     }).then(res => {
       that.setData({
         detail: res.data,
+        video: res.data.lessons[that.data.index].video
       })
       setTimeout(function() {
         if (that.data.isLoading)
@@ -181,31 +184,56 @@ Page({
 
   downloadfileTap: function(evt) {
     console.log('----------->>> download', evt)
-    var url = evt.currentTarget.dataset.url;
-    //下载文件，生成临时地址
+    let url = evt.currentTarget.dataset.url;
+    let tmp = url.split('.');
+    let type = tmp[tmp.length-1];
+    console.log('------------->>> download type', type)
     wx.downloadFile({
       url: url,
-      success(res) {
-        console.log(res)
-        //保存到本地
-        wx.saveFile({
-          tempFilePath: res.tempFilePath,
-          success: function(res) {
-            const savedFilePath = res.savedFilePath;
-            // 打开文件
-            wx.openDocument({
-              filePath: savedFilePath,
-              success: function(res) {
-                console.log('打开文档成功')
-              },
-            });
+      success: function (res) {
+        var filePath = res.tempFilePath
+        wx.openDocument({
+          filePath: filePath,
+          fileType:type,
+          success: function (res) {
+            console.log('打开文档成功')
           },
-          fail: function(err) {
-            console.log('保存失败：', err)
+          fail:function(res){
+            console.log('打开文档失败',res)
           }
-        });
+        })
       }
     })
+    //下载文件，生成临时地址
+    // wx.downloadFile({
+    //   url: url,
+    //   success(res) {
+    //     console.log(res)
+    //     //保存到本地
+    //     wx.saveFile({
+    //       tempFilePath: res.tempFilePath,
+    //       success: function(res) {
+    //         var savedFilePath = res.savedFilePath;
+    //         console.log('保存本地成功')
+    //         // 打开文件
+    //         wx.openDocument({
+    //           filePath: savedFilePath,
+    //           fileType: type,
+    //           success: function(res) {
+    //             console.log('打开文档成功')
+    //           },
+    //           fail:function(res){
+    //             console.log('打开失败',res);
+    //             tip.text('文件类型不对，无法下载',1000);
+    //           }
+    //         });
+    //       },
+    //       fail: function(err) {
+    //         console.log('保存失败：', err)
+    //       }
+    //     });
+    //   }
+    // })
   },
 
   /**

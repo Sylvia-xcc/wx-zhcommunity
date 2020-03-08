@@ -99,7 +99,9 @@
     "pages/community/community-meeting-search/community-meeting-search",
     "pages/community/community-chat-search/community-chat-search",
     "pages/commonweal/commonweal-search/commonweal-search",
-    "pages/user/user-fabu/user-fabu-school/user-fabu-school"
+    "pages/user/user-fabu/user-fabu-school/user-fabu-school",
+    "pages/school/school-search/school-search",
+    "pages/user/user-collect/user-collect-school/user-collect-school"
   ],
   "window": {
     "backgroundTextStyle": "dark",
