@@ -39,7 +39,7 @@
         <view class="text-sm padding-top-xs">我的粉丝</view>
       </navigator>
     </view>
-    <view class="flex justify-end padding-lr padding-top-xl" style="padding-top:125rpx;">
+    <view class="flex justify-end padding-lr padding-top-xl" style="padding-top:130rpx;">
       <!-- <text class="font_30 text-bold">中环国际社区</text> -->
       <navigator url="/pages/user/user-chongzhi/user-chongzhi" hover-class="none" style="margin-right:76rpx;">
         <image src="http://image.fengzhankeji.com/static/chongzhi-btn.png" style="width:136rpx;height:38rpx;"></image>

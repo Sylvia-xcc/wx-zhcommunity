@@ -1,6 +1,10 @@
 <!--pages/shop/shop-pay-result/shop-pay-result.wxml-->
 <view class='con'>
   <image src="http://www.fengzhankeji.com/flower/images/{{type=='success'?'pay-success':'pay-fail'}}.png"></image>
-  <text class='pay-t1'>{{type=='success'?'恭喜您 本次支付成功！':'很遗憾本次支付失败～'}}</text>
-  <view class='btn center' bindtap='goHome'>继续逛逛</view>
+  <text class='pay-t1 padding-top-sm'>{{type=='success'?'恭喜您 本次支付成功！':'很遗憾本次支付失败～'}}</text>
+  <!-- <view class='btn center padding-top-sm text-blue' >继续逛逛</view> -->
+  <view class="padding-top-xl flex justify-around" style="width:40%;">
+    <button class="cu-btn bg-green sm radius " bindtap='shopTap' >继续逛逛</button>
+    <button class="cu-btn bg-red  sm radius" bindtap="orderTap" wx:if="{{type=='fail'}}">继续支付</button>
+  </view>
 </view>

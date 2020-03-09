@@ -347,6 +347,10 @@ Page({
         tip.success('发布成功', 1000);
         that.reset();
         that.hideModal();
+        that.setData({
+          page:1,
+        })
+        that.loadList();
       })
     })
   },
@@ -433,6 +437,10 @@ Page({
         tip.success('发布成功', 1000);
         that.reset();
         that.hideModal();
+        that.setData({
+          page:1
+        })
+        that.loadList();
       })
     })
 

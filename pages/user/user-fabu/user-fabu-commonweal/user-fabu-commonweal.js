@@ -1,4 +1,4 @@
-// pages/user/user-activity/user-activity-community/user-activity-community.js
+// pages/user/user-fabu/user-fabu-commonweal/user-fabu-commonweal.js
 const app = getApp();
 const util = require('../../../../utils/util.js');
 const http = require('../../../../utils/http.js');
@@ -16,6 +16,7 @@ Page({
     bottoming: true,
     showBottomLoading: false,
     isLoading: true,
+    loading: true,
     isOwn: true,
   },
 
@@ -30,22 +31,37 @@ Page({
     this.setData({
       isOwn: this.data.uid == app.d.uid ? true : false
     })
-    this.loadMeetingList();
+    this.loadList();
   },
 
-  //约会列表
-  loadMeetingList: function () {
+  loadList: function (p = true) {
     let that = this;
     if (that.data.isLoading)
       tip.loading();
+    if (p) {
+      that.setData({
+        bottoming: false,
+        showBottomLoading: true,
+        loading: true,
+      })
+    }
+    setTimeout(function () {
+      that.loadAddList();
+    }, 400)
+
+  },
+
+  //聊天列表
+  loadAddList: function () {
+    let that = this;
     http.requestUrl({
-      url: 'account/activity',
+      url: 'account/index',
       news: true,
       data: {
         listRows: 10,
         page: that.data.page,
         uid: that.data.uid,
-        model: 'meeting'
+        model: 'service',
       }
     }).then(res => {
       let items = that.data.list;
@@ -59,6 +75,7 @@ Page({
         total: res.data.total,
         bottoming: true,
         showBottomLoading: false,
+        loading: false,
       })
       setTimeout(function () {
         tip.loaded();
@@ -69,21 +86,28 @@ Page({
     })
   },
 
-  cancelTap: function (evt) {
+  // detailChatTap: function (evt) {
+  //   let id = evt.currentTarget.dataset.id;
+  //   wx.navigateTo({
+  //     url: '/pages/community/community-chat-detail/community-chat-detail?id=' + id,
+  //   })
+  // },
+
+  deleteTap: function (evt) {
     let that = this;
     let id = evt.currentTarget.dataset.id;
-    tip.confirm('是否确定取消参加该活动?').then(res => {
+    tip.confirm('是否确定删除发布?').then(res => {
       http.requestUrl({
-        url: 'account/clearActivity',
+        url: 'account/clearPost',
         news: true,
         method: 'post',
         data: {
           id: id,
-          model: 'meeting',
+          model: 'service',
           uid: app.d.uid
         }
       }).then(res => {
-        tip.success('取消报名成功', 1000);
+        tip.success('删除成功', 1000);
         let items = that.data.list;
         let tmp = [];
         for (var i = 0; i < items.length; i++) {
@@ -97,10 +121,14 @@ Page({
     })
   },
 
-  detailTap: function (evt) {
+  //预览
+  previewImgTap: function (evt) {
     let id = evt.currentTarget.dataset.id;
-    let model = evt.currentTarget.dataset.model;
-    util.detailTap(model, id);
+    let dataimg = evt.currentTarget.dataset.dataimg;
+    wx.previewImage({
+      current: dataimg[id],
+      urls: dataimg
+    });
   },
 
   /**
@@ -152,7 +180,7 @@ Page({
         that.setData({
           page: that.data.page + 1,
         })
-        that.loadMeetingList(false);
+        that.loadList(false);
       }, 800)
     }
   },

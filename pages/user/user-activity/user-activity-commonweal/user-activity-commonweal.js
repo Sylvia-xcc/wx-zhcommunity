@@ -85,7 +85,7 @@ Page({
         method: 'post',
         data: {
           id: id,
-          model: 'meeting',
+          model: 'service',
           uid: app.d.uid
         }
       }).then(res => {

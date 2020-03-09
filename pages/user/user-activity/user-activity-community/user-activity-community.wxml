@@ -1,17 +1,20 @@
 <!--pages/user/user-activity/user-activity-community/user-activity-community.wxml-->
 <view class="" hidden="{{isLoading}}">
-  <!-- <view  class="flex padding solid-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.detail.id}}" data-model="chat" catchtap="detailTap">
+  <view class="flex padding solid-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.detail.id}}" data-model="chat" catchtap="detailTap">
     <image src="{{item.detail.img_list[0]}}" mode="aspectFill" class="radius" style="width:156rpx;height:156rpx;" wx:if="{{item.detail.img_list.length>0}}"></image>
     <view class="flex-sub padding-left  flex flex-direction justify-between">
       <view class="c0 showtwo">{{item.detail.describe}}</view>
       <view class="flex justify-between text-gray font_22 padding-top ">
         <text>{{item.detail.create_time}}</text>
-        <view class="text-sm text-gray text-right" data-id="{{item.id}}" catchtap="cancelTap" wx:if="{{isOwn}}">取消报名</view>
+        <view class="flex">
+          <text class="text-red" wx:if="{{item.detail.delete_flag==1}}">活动已被删除</text>
+          <view class="text-sm text-gray text-right padding-left" data-id="{{item.id}}" catchtap="cancelTap" wx:if="{{isOwn}}">取消报名</view>
+        </view>
       </view>
     </view>
-  </view> -->
-  <view wx:for="{{list}}" wx:key="index">
-    <v-meeting item="{{item.detail}}"></v-meeting>
   </view>
+  <!-- <view wx:for="{{list}}" wx:key="index">
+    <v-meeting item="{{item.detail}}"></v-meeting>
+  </view> -->
   <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
 </view>

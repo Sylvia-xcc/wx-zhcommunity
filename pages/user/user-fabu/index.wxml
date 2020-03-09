@@ -28,4 +28,8 @@
     <image src="/images/a7.png" class="grid-img"></image>
     <text>小雅课堂</text>
   </navigator>
+  <!-- <navigator url="/pages/user/user-fabu/user-fabu-commonweal/user-fabu-commonweal" hover-class="none" class="item">
+    <image src="/images/a9.png" class="grid-img"></image>
+    <text>公益活动</text>
+  </navigator> -->
 </view>

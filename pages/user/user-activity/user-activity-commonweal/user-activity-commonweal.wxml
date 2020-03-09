@@ -1,12 +1,14 @@
 <!--pages/user/user-activity/user-activity-commonweal/user-activity-commonweal.wxml-->
 <view hidden="{{isLoading}}">
-  <view class="flex padding solid-bottom" wx:for="{{list}}" wx:key="index" >
-    <image src="{{item.detail.img_list[0]}}" style="width:156rpx;height:156rpx;" mode="aspectFill" wx:if="{{item.detail.img_list.length>0}}"></image>
+  <view class="flex padding solid-bottom" wx:for="{{list}}" wx:key="index">
+    <image src="{{item.detail.img_list[0]}}" class="radius" style="width:156rpx;height:156rpx;" mode="aspectFill" wx:if="{{item.detail.img_list.length>0}}"></image>
     <view class="flex-sub padding-left">
       <view class="c0 showtwo">{{item.detail.content}}</view>
       <view class="flex justify-between align-center text-gray font_22 padding-top-xl ">
         <text>{{item.detail.create_time}}</text>
+
         <view class="flex">
+          <text class="text-red" wx:if="{{item.detail.status==0}}">活动已被删除</text>
           <view class="text-sm text-gray text-right padding-left" data-id="{{item.id}}" catchtap="cancelTap" wx:if="{{isOwn}}">取消报名</view>
         </view>
       </view>
