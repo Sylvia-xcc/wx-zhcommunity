@@ -89,7 +89,7 @@ Page({
   deleteTap: function (evt) {
     let that = this;
     let id = evt.currentTarget.dataset.id;
-    tip.confirm('是否确定删除改发布?').then(res => {
+    tip.confirm('是否确定删除发布?').then(res => {
       http.requestUrl({
         url: 'account/clearPost',
         news: true,

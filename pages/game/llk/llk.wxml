@@ -1,29 +1,39 @@
 <!--pages/game/llk/llk.wxml-->
-<view class="timer">{{timestamp}}</view>
-<view class="padding-tb">
-  <view class="flex">
-    <view class="border {{foo.filter(index-1, -1, drawPath)?'showPath':''}}" wx:for="{{nx+2}}" wx:key="index"></view>
-  </view>
-
-  <view class="flex" wx:for="{{ny}}" wx:key="index" wx:for-index="j">
-    <view class="border {{foo.filter(-1, j, drawPath)?'showPath':''}}"></view>
-    <view class="cell " wx:for="{{nx}}" wx:key="index" wx:for-index="i" data-item="{{list[j*nx+i]}}" catchtap="clickTap">
-      <image src="/images/llk/icon_{{list[j*nx+i].c}}.png" mode="aspectFill" wx:if="{{!list[j*nx+i].checked}}"></image>
-      <view class="cell-line {{(selectedCell.x==i && selectedCell.y==j)?'selected':''}} {{foo.filter(i, j, drawPath)?'showPath':''}}"></view>
+<view class="bg-img padding-tb-xl" style="background-image: url('http://image.fengzhankeji.com/static/game-bg.png');height: 100vh;">
+  <view class="padding-lr">
+    <view class="text-center font_26 c0 padding-tb-sm">您还剩余：{{count}}s</view>
+    <view class="cu-progress round">
+      <view class="bg-green" style="width:{{progress}}%;"></view>
     </view>
-    <view class="border {{foo.filter(nx, j, drawPath)?'showPath':''}}"></view>
   </view>
+  <!-- <view class="timer">{{timestamp}}</view> -->
+  <view class="padding-bottom padding-top-xs">
+    <view class="flex">
+      <view class="border {{foo.filter(index-1, -1, drawPath)?'showPath':''}}" wx:for="{{nx+2}}" wx:key="index"></view>
+    </view>
 
-  <view class="flex">
-    <view class="border {{foo.filter(index-1, ny, drawPath)?'showPath':''}}" wx:for="{{nx+2}}" wx:key="index"></view>
+    <view class="flex" wx:for="{{ny}}" wx:key="index" wx:for-index="j">
+      <view class="border {{foo.filter(-1, j, drawPath)?'showPath':''}}"></view>
+      <view class="cell " wx:for="{{nx}}" wx:key="index" wx:for-index="i" data-item="{{list[j*nx+i]}}" catchtap="clickTap">
+        <image src="/images/llk/icon_{{list[j*nx+i].c}}.png" mode="aspectFill" wx:if="{{!list[j*nx+i].checked}}"></image>
+        <view class="cell-line {{(selectedCell.x==i && selectedCell.y==j)?'selected':''}} {{foo.filter(i, j, drawPath)?'showPath':''}}"></view>
+      </view>
+      <view class="border {{foo.filter(nx, j, drawPath)?'showPath':''}}"></view>
+    </view>
+
+    <view class="flex">
+      <view class="border {{foo.filter(index-1, ny, drawPath)?'showPath':''}}" wx:for="{{nx+2}}" wx:key="index"></view>
+    </view>
   </view>
 </view>
-
 <!-- <view class="padding-xxl">当前点击的cell: x:{{selectedCell.x}} y:{{selectedCell.y}}</view> -->
 
 <view class="game" wx:if="{{gameOver>0}}">
   <view class="game-over {{gameOver==1?'text-white':'text-red'}}">{{gameOver==1?'GAME OVER!':'GAME WIN!'}}</view>
-  <button class="cu-btn radius text-white lg bg-cgreen margin-top-xl" bindtap="reset">再来一次</button>
+  <!-- <button class="cu-btn radius text-white lg bg-cgreen margin-top-xl" bindtap="reset">再来一次</button> -->
+  <view class="margin-top-xl">
+    <image src="http://image.fengzhankeji.com/static/game-again-btn.png" style="width:273rpx;height:77rpx;" bindtap="reset"></image>
+  </view>
 </view>
 <wxs module="foo">
   var filter = function(x, y, temp) {

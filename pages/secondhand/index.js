@@ -25,7 +25,7 @@ Page({
    */
   onLoad: function(options) {
     this.loadCategoryList();
-    this.loadList();
+    // this.loadList();
     this.loadBannerList();
   },
 
@@ -34,7 +34,10 @@ Page({
    */
   onShow: function() {
     // this.loadCategoryList();
-    // this.loadList();
+    this.setData({
+      page:1,
+    })
+    this.loadList();
   },
 
   loadCategoryList: function() {

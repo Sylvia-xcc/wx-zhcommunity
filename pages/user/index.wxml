@@ -1,10 +1,10 @@
 <!--pages/user/index.wxml-->
-<view class="bg-img padding-tb-xl" style="background-image: url('http://image.fengzhankeji.com/static/001.png');height: 631rpx;">
+<view class="bg-img padding-tb-xl" style="background-image: url('http://image.fengzhankeji.com/static/user-bg2.png');height: 631rpx;">
   <view class="padding-xl text-white ">
     <view class="flex padding-bottom-xl" wx:if="{{user}}">
       <navigator url="/pages/homepage/index" hover-class="none">
         <view class="cu-avatar-group">
-          <view class="cu-avatar round lg" style="background-image:url({{user.avatar}}); "></view>
+          <view class="cu-avatar round lg" style="background-image:url({{user.avatar}}); width:110rpx;height:110rpx;"></view>
         </view>
       </navigator>
       <view class="padding-left-xs">
@@ -39,10 +39,10 @@
         <view class="text-sm padding-top-xs">我的粉丝</view>
       </navigator>
     </view>
-    <view class="flex justify-between padding-lr padding-top-xl" style="padding-top:100rpx;">
-      <text class="font_30 text-bold">中环国际社区会员充值</text>
-      <navigator url="/pages/user/user-chongzhi/user-chongzhi" hover-class="none">
-        <button class="cu-btn round bg-gradient1 text-brown">立即充值</button>
+    <view class="flex justify-end padding-lr padding-top-xl" style="padding-top:125rpx;">
+      <!-- <text class="font_30 text-bold">中环国际社区</text> -->
+      <navigator url="/pages/user/user-chongzhi/user-chongzhi" hover-class="none" style="margin-right:76rpx;">
+        <image src="http://image.fengzhankeji.com/static/chongzhi-btn.png" style="width:136rpx;height:38rpx;"></image>
       </navigator>
     </view>
   </view>

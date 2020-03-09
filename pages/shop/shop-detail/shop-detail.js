@@ -55,7 +55,7 @@ Page({
         realData['pid'] = that.data.productId;
         realData['name'] = product.name;
         realData['imgUrl'] = product.thumb;
-        realData['price'] = (that.data.vip == 0) ? product.price_yh : product.price_vip;
+        realData['price'] = product.price_yh;//(that.data.vip == 0) ? product.price_yh : product.price_vip;
         realData['price_yj'] = product.price;
         realData['stock'] = product.stock;
         realData['buynum'] = 1;

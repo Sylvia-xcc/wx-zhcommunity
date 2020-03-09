@@ -136,7 +136,7 @@ Page({
   detailTap: function (evt) {
     let id = evt.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/job/job-detail/job-detail?id=' + id + '&type=' + this.data.tabCur,
+      url: '/pages/house/house-sell/house-sell-detail/house-sell-detail?id=' + id + '&type=' + this.data.tabCur,
     })
   },
 

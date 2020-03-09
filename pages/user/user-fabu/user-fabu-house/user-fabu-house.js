@@ -112,7 +112,7 @@ Page({
     let that = this;
     let id = evt.currentTarget.dataset.id;
     let model = that.data.tabCur == 0 ? 'house_buy' : that.data.tabCur == 1 ? 'house_hire' : that.data.tabCur == 2 ? 'house_ask_hire' : 'house_ask_buy';
-    tip.confirm('是否确定删除该发布?').then(res => {
+    tip.confirm('是否确定删除发布?').then(res => {
       http.requestUrl({
         url: 'account/clearPost',
         news: true,

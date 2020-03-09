@@ -92,7 +92,17 @@ Page({
     console.log('=============>>', this.data.heigh);
     // console.log('------------- ', Const.areaArr);
 
-    that.loadJobList();
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.setData({
+      page:1,
+    })
+    this.loadJobList();
   },
 
   //获取工作列表
@@ -144,6 +154,7 @@ Page({
       return;
     if (p) {
       this.setData({
+        page:1,
         loading: true,
         bottoming: false,
         showBottomLoading: true,
@@ -205,7 +216,7 @@ Page({
       num++;
     }
     if (treatment.length > 0) {
-      data.treatment = treatment;
+      data.treatment = treatment.join(',');
       num++;
     }
     that.setData({
@@ -388,11 +399,12 @@ Page({
   },
   //筛选-福利
   selectFuliTap: function(evt) {
+    console.log('------------>>>0 ',evt);
     let that = this;
     let id = evt.currentTarget.dataset.id;
     let items = that.data.treatmentArr;
     for (var i = 0; i < items.length; i++) {
-      if (id == 0) { //选择不限
+      if (id == -1) { //选择不限
         items[i].selected = i == 0 ? true : false;
       } else {
         items[0].selected = false;
@@ -454,13 +466,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
 
   },
 

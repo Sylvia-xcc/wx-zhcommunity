@@ -5,7 +5,7 @@ const http = require('../../../utils/http.js');
 import tip from '../../../utils/tip.js';
 var symbols = 'ABCDEFGHIGKLMNOPQRSTUV'; //WXYZ123456789
 var config = 0;
-var timer=0;
+var timer = 0;
 Page({
 
   /**
@@ -15,11 +15,14 @@ Page({
     list: [],
     nx: 6,
     ny: 8,
-    count: 18,
+    count: 0,
     selectedCell: null,
     drawPath: [],
     timestamp: '00:00',
-    gameOver:0,
+    gameOver: 0,
+    progress:100,
+    timer:[90],
+    level:0,
   },
 
   /**
@@ -32,19 +35,19 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
     this.clearTimer();
   },
 
-  
+
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
     this.clearTimer();
   },
 
-  clearTimer: function () {
+  clearTimer: function() {
     clearTimeout(timer);
   },
 
@@ -81,8 +84,9 @@ Page({
     console.log('-------', list)
     that.setData({
       list: list,
-      count:90,
-      gameOver:0,
+      count: that.data.timer[that.data.level],
+      gameOver: 0,
+      progress:100,
     })
     that.startTimer();
   },
@@ -91,19 +95,24 @@ Page({
     let that = this;
     let count = that.data.count;
     that.onTimestamp();
-    timer=setTimeout(function() {
+    timer = setTimeout(function() {
       count--;
-      if (count < 0) {
-        tip.success('游戏失败', 2000)
+      if (count <= 0) {
+        count = count <= 0 ? 0 : count;
+        // tip.success('游戏失败', 2000)
+        console.log('游戏失败');
         that.setData({
-          gameOver:1,
+          gameOver: 1,
         })
-        this.clearTimer();
+        that.clearTimer();
       } else {
         that.startTimer();
       }
+      let max = that.data.timer[that.data.level];
+      let pro = Math.floor(count/max *100);
       that.setData({
-        count: count
+        count: count,
+        progress:pro
       })
     }, 1000)
   },
@@ -113,7 +122,7 @@ Page({
     let count = that.data.count;
     let m = Math.floor(count / 60);
     let s = count % 60;
-    let str = util.formatNumber(m) +':'+ util.formatNumber(s);
+    let str = util.formatNumber(m) + ':' + util.formatNumber(s);
     console.log('---------------- 分：', m, s, str)
     that.setData({
       timestamp: str,
@@ -177,8 +186,9 @@ Page({
 
     if (that.gameOver()) {
       that.setData({
-        gameOver:2
+        gameOver: 2
       })
+      console.log('游戏成功')
       this.clearTimer();
     }
   },

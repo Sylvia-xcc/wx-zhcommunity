@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/test/test",
     "pages/school/school-fabu-detail/school-fabu-detail",
     "pages/school/school-lesson-fabu/school-lesson-fabu",
     "pages/school/school-course-fabu/school-course-fabu",
@@ -121,7 +122,7 @@
       },
       {
         "pagePath": "pages/video/index",
-        "text": "视频",
+        "text": "广场",
         "iconPath": "images/icons/btn_tabs_04.png",
         "selectedIconPath": "images/icons/btn_tabs_03.png"
       },

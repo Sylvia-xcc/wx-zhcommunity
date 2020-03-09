@@ -28,7 +28,7 @@
           </view>
           <image wx:else src="{{item.editor_imgurls[0]}}" class="radius" style="width:300rpx;height:340rpx;" mode="aspectFill"></image>
         </view>
-        <view class="text-gray text-sm text-left padding-bottom ">
+        <view class="text-gray text-xs text-left padding-bottom ">
           <text>{{item.create_time}}</text>
           <text class="padding-left-sm">评论({{item.comments_num}})</text>
         </view>

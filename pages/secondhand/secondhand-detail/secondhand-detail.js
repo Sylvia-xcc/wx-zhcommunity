@@ -17,6 +17,18 @@ Page({
     bottoming: true,
     showBottomLoading: false,
     isLoading:true,
+
+    list:[{
+      id:1,
+      name:'A',
+      plist:[
+        {
+          toName: "A",
+          name: "B",
+        }
+        
+      ]
+    }]
   },
 
   /**

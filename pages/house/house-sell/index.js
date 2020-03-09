@@ -456,7 +456,7 @@ Page({
     let id = evt.currentTarget.dataset.id;
     let items = that.data.houseSpeArray;
     for (var i = 0; i < items.length; i++) {
-      if (id == 0) { //选择不限
+      if (id == 1) { //选择不限
         items[i].selected = i == 0 ? true : false;
       } else {
         items[0].selected = false;

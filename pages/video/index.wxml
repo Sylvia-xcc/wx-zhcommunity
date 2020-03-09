@@ -14,7 +14,7 @@
           <view class="padding-xs showtwo">
             {{item.title}}
           </view>
-          <image src="/images/play_btn.png" class="pa" style="width:96rpx;height:96rpx; left:320rpx;"></image>
+          <!-- <image src="/images/play_btn.png" class="pa" style="width:96rpx;height:96rpx; left:320rpx;"></image> -->
         </view>
       </view>
       <view class="flex align-center padding-lr padding-tb-sm">

@@ -37,7 +37,7 @@ page{
 }
 
 .cell .selected {
-  border: 6rpx solid #39f;
+  border: 6rpx solid red;
 }
 
 .cell .showPath {
