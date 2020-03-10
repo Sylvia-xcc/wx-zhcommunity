@@ -12,13 +12,14 @@ Page({
     user:null,
     info:null,
     isLoading:true,
+    recharge:0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.loadConfigInfo();
   },
 
   /**
@@ -62,6 +63,21 @@ Page({
     }).then(res => {
       that.setData({
         info: res.data
+      })
+    })
+  },
+
+  loadConfigInfo: function () {
+    let that = this;
+    http.requestUrl({
+      url: 'common/config',
+      news: true,
+      data: {
+        aid: app.d.uid,
+      },
+    }).then(res => {
+      that.setData({
+        recharge: res.data.recharge
       })
     })
   },

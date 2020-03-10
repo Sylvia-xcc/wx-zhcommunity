@@ -103,7 +103,8 @@
     "pages/user/user-fabu/user-fabu-school/user-fabu-school",
     "pages/school/school-search/school-search",
     "pages/user/user-collect/user-collect-school/user-collect-school",
-    "pages/user/user-fabu/user-fabu-commonweal/user-fabu-commonweal"
+    "pages/user/user-fabu/user-fabu-commonweal/user-fabu-commonweal",
+    "pages/socks/socks"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -124,8 +125,14 @@
       {
         "pagePath": "pages/video/index",
         "text": "广场",
-        "iconPath": "images/icons/btn_tabs_034.jpg",
-        "selectedIconPath": "images/icons/btn_tabs_033.png"
+        "iconPath": "images/icons/btn_tabs_04.jpg",
+        "selectedIconPath": "images/icons/btn_tabs_03.png"
+      },
+      {
+        "pagePath": "pages/socks/socks",
+        "text": "消息",
+        "iconPath": "images/icons/btn_tabs_06.png",
+        "selectedIconPath": "images/icons/btn_tabs_05.png"
       },
       {
         "pagePath": "pages/user/index",

@@ -102,7 +102,7 @@
     <input type="number" maxlength="11" placeholder="输入手机号码" placeholder-class="text-gray text-df" bindinput="mobileInput"></input>
   </view>
 
-  <view class="cu-form-group align-start">
+  <view class="cu-form-group align-start" wx:if="{{modalName==null}}">
     <view class="title">职位描述</view>
     <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="textareaInput" placeholder="请输入具体的职位描述" placeholder-class="text-gray text-df"></textarea>
   </view>
@@ -119,7 +119,7 @@
       <view>福利待遇(多选)</view>
       <view class="action text-green" data-type="ok" bindtap="hideModal">确定</view>
     </view>
-    <view class="grid col-3 padding-sm" style="min-height:300rpx;">
+    <view class="grid col-3 padding-sm" style="min-height:450rpx;">
       <view wx:for="{{checkbox}}" wx:key="index" class="padding-xs">
         <button class="cu-btn orange lg block sm {{item.checked?'bg-cgreen text-white':'line-gray'}}" bindtap="ChooseCheckbox" data-value="{{item.name}}"> {{item.name}}
         </button>

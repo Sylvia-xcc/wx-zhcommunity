@@ -62,14 +62,15 @@ Page({
         appId: 'wxa99810e091613a64',
         path: 'pages/index/index'
       }
-    ]
+    ],
+    isShow:0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.loadConfigInfo();
   },
 
   /**
@@ -109,6 +110,21 @@ Page({
         tip.loaded();
       }, 400)
     }
+  },
+
+  loadConfigInfo: function () {
+    let that = this;
+    http.requestUrl({
+      url: 'common/config',
+      news: true,
+      data: {
+        aid: app.d.uid,
+      },
+    }).then(res => {
+      that.setData({
+        isShow: res.data.is_show
+      })
+    })
   },
   loadBanner: function() {
     let that = this;
@@ -171,7 +187,7 @@ Page({
       return;
     that.setData({
       tabCur: id,
-      scrollLeft: (id - 1) * 60,
+      scrollLeft: (id - 1) * 140,
       loading: true,
       page: 1,
       tagIndex: 0,

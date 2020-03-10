@@ -1,24 +1,31 @@
 <!--pages/paper/index.wxml-->
 
 
-<view class="bg-img padding-tb-xl" style="background-image: url('http://image.fengzhankeji.com/static/paper-bg.png');height: 100vh;">
+<view wx:if="{{info}}" class="bg-img padding-tb-xl pr" style="background-image: url('http://image.fengzhankeji.com/static/p1.png');height: 100vh;">
   <view class="padding-xl text-white flex align-center flex-direction">
-    <view class="pr" style="width:445rpx; height:542rpx;">
-      <image src="http://image.fengzhankeji.com/static/paper-z.png" style="width:445rpx; height:542rpx;"></image>
+    <view class="pr" style="width:551rpx; height:602rpx; margin-top:100rpx;">
+      <image src="http://image.fengzhankeji.com/static/p3.png" style="width:551rpx; height:602rpx;"></image>
       <view class="pa" style="z-index:99; left:50rpx; top:60rpx;">
-        <view class="text-black" style="margin-top:80rpx; width:350rpx;height:200rpx;">
+        <view class="text-black" style="margin-top:60rpx; width:350rpx;height:310rpx; margin-left:70rpx;">
           {{info.content}}
         </view>
-        <view class="padding-top text-center">
-          <button class="cu-btn round text-cyan" bindtap="showModal" data-target="DialogModal2">去送祝福给Ta</button>
+        <view class="padding-top text-center" style="width:400rpx;">
+          <button class="cu-btn round bg-blue sm" bindtap="showModal" data-target="DialogModal2" style="background-color:#2e7cb5;">去送祝福给Ta</button>
         </view>
-        <view class="text-gray font_22 text-right margin-top padding-right" style="width:350rpx" bindtap="nextTap">下一张>></view>
+        <view class="text-white text-bold text-sm text-right margin-top padding-right" style="width:480rpx;margin-top:35rpx;" bindtap="nextTap">下一张</view>
       </view>
 
     </view>
-    <view style="padding-top:300rpx;">
-      <button class="cu-btn radius bg-green" bindtap="showModal" data-target="DialogModal">我也来偷偷说一句~</button>
+    <view class="pa" style="bottom:30rpx; opacity: 0;">
+      <view style="width:400rpx;height:70rpx;" class="bg-green" bindtap="showModal" data-target="DialogModal"></view>
+      <!-- <button class="cu-btn radius bg-green" bindtap="showModal" data-target="DialogModal">我也来偷偷说一句~</button> -->
     </view>
+  </view>
+</view>
+
+<view wx:else class="bg-img padding-tb-xl pr" style="background-image: url('http://image.fengzhankeji.com/static/p2.png');height: 100vh;">
+  <view class="padding-top text-center" style="height:100vh;">
+    <button class="cu-btn round bg-blue sm" bindtap="showModal" data-target="DialogModal"  style="margin-top:45vh; margin-right:100rpx;background-color:#2e7cb5;">写小纸条</button>
   </view>
 </view>
 
@@ -40,7 +47,7 @@
     <view class="cu-bar bg-white justify-end">
       <view class="action">
         <!-- <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button> -->
-        <button class="cu-btn bg-green margin-left" bindtap="submitTap">确定</button>
+        <button class="cu-btn bg-green margin-left radius" bindtap="submitTap">确定</button>
       </view>
     </view>
   </view>

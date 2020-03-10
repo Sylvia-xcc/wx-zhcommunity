@@ -11,7 +11,7 @@ Page({
   data: {
     modalName:null,
     msg:'',
-    max:50,
+    max:90,
     isLoading:true,
     info:null,
   },

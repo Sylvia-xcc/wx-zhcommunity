@@ -6,7 +6,7 @@
     <image src="{{item.slide_pic}}" mode="aspectFill"></image>
   </swiper-item>
 </swiper>
-<view class="padding flex flex-wrap">
+<view class="padding flex flex-wrap" wx:if="{{isShow!=0}}">
   <navigator url="/pages/community/index" hover-class="none" class="flex align-center flex-direction basis-xs padding-bottom">
     <image src="/images/a1.png" style="width:129rpx;height:128rpx;"></image>
     <view class="font_26 c0">社区服务</view>
@@ -79,18 +79,33 @@
     <text class="cuIcon-titles text-green"></text>
     <text class="c0 text-bold">为你推荐</text>
     <navigator url="/pages/paper/index" hover-class="none" class="pa" style="right:30rpx; top:-25rpx;">
-      <image src="http://image.fengzhankeji.com/static/paper.png" style="width:85rpx;height:81rpx;"></image>
+      <image src="/images/now_lowest.gif" style="width:85rpx;height:81rpx;"></image>
     </navigator>
   </view>
 </view>
 
 <scroll-view scroll-x class="bg-white nav padding-lr" scroll-with-animation scroll-left="{{scrollLeft}}">
   <view class="flex text-center">
-    <view class="cu-item flex-sub {{tabCur==0?'text-cgreen  nav-cur':''}}" bindtap="tabSelect" data-id="{{0}}">二手物品</view>
-    <view class="cu-item flex-sub {{tabCur==1?'text-cgreen  nav-cur':''}}" bindtap="tabSelect" data-id="{{1}}">附近工作</view>
-    <view class="cu-item flex-sub {{tabCur==2?'text-cgreen  nav-cur':''}}" bindtap="tabSelect" data-id="{{2}}">精选商城</view>
-    <view class="cu-item flex-sub {{tabCur==3?'text-cgreen  nav-cur':''}}" bindtap="tabSelect" data-id="{{3}}">公益活动</view>
-    <view class="cu-item flex-sub {{tabCur==4?'text-cgreen  nav-cur':''}}" bindtap="tabSelect" data-id="{{4}}">房管家</view>
+    <view class="" bindtap="tabSelect" data-id="{{0}}">
+      <image src="http://image.fengzhankeji.com/static/tab_1_1.png" style="width:207rpx;height:139rpx;" wx:if="{{tabCur==0}}"></image>
+      <image src="http://image.fengzhankeji.com/static/tab_1_2.png" style="width:207rpx;height:139rpx;" wx:else></image>
+    </view>
+    <view class="" bindtap="tabSelect" data-id="{{1}}">
+      <image src="http://image.fengzhankeji.com/static/tab_2_1.png" style="width:207rpx;height:139rpx;" wx:if="{{tabCur==1}}"></image>
+      <image src="http://image.fengzhankeji.com/static/tab_2_2.png" style="width:207rpx;height:139rpx;" wx:else></image>
+    </view>
+    <view class="" bindtap="tabSelect" data-id="{{2}}">
+      <image src="http://image.fengzhankeji.com/static/tab_3_1.png" style="width:207rpx;height:139rpx;" wx:if="{{tabCur==2}}"></image>
+      <image src="http://image.fengzhankeji.com/static/tab_3_2.png" style="width:207rpx;height:139rpx;" wx:else></image>
+    </view>
+    <view class="" bindtap="tabSelect" data-id="{{3}}">
+      <image src="http://image.fengzhankeji.com/static/tab_4_1.png" style="width:207rpx;height:139rpx;" wx:if="{{tabCur==3}}"></image>
+      <image src="http://image.fengzhankeji.com/static/tab_4_2.png" style="width:207rpx;height:139rpx;" wx:else></image>
+    </view>
+    <view class="" bindtap="tabSelect" data-id="{{4}}">
+      <image src="http://image.fengzhankeji.com/static/tab_5_1.png" style="width:207rpx;height:139rpx;" wx:if="{{tabCur==4}}"></image>
+      <image src="http://image.fengzhankeji.com/static/tab_5_2.png" style="width:207rpx;height:139rpx;" wx:else></image>
+    </view>
   </view>
 </scroll-view>
 

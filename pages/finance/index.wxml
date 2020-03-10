@@ -36,7 +36,7 @@
   </view>
 
   <!-- <navigator  url="/pages/finance/finance-user/finance-user" hover-class="none" class="bg-white"  style="position: fixed;right:30rpx; bottom:100rpx; z-index:99; ">
-    <image src="/images/head-icon.png" style="width:80rpx;height:80rpx;"></image>
+    <image src="http://image.fengzhankeji.com/static/head-icon.png" style="width:80rpx;height:80rpx;"></image>
   </navigator> -->
 
   <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>

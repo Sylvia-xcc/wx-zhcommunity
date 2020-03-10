@@ -2,5 +2,5 @@
   "usingComponents": {
     "v-bottomloading": "/components/bottomLoading/bottomloading"
   },
-  "navigationBarTitleText": "视频"
+  "navigationBarTitleText": "广场"
 }

@@ -1,5 +1,5 @@
 <!--pages/user/user-fabu/index.wxml-->
-<view class="margin flex flex-wrap justify-between">
+<view class="margin flex flex-wrap">
   <navigator url="/pages/user/user-fabu/user-fabu-secondhand/user-fabu-secondhand" hover-class="none" class="item">
     <image src="/images/a2.png" class="grid-img"></image>
     <text>二手物品</text>
@@ -28,8 +28,8 @@
     <image src="/images/a7.png" class="grid-img"></image>
     <text>小雅课堂</text>
   </navigator>
-  <!-- <navigator url="/pages/user/user-fabu/user-fabu-commonweal/user-fabu-commonweal" hover-class="none" class="item">
+  <navigator url="/pages/user/user-fabu/user-fabu-commonweal/user-fabu-commonweal" hover-class="none" class="item">
     <image src="/images/a9.png" class="grid-img"></image>
     <text>公益活动</text>
-  </navigator> -->
+  </navigator>
 </view>

@@ -8,13 +8,14 @@ page{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-basis: 30%;
+  /* flex-basis: 30%; */
   background: #fff;
   height: 192rpx;
   border-radius:10px;
+  width: 30%;
+  margin: 0 1.5%;  
   margin-bottom: 30rpx;
 }
-
 .item image{
   width:96rpx;
   height: 95rpx;

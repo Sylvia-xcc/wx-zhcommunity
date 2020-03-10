@@ -6,13 +6,13 @@
       <view class="text-gray text-xs padding-top-xs">{{detail.create_time}}</view>
       <view class="text-sm padding-top-sm">{{detail.desc}}
       </view>
-      <view class="padding-top" wx:if="{{detail.type<=1}}">
+      <view class="padding-top">
         <import src="../../../wxParse/wxParse.wxml" />
         <template is="wxParse" data="{{wxParseData:content.nodes}}" style="width:370px" />
       </view>
-      <view class="padding-top" wx:else>
+      <!-- <view class="padding-top" wx:else>
         <video src="{{detail.video}}" style="width:690rpx;"></video>
-      </view>
+      </view> -->
       <view class="text-black text-xs text-left padding-tb">
         <text>评论({{total}})</text>
         <text class="padding-left">{{detail.views}}次阅读</text>
