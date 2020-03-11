@@ -53,5 +53,5 @@
 
 <view class="cu-bar bg-white tabbar border shop position-bottom">
   <view class="submit text-white" style="background:#EF696B;" bindtap="phoneTap">打电话</view>
-  <view class="bg-cgreen submit text-white"  bindtap="chatTap">在线聊</view>
+  <view class="bg-cgreen submit text-white"  data-uid="{{detail.user_id}}" bindtap="chatTap">在线聊</view>
 </view>

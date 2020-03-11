@@ -1,4 +1,71 @@
 <!--pages/socks/socks.wxml-->
+<view class="news" bindtap='outbtn'>
+  <view class="chat-notice" wx:if="{{userInfo}}">系统消息: 欢迎 {{ userInfo.nickName }} 加入聊天室</view>
+  <view class="historycon">
+    <scroll-view scroll-y="true" class="history" scroll-top="{{scrollTop}}">
+      <block wx:for="{{newslist}}" wx:key>
+        <!-- 历史消息 -->
+        <!-- <view class="chat-news">
+<view style="text-align: left;padding-left: 20rpx;">
+<image class='new_img' src="{{item.avatarUrl? item.avatarUrl:'images/avator.png'}}"></image>
+<text class="name">{{ item.nickName }}{{item.date}}</text>
+</view>
+<view class='you_left'>
+<block wx:if="{{item.type=='text'}}">
+<view class='new_txt'>{{item.content}}</view>
+</block>
+<block wx:if="{{item.type=='image'}}">
+<image class="selectImg" src="{{item.images}}"></image>
+</block>
+</view>
+</view> -->
+        <view>{{item.date}}</view>
+        <!--自己的消息 -->
+        <view class="chat-news" wx:if="{{item.nickName == userInfo.nickName}}">
+          <view style="text-align: right;padding-right: 20rpx;">
+            <text class="name">{{ item.nickName }}</text>
+            <image class='new_img' src="{{userInfo.avatarUrl}}"></image>
+          </view>
+          <view class='my_right'>
+            <block wx:if="{{item.type=='text'}}">
+              <view class='new_txt'>{{item.content}}</view>
+            </block>
+            <block wx:if="{{item.type=='image'}}">
+              <image class="selectImg" src="{{item.images}}" data-src="{{item.images}}" lazy-load="true" bindtap="previewImg"></image>
+            </block>
+          </view>
+        </view>
+        <!-- 别人的消息 -->
+        <view class="chat-news" wx:else>
+          <view style="text-align: left;padding-left: 20rpx;">
+            <image class='new_img' src="{{item.avatarUrl? item.avatarUrl:'images/avator.png'}}"></image>
+            <text class="name">{{ item.nickName }}</text>
+          </view>
+          <view class='you_left'>
+            <block wx:if="{{item.type=='text'}}">
+              <view class='new_txt'>{{item.content}}</view>
+            </block>
+            <block wx:if="{{item.type=='image'}}">
+              <image class="selectImg" src="{{item.images}}" data-src="{{item.images}}" lazy-load="true" bindtap="previewImg"></image>
+            </block>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</view>
+<view id="flag"></view>
+<!-- 聊天输入 -->
+<view class="message">
+  <form bindreset="cleanInput" class="sendMessage">
+    <input type="text" placeholder="请输入聊天内容.." value="{{massage}}" bindinput='bindChange'></input>
+    <view class="add" bindtap='increase'>+</view>
+    <button type="primary" bindtap='send' formType="reset" size="small" button-hover="blue">发送</button>
+  </form>
+  <view class='increased {{aniStyle?"slideup":"slidedown"}}' wx:if="{{increase}}">
+    <view class="image" bindtap='chooseImage'>相册 </view>
+  </view>
+</view>
 <!-- <view class="padding">
   <view class="flex justify-between align-center">
     <view>
@@ -11,47 +78,37 @@
     </view>
   </view>
 </view> -->
-
+<!-- 
 <view class="cu-chat" style="padding-bottom:130rpx;">
   <view class="cu-info" style="padding:10rpx 20rpx !important;">交易前请仔细沟通清楚，避免产生交易纠纷本平台不提供在线交易哦</view>
 
-  <view wx:for="{{list}}" wx:key="index" class="cu-item {{item.uid==uid?'self':''}} ">
-    <view class="nickname">{{item.nickname}}</view>
-    <view class="main">
-      <view class="content bg-green shadow">
-        <text>{{item.content}}</text>
+  <view wx:for="{{list}}" wx:key="index">
+    <view class="cu-item self " wx:if="{{item.uid!=uid}}">
+      <view class="nickname">{{item.nickname}}</view>
+      <view class="main">
+        <view class="content shadow">
+          <text>{{item.content}}</text>
+        </view>
       </view>
+      <view class="cu-avatar round" style="background-image:url({{item.avatar}});"></view>
+      <view class="date">{{item.create_time}}</view>
     </view>
-    <view class="cu-avatar round" style="background-image:url({{item.avatar}});"></view>
-    <view class="date">{{item.create_time}}</view>
+    <view class="cu-item" wx:else>
+      <view class="cu-avatar round" style="background-image:url({{item.avatar}});"></view>
+      <view class="nickname">{{item.nickname}}</view>
+      <view class="main">
+        <view class="content bg-green shadow">
+          <text>{{item.content}}</text>
+        </view>
+      </view>
+      <view class="date ">{{item.create_time}}</view>
+    </view>
   </view>
 
-  <view class="cu-item">
-    <view class="cu-avatar round" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
-    <view class="nickname">薯片配咖啡</view>
-    <view class="main">
-      <view class="content shadow">
-        <text>我看看时间吧，</text>
-      </view>
-    </view>
-    <view class="date "> 13:23</view>
-  </view>
 
 
-  <view class="cu-item">
-    <view class="cu-avatar round" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big143004.jpg);"></view>
-    <view class="nickname">薯片配咖啡</view>
-    <view class="main">
-      <view class="content shadow">
-        @#$^&**
-      </view>
-      <view class="action text-grey">
-        <text class="cuIcon-warnfill text-red text-xxl"></text>
-        <text class="text-sm margin-left-sm">翻译错误</text>
-      </view>
-    </view>
-    <view class="date">13:23</view>
-  </view>
+
+
 </view>
 
 <view class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
@@ -60,4 +117,4 @@
     <text class="cuIcon-roundadd text-grey"></text>
   </view>
   <button class="cu-btn bg-green shadow radius" bindtap="send">发送</button>
-</view>
+</view> -->

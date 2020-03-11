@@ -40,7 +40,7 @@
       </navigator>
     </view>
   </view>
-  <view class="pr margin-lr" wx:if="{{recharge!=0}}">
+  <view class="pr margin-lr" style="margin-top:30rpx;" wx:if="{{recharge!=0}}">
     <image src="http://image.fengzhankeji.com/static/user-bg3.png"  style="height: 187rpx; width:690rpx;"></image>
     <navigator url="/pages/user/user-chongzhi/user-chongzhi" hover-class="none" class="pa" style="bottom:30rpx; right:150rpx;">
       <image src="http://image.fengzhankeji.com/static/chongzhi-btn.png" style="width:136rpx;height:38rpx;"></image>
@@ -49,39 +49,39 @@
 
 </view>
 
-<view class="padding flex flex-wrap justify-between" style="padding-top:70rpx;">
+<view class="padding flex flex-wrap justify-between" style="padding-top:80rpx;">
   <navigator url="/pages/community/community-jifen-shop/community-jifen-shop" hover-class="none" class="flex align-center flex-direction basis-xn margin-bottom-xl item">
-    <image src="/images/u1.png"></image>
+    <image src="http://image.fengzhankeji.com/static/u1.png"></image>
     <text class="c0 padding-top-sm font_26 text-bold">积分商城</text>
   </navigator>
   <navigator url="/pages/community/community-jifen-list/community-jifen-list" hover-class="none" class="flex align-center flex-direction basis-xn item">
-    <image src="/images/u4.png"></image>
+    <image src="http://image.fengzhankeji.com/static/u4.png"></image>
     <text class="c0 padding-top-sm font_26 text-bold">积分明细</text>
   </navigator>
   <navigator url="/pages/shop/shop-cart/shop-cart" hover-class="none" class="flex align-center flex-direction basis-xn item">
-    <image src="/images/u3.png"></image>
+    <image src="http://image.fengzhankeji.com/static/u3.png"></image>
     <text class="c0 padding-top-sm font_26 text-bold">购物车</text>
   </navigator>
   <navigator url="/pages/shop/shop-order/shop-order" hover-class="none" class="flex align-center flex-direction basis-xn item">
-    <image src="/images/u2.png"></image>
+    <image src="http://image.fengzhankeji.com/static/u2.png"></image>
     <text class="c0 padding-top-sm font_26 text-bold">商城订单</text>
   </navigator>
 
   <navigator url="/pages/user/user-activity/index" hover-class="none" class="flex align-center flex-direction basis-xn item">
-    <image src="/images/u5.png"></image>
+    <image src="http://image.fengzhankeji.com/static/u5.png"></image>
     <text class="c0 padding-top-sm font_26 text-bold">我的活动</text>
   </navigator>
   <navigator url="/pages/user/user-collect/index" hover-class="none" class="flex align-center flex-direction basis-xn item">
-    <image src="/images/u6.png"></image>
+    <image src="http://image.fengzhankeji.com/static/u6.png"></image>
     <text class="c0 padding-top-sm font_26 text-bold">我的收藏</text>
   </navigator>
   <navigator url="/" hover-class="none" class="flex align-center flex-direction basis-xn item pr">
     <button open-type="contact" class="shareBtn"></button>
-    <image src="/images/u7.png"></image>
+    <image src="http://image.fengzhankeji.com/static/u7.png"></image>
     <text class="c0 padding-top-sm font_26 text-bold">我的客服</text>
   </navigator>
   <navigator url="/pages/shop/shop-address/shop-address" hover-class="none" class="flex align-center flex-direction basis-xn item">
-    <image src="/images/u8.png"></image>
+    <image src="http://image.fengzhankeji.com/static/u8.png"></image>
     <text class="c0 padding-top-sm font_26 text-bold">收货地址</text>
   </navigator>
 </view>

@@ -153,7 +153,8 @@ Page({
   },
 
   chatTap: function (evt) {
-    util.liveChatTap();
+    let uid = evt.currentTarget.dataset.uid;
+    util.liveChatTap(uid);
   },
 
 

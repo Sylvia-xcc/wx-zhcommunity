@@ -1,6 +1,6 @@
 /* pages/socks/socks.wxss */
 
-page{
+/* page{
   background: #fff !important;
 }
 .cu-chat .cu-item>.main {
@@ -14,19 +14,19 @@ page{
   width: calc(100% - 320rpx);
   top: 40rpx;
   left: 160rpx;
-}
-
-
-/* page {
-  background-color: #f7f7f7;
-  height: 100%;
 } */
 
+page {
+  background-color: #f7f7f7;
+  height: 100%;
+}
+
 /* 聊天内容 */
-/* 
+
 .news {
   padding-top: 30rpx;
   text-align: center;
+  /* height:100%; */
   box-sizing: border-box;
 }
 
@@ -45,12 +45,13 @@ page{
 .historycon {
   height: 100%;
   width: 100%;
+  /* flex-direction: column; */
   display: flex;
   border-top: 0px;
-} */
+}
 
 /* 聊天 */
-/* 
+
 .chat-news {
   width: 100%;
   overflow: hidden;
@@ -58,6 +59,7 @@ page{
 
 .chat-news .my_right {
   float: right;
+  /* right: 40rpx; */
   padding: 10rpx 10rpx;
 }
 
@@ -67,9 +69,10 @@ page{
 
 .chat-news .you_left {
   float: left;
+  /* left: 5rpx; */
   padding: 10rpx 10rpx;
-} */
-/* 
+}
+
 .selectImg {
   display: inline-block;
   width: 150rpx;
@@ -135,10 +138,10 @@ page{
   height: 0;
   color: transparent;
   z-index: -1;
-} */
+}
 
 /* 信息输入区域 */
-/* 
+
 .message {
   position: fixed;
   bottom: 0;
@@ -186,6 +189,7 @@ page{
 
 .increased {
   width: 100%;
+  /* height: 150rpx; */
   padding: 40rpx 30rpx;
   background-color: #fff;
 }
@@ -226,4 +230,4 @@ page{
   to {
     transform: translateY(0);
   }
-} */
+}

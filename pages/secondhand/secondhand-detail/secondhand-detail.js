@@ -17,18 +17,6 @@ Page({
     bottoming: true,
     showBottomLoading: false,
     isLoading:true,
-
-    list:[{
-      id:1,
-      name:'A',
-      plist:[
-        {
-          toName: "A",
-          name: "B",
-        }
-        
-      ]
-    }]
   },
 
   /**
@@ -253,7 +241,8 @@ Page({
   },
 
   chatTap: function(evt) {
-    util.liveChatTap();
+    let uid = evt.currentTarget.dataset.uid;
+    util.liveChatTap(uid);
   },
 
   //预览

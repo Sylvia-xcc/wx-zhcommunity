@@ -1,4 +1,8 @@
 // pages/message/index.js
+const app = getApp();
+const util = require('../../utils/util.js');
+const http = require('../../utils/http.js');
+import tip from '../../utils/tip.js';
 Page({
 
   /**
@@ -25,11 +29,27 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.loadMessageList();
   },
 
   loadMessageList: function () {
+    let that = this;
+    http.requestUrl({
+      url: 'chat/chatusers',
+      news: true,
+      data: {
+        uid: app.d.uid,
+      },
+    }).then(res => {
+      that.setData({
+        list:res.data
+      })
+    })
+  },
 
+  chatTap:function(evt){
+    let uid = evt.currentTarget.dataset.uid;
+    util.liveChatTap(uid);
   },
 
   /**

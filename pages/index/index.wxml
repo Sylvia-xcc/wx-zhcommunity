@@ -79,7 +79,7 @@
     <text class="cuIcon-titles text-green"></text>
     <text class="c0 text-bold">为你推荐</text>
     <navigator url="/pages/paper/index" hover-class="none" class="pa" style="right:30rpx; top:-25rpx;">
-      <image src="/images/now_lowest.gif" style="width:85rpx;height:81rpx;"></image>
+      <image src="http://image.fengzhankeji.com/static/now_lowest.gif" style="width:85rpx;height:81rpx;"></image>
     </navigator>
   </view>
 </view>
@@ -91,19 +91,19 @@
       <image src="http://image.fengzhankeji.com/static/tab_1_2.png" style="width:207rpx;height:139rpx;" wx:else></image>
     </view>
     <view class="" bindtap="tabSelect" data-id="{{1}}">
-      <image src="http://image.fengzhankeji.com/static/tab_2_1.png" style="width:207rpx;height:139rpx;" wx:if="{{tabCur==1}}"></image>
+      <image src="http://image.fengzhankeji.com/static/tab_2_3.png" style="width:207rpx;height:139rpx;" wx:if="{{tabCur==1}}"></image>
       <image src="http://image.fengzhankeji.com/static/tab_2_2.png" style="width:207rpx;height:139rpx;" wx:else></image>
     </view>
     <view class="" bindtap="tabSelect" data-id="{{2}}">
-      <image src="http://image.fengzhankeji.com/static/tab_3_1.png" style="width:207rpx;height:139rpx;" wx:if="{{tabCur==2}}"></image>
+      <image src="http://image.fengzhankeji.com/static/tab_3_3.png" style="width:207rpx;height:139rpx;" wx:if="{{tabCur==2}}"></image>
       <image src="http://image.fengzhankeji.com/static/tab_3_2.png" style="width:207rpx;height:139rpx;" wx:else></image>
     </view>
     <view class="" bindtap="tabSelect" data-id="{{3}}">
-      <image src="http://image.fengzhankeji.com/static/tab_4_1.png" style="width:207rpx;height:139rpx;" wx:if="{{tabCur==3}}"></image>
+      <image src="http://image.fengzhankeji.com/static/tab_4_3.png" style="width:207rpx;height:139rpx;" wx:if="{{tabCur==3}}"></image>
       <image src="http://image.fengzhankeji.com/static/tab_4_2.png" style="width:207rpx;height:139rpx;" wx:else></image>
     </view>
     <view class="" bindtap="tabSelect" data-id="{{4}}">
-      <image src="http://image.fengzhankeji.com/static/tab_5_1.png" style="width:207rpx;height:139rpx;" wx:if="{{tabCur==4}}"></image>
+      <image src="http://image.fengzhankeji.com/static/tab_5_3.png" style="width:207rpx;height:139rpx;" wx:if="{{tabCur==4}}"></image>
       <image src="http://image.fengzhankeji.com/static/tab_5_2.png" style="width:207rpx;height:139rpx;" wx:else></image>
     </view>
   </view>

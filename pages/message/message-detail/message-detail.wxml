@@ -1,0 +1,84 @@
+<!--pages/secondhand/secondhand-chat/secondhand-chat.wxml-->
+
+<!-- <view class="padding">
+  <view class="flex justify-between align-center">
+    <view>
+      <image src="/images/ershou2.png" style="width:175rpx;height:135rpx;"></image>
+    </view>
+    <view class="padding-left">
+      <view class="showtwo text-sm c0 text-bold">崔雅卷发蓬松神器便宜出手，买了2年，只用过 2次，9成新，南京本地交易哇
+      </view>
+      <view class="font_22 text-gray padding-top-xs">交易前，先聊一聊这个宝贝吧～</view>
+    </view>
+  </view>
+</view> -->
+
+<!-- <view wx:if="{{!isLoading}}"> -->
+<view class="cu-chat" id="flag" style="padding-bottom:130rpx;">
+
+  <!-- 历史记录 -->
+  <block wx:for="{{history}}" wx:key="index">
+    <view class="cu-item self " wx:if="{{item.from_user_id==uid}}">
+      <view class="nickname">{{item.nickname}}</view>
+      <view class="main">
+        <view class="content bg-green shadow" wx:if="{{item.type=='text'}}">
+          <text>{{item.content}}</text>
+        </view>
+        <image wx:else src="{{item.content}}" class="radius" mode="widthFix" style="width:200rpx;" data-src="{{item.content}}" catchtap="previewImg"></image>
+      </view>
+      <view class="cu-avatar round" style="background-image:url({{item.avatar}});"></view>
+      <view class="date">{{item.create_time}}</view>
+    </view>
+    <view class="cu-item" wx:else>
+      <view class="cu-avatar round" style="background-image:url({{item.avatar}});"></view>
+      <view class="nickname">{{item.nickname}}</view>
+      <view class="main">
+        <view class="content shadow" wx:if="{{item.type=='text'}}">
+          <text>{{item.content}}</text>
+        </view>
+        <image wx:else src="{{item.content}}" class="radius" mode="widthFix" style="width:200rpx;" data-src="{{item.content}}" catchtap="previewImg"></image>
+      </view>
+      <view class="date ">{{item.create_time}}</view>
+    </view>
+  </block>
+
+  <!-- 即时聊天 -->
+  <view class="cu-info" style="padding:10rpx 20rpx !important;">交易前请仔细沟通清楚，避免产生交易纠纷本平台不提供在线交易哦</view>
+  <block wx:for="{{list}}" wx:key="index">
+    <view class="cu-info" wx:if="{{item.type=='os'}}">{{item.content}}</view>
+    <block wx:else>
+      <view class="cu-item self " wx:if="{{item.uid==uid}}">
+        <view class="nickname">{{item.nickname}}</view>
+        <view class="main">
+          <view class="content bg-green shadow" wx:if="{{item.type=='text'}}">
+            <text>{{item.content}}</text>
+          </view>
+          <image wx:else src="{{item.content}}" class="radius" mode="widthFix" style="width:200rpx;" data-src="{{item.content}}" catchtap="previewImg"></image>
+        </view>
+        <view class="cu-avatar round" style="background-image:url({{item.avatar}});"></view>
+        <view class="date">{{item.create_time}}</view>
+      </view>
+      <view class="cu-item" wx:else>
+        <view class="cu-avatar round" style="background-image:url({{item.avatar}});"></view>
+        <view class="nickname">{{item.nickname}}</view>
+        <view class="main">
+          <view class="content shadow" wx:if="{{item.type=='text'}}">
+            <text>{{item.content}}</text>
+          </view>
+          <image wx:else src="{{item.content}}" class="radius" mode="widthFix" style="width:200rpx;" data-src="{{item.content}}" catchtap="previewImg"></image>
+        </view>
+        <view class="date ">{{item.create_time}}</view>
+      </view>
+    </block>
+  </block>
+
+</view>
+
+<view class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
+  <input class="ssolid_bottom" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" cursor-spacing="10" value="{{message}}" bindinput="messageInput"></input>
+  <view class="action" catchtap="chooseImage">
+    <text class="cuIcon-roundadd text-grey"></text>
+  </view>
+  <button class="cu-btn bg-green shadow radius" bindtap="submitTap">发送</button>
+</view>
+<!-- </view> -->

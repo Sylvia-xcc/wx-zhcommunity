@@ -58,7 +58,7 @@ const detailTap = (model, mid) => {
   let url = "";
   console.log('------------->>>', model, mid)
   if (mid <= 0) {
-    if (model =='activity')
+    if (model == 'activity')
       url = "/pages/commonweal/index"
   } else {
     if (model == 'used' || model == "used_like")
@@ -83,12 +83,28 @@ const detailTap = (model, mid) => {
     return;
 
   wx.navigateTo({
-    url: url ,
+    url: url,
   })
 }
 
-const liveChatTap = ()=>{
-  tip.text('该功能暂未开放，敬请期待~~');
+const liveChatTap = (uid) => {
+  // tip.text('该功能暂未开放，敬请期待~~');
+  console.log('------------- 聊天', uid)
+  if(uid==undefined){
+    return;
+  }
+  if (uid <= 0) {
+    tip.error('该用户不存在', 1000);
+    return;
+  }
+  if(uid == getApp().d.uid)
+  {
+    tip.text('请忽与自己聊天',1000);
+    return;
+  }
+  wx.navigateTo({
+    url: '/pages/message/message-detail/message-detail?tid=' + uid,
+  })
 }
 
 

@@ -93,7 +93,7 @@
         转发
       </view>
       <view class="btn-group" style="justify-content: flex-end !important; padding-right:30rpx !important;">
-        <button class="cu-btn bg-green round shadow-blur" bindtap="chatTap">我想要</button>
+        <button class="cu-btn bg-green round shadow-blur" data-uid="{{product.user_id}}" bindtap="chatTap">我想要</button>
       </view>
     </view>
   </block>

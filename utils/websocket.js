@@ -1,3 +1,5 @@
+import tip from './tip.js';
+
 var url = 'ws://47.97.42.146:9502'; //服务器地址
 function connect(user, func) {
   wx.connectSocket({
@@ -12,21 +14,17 @@ function connect(user, func) {
       console.log('websocket连接失败~')
     }
   })
-  wx.onSocketOpen(function(res) {
-    wx.showToast({
-      title: 'websocket已开通~',
-      icon: "success",
-      duration: 2000
-    })
+  wx.onSocketOpen(function(res) {    
+    console.log('WebSocket连接打开')
     //接受服务器消息
     wx.onSocketMessage(func); //func回调可以拿到服务器返回的数据
   });
   wx.onSocketError(function(res) {
-    wx.showToast({
-      title: 'websocket连接失败，请检查！',
-      icon: "none",
-      duration: 2000
-    })
+    console.log('WebSocket连接打开失败！')
+  });
+  wx.onSocketClose((res) => {
+    console.log('WebSocket已关闭！')
+    // that.reconnect()
   })
 }
 //发送消息
