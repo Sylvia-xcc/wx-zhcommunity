@@ -13,9 +13,7 @@
   </view>
 </view> -->
 
-<!-- <view wx:if="{{!isLoading}}"> -->
-<view class="cu-chat" id="flag" style="padding-bottom:130rpx;">
-
+<view class="cu-chat" id="flag">
   <!-- 历史记录 -->
   <block wx:for="{{history}}" wx:key="index">
     <view class="cu-item self " wx:if="{{item.from_user_id==uid}}">
@@ -24,7 +22,7 @@
         <view class="content bg-green shadow" wx:if="{{item.type=='text'}}">
           <text>{{item.content}}</text>
         </view>
-        <image wx:else src="{{item.content}}" class="radius" mode="widthFix" style="width:200rpx;" data-src="{{item.content}}" catchtap="previewImg"></image>
+        <image wx:else src="{{item.content}}" class="radius" mode="widthFix" style="width:200rpx; min-height:50rpx;" data-src="{{item.content}}" catchtap="previewImg"></image>
       </view>
       <view class="cu-avatar round" style="background-image:url({{item.avatar}});"></view>
       <view class="date">{{item.create_time}}</view>
@@ -36,7 +34,7 @@
         <view class="content shadow" wx:if="{{item.type=='text'}}">
           <text>{{item.content}}</text>
         </view>
-        <image wx:else src="{{item.content}}" class="radius" mode="widthFix" style="width:200rpx;" data-src="{{item.content}}" catchtap="previewImg"></image>
+        <image wx:else src="{{item.content}}" class="radius" mode="widthFix" style="width:200rpx;  min-height:50rpx;" data-src="{{item.content}}" catchtap="previewImg"></image>
       </view>
       <view class="date ">{{item.create_time}}</view>
     </view>
@@ -53,7 +51,7 @@
           <view class="content bg-green shadow" wx:if="{{item.type=='text'}}">
             <text>{{item.content}}</text>
           </view>
-          <image wx:else src="{{item.content}}" class="radius" mode="widthFix" style="width:200rpx;" data-src="{{item.content}}" catchtap="previewImg"></image>
+          <image wx:else src="{{item.content}}" class="radius" mode="widthFix" style="width:200rpx; min-height:50rpx;" data-src="{{item.content}}" catchtap="previewImg"></image>
         </view>
         <view class="cu-avatar round" style="background-image:url({{item.avatar}});"></view>
         <view class="date">{{item.create_time}}</view>
@@ -65,7 +63,7 @@
           <view class="content shadow" wx:if="{{item.type=='text'}}">
             <text>{{item.content}}</text>
           </view>
-          <image wx:else src="{{item.content}}" class="radius" mode="widthFix" style="width:200rpx;" data-src="{{item.content}}" catchtap="previewImg"></image>
+          <image wx:else src="{{item.content}}" class="radius" mode="widthFix" style="width:200rpx; min-height:50rpx;" data-src="{{item.content}}" catchtap="previewImg"></image>
         </view>
         <view class="date ">{{item.create_time}}</view>
       </view>
@@ -73,7 +71,7 @@
   </block>
 
 </view>
-
+<view  class="bg-white" style="height:130rpx; width:750rpx;"></view>
 <view class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
   <input class="ssolid_bottom" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" cursor-spacing="10" value="{{message}}" bindinput="messageInput"></input>
   <view class="action" catchtap="chooseImage">
@@ -81,4 +79,3 @@
   </view>
   <button class="cu-btn bg-green shadow radius" bindtap="submitTap">发送</button>
 </view>
-<!-- </view> -->

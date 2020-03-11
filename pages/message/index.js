@@ -34,6 +34,8 @@ Page({
 
   loadMessageList: function () {
     let that = this;
+    if(that.data.isLoading)
+      tip.loading()
     http.requestUrl({
       url: 'chat/chatusers',
       news: true,
@@ -44,6 +46,12 @@ Page({
       that.setData({
         list:res.data
       })
+      setTimeout(function(){
+        tip.loaded();
+        that.setData({
+          isLoading:false,
+        })
+      },400);
     })
   },
 

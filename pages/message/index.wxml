@@ -1,5 +1,5 @@
 <!--pages/message/index.wxml-->
-<view>
+<view hidden="{{isLoading}}">
   <view class="cu-list menu-avatar ">
     <view class="cu-item solid-bottom" style="" wx:for="{{list}}" wx:key="index" data-uid="{{item.id}}" catchtap="chatTap" >
       <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});">

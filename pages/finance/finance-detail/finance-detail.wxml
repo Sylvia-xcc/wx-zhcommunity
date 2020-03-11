@@ -28,7 +28,7 @@
           </view>
         </view>
         <view class="padding-right-sm">
-          <view class="flex align-center"  bindtap="chatTap">
+          <view class="flex align-center"  data-uid="{{detail.user_id}}" bindtap="chatTap">
             <view class="cuIcon-comment text-black" style="font-size:38rpx;"></view>
             <view class="text-black text-xs padding-left-xs">立即沟通</view>
           </view>
