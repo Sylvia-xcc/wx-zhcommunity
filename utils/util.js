@@ -90,6 +90,10 @@ const detailTap = (model, mid) => {
 const liveChatTap = (uid) => {
   // tip.text('该功能暂未开放，敬请期待~~');
   console.log('------------- 聊天', uid)
+  if(getApp().d.chat==0){
+    tip.text('该功能暂未开放，敬请期待~');
+    return;
+  }
   if(uid==undefined){
     return;
   }

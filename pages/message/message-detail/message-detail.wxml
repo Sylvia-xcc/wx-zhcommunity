@@ -41,7 +41,7 @@
   </block>
 
   <!-- 即时聊天 -->
-  <view class="cu-info" style="padding:10rpx 20rpx !important;">交易前请仔细沟通清楚，避免产生交易纠纷本平台不提供在线交易哦</view>
+  <view class="cu-info" style="padding:10rpx 20rpx !important;">交易前请仔细沟通清楚，避免产生交易纠纷，本平台不提供在线交易哦</view>
   <block wx:for="{{list}}" wx:key="index">
     <view class="cu-info" wx:if="{{item.type=='os'}}">{{item.content}}</view>
     <block wx:else>

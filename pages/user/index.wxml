@@ -1,13 +1,13 @@
 <!--pages/user/index.wxml-->
 <view class="bg-img padding-bottom-xl" style="background-image: url('http://image.fengzhankeji.com/static/user-bg4.png');height: 514rpx;">
-  <view class="padding-xl text-white ">
+  <view class="padding-xl text-white">
     <view class="flex padding-bottom-xl" wx:if="{{user}}">
       <navigator url="/pages/homepage/index" hover-class="none">
         <view class="cu-avatar-group">
           <view class="cu-avatar round lg" style="background-image:url({{user.avatar}}); width:110rpx;height:110rpx;"></view>
         </view>
       </navigator>
-      <view class="padding-left-xs">
+      <view class="padding-left-xs ">
         <view class="font_30 padding-left-sm padding-bottom-xs flex align-center">
           <text class="padding-right">{{user.nickname}}</text>
           <view style="margin-top:15rpx;">
@@ -16,11 +16,15 @@
         </view>
         <navigator url="/pages/user/user-personal-edit/user-personal-edit" hover-class="none" class="cu-tag font_22" style="background:rgba(65,151,93,0.58); border-radius:24px;">账号管理></navigator>
       </view>
-    </view>
+    </view>    
     <view class="flex padding-bottom-xl align-center" wx:else>
       <view class="cu-avatar round lg" style="background-image:url(http://image.fengzhankeji.com/static/head-icon.png); width:110rpx;height:110rpx; "></view>
       <navigator url="/pages/authorize/authorize" hover-class="none" class="cu-tag font_22 margin-left" style="background:rgba(65,151,93,0.58); border-radius:24px;">登录></navigator>
     </view>
+    <navigator url="/pages/message/index" hover-class="none"  class="pa" style="right:70rpx;top:60rpx;" wx:if="{{chat!=0}}">
+      <image src="/images/msg.png" style="width:44rpx;height:49rpx;"></image>
+      <view class="cu-tag badge" wx:if="{{msgNum>0}}">{{msgNum>99?'99+':msgNum}}</view>
+    </navigator>
     <view class="flex justify-between">
       <navigator url="/pages/user/user-fabu/index" hover-class="none" class="flex flex-direction align-center">
         <view class="font_26">{{info.action||0}}</view>
@@ -40,9 +44,9 @@
       </navigator>
     </view>
   </view>
-  <view class="pr margin-lr" style="margin-top:30rpx;" wx:if="{{recharge!=0}}">
-    <image src="http://image.fengzhankeji.com/static/user-bg3.png"  style="height: 187rpx; width:690rpx;"></image>
-    <navigator url="/pages/user/user-chongzhi/user-chongzhi" hover-class="none" class="pa" style="bottom:30rpx; right:150rpx;">
+  <view class="pr" style="margin-top:30rpx;" wx:if="{{recharge!=0}}">
+    <image src="http://image.fengzhankeji.com/static/user-bg5.png" style="height: 187rpx; width:750rpx;"></image>
+    <navigator url="/pages/user/user-chongzhi/user-chongzhi" hover-class="none" class="pa" style="bottom:30rpx; right:174rpx;">
       <image src="http://image.fengzhankeji.com/static/chongzhi-btn.png" style="width:136rpx;height:38rpx;"></image>
     </navigator>
   </view>

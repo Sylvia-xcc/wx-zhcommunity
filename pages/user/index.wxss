@@ -1,9 +1,15 @@
 /* pages/user/index.wxss */
-page{
+
+page {
   background: #fff !important;
 }
 
-.item image{
+.item image {
   width: 48rpx;
   height: 48rpx;
+}
+
+.cu-tag.badge {
+  top: -15rpx;
+  right: -25rpx;
 }

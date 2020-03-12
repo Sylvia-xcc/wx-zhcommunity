@@ -462,6 +462,11 @@ Page({
       url: '/pages/job/job-search/job-search?tab=' + this.data.tabCur,
     })
   },
+
+  personalTap: function (evt) {
+    let uid = evt.currentTarget.dataset.uid;
+    util.personal(uid);
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

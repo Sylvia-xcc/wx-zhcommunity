@@ -15,6 +15,7 @@ Page({
     user: null,
     isLoading: true,
     isOwn: false,
+    chat: 1,
   },
 
   /**
@@ -24,13 +25,14 @@ Page({
     console.log('options:', options);
     let that = this;
     that.setData({
-      uid: options.uid || app.d.uid
+      uid: options.uid || app.d.uid,
+      chat:app.d.chat||0
     })
-    let isOwn = (app.d.uid == undefined ||that.data.uid == app.d.uid) ? true : false;
+    let isOwn = (app.d.uid == undefined || that.data.uid == app.d.uid) ? true : false;
     that.setData({
-      isOwn:isOwn
+      isOwn: isOwn
     })
-      that.loadPersonInfo();
+    that.loadPersonInfo();
   },
 
   loadPersonInfo: function() {
@@ -81,6 +83,10 @@ Page({
     this.setData({
       tabCur: evt.currentTarget.dataset.id
     })
+  },
+
+  chatTap: function(evt) {
+    util.liveChatTap(this.data.uid);
   },
 
   /**

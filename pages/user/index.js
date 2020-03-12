@@ -9,41 +9,49 @@ Page({
    * 页面的初始数据
    */
   data: {
-    user:null,
-    info:null,
-    isLoading:true,
-    recharge:0,
+    user: null,
+    info: null,
+    isLoading: true,
+    recharge: 0,
+    chat: 0,
+    msgNum: 0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.loadConfigInfo();
+    this.setData({
+      chat: app.d.chat
+    })
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     let that = this;
     that.setData({
       user: app.globalData.userInfo || null
     })
     console.log('----user:', app.globalData.userInfo)
-    that.loadUserInfo();
-    if(that.data.user)
+    
+    if (app.d.uid != undefined) {
+      that.loadUserInfo();
       that.loadPersonInfo();
+      that.loadChatInfo();
+    }
   },
 
-  loadUserInfo: function () {
+  loadUserInfo: function() {
     let that = this;
     http.requestUrl({
       url: 'account/info',
       data: {
         uid: app.d.uid
       },
-      news:true,
+      news: true,
     }).then(res => {
       that.setData({
         user: res.data
@@ -52,14 +60,15 @@ Page({
     })
   },
 
-  loadPersonInfo: function () {
+  loadPersonInfo: function() {
     let that = this;
+    let data = {}
+    if (app.d.uid != undefined)
+      data.aid = app.d.uid
     http.requestUrl({
       url: 'common/info',
       news: true,
-      data: {
-        aid: app.d.uid,
-      },
+      data: data,
     }).then(res => {
       that.setData({
         info: res.data
@@ -67,14 +76,26 @@ Page({
     })
   },
 
-  loadConfigInfo: function () {
+  loadChatInfo: function() {
+    let that = this;
+    http.requestUrl({
+      url: 'account/newMsn',
+      news: true,
+      data: {
+        uid: app.d.uid,
+      },
+    }).then(res => {
+      that.setData({
+        msgNum: res.data
+      })
+    })
+  },
+
+  loadConfigInfo: function() {
     let that = this;
     http.requestUrl({
       url: 'common/config',
       news: true,
-      data: {
-        aid: app.d.uid,
-      },
     }).then(res => {
       that.setData({
         recharge: res.data.recharge
@@ -82,7 +103,7 @@ Page({
     })
   },
 
-  signTap:function(){
+  signTap: function() {
     let that = this;
     http.requestUrl({
       url: 'account/sign',
@@ -90,51 +111,51 @@ Page({
       data: {
         uid: app.d.uid,
       },
-      method:'post'
+      method: 'post'
     }).then(res => {
-      tip.success('签到成功',1000);
+      tip.success('签到成功', 1000);
     })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

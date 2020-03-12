@@ -21,9 +21,9 @@
     <view class="cu-item">
       <view class="content">
         <view class="flex padding-bottom" wx:for="{{productData}}" wx:key="index" wx:for-item="iitem" data-id="{{iitem.pro_id}}" catchtap="detailTap">
-          <image src="{{iitem.pro_thumb}}" mode="aspectFill" style="width:186rpx;height:186rpx"></image>
+          <image src="{{iitem.pro_thumb}}" mode="aspectFill" style="width:186rpx;height:186rpx" class="radius"></image>
           <view class="flex-sub padding-left">
-            <view class="c0 showtwo">{{iitem.pro_name}}</view>
+            <view class="c0 showtwo text-df">{{iitem.pro_name}}</view>
             <view class="cu-tag bg-gray radius sm" wx:if="{{iitem.pro_buff!=''}}">{{iitem.pro_buff}}</view>
             <view class="flex justify-between align-center padding-top-xs">
             <text class="font_34 text-red text-bold" wx:if="{{orderData.pay_type=='积分支付'}}">{{iitem.pro_price}}积分</text>
@@ -64,7 +64,7 @@
       <view class="padding-top-sm flex">联系客服：
         <view class="pr">
           <button open-type="contact" class="shareBtn"></button>
-          <image src="/images/u7.png" style="width:34rpx; height:36rpx;"></image>
+          <image src="http://image.fengzhankeji.com/static/u7.png" style="width:34rpx; height:36rpx;"></image>
         </view>
       </view>
     </view>

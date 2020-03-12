@@ -130,9 +130,9 @@
 
   <view hidden="{{loading}}" wx:if="{{displays=='none'}}">
     <view class="cu-card dynamic no-card solid-bottom padding-bottom-sm" wx:for="{{list}}" wx:key="index">
-      <view class="cu-item shadow pr" data-id="{{item.id}}" bindtap="detailTap">
+      <view class="cu-item shadow pr" data-id="{{item.id}}" catchtap="detailTap">
         <view class="cu-list menu-avatar">
-          <view class="cu-item">
+          <view class="cu-item" data-uid="{{item.uid}}" catchtap="personalTap">
             <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
             <view class="content flex-sub">
               <view class="text-sm" style="font-size:24rpx;">{{item.nickname}}</view>

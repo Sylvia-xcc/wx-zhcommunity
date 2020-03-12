@@ -15,3 +15,26 @@ page{
   padding-top: 20rpx;
   margin: 10rpx;
 }
+
+.paper{
+  animation: myfirst 4s linear 2s infinite alternate;
+    /* Safari 与 Chrome: */
+    -webkit-animation: myfirst 4s linear 2s infinite alternate;
+}
+
+@keyframes myfirst
+{
+	0%   {right:-100rpx; top:-20rpx;}
+	25%  { right:50rpx; top:-20rpx;}
+  75%  { right:50rpx; top:-20rpx;}
+	100% { right:-100rpx; top:-20rpx;}
+}
+
+/* Safari and Chrome */
+@-webkit-keyframes myfirst 
+{
+	0%   {right:-100rpx; top:-20rpx;}
+	25%  { right:50rpx; top:-20rpx;}
+  75%  { right:50rpx; top:-20rpx;}
+	100% { right:-100rpx; top:-20rpx;}
+}

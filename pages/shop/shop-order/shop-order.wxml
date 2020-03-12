@@ -17,7 +17,7 @@
       <text class="text-red">{{item.desc}}</text>
     </view>
     <view class="flex padding-tb" wx:for="{{item.product}}" wx:key="index" wx:for-item="iitem">
-      <image src="{{iitem.pro_thumb}}" mode="aspectFill" style="width:186rpx;height:186rpx"></image>
+      <image src="{{iitem.pro_thumb}}" mode="aspectFill" class="radius" style="width:186rpx;height:186rpx"></image>
       <view class="flex-sub padding-left">
         <view class="c0 showtwo">{{iitem.pro_name}}</view>
         <view class="flex flex-wrap padding-top-xs">

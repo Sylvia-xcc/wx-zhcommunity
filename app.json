@@ -127,13 +127,8 @@
         "text": "广场",
         "iconPath": "images/icons/btn_tabs_04.jpg",
         "selectedIconPath": "images/icons/btn_tabs_03.png"
-      },  
-      {
-        "pagePath": "pages/message/index",
-        "text": "消息",
-        "iconPath": "images/icons/btn_tabs_06.png",
-        "selectedIconPath": "images/icons/btn_tabs_05.png"
-      },    
+      }, 
+      
       {
         "pagePath": "pages/user/index",
         "text": "我的",

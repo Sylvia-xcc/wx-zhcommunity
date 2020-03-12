@@ -31,14 +31,15 @@ Page({
       tid: options.tid || 8
     })
     that.loadHistoryList();
+    websocket.connectSocket();
+    websocket.onSocketMessageCallback = this.onSocketMessageCallback;
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    websocket.connectSocket();
-    websocket.onSocketMessageCallback = this.onSocketMessageCallback;
+    
   },
 
   loadHistoryList: function(p = true) {
@@ -61,10 +62,8 @@ Page({
         items = list
       } else {
         items = items.concat(list)
-        console.log('-----')
       }
       items.reverse();
-      console.log('---------- items', items)
       that.setData({
         history: items,
         total: res.data.total,
@@ -80,20 +79,22 @@ Page({
   },
 
   // socket收到的信息回调
-  onSocketMessageCallback: function(msg) {
-    console.log('收到消息回调', JSON.parse(msg))
-
+  onSocketMessageCallback: function (msg) {
     let that = this;
-    let list = []
-    list = that.data.list
-    if (typeof msg == 'string') {
-      list.push(JSON.parse(msg))
+    let data = JSON.parse(msg);
+    console.log('收到消息回调', data, data.to_user_id);
+    if((data.to_user_id!=undefined && ((data.to_user_id==that.data.uid && data.uid==that.data.tid)||(data.to_user_id==that.data.tid&& data.uid==that.data.uid))) || data.to_user_id==undefined){
+      let list = []
+      list = that.data.list
+      if (typeof msg == 'string') {
+        list.push(JSON.parse(msg))
+      }
+      that.setData({
+        list: list
+      }, function () {
+        that.bottom();
+      })
     }
-    that.setData({
-      list: list
-    }, function() {
-      that.bottom();
-    })
   },
 
   onSendMessage(type, content) {
@@ -217,7 +218,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-    websocket.closeSocket();
+    // websocket.closeSocket();
   },
 
   /**

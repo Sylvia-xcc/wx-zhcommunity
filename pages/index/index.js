@@ -117,13 +117,11 @@ Page({
     http.requestUrl({
       url: 'common/config',
       news: true,
-      data: {
-        aid: app.d.uid,
-      },
     }).then(res => {
       that.setData({
         isShow: res.data.is_show
       })
+      app.d.chat = res.data.is_msn;
     })
   },
   loadBanner: function() {

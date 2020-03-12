@@ -1,7 +1,7 @@
 import tip from './tip.js';
 const app = getApp()
 
-var url = 'ws://47.97.42.146:9502/chat?'; //服务器地址
+var url = 'wss://education.fengzhankeji.com:9502/chat?';//'ws://192.168.10.106:9502/chat?'// //服务器地址
 // socket已经连接成功
 var socketOpen = false
 // socket已经调用关闭function
@@ -60,6 +60,7 @@ var webSocket = {
    *   complete	Function	否	接口调用结束的回调函数（调用成功、失败都会执行）
    */
   sendSocketMessage: function(options) {
+    console.log('-------- send:', options.msg)
     if (socketOpen) {
       wx.sendSocketMessage({
         data: options.msg,
@@ -70,6 +71,7 @@ var webSocket = {
           }
         },
         fail: function(res) {
+          console.log('send fail:', res);
           if (options) {
             options.fail && options.fail(res);
           }
@@ -98,7 +100,7 @@ var webSocket = {
     self.stopHeartBeat();
     wx.closeSocket({
       success: function(res) {
-        console.log('WebSocket 已关闭！');
+        console.log('WebSocket 已关闭！', res);
         if (options) {
           options.success && options.success(res);
         }
@@ -183,7 +185,6 @@ wx.onSocketOpen(function(res) {
     webSocket.closeSocket();
   } else {
     socketOpen = true
-    console.log('------------->>> ', socketMsgQueue)
     for (var i = 0; i < socketMsgQueue.length; i++) {
       webSocket.sendSocketMessage(socketMsgQueue[i])
     }
@@ -195,19 +196,21 @@ wx.onSocketOpen(function(res) {
 // 监听WebSocket错误。
 wx.onSocketError(function(res) {
   tip.loaded();
-  tip.error('连接失败',1000)
+  tip.error('网络异常',1000)
   console.log('WebSocket连接打开失败，请检查！', res)
 })
 
 // 监听WebSocket接受到服务器的消息事件。
 wx.onSocketMessage(function(res) {
   console.log('收到服务器内容：' + res.data)
-  webSocket.onSocketMessageCallback(res.data)
+  let data = JSON.parse(res.data)
+  if(data.type!='heart')
+    webSocket.onSocketMessageCallback(res.data)
 })
 
 // 监听WebSocket关闭。
 wx.onSocketClose(function(res) {
-  console.log('WebSocket 已关闭！')
+  console.log('WebSocket 已关闭！', res)
   if (!socketClose) {
     clearTimeout(connectSocketTimeOut)
     connectSocketTimeOut = setTimeout(() => {

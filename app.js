@@ -7,6 +7,7 @@ App({
     openid: undefined,
     sessionkey: undefined,
     uid: undefined,
+    chat:0,
   },
   globalData: {
     userInfo: null,

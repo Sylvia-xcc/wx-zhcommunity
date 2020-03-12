@@ -3,7 +3,7 @@
   <view class='user-box flex '>
     <image class="blur" src="{{user!=null?user.avatar:'/images/head.png'}}" mode="aspectFill"></image>
     <view class="padding-xl text-white flex pa flex-direction" style="padding-top:120rpx; width:100%;">
-      <view class="flex">
+      <view class="flex pr">
         <image class="cu-avatar round xl" src="{{user.avatar}}" style="width:110rpx;height:110rpx; background-color:#fff;"></image>
         <view class="flex-sub padding-left flex flex-direction justify-center">
           <view style="z-index:999" class="">{{user.nickname}}</view>
@@ -11,6 +11,9 @@
             <button class="cu-btn round sm bg-green margin-top-sm" bindtap="guanzhuTap" wx:if="{{user.isfollow==0}}">+关注</button>
             <button class="cu-btn round sm line-green margin-top-sm" bindtap="guanzhuTap" wx:else>已关注</button>
           </view>
+        </view>
+        <view class="pa" style="right:0rpx; top:20rpx;" wx:if="{{!(chat==0||isOwn)}}">
+          <button class="cu-btn round sm bg-green margin-top-sm" bindtap="chatTap">私聊</button>
         </view>
       </view>
       <view class="padding-lr-xl text-white flex justify-between text-sm" style="padding-top:80rpx;">

@@ -78,8 +78,8 @@
   <view class="padding-bottom-sm pr">
     <text class="cuIcon-titles text-green"></text>
     <text class="c0 text-bold">为你推荐</text>
-    <navigator url="/pages/paper/index" hover-class="none" class="pa" style="right:30rpx; top:-25rpx;">
-      <image src="http://image.fengzhankeji.com/static/now_lowest.gif" style="width:85rpx;height:81rpx;"></image>
+    <navigator url="/pages/paper/index" hover-class="none" class="pa paper" style="right:30rpx; top:-25rpx;">
+      <image src="http://image.fengzhankeji.com/static/paper.png" style="width:85rpx;height:81rpx;"></image>
     </navigator>
   </view>
 </view>
@@ -144,9 +144,9 @@
       <view class="cu-tag {{tagIndex==1?'bg-green':'line-green'}} " data-id="{{1}}" bindtap="tagSelect">兼职</view>
     </view>
     <view class="cu-card dynamic no-card solid-bottom padding-bottom-sm" wx:for="{{list}}" wx:key="index" hidden="{{loading}}">
-      <view class="cu-item shadow pr" data-id="{{item.id}}" data-model="job" bindtap="detailTap">
+      <view class="cu-item shadow pr" data-id="{{item.id}}" data-model="job" catchtap="detailTap">
         <view class="cu-list menu-avatar">
-          <view class="cu-item">
+          <view class="cu-item" data-uid="{{item.uid}}" catchtap="personalTap">
             <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
             <view class="content flex-sub">
               <view class="text-sm" style="font-size:24rpx;">{{item.nickname}}</view>

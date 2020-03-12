@@ -9,7 +9,7 @@
 
   <view class="padding-tb">
     <view class="padding-bottom" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="detailTap">
-      <view class="bg-img bg-mask padding-tb-xl " style="background-image: url('{{item.editor_imgurls[0]}}');height: 340rpx;">
+      <view class="bg-img bg-mask padding-tb-xl " style="background-image: url('{{item.video_thumb}}');height: 340rpx;">
         <view class="padding-lr text-white pr">
           <view class="padding-xs showtwo">
             {{item.title}}

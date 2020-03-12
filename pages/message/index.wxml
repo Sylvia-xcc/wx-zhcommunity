@@ -3,7 +3,7 @@
   <view class="cu-list menu-avatar ">
     <view class="cu-item solid-bottom" style="" wx:for="{{list}}" wx:key="index" data-uid="{{item.id}}" catchtap="chatTap" >
       <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});">
-        <!-- <view class="cu-tag badge" style="margin-right:0rpx;">99+</view> -->
+        <view class="cu-tag badge" style="margin-right:0rpx;" wx:if="{{item.unread>0}}">{{item.unread>99?'99+':item.unread}}</view>
       </view>
       <view class="content">
         <view class="text-black">
