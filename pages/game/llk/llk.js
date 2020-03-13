@@ -23,6 +23,8 @@ Page({
     progress:100,
     timer:[90],
     level:0,
+    rankList:[],
+    modalName:null,
   },
 
   /**
@@ -185,12 +187,53 @@ Page({
     })
 
     if (that.gameOver()) {
-      that.setData({
-        gameOver: 2
-      })
-      console.log('游戏成功')
-      this.clearTimer();
+     that.gameWin();
     }
+  },
+
+  gameWin:function(){
+    let that = this;
+    that.setData({
+      gameOver: 2
+    })
+    console.log('游戏成功')
+    that.clearTimer();
+    let num = that.data.timer[that.data.level] - that.data.count;
+    num = num<=0?0:num;
+    http.requestUrl({
+      url: 'game/win',
+      news: true,
+      data: {
+        num: num,
+        uid: app.d.uid
+      },
+      method: 'post',
+    }).then(res => {
+      tip.success('提交分数成功', 1000);
+    })
+  },
+
+  rankTap:function(evt){
+   this.loadRankList()
+  },
+
+  loadRankList:function(){
+    let that = this;
+    http.requestUrl({
+      url: 'game/rank',
+      news: true,
+    }).then(res => {
+      that.setData({
+        rankList:res.data,
+        modalName: 'showRank',
+      })
+    })
+  },
+
+  hideModal:function(evt){
+    this.setData({
+      modalName: null
+    })
   },
 
   gameOver: function() {

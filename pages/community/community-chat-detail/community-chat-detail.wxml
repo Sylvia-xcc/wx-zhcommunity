@@ -30,7 +30,7 @@
   <!-- <view class="c0 font_26 text-bold">全部留言（{{total}}）</view> -->
   <view>
     <view class="cu-list menu-avatar comment">
-      <view class="cu-item solid-bottom" style="padding-left:90rpx !important;" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" >
+      <view class="cu-item solid-bottom" style="padding-left:90rpx !important;" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" data-tid="{{item.uid}}" data-nickname="{{item.nickname}}" catchtap="messageTap" >
         <view class="cu-avatar round" style="left:0 !important; background-image:url({{item.avatar}});" data-uid="{{item.uid}}" catchtap="personalTap"></view>
         <view class="content">
           <view class="text-black text-bold" style="font-size:24rpx;">{{item.nickname}}</view>
@@ -43,8 +43,8 @@
             <!-- <view class="text-blue text-xs padding-left-sm">评论</view> -->
           </view>
 
-          <!-- <view>
-            <view class="cu-list menu-avatar comment" wx:for="{{item.childNode}}" wx:key="index" wx:for-item="iitem" catchtap>
+          <view>
+            <view class="cu-list menu-avatar comment" wx:for="{{item.childNode}}" wx:key="index" wx:for-item="iitem" data-id="{{iitem.comment_id}}" data-tid="{{iitem.uid}}" data-nickname="{{iitem.nickname}}" catchtap="messageTap">
               <view class="cu-item" style="padding-left:90rpx !important; padding-right:0 !important; padding-bottom:0 !important;">
                 <view class="cu-avatar round" style="left:0 !important; background-image:url({{item.user_photo}});"></view>
                 <view class="content">
@@ -59,7 +59,7 @@
                 </view>
               </view>
             </view>
-          </view> -->
+          </view>
 
         </view>
       </view>
@@ -67,7 +67,7 @@
     <v-bottomloading showBottomLoading="{{showBottomLoading}}" haveMore="{{list.length>=total}}"></v-bottomloading>
   </view>
 </view>
-<my-textarea id='my-textarea' bind:OnSubmit='OnSubmit'></my-textarea>
+<my-textarea id='my-textarea' bind:OnSubmit='OnSubmit' placeholder="{{placeholder}}"></my-textarea>
 
 
 <view class="cu-bar input position-bottom" style="box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);">

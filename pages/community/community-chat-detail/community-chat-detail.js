@@ -17,6 +17,8 @@ Page({
     showBottomLoading: false,
     isLoading: true,
     detail: null,
+    placeholder: '亲~快来留个言~~',
+    msgNum: 0,
   },
 
   /**
@@ -85,6 +87,7 @@ Page({
         bottoming: true,
         showBottomLoading: false,
       })
+      that.countMsgNum();
     })
   },
 
@@ -106,6 +109,20 @@ Page({
       that.setData({
         list: items,
       })
+      that.countMsgNum();
+    })
+  },
+
+  countMsgNum: function () {
+    let that = this;
+    let items = that.data.list;
+    let count = 0;
+    for (var i = 0; i < items.length; i++) {
+      count += items[i].reply.length;
+    }
+    count += items.length;
+    that.setData({
+      msgNum: count
     })
   },
 
@@ -167,19 +184,51 @@ Page({
     })
   },
 
+  loadAddReplay: function (id, tid, value) {
+    if (!util.hasAuthorize())
+      return;
+    let that = this;
+    http.requestUrl({
+      url: 'used/addReply',
+      news: true,
+      data: {
+        uid: app.d.uid,
+        comment_id: id,
+        fid: tid,
+        content: value,
+        model: 'chat',
+      },
+      method: 'post',
+    }).then(res => {
+      tip.success('评论成功', 1000);
+      that.loadCommentDetail(that.data.product.id, id);
+    })
+  },
+
   messageTap: function(evt) {
     if (!util.hasAuthorize())
       return;
+    let that = this;
     let id = evt.currentTarget.dataset.id;
-    console.log('------------ 评论id', id)
-    this.selectComponent('#my-textarea').toggleModal(id);
+    let tid = evt.currentTarget.dataset.tid;
+    let nickname = evt.currentTarget.dataset.nickname;
+    console.log('--------- 留言', id, tid, nickname);
+    that.setData({
+      placeholder: (nickname == undefined) ? '亲~快来留个言~~' : '回复@' + nickname
+    })
+    this.selectComponent('#my-textarea').toggleModal(id,tid);
   },
 
   OnSubmit: function(evt) {
     console.log(evt)
     let content = evt.detail.value;
-    let id = evt.detail.id
+    let id = evt.detail.id;
+    let tid = evt.detail.tid;
     let that = this;
+    if (id > 0) {
+      that.loadAddReplay(id, tid, content);
+      return;
+    }
     http.requestUrl({
       url: 'chat/addComment',
       news: true,

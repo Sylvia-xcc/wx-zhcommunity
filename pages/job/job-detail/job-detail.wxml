@@ -33,10 +33,10 @@
           <text class="c6">{{detail.education=='不限'?'学历不限':detail.education}}</text>
         </view>
         <view class="text-sm padding-top-xs ">
-          <text class="fload {{isFload?'show':'hide'}}">{{detail.description}}</text>
-          <view class="text-blue text-sm padding-top-sm text-right">
-            <text wx:if="{{!isFload && detail.description.length>50}}" bindtap="floadTap">展开</text>
-            <text wx:if="{{isFload && detail.description.length>50}}" bindtap="floadTap">收起</text>
+          <text class="fload {{showFload==false?'show':isFload?'show':'hide'}}">{{detail.description}}</text>
+          <view class="text-blue text-sm padding-top-sm text-right" wx:if="{{showFload}}">
+            <text wx:if="{{!isFload }}" bindtap="floadTap">展开</text>
+            <text wx:else bindtap="floadTap">收起</text>
           </view>
         </view>
       </view>

@@ -74,6 +74,7 @@ Page({
     jobIndex: 0,
     shaixuanNum: 0,
     treatmentArr: [],
+    scrollTop:0,
   },
 
   /**
@@ -89,20 +90,22 @@ Page({
       areaArr: Const.areaArr,
       // treatmentArr: Const.treatmentArr,
     })
-    console.log('=============>>', this.data.heigh);
-    // console.log('------------- ', Const.areaArr);
-
-    
+    // console.log('=============>>', this.data.heigh);
+    // console.log('------------- ', Const.areaArr);    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({
-      page:1,
-    })
-    this.loadJobList();
+    let that = this;
+    console.log('---------scrollTop:', that.data.scrollTop)
+    if (that.data.scrollTop <= 100) {
+      that.setData({
+        page: 1,
+      })
+      that.loadJobList();
+    }
   },
 
   //获取工作列表
@@ -467,6 +470,13 @@ Page({
     let uid = evt.currentTarget.dataset.uid;
     util.personal(uid);
   },
+
+  onPageScroll: function (evt) {
+    this.setData({
+      scrollTop: evt.scrollTop
+    })
+  },
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

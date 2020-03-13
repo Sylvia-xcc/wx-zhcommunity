@@ -22,7 +22,7 @@
       <view class="cu-item shadow ssolid_bottom ">
         <view class="showone text-sm text-bold padding-tb-sm">{{item.title}}</view>
         <view class="padding-bottom" wx:if="{{item.editor_imgurls.length>0}}">
-          <view class="grid flex-sub padding-lr padding-bottom col-3 grid-square" wx:if="{{item.editor_imgurls.length>1}}">
+          <view class="grid flex-sub padding-bottom col-3 grid-square" wx:if="{{item.editor_imgurls.length>1}}">
             <view wx:for="{{item.editor_imgurls}}" wx:key="index" wx:for-item="iitem" wx:if="{{index<3}}" class="bg-img" style="background-image:url({{iitem}});">
             </view>
           </view>

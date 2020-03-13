@@ -31,10 +31,25 @@
 <view class="game" wx:if="{{gameOver>0}}">
   <view class="game-over {{gameOver==1?'text-white':'text-red'}}">{{gameOver==1?'GAME OVER!':'GAME WIN!'}}</view>
   <!-- <button class="cu-btn radius text-white lg bg-cgreen margin-top-xl" bindtap="reset">再来一次</button> -->
-  <view class="margin-top-xl">
-    <image src="http://image.fengzhankeji.com/static/game-again-btn.png" style="width:273rpx;height:77rpx;" bindtap="reset"></image>
+  <view class="margin-top-xl flex flex-direction">
+    <image src="http://image.fengzhankeji.com/static/game-again-btn.png" class="margin-bottom" style="width:273rpx;height:77rpx;" bindtap="reset"></image>
+    <image src="http://image.fengzhankeji.com/static/game-rank-btn.png" style="width:273rpx;height:77rpx;" bindtap="rankTap"></image>
   </view>
 </view>
+
+<view class="game" wx:if="{{modalName=='showRank'}}" catchtap="hideModal">
+  <view class="pr" catchtap>
+    <image src="http://image.fengzhankeji.com/static/rank-bg.png" style="width:660rpx;height:852rpx;"></image>
+    <view class="pa" style="width:600rpx; left:30rpx; top:160rpx;">
+      <view class="flex justify-between text-bold c0 font_30" wx:for="{{rankList}}" wx:key="index">
+        <view class="basis-xm padding-tb-sm padding-left-xl">{{index+1}}</view>
+        <view class="basis-xm  text-center padding-tb-sm">{{item.remote_user.nickname}}</view>
+        <view class="basis-xm  padding-tb-sm text-right padding-right">{{item.score}}s</view>
+      </view>
+    </view>
+  </view>
+</view>
+
 <wxs module="foo">
   var filter = function(x, y, temp) {
     for (var i = 0; i < temp.length; i++) {

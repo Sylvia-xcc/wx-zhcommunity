@@ -18,6 +18,7 @@ Page({
     isCard: true,
     categoryList: [],
     slide: [],
+    scrollTop:0,
   },
 
   /**
@@ -34,10 +35,14 @@ Page({
    */
   onShow: function() {
     // this.loadCategoryList();
-    this.setData({
-      page:1,
-    })
-    this.loadList();
+    let that = this;
+    console.log('---------scrollTop:', that.data.scrollTop)
+    if(that.data.scrollTop<=100){
+      that.setData({
+        page: 1,
+      })
+      that.loadList();
+    }
   },
 
   loadCategoryList: function() {
@@ -170,6 +175,12 @@ Page({
    */
   onUnload: function() {
 
+  },
+
+  onPageScroll: function (evt) {
+    this.setData({
+      scrollTop: evt.scrollTop
+    })
   },
 
   /**

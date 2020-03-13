@@ -12,13 +12,27 @@ Page({
     money: '',
     list:[],
     selectId:0,
+    recharge:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
+    this.loadConfigInfo();
     this.loadRechargeList();
+  },
+
+  loadConfigInfo: function () {
+    let that = this;
+    http.requestUrl({
+      url: 'common/config',
+      news: true,
+    }).then(res => {
+      that.setData({
+        recharge: res.data.recharge
+      })
+    })
   },
 
   loadRechargeList:function(){

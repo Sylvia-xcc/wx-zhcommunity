@@ -1,22 +1,23 @@
 <!--pages/user/user-chongzhi/user-chongzhi.wxml-->
-<view class="bg bg-gradient1 padding-lr padding-tb-xl">
-  <view class="br bg-white padding" style="box-shadow:0rpx 7rpx 2rpx 0rpx rgba(198,199,198,0.11);">
-    <view class="font_30 c0 padding-bottom-xs">请输入充值金额(元)</view>
-    <view class="padding-tb-xs ssolid_bottom">
-      <input placeholder="请输入要充值的金额" type="number" value="{{money}}" bindinput="moneyInput" placeholder-class="text-gray" class="c0" style="font-size:60rpx; height:100rpx;"></input>
-    </view>
-    <view class="padding-tb flex flex-wrap">
-      <view class="padding-xs" wx:for="{{list}}" wx:key="index" data-index="{{index}}" data-id="{{item.id}}" data-money="{{item.money}}" bindtap="selectedTap">
-        <view class="item {{item.id==selectId?'active':''}} ">
-          <view class="font_34 c0">{{item.money}}</view>
-          <view class="font_22 text-red">送{{item.addition}}{{item.type==20?'积分':'元'}}</view>
+<view wx:if="{{recharge==1}}">
+  <view class="bg bg-gradient1 padding-lr padding-tb-xl">
+    <view class="br bg-white padding" style="box-shadow:0rpx 7rpx 2rpx 0rpx rgba(198,199,198,0.11);">
+      <view class="font_30 c0 padding-bottom-xs">请输入充值金额(元)</view>
+      <view class="padding-tb-xs ssolid_bottom">
+        <input placeholder="请输入要充值的金额" type="number" value="{{money}}" bindinput="moneyInput" placeholder-class="text-gray" class="c0" style="font-size:60rpx; height:100rpx;"></input>
+      </view>
+      <view class="padding-tb flex flex-wrap">
+        <view class="padding-xs" wx:for="{{list}}" wx:key="index" data-index="{{index}}" data-id="{{item.id}}" data-money="{{item.money}}" bindtap="selectedTap">
+          <view class="item {{item.id==selectId?'active':''}} ">
+            <view class="font_34 c0">{{item.money}}</view>
+            <view class="font_22 text-red">送{{item.addition}}{{item.type==20?'积分':'元'}}</view>
+          </view>
         </view>
       </view>
     </view>
-
+  </view>
+  <view class="padding flex flex-direction padding-top-xl">
+    <button class="cu-btn bg-gradient1 lg radius text-white text-bold" bindtap="submitTap">立即开通</button>
   </view>
 </view>
-<view class="padding flex flex-direction padding-top-xl">
-  <button class="cu-btn bg-gradient1 lg radius text-white text-bold" bindtap="submitTap">立即开通</button>
-</view>
-<!-- <view class="text-gray text-center padding-top-xl" style="width:750rpx;">该功能暂未开放，敬请期待</view> -->
+<view class="text-gray text-center padding-top-xl" style="width:750rpx;" wx:else>该功能暂未开放，敬请期待</view>

@@ -12,6 +12,7 @@ Page({
     id: 0,
     markers: [],
     isFload: false,
+    showFload:false,
     isLoading: true,
     detail: null,
   },
@@ -44,8 +45,11 @@ Page({
       let detail = res.data;
       detail.treatment = detail.treatment.split('|');
       detail.work_day = detail.work_day.split('|').join('，');
+      let n = detail.description.split("\n");
+      console.log('---------->>>', n)
       that.setData({
         detail: detail,
+        showFload: (n.length > 2 || detail.description.length>50)?true:false
       })
       that.loadMap();
     })

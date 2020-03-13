@@ -27,8 +27,9 @@
         <view class="bg-img {{item.imgs.length>1?'':'only-img'}}" wx:for="{{item.imgs}}" wx:key="index" wx:for-item="iitem" wx:if="{{index<3}}" style="background-image:url({{iitem}});" data-id="{{index}}" data-dataimg="{{item.imgs}}">
         </view>
       </view>
-      <view class="padding-lr" wx:else>
+      <view class="padding-lr pr" wx:else>
         <video src="{{item.videos[0]}}" object-fit="cover" style="width:690rpx; height:242rpx;"></video>
+        <view class=" pa" style="width:690rpx; height:242rpx; top:0; left:30rpx; z-index:9;"></view>
       </view>
       <view class="text-content"></view>
     </view>

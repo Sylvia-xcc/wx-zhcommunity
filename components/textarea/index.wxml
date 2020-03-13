@@ -3,7 +3,7 @@
 </view>
 <view class="pop-content {{showModal?'active':''}}">
   <view class="textarea-con">
-    <textarea class="textarea-li" placeholder="{{placeholder}}" fixed="{{true}}"  maxlength="9999999" value="{{comment}}" bindinput="bindinput">
+    <textarea class="textarea-li" placeholder="{{placeholder}}" placeholder-style="color:#999;" fixed="{{true}}" focus="{{focus}}"  maxlength="9999999" value="{{comment}}" bindinput="bindinput">
     </textarea>
     <view class="textarea-btn" bindtap="submitTap">提交</view>
   </view>

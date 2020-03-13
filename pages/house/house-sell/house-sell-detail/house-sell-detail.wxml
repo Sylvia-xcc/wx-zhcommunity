@@ -7,7 +7,7 @@
       <view class="cu-tag line-gray radius font_22" style="heigth:38rpx;">{{item}}</view>
     </view>
   </view>
-  <view class="cu-tag bg-gray radius pa text-gray" style="heigth:38rpx; right:30rpx; top:86rpx" wx:if="{{type==0}}">住宅{{detail.house_type}}</view>
+  <view class="cu-tag bg-gray radius pa text-gray" style="heigth:38rpx; right:30rpx; top:86rpx" wx:if="{{type==0}}">{{detail.house_type}}</view>
   <view class="padding-tb flex flex-wrap">
     <view class="basis-df padding-bottom-sm" wx:if="{{type==0}}">
       <text class="text-gray text-sm">均价：</text>
