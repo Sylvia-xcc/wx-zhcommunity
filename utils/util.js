@@ -89,21 +89,24 @@ const detailTap = (model, mid) => {
 
 const liveChatTap = (uid) => {
   // tip.text('该功能暂未开放，敬请期待~~');
-  console.log('------------- 聊天', uid)
-  if(getApp().d.chat==0){
+  console.log('------------- 聊天', uid, getApp().d.uid)
+  if (getApp().d.chat == 0) {
     tip.text('该功能暂未开放，敬请期待~');
     return;
   }
-  if(uid==undefined){
+  if (!hasAuthorize()) {
+    return;
+  }
+  if (uid == undefined) {
+    tip.error('该用户不存在', 1000);
     return;
   }
   if (uid <= 0) {
     tip.error('该用户不存在', 1000);
     return;
   }
-  if(uid == getApp().d.uid)
-  {
-    tip.text('请忽与自己聊天',1000);
+  if (uid == getApp().d.uid) {
+    tip.text('请忽与自己聊天', 1000);
     return;
   }
   wx.navigateTo({
