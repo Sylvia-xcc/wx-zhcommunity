@@ -8,3 +8,19 @@
   left: 0;
   z-index: 999;
 }
+
+.count{
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+  width:100rpx;
+  height: 45rpx;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 25rpx;
+  z-index: 999;
+  text-align: center;
+  line-height: 45rpx;
+  vertical-align: middle;
+  font-size: 22rpx;
+}

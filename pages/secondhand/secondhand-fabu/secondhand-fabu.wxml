@@ -1,6 +1,6 @@
 <!--pages/secondhand/secondhand-fabu/secondhand-fabu.wxml-->
 <view class="cu-form-group ">
-  <textarea maxlength="-1" bindinput="textareaInput" placeholder="输入品牌型号，新旧程度，入手渠道，转手原因等" style="height:100%; min-height:300rpx;" placeholder-style="color:#999;"></textarea>
+  <textarea maxlength="-1" bindinput="textareaInput" placeholder="输入品牌型号，新旧程度，入手渠道，转手原因等" style="min-height:300rpx;" placeholder-style="color:#999;"></textarea>
 </view>
 
 <view class="cu-form-group padding-lr padding-top">

@@ -1,6 +1,6 @@
 <!--pages/commonweal/commonweal-fabu/commonweal-fabu.wxml-->
 <view class="cu-form-group ">
-  <textarea maxlength="-1" bindinput="textareaInput" placeholder="输入活动具体详情" style="height:100%; min-height:300rpx;" placeholder-style="color:#999;"></textarea>
+  <textarea maxlength="-1" bindinput="textareaInput" placeholder="输入活动具体详情" style="min-height:300rpx;" placeholder-style="color:#999;"></textarea>
 </view>
 
 <view class="cu-form-group padding-lr padding-top">

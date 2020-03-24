@@ -47,7 +47,7 @@
   <view class="bg-white padding ssolid_bottom">
     <view class="text-df text-black ">需求具体描述</view>
     <view class="padding-top-sm ">
-      <textarea class="solids" maxlength="-1" value="{{desc}}" bindinput="descInput" placeholder="输入具体详情" style="height:100%; min-height:250rpx; width:690rpx; padding:20rpx !important;" placeholder-style="color:#999; padding:20rpx !important;"></textarea>
+      <textarea class="solids" maxlength="-1" value="{{desc}}" bindinput="descInput" placeholder="输入具体详情" style="min-height:250rpx; width:690rpx; padding:20rpx !important;" placeholder-style="color:#999; padding:20rpx !important;"></textarea>
     </view>
   </view>
 

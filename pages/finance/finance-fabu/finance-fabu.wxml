@@ -3,7 +3,7 @@
   <view class="bg-white padding">
     <view class="text-df c0 ">发布内容</view>
     <view class="padding-top-sm ">
-      <textarea class="solids" maxlength="-1" bindinput="descInput" value="{{desc}}" placeholder="输入发布内容" style="height:100%; min-height:120rpx; width:690rpx; padding:20rpx !important;" placeholder-style="color:#999; padding:20rpx !important;"></textarea>
+      <textarea class="solids" maxlength="-1" bindinput="descInput" value="{{desc}}" placeholder="输入发布内容" style="min-height:120rpx; width:690rpx; padding:20rpx !important;" placeholder-style="color:#999; padding:20rpx !important;"></textarea>
     </view>
   </view>
 
@@ -53,7 +53,7 @@
   <view class="bg-white padding">
     <view class="text-df text-black ">备注</view>
     <view class="padding-top-sm ">
-      <textarea class="solids" maxlength="-1" value="{{remark}}" bindinput="remarkInput" placeholder="审核备注信息，给审核人员的说明，不会出现在正文中" style="height:100%; min-height:100rpx; width:690rpx; padding:20rpx !important;" placeholder-style="color:#999; padding:20rpx !important;"></textarea>
+      <textarea class="solids" maxlength="-1" value="{{remark}}" bindinput="remarkInput" placeholder="审核备注信息，给审核人员的说明，不会出现在正文中" style="min-height:100rpx; width:690rpx; padding:20rpx !important;" placeholder-style="color:#999; padding:20rpx !important;"></textarea>
     </view>
   </view>
 

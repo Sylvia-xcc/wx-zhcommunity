@@ -106,7 +106,7 @@ const liveChatTap = (uid) => {
     return;
   }
   if (uid == getApp().d.uid) {
-    tip.text('请忽与自己聊天', 1000);
+    tip.text('请勿与自己聊天', 1000);
     return;
   }
   wx.navigateTo({

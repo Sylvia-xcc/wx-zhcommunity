@@ -113,6 +113,10 @@
   box-shadow:0rpx 7rpx 2rpx 0rpx rgba(198,199,198,0.11);
 }
 
+.my-shadow3{
+  box-shadow:0rpx 3rpx 6rpx 0rpx rgba(154,154,154,0.19);
+}
+
 .layout-col{
   display: flex;
   flex-direction: column;

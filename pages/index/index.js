@@ -63,7 +63,11 @@ Page({
         path: 'pages/index/index'
       }
     ],
-    isShow:0,
+    isShow: 0,
+    startup: true,
+    topheight:0,
+    scrollTop:0,
+    fixed:false,
   },
 
   /**
@@ -93,11 +97,15 @@ Page({
     that.setData({
       showLoading: false
     })
+    that.selectComponent('#my-startup').startCount();
   },
 
   startupTap: function(evt) {
     let that = this;
     wx.showTabBar()
+    that.setData({
+      startup: false,
+    })
     tip.loading();
     that.loadBanner();
     that.loadIndex();
@@ -112,7 +120,7 @@ Page({
     }
   },
 
-  loadConfigInfo: function () {
+  loadConfigInfo: function() {
     let that = this;
     http.requestUrl({
       url: 'common/config',
@@ -138,6 +146,14 @@ Page({
         a: true,
       })
       that.canFit();
+      if(that.data.topheight<=0){
+        wx.createSelectorQuery().selectAll('#top').boundingClientRect(function (rect) {
+          console.log(rect)
+          that.setData({
+            topheight: rect[0].top
+          })
+        }).exec();
+      }
     })
   },
 
@@ -193,7 +209,13 @@ Page({
       bottoming: false,
       showBottomLoading: true,
     })
-    setTimeout(function() {
+    if (that.data.fixed) {
+      wx.pageScrollTo({
+        scrollTop: that.data.topheight-1,
+        duration:0,
+      })
+    }
+    setTimeout(function() {      
       that.loadIndex();
     }, 600)
 
@@ -302,5 +324,15 @@ Page({
    */
   onShareAppMessage: function() {
 
-  }
+  },
+  onPageScroll: function(evt) {
+    // console.log('------ scroll', evt.scrollTop)
+    let that = this;
+    let fixed = (evt.scrollTop >= that.data.topheight)?true:false;    
+    that.setData({
+      fixed: fixed,
+      scrollTop:evt.scrollTop
+    })
+    // console.log('---------', that.data.fixed, that.data.topheight, evt.scrollTop)
+  },
 })
