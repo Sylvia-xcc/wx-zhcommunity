@@ -40,18 +40,20 @@ Component({
       if (!util.hasAuthorize())
         return;
       let that = this;
-      http.requestUrl({
-        url: 'activities/join',
-        news: true,
-        data: {
-          uid: app.d.uid,
-          id: that.data.item.id,
-        },
-        method:'post',
-      }).then(res => {
-        tip.success('报名成功', 1000);
-        that.hideModal();
-        that.updateDetail();
+      util.joinActAuthorizedService().then(res=>{
+        http.requestUrl({
+          url: 'activities/join',
+          news: true,
+          data: {
+            uid: app.d.uid,
+            id: that.data.item.id,
+          },
+          method: 'post',
+        }).then(res => {
+          tip.success('报名成功', 1000);
+          that.hideModal();
+          that.updateDetail();
+        })
       })
     },
 

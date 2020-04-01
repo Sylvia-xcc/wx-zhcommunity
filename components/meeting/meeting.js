@@ -42,19 +42,22 @@ Component({
       if (!util.hasAuthorize())
         return;
       let that = this;
-      http.requestUrl({
-        url: 'meeting/join',
-        news: true,
-        data: {
-          uid: app.d.uid,
-          mid: that.data.item.id,
-        },
-        method: 'post',
-      }).then(res => {
-        tip.success('报名成功', 1000);
-        that.hideModal();
-        that.updateDetail();
-      })
+      util.joinActAuthorizedService().then(res => {
+        http.requestUrl({
+          url: 'meeting/join',
+          news: true,
+          data: {
+            uid: app.d.uid,
+            mid: that.data.item.id,
+          },
+          method: 'post',
+        }).then(res => {
+          tip.success('报名成功', 1000);
+          that.hideModal();
+          that.updateDetail();
+        })
+      });
+
     },
 
     updateDetail: function() {
@@ -83,7 +86,7 @@ Component({
       });
     },
 
-    personalTap: function (evt) {
+    personalTap: function(evt) {
       let uid = evt.currentTarget.dataset.uid;
       util.personal(uid);
     },

@@ -22,7 +22,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     console.log('options:', options);
     this.setData({
       uid: options.uid || app.d.uid,
@@ -34,7 +34,7 @@ Page({
   },
 
   //约会列表
-  loadMeetingList: function () {
+  loadMeetingList: function() {
     let that = this;
     if (that.data.isLoading)
       tip.loading();
@@ -60,7 +60,7 @@ Page({
         bottoming: true,
         showBottomLoading: false,
       })
-      setTimeout(function () {
+      setTimeout(function() {
         tip.loaded();
         that.setData({
           isLoading: false
@@ -69,35 +69,38 @@ Page({
     })
   },
 
-  cancelTap: function (evt) {
+  cancelTap: function(evt) {
     let that = this;
     let id = evt.currentTarget.dataset.id;
     tip.confirm('是否确定取消参加该活动?').then(res => {
-      http.requestUrl({
-        url: 'account/clearActivity',
-        news: true,
-        method: 'post',
-        data: {
-          id: id,
-          model: 'meeting',
-          uid: app.d.uid
-        }
-      }).then(res => {
-        tip.success('取消报名成功', 1000);
-        let items = that.data.list;
-        let tmp = [];
-        for (var i = 0; i < items.length; i++) {
-          if (items[i].id != id)
-            tmp.push(items[i]);
-        }
-        that.setData({
-          list: tmp
+      util.cancelActAuthorizedService().then(res => {
+        http.requestUrl({
+          url: 'account/clearActivity',
+          news: true,
+          method: 'post',
+          data: {
+            id: id,
+            model: 'meeting',
+            uid: app.d.uid
+          }
+        }).then(res => {
+          tip.success('取消报名成功', 1000);
+          let items = that.data.list;
+          let tmp = [];
+          for (var i = 0; i < items.length; i++) {
+            if (items[i].id != id)
+              tmp.push(items[i]);
+          }
+          that.setData({
+            list: tmp
+          })
         })
       })
+
     })
   },
 
-  detailTap: function (evt) {
+  detailTap: function(evt) {
     let id = evt.currentTarget.dataset.id;
     let model = evt.currentTarget.dataset.model;
     util.detailTap(model, id);
@@ -106,49 +109,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
     let that = this;
     if (that.data.list.length < that.data.total && that.data.bottoming) { //有更多时加载
       that.setData({
         showBottomLoading: true,
         bottoming: false,
       })
-      setTimeout(function () {
+      setTimeout(function() {
         that.setData({
           page: that.data.page + 1,
         })
@@ -160,7 +163,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

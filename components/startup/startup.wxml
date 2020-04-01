@@ -6,5 +6,5 @@
       <image src="{{item}}" mode="aspectFill" style="width:750rpx; height:100%;"></image>
     </swiper-item>
   </swiper>
-  <view class="count">{{count}} 跳过</view>
+  <view class="count" catchtap="skinTap">{{count}} 跳过</view>
 </view>

@@ -114,6 +114,40 @@ const liveChatTap = (uid) => {
   })
 }
 
+//参加活动授权
+const joinActAuthorizedService = ()=>{
+  return new Promise((resolve, reject)=>{
+    wx.requestSubscribeMessage({
+      tmplIds: ['xSAkxWAN9b-AgB1MpibGh21kUkFDbRXj9kBBWDiOt4s'], // 此处可填写多个模板 ID，但低版本微信不兼容只能授权一个
+      success(res) {
+        console.log('已授权接收订阅消息')
+        tip.success('授权订阅成功', 1000);
+      },
+      complete(res){
+        resolve(res);
+      }
+    })
+  })
+}
+
+//参加活动授权
+const cancelActAuthorizedService = () => {
+  return new Promise((resolve, reject) => {
+    wx.requestSubscribeMessage({
+      tmplIds: ['9SZ7M1ks14FTbEb3mYEj2GWuiL1DoYokgccpfHbfr3Y'], // 此处可填写多个模板 ID，但低版本微信不兼容只能授权一个
+      success(res) {
+        console.log('已授权接收订阅消息')
+        tip.success('授权成功', 1000);
+      },
+      complete(res) {
+        resolve(res);
+      }
+    })
+  })
+}
+
+
+
 
 
 /**是否授权*/
@@ -277,4 +311,6 @@ module.exports = {
   filterMobile,
   detailTap,
   liveChatTap,
+  joinActAuthorizedService,
+  cancelActAuthorizedService,
 }

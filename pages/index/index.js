@@ -211,7 +211,7 @@ Page({
     })
     if (that.data.fixed) {
       wx.pageScrollTo({
-        scrollTop: that.data.topheight-1,
+        scrollTop: that.data.topheight,
         duration:0,
       })
     }

@@ -46,9 +46,8 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    goTap: function(evt) {
-      
-      // this.hide();
+    skinTap: function(evt) {
+      this.hide();
     },
 
     bindchange: function(evt) {
@@ -64,6 +63,7 @@ Component({
       this.setData({
         show: false,
       })
+      clearInterval(this.timer);
       this.triggerEvent("startup");
     },
 
@@ -76,7 +76,6 @@ Component({
           that.startCount();
         }, 1000)
       }else{
-        clearInterval(this.timer);
         that.hide();
       }
     },
@@ -89,6 +88,7 @@ Component({
       that.setData({
         count: count
       })
+      console.log('----- skin ', count)
     },
   }
 })
